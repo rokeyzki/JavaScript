@@ -1,7 +1,7 @@
 # 对象 - Object
 
 * [临时](object_foo.md)
-* [对象结构](object_0.md)
+* [对象结构](object_structure.md)
 * [对象原型](object_1.md)
 * [属性操作](object_2.md)
 * [getter setter](object_3.md)
