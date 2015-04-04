@@ -65,7 +65,7 @@ fooA.hasOwnPropetty('toString'); // false
 ```
 
 * ### 属性枚举
-> 属性枚举即通过 for in 语句将对象中（enumerable 属性为 true)的属性遍历输出
+> 属性枚举即通过 for in 语句将对象中（enumerable 属性为 true）的属性遍历输出
 > 判断属性属性是否可枚举
 > ```javascript
 var fooA = {x:1, y:2};
