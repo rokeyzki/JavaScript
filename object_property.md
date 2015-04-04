@@ -48,7 +48,6 @@ var fooB = Object.getOwnPropertyDescriptor(Object, 'prototype');
 console.log(fooB.configurable); // false
 delete Object.prototype; // false
 ```
->
 
 * ### 属性检测
 > 检测属性即检测对象中的某个属性是否存在
@@ -64,7 +63,6 @@ fooA.hasOwnProperty('x'); // true
 fooA.hasOwnProperty('z'); // false
 fooA.hasOwnPropetty('toString'); // false
 ```
->
 
 * ### 属性枚举
 > 属性枚举即通过 for in 语句将对象中（enumerable 属性为 true)的属性遍历输出
@@ -75,7 +73,6 @@ var fooA = {x:1, y:2};
 'toString' in fooA; // true
 fooA.propertyIsEnumerable('toString'); // false
 ```
->
 > 两种属性枚举的方式：
 > ```javascript
 var fooA = {x:1, y:2};
@@ -96,4 +93,3 @@ for (key in fooB){
     }
 }
 ```
->
