@@ -5,11 +5,11 @@
 ## 对象结构示例
 > 示例1 代码
 > ```javascript
-// 创建一个函数对象 fooA
+// 创建一个模板对象 fooA
 function fooA(){}
-// 给函数对象 fooA 的原型对象添加属性 z
+// 给模板对象 fooA 的原型(即元祖对象)添加属性 z
 fooA.prototype.z = 3;
-// 实例化函数对象 fooA 为实例对象 fooB
+// 实例化模板对象 fooA 为实例对象 fooB
 var fooB = new fooA();
 fooB.x = 1;
 fooB.y = 2;
@@ -29,8 +29,8 @@ console.log(fooB.hasOwnProperty('z')); // false
 > 通过示例1可以看出一个实例对象的结构：
 
 > 1. 第一层：实例对象（如 fooB）及它的对象属性
-> 2. 第二层：实例对象的原型：函数对象（如 fooA）及它的对象属性
-> 3. 第三层：函数对象的原型：初始对象（即 Object）及它的对象属性
-> 4. 第四层：初始对象的原型：Object.prototype（即 null）
+> 2. 第二层：实例对象的原型：模板对象（如 fooA）及它的对象属性
+> 3. 第三层：模板对象的原型：元祖对象（即 Object）及它的对象属性
+> 4. 第四层：元祖对象的原型：Object.prototype 为空（即 null）
 
 > 以上即为一个实例对象的原型链结构
