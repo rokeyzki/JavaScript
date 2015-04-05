@@ -6,17 +6,48 @@
 对象属性的读写、删除、检测、枚举
 
 * ### 属性读写
-> 属性的 key 本质上是个字符串，所以可以使用以下两种方式读写属性：
+> 属性的 key 本质上是个字符串，所以可以使用以下四种方式读写属性：
 > ```javascript
 var fooA = {x:1, y:2};
-// 第一种属性读取方式：
-console.log(fooA.x); // 1
-// 第二种属性读取方式：
-console.log(fooA['y']); // 2
-// 第一种属性写入方式：
-fooA.x = 3；
-// 第二种属性写入方式：
+// 第一种属性读写方式：
+fooA.x = 3;
+console.log(fooA.x); // 3
+// 第二种属性读写方式：
 fooA['y'] = 4;
+console.log(fooA['y']); // 4
+// 第三种属性读写方式（get/set方法）：
+var fooB = {
+    a:5;
+    get b(){
+        return this.a;
+    },
+    set b(val){
+        this.a += val;
+    }
+}
+fooB.b = 100;
+console.log(fooB.b); // 105
+// 第四种属性读写方式（Object.defineProperty方法）：
+var fooC = {};
+Object.defineProperty(fooC, 'one', {value:1}); // 这种方式创建的属性，其writable、enumerable、configurable标签默认为false
+console.log(fooC.one); // 1
+// 第五种属性读写方式（Object.defineProperties方法）：
+var fooD = {};
+Object.defineProperties(fooD, {
+    one:{value:1, writable:true},
+    two:{value:2},
+    three:{
+        get:function(){
+            return 'one的值为' + this.one + ',two的值为' + this.two;
+        },
+        set:function(val){
+            this.one += val;
+            this.two += val;
+        }
+    }
+}); // 这种方式创建的属性，其writable、enumerable、configurable标签默认为false，所以one属性的writable标签需要申明为true，这样get\set方法才能正常使用
+fooD.three = 100;
+console.log(fooD.two); // "one的值为101,two的值为2"
 ```
 读写属性时，如果出现错误时，会出现以下三种异常：
 > ```javascript
@@ -50,7 +81,8 @@ delete Object.prototype; // false
 ```
 
 * ### 属性检测
-> 检测属性即检测对象中的某个属性是否存在，检测属性的两种方式：
+> 检测属性即检测对象中的某个属性是否存在<br>
+> 检测属性的两种方式：
 > ```javascript
 var fooA = {x:1, y:2};
 // 第一种属性检测方式（使用 in 检测范围，包括对象原型链上的所有属性）：
@@ -64,8 +96,8 @@ fooA.hasOwnPropetty('toString'); // false
 ```
 
 * ### 属性枚举
-> 属性枚举即通过 for in 语句将对象中（enumerable 属性为 true）的属性遍历输出
-> 判断属性属性是否可枚举
+> 属性枚举即通过 for in 语句将对象中（enumerable 属性为 true）的属性遍历输出<br>
+> 判断对象属性是否可枚举:
 > ```javascript
 var fooA = {x:1, y:2};
 // in 是检测属性是否存在对象中，propertyIsEnumerable 则是检测属性是否可枚举：
@@ -91,4 +123,35 @@ for (key in fooB){
         console.log(key) // 3
     }
 }
+```
+
+## 属性标签
+对象属性的标签包括四种标签，分别是 value（属性值）writable（可复写）enumerable（可枚举）configurable（可配置）
+
+* ### 属性标签检测
+> 通过Object.getOwnPropertyDescriptor方法可以检测对象属性标签的值
+> ```javascript
+var fooA = {x:1};
+Object.getOwnPropertyDescriptor(fooA, 'x'); // Object {value: 1, writable: true, enumerable: true, configurable: true}
+```
+
+* ### 属性标签说明
+> 1. writable （可复写）标签<br>
+> 1.1 可赋值对象属性<br>
+> 1.2 可修改对象属性的值<br>
+> 2. enumerable （可枚举）标签<br>
+> 2.1 可通过通过 for in 语句将对象中的属性遍历输出<br>
+> 3. configurable（可配置）标签<br>
+> 3.1 可删除对象属性<br>
+> 3.2 可修改对象属性的标签<br>
+> 3.3 可修改get/set方法<br>
+
+* ###  属性标签配置
+> 通过Object.defineProperty方法可以修改属性标签配置
+> ```javascript
+var fooA = {x:1};
+Object.getOwnPropertyDescriptor(fooA, 'x'); // Object {value: 1, writable: true, enumerable: true, configurable: true}
+console.log(fooA.x); // 1
+Object.defineProperty(fooA, 'x', {value:2, configurable:false, writable:false}); // Object {value: 2, writable: false, enumerable: true, configurable: false}
+console.log(fooA.x); // 2
 ```

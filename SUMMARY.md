@@ -9,3 +9,7 @@
 	* [临时](object_foo.md)
 	* [结构](object_structure.md)
 	* [属性](object_property.md)
+	* [方法](object_method.md)
+* [函数](function.md)
+* [JOM](jom.md)
+	*[数组](jom_array.md)
