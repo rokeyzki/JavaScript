@@ -128,13 +128,6 @@ for (key in fooB){
 ## 属性标签
 对象属性的标签包括四种标签，分别是 value（属性值）writable（可复写）enumerable（可枚举）configurable（可配置）
 
-* ### 属性标签检测
-> 通过Object.getOwnPropertyDescriptor方法可以检测对象属性标签的值
-> ```javascript
-var fooA = {x:1};
-Object.getOwnPropertyDescriptor(fooA, 'x'); // Object {value: 1, writable: true, enumerable: true, configurable: true}
-```
-
 * ### 属性标签说明
 > 1. writable （可复写）标签<br>
 > 1.1 可赋值对象属性<br>
@@ -145,6 +138,13 @@ Object.getOwnPropertyDescriptor(fooA, 'x'); // Object {value: 1, writable: true,
 > 3.1 可删除对象属性<br>
 > 3.2 可修改对象属性的标签<br>
 > 3.3 可修改get/set方法<br>
+
+* ### 属性标签检测
+> 通过Object.getOwnPropertyDescriptor方法可以检测对象属性标签的值
+> ```javascript
+var fooA = {x:1};
+Object.getOwnPropertyDescriptor(fooA, 'x'); // Object {value: 1, writable: true, enumerable: true, configurable: true}
+```
 
 * ###  属性标签配置
 > 通过Object.defineProperty方法可以修改属性标签配置

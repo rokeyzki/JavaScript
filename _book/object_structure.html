@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Glossary | JavaScript 手册</title>
+        <title>结构 | JavaScript 手册</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,10 @@
         
     
     
+    <link rel="next" href="./object_property.html" />
     
     
-
-    
+    <link rel="prev" href="./object_foo.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="" data-basepath="." data-revision="1428250741653">
+    <div class="book" data-level="2.2" data-basepath="." data-revision="1428250741653">
     
 
 <div class="book-summary">
@@ -169,7 +169,7 @@
         </li>
     
         
-        <li class="chapter " data-level="2.2" data-path="object_structure.html">
+        <li class="chapter active" data-level="2.2" data-path="object_structure.html">
             
                 
                     <a href="./object_structure.html">
@@ -363,13 +363,58 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="page-inner">
                 
+                
+                    <section class="normal" id="section-gitbook_17">
+                    
+                        <h1 id="object-">Object 结构</h1>
+<p>对象是属性的无序集合，每个属性都有一个字符串的 key 和对应的 value 来存放一个原始类型数据或对象类型数据，同时每个对象都存在自己的原型。</p>
+<hr>
+<h2 id="">对象结构示例</h2>
+<blockquote>
+<p>示例1 代码</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// 创建一个模板对象 fooA</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fooA</span><span class="hljs-params">()</span></span>{}
+<span class="hljs-comment">// 给模板对象 fooA 的原型(即元祖对象)添加属性 z</span>
+fooA.prototype.z = <span class="hljs-number">3</span>;
+<span class="hljs-comment">// 实例化模板对象 fooA 为实例对象 fooB</span>
+<span class="hljs-keyword">var</span> fooB = <span class="hljs-keyword">new</span> fooA();
+fooB.x = <span class="hljs-number">1</span>;
+fooB.y = <span class="hljs-number">2</span>;
+</code></pre>
+<p>示例1 输出</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(fooB.x); <span class="hljs-comment">// 1</span>
+<span class="hljs-built_in">console</span>.log(fooB.y); <span class="hljs-comment">// 2</span>
+<span class="hljs-built_in">console</span>.log(fooB.z); <span class="hljs-comment">// 3</span>
+<span class="hljs-comment">// 获取实例对象 fooB 的对象类型</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> fooB.toString); <span class="hljs-comment">// 'function'</span>
+<span class="hljs-comment">// 判断实例对象 fooB 的属性 z 是否存在</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'z'</span> <span class="hljs-keyword">in</span> fooB); <span class="hljs-comment">// true</span>
+<span class="hljs-comment">// 判断实例对象 fooB 的属性 z 是否存在于它本身（即非继承于原型链上的对象）</span>
+<span class="hljs-built_in">console</span>.log(fooB.hasOwnProperty(<span class="hljs-string">'z'</span>)); <span class="hljs-comment">// false</span>
+</code></pre>
+<p>通过示例1可以看出一个实例对象的结构：</p>
+<ol>
+<li>第一层：实例对象（如 fooB）及它的对象属性</li>
+<li>第二层：实例对象的原型：模板对象（如 fooA）及它的对象属性</li>
+<li>第三层：模板对象的原型：元祖对象（即 Object）及它的对象属性</li>
+<li>第四层：元祖对象的原型：Object.prototype 为空（即 null）</li>
+</ol>
+<p>以上即为一个实例对象的原型链结构</p>
+</blockquote>
 
-
+                    
+                    </section>
+                
+                
                 </div>
             </div>
         </div>
 
         
+        <a href="./object_foo.html" class="navigation navigation-prev " aria-label="Previous page: 临时"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./object_property.html" class="navigation navigation-next " aria-label="Next page: 属性"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
