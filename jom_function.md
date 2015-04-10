@@ -68,6 +68,10 @@ var fooA = Function('a', 'b', 'console.log(a + b);'); // 加不加 new 关键词
 fooA(1, 2); // 3
 ```
 
+## 函数的类型（待完成）
+> 说明：
+* 一般函数、构造函数、闭包函数...
+
 ## 函数的参数
 > 说明：
 * 函数的参数数量不限，参数之前由逗号 (,) 分隔。
@@ -112,3 +116,92 @@ function example(a, b)
 	return a + b;
 }
 ```
+
+## 函数的指针
+> 说明：
+* 函数的指针即this
+* this即函数内当前使用的对象，简单说，this就是指函数当前的运行环境
+
+> ### 使用场景1.全局环境
+>> 说明：
+* 在全局环境使用this，它指的是顶层对象（浏览器中为window对象）
+
+>> 示例一：
+```javascript
+function fooA(){
+    return this;
+}
+fooA() === window; // true;
+```
+
+>> 示例二：
+```javascript
+this === window // true
+function f() {
+    console.log(this === window); // true
+}
+```
+
+> ### 使用场景2.构造函数
+>> 说明：
+* 所谓“构造函数”，就是专门用来生成“对象”的函数。它提供模板，作为对象的基本结构，它无返回值，可被实例化
+* 构造函数中的this，指的是实例对象
+
+>> 示例一：
+```javascript
+function fooB(){
+    this.attr = 1000;
+}
+var foob = new fooB();
+console.log(foob.attr); // 1000
+```
+
+>> 示例二：
+```javascript
+var Foo = function(x) {
+    this.attr = x;
+};
+var foo = new Foo("hello");
+console.log(foo.attr) // "hello"
+```
+
+> ### 使用场景3.对象方法
+>> 说明：
+* 对象方法中的this是方法所属的对象
+* 当a对象的方法被赋予b对象，该方法就变成了普通函数，其中的this就从指向a对象变成了指向b对象
+
+>> 示例一：
+```javascript
+var obj = {
+    attr:50,
+    fooC:function(){
+        return this.attr;
+    }
+};
+console.log(obj.fooC()); // 50
+```
+
+>> 示例二：
+```javascript
+var objA = {
+    m:1,
+    f:function(){
+        console.log(this.m);
+    }
+}
+objA.f() // 1
+var objB = {
+    m:2,
+    f:objA.f // 注意，这里的objA.j 不加括号，等于将函数全部赋值给objB的属性f
+}
+objB.f() // 2
+var objC = {
+    m:3,
+    f:objA.f() // 注意，这里的objA.j 加了括号，等于立即执行函数objA.j
+}
+objC.f() // TypeError: undefined is not a function
+// 待思考和补充
+```
+
+## 函数的属性（待完成）
+## 函数的方法（待完成）
