@@ -186,21 +186,25 @@ console.log(obj.fooC()); // 50
 var objA = {
     m:1,
     f:function(){
-        console.log(this.m);
+        return this.m;
     }
 }
-objA.f() // 1
+console.log(objA.f()); // 1
+```
+```javascript
 var objB = {
     m:2,
     f:objA.f // 注意，这里的objA.j 不加括号，等于将函数全部赋值给objB的属性f
 }
-objB.f() // 2
+console.log(objB.f()); // 2
+```
+```javascript
 var objC = {
     m:3,
-    f:objA.f() // 注意，这里的objA.j 加了括号，等于立即执行函数objA.j
+    f:objA.f() // 注意，这里的objA.j 加了括号，等于立即执行函数objA.j，即objC.f = objA.f() = 1
 }
-objC.f() // TypeError: undefined is not a function
-// 待思考和补充
+console.log(objC.f()); // TypeError: number is not a function
+console.log(objC.f); // 1
 ```
 
 ## 函数的属性（待完成）
