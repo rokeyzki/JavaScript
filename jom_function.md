@@ -68,14 +68,89 @@ var fooA = Function('a', 'b', 'console.log(a + b);'); // 加不加 new 关键词
 fooA(1, 2); // 3
 ```
 
-## 函数的类型（待完成）
+## 函数的类型
 > 说明：
-* 一般函数、构造函数、闭包函数...
+* 函数类型包括有返函数、无返函数、递归函数、闭包函数、构造函数五种
+
+> ### 有返函数
+>> 说明：
+* 函数体内部包含return语句，表示该函数有返回值，即有返函数
+
+>> 示例一：
+```javascript
+function add(x,y) {
+  return x+y;
+}
+console.log(add(1,1)); // 2
+```
+
+> ### 无返函数
+>> 说明：
+* 函数体内部的return语句不是必需的，如果没有的话，该函数就不返回任何值，或者说返回undefined，即无返函数
+
+>> 示例一：
+```javascript
+function f(){
+  console.log(2);
+}
+console.log(f()); // undefined
+```
+
+> ### 递归函数
+>> 说明：
+* 函数可以调用自身，这就是递归，即递归函数
+
+>> 示例一：
+```javascript
+function fib(num) {
+    if (num > 2) {
+        return fib(num - 2) + fib(num - 1);
+    } else {
+        return 1;
+    }
+}
+console.log(fib(6)); // 8
+```
+
+> ### 闭包函数
+>> 说明：
+* 闭包函数就是定义在函数体内部的函数
+* 闭包是函数与其生成时所在的作用域对象的一种结合
+* 闭包的特点在于，在闭包函数内部可以读取闭包函数的外部变量
+
+>> 示例一：
+```javascript
+function f() {
+    var v = 1;
+    var c = function (){
+        return v;
+    };
+    return c;
+}
+console.log(f()); // function(){return v};
+console.log(f()()); // 1
+```
+
+> ### 构造函数
+>> 说明：
+* 构造函数就是专门用来生成对象的函数，它提供模板，作为对象的基本结构
+* 一个构造函数，可以生成多个对象，这些对象都有相同的结构
+* 函数体内部使用了this关键字，代表了所要生成的对象实例
+* 生成对象的时候，必需用new命令来调用构造函数
+
+>> 示例一：
+```javascript
+var Vehicle = function() {
+    this.price = 1000;
+};
+var v = new Vehicle();
+console.log(v.price); // 1000
+```
 
 ## 函数的参数
 > 说明：
-* 函数的参数数量不限，参数之前由逗号 (,) 分隔。
-* 通过使用 return 语句就可以实现函数将值返回调用它的地方。
+* 函数的参数数量不限，参数之前由逗号 (,) 分隔
+* 通过使用 return 语句就可以实现函数将值返回调用它的地方
 
 > 示例一：
 ```javascript
@@ -116,6 +191,8 @@ function example(a, b)
 	return a + b;
 }
 ```
+
+## 函数的作用域（待完成）
 
 ## 函数的指针
 > 说明：
