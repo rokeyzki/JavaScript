@@ -17,7 +17,7 @@
 >> 示例一：
 ```javascript
 function fooA(a, b) {
-    // do sth
+    // code
 }
 ```
 
@@ -27,30 +27,59 @@ function fooA(a, b) {
 * 不可以后置，不可以通过函数名访问
 * 可以匿名，可以立即调用
 
->> 示例一：function variable 变量函数表达式
+>> 示例一：VFE 变量函数表达式
 ```javascript
 var fooA = function(a, b) {
-    // do sth
+    // code
 };
 ```
 
->> 示例二：IEF 立即执行函数表达式
-```javascript
-(function() {
-    // do sth
-})();
-```
-
->> 示例三：first-class function 首类函数表达式
-```javascript
-return function() {
-    // do sth
-}
-```
->> 示例四：NFE 命名式函数表达式
+>> 示例二：NFE 命名式函数表达式
 ```javascript
 var fooA = function fooB(a, b) {
-    // do sth
+    // code
+}
+```
+
+>> 示例三：IIFE 立即执行函数表达式
+```javascript
+// 用法一
+(function() {
+    // code
+})(); // 注意，IIFE的结尾，都必须加上分号
+```
+```javascript
+// 用法二
+(function(){
+    // code
+}()); // 注意，IIFE的结尾，都必须加上分号
+```
+```javascript
+// 用法三（任何让解释器以表达式来处理函数定义的方法，都能产生同样的效果）
+var i = function(){ /* code */ }();
+true && function(){ /* code */ }();
+0, function(){ /* code */ }();
+!function(){ /* code */ }();
+~function(){ /* code */ }();
+-function(){ /* code */ }();
++function(){ /* code */ }();
+new function(){ /* code */ }
+new function(){ /* code */ }() // 只有传递参数时，才需要最后那个圆括号。
+```
+```javascript
+// 错误用法
+function(){
+    // code
+}(); // SyntaxError: Unexpected token (
+// 通常情况下，只对匿名函数使用IIFE。它的目的有两个：
+// 一是不必为函数命名，避免了污染全局变量；
+// 二是IIFE内部形成了一个单独的作用域，可以封装一些外部无法读取的私有变量。
+```
+
+>> 示例四：first-class function 首类函数表达式
+```javascript
+return function() {
+    // code
 }
 ```
 
@@ -70,7 +99,7 @@ fooA(1, 2); // 3
 
 ## 函数的类型
 > 说明：
-* 函数类型包括有返函数、无返函数、递归函数、闭包函数、构造函数五种
+* 根据函数的内部代码块来区分，函数类型包括有返函数、无返函数、递归函数、闭包函数、构造函数五种
 
 > ### 有返函数
 >> 说明：
@@ -116,24 +145,45 @@ console.log(fib(6)); // 8
 >> 说明：
 * 闭包函数就是定义在函数体内部的函数
 * 闭包是函数与其生成时所在的作用域对象的一种结合
-* 闭包的特点在于，在闭包函数内部可以读取闭包函数的外部变量
+* 闭包的特点在于，在函数外部可以读取函数的内部变量
+* 闭包不仅可以读取函数内部变量，还可以使得内部变量记住上一次调用时的运算结果
+* 闭包存在空间浪费，性能消耗的缺点
 
 >> 示例一：
 ```javascript
 function f() {
     var v = 1;
+    // 下面的c函数就是闭包函数
     var c = function (){
         return v;
     };
     return c;
 }
 console.log(f()); // function(){return v};
+// 借助f函数内部的c闭包函数，我们读取到了f函数的内部变量v
 console.log(f()()); // 1
+```
+
+>> 示例二：
+```javascript
+function fooA(attr) {
+    // 下面的匿名函数就是闭包函数
+    var start = attr;
+    return function () {
+        return start++;
+    }
+}
+var test = fooA(5);
+test(); // 5
+test(); // 6
+test(); // 7
+console.log(start); // ReferenceError: start is not defined
 ```
 
 > ### 构造函数
 >> 说明：
 * 构造函数就是专门用来生成对象的函数，它提供模板，作为对象的基本结构
+* 构造函数无直接返回值，可被实例化为对象实例
 * 一个构造函数，可以生成多个对象，这些对象都有相同的结构
 * 函数体内部使用了this关键字，代表了所要生成的对象实例
 * 生成对象的时候，必需用new命令来调用构造函数
@@ -221,8 +271,7 @@ function f() {
 
 > ### 使用场景2.构造函数
 >> 说明：
-* 所谓“构造函数”，就是专门用来生成“对象”的函数。它提供模板，作为对象的基本结构，它无返回值，可被实例化
-* 构造函数中的this，指的是实例对象
+* 构造函数中的this，指的是实例对象本身
 
 >> 示例一：
 ```javascript
