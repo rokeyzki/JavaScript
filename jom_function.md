@@ -242,7 +242,96 @@ function example(a, b)
 }
 ```
 
-## 函数的作用域（待完成）
+## 函数的作用域
+> 说明：
+* 作用域指的是变量存在的范围
+* Javascript只有两种作用域：
+* 一种是全局作用域，变量在整个程序中一直存在
+* 另一种是函数作用域，变量只在函数内部存在
+
+> ### 全局作用域
+>> 说明：
+* 在函数外部声明的变量就是全局变量，它可以在函数内部读取，作用域覆盖全局
+
+>> 示例一：
+```javascript
+var v = 1;
+function f(){
+   return v;
+}
+console.log(v); // 1
+console.log(f()); // 1
+```
+
+> ### 函数作用域
+>> 说明：
+* 在函数内部定义的变量，外部无法读取，称为局部变量，作用域只覆盖变量所在的函数内部
+* 函数内部定义的变量，会在该作用域内覆盖同名全局变量，但是函数作用域外部的全局变量不会被覆盖
+* var命令声明的变量，不管在函数什么位置，变量声明都会被提升到函数体的头部
+
+>> 示例一：
+```javascript
+var v = 1；
+function f(){
+    var v = 2;
+    return v；
+}
+console.log(f()); // 2
+console.log(v); // 1
+```
+
+>> 示例二：
+```javascript
+function foo(x) {
+    if (x > 100) {
+        // 下面的tmp变量等于被放到函数头部，如function foo(x){ var tmp; /* code */};
+        var tmp = x - 100;
+    }
+}
+```
+
+> ### 作用域链
+>> 说明：
+* 如果函数A调用函数B，函数B是在函数A内声明，则函数B可以引用函数A的内部变量，这就是变量的作用域链
+* 如果函数A调用函数B，函数B是在函数A外声明，则函数B不能引用函数A的内部变量，因为函数本身的作用域只绑定在其声明时所在的区域
+* 函数构造器生成的函数无法读取外部函数的变量
+
+>> 示例一：
+```javascript
+function A(){
+    var x = 2;
+    // 下面的函数B在函数A的作用域内声明，所以可以读取到变量x
+    var B = function (){
+        return x;
+    };
+    return B();
+}
+console.log(A()); // 2
+```
+
+>> 示例二：
+```javascript
+// 下面的函数B在函数A的作用域外声明，所以读取不到变量x
+var B = function (){
+    return x;
+};
+function A(){
+    var x = 2;
+    return B();
+}
+console.log(A()); // ReferenceError: x is not defined
+```
+
+>> 示例三：
+```javascript
+function A(){
+    var x = 1;
+    // 函数构造器生成的函数无法读取外部函数的变量
+    var B = new Function("return x;");
+    return B();
+}
+console.log(A()); // ReferenceError: x is not defined
+```
 
 ## 函数的指针
 > 说明：
@@ -333,5 +422,48 @@ console.log(objC.f()); // TypeError: number is not a function
 console.log(objC.f); // 1
 ```
 
-## 函数的属性（待完成）
+## 函数的属性
+> 说明：
+* 每个函数对象包含两个标准属性：prototype和length
+* 还包含一个非标准属性：name
+
+> ### prototype属性
+>> 说明：
+* prototype是函数的原型属性，toString()和valueOf()等方法实际上都保存在prototype名下，通过各自对象的实例来访问
+
+>> 示例一：
+```javascript
+function A(){};
+A.prototype.x = 1;
+console.log(A.x); // undefined
+console.log(A.prototype.x); // 1
+var a = new A();
+console.log(a.x); // 1
+```
+
+> ### length属性
+>> 说明：
+* length代表函数定义的命名参数（形参）的个数
+
+>> 示例一：
+```javascript
+function A(x){};
+console.log(A.length); // 1
+```
+
+> ### name属性
+>> 说明：
+* name属性返回紧跟在function关键字之后的那个函数名
+* 大多数JavaScript引擎支持非标准的name属性
+
+>> 示例一：
+```javascript
+function f1() {}
+console.log(f1.name) // 'f1'
+var f2 = function () {};
+console.log(f2.name) // ''
+var f3 = function myName() {};
+console.log(f3.name) // 'myName'
+```
+
 ## 函数的方法（待完成）
