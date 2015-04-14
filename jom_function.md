@@ -466,4 +466,175 @@ var f3 = function myName() {};
 console.log(f3.name) // 'myName'
 ```
 
-## 函数的方法（待完成）
+## 函数的方法
+> JavaScript提供了call、apply、bind这三个方法，用来切换/固定this的指向
+
+> call方法
+>> 说明：
+* 函数的call方法，可以改变指定该函数内部this的指向，然后再调用该函数
+* call方法的作用包括两个：
+* 1.继承其他对象来调用方法（直接执行）
+* 2.继承其他对象的属性（new 实例化之后继承）
+* 语法：func.attr.call(obj, 'arguA', 'arguB', ...);
+* 语法解释1. func 函数（必需）：必须为函数，要执行的代码块
+* 语法解释2. attr 属性（可选）：必须为函数，为函数对象的属性，这里如果要使用属性，该属性必须为函数（即方法）
+* 语法解释3. obj 对象（必需）：必须为对象，作为父类对象（提供继承的对象源），是func函数中真实的this对象（即指针），如果设为null或undefined，则等同于指定全局对象
+* 语法解释4. arguA 参数（可选）：参数需要用引号包围，这里的参数对应为真正要执行的函数（func或func.attr）的参数，当该函数无参数时可以为空
+
+>> 示例一：
+```javascript
+function Animal(){
+    this.name = "Animal";
+    this.show = function(){
+        console.log("show: " + this.name);
+    }
+}
+function Dog(){
+    this.name = "Dog";
+}
+var animal = new Animal();
+var dog = new Dog();
+animal.show.call(dog); // Dog
+```
+
+>> 示例二：
+```javascript
+function sayColor(a, b) {
+    console.log(a + this.color + b);
+};
+var obj = {'color':'blue'};
+sayColor.call(obj, "The color is ", " a very nice color indeed."); // The color is blue a very nice color indeed.
+```
+
+>> 示例三：
+```javascript
+function fooA(x, y){
+	this.attrA = 'a1';
+	this.attrB = function(y){
+		console.log(this.attrA + ' - ' + y);
+	}
+	this.attrC = '继承';
+}
+var fooa = new fooA();
+function fooB(){
+	this.attrA = 'b1';
+	this.attrB = 'b2';
+}
+var foob = new fooB();
+fooa.attrB.call(foob, 'y1'); // b1 - y1
+function fooC(){
+	fooA.call(this);
+}
+console.log(fooC); // function fooC(){ fooA.call(this); }
+var fooc = new fooC();
+console.log(fooc); // fooC {attrA: "a1", attrB: function, attrC: "继承"}
+fooc.attrB.call(foob, 'haha'); // b1 - haha
+```
+
+>> 示例四
+```javascript
+function Animal(name){
+    this.name = name;
+    this.show = function(){
+        console.log(this.name);
+    }
+}
+function Cat(name){
+    Animal.call(this, name);
+}
+var cat = new Cat("Black Cat");
+cat.show(); // Black Cat
+```
+
+>> 示例五
+```javascript
+// 多重继承
+function Class1()
+{
+    this.showSub = function(a,b)
+    {
+        console.log(a-b);
+    }
+}
+function Class2()
+{
+    this.showAdd = function(a,b)
+    {
+        console.log(a+b);
+    }
+}
+function Class3()
+{
+    Class1.call(this);
+    Class2.call(this);
+}
+class3 = new Class3();
+console.log(class3); // Class3 {showSub: function, showAdd: function}
+class3.showAdd(1, 2); // 3
+```
+
+> apply方法
+>> 说明：
+* apply方法的作用与call方法类似，也是改变this指向，然后再调用该函数。
+* apply方法与call方法不同的地方在于，其第二个参数是一个数组，该数组的所有成员依次作为参数，传入原函数。
+* 语法：func.attr.call(obj, ['arguA', 'arguB', ...]);
+
+>> 示例一：
+```javascript
+function f(x,y){ console.log(x+y); }
+f.call(null,1,1) // 2
+f.apply(null,[1,1]) // 2
+```
+
+>> 示例二：
+```javascript
+// 找出数组最大元素
+var a = [10, 2, 4, 15, 9];
+Math.max.apply(null, a); // 15
+// 将数组的空元素变为undefined
+Array.apply(null, ["a",,"b"]) // [ 'a', undefined, 'b' ]
+```
+
+> bind方法
+>> 说明：
+* bind方法用于将函数体内的this绑定到某个对象，然后返回一个新函数
+* bind比call方法和apply方法更进一步的是，除了绑定this以外，还可以绑定原函数的参数
+* 语法：func.attr.bind(obj, 'arguA', 'arguB', ...);
+* 要特别注意bind方法每运行一次，就返回一个新函数
+
+>> 示例一：
+```javascript
+var o1 = new Object();
+o1.p = 123;
+o1.m = function (){
+    console.log(this.p);
+};
+o1.m(); // 123
+var o2 = new Object();
+o2.p = 456;
+o2.m = o1.m;
+o2.m(); // 456
+o2.m = o1.m.bind(o1);
+o2.m(); // 123
+```
+
+>> 示例二：
+```javascript
+function add(x,y) { return x+y; }
+var plus5 = add.bind(null, 5, 10); // 即x=5, y=10
+plus5(); // 15
+```
+
+>> 示例三：
+```javascript
+var add = function (x,y) {
+    return x*this.m + y*this.n;
+}
+var obj = {
+    m: 1,
+    n: 2
+};
+var newAdd = add.bind(obj, 3); // 即设置x=3
+newAdd(4); // 11
+```
+
