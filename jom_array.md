@@ -205,5 +205,258 @@ while (i--){
 ```
 
 ## 数组的属性
+> 说明：
+* 数组常用属性为length
+
+> ### length属性
+>> 说明：
+* 数组的length属性，返回数组的成员数量
+* JavaScript使用一个32位整数，保存数组的元素个数。这意味着，数组成员最多只有4294967295个（232-1）个，也就是说length属性的最大值就是4294967295
+* 数组的length属性与对象的length属性有区别，只要是数组，就一定有length属性，而对象不一定有
+
+>> 示例一：
+```javascript
+['a', 'b', 'c'].length // 3
+var arr = ['a', 'b'];
+/* 数组的length属性是一个动态的值，等于键名中的最大整数加上1 */
+arr.length // 2
+arr[2] = 'c';
+arr.length // 3
+arr[9] = 'd';
+arr.length // 10
+arr[1000] = 'e';
+arr.length // 1001
+```
+
+>> 示例二：
+```javascript
+/* length属性是可写的。如果人为设置一个小于当前成员个数的值，该数组的成员会自动减少到length设置的值 */
+var arr = [ 'a', 'b', 'c' ];
+arr.length // 3
+arr.length = 2;
+arr // ["a", "b"]
+```
+
+>> 示例三：
+```javascript
+/* 如果人为设置length大于当前元素个数，则数组的成员数量会增加到这个值，新增的位置填入空元素 */
+var a = ['a'];
+a.length = 3;
+a // ["a", undefined × 2]
+```
+
+>> 示例四：
+```javascript
+/* 将数组清空的一个有效方法，就是将length属性设为0 */
+var arr = [ 'a', 'b', 'c' ];
+arr.length = 0;
+arr // []
+```
+
+>> 示例五：
+```javascript
+/* 如果人为设置length为不合法的值，JavaScript会报错 */
+// 设置负值
+[].length = -1 // RangeError: Invalid array length
+// 数组元素个数大于等于2的32次方
+[].length = Math.pow(2,32) // RangeError: Invalid array length
+// 设置字符串
+[].length = 'abc' // RangeError: Invalid array length
+```
+
+>> 示例六：
+```javascript
+/* 值得注意的是，由于数组本质上是对象的一种，所以我们可以为数组添加属性，但是这不影响length属性的值 */
+var a = [];
+a["p"] = "abc";
+a.length // 0
+a[2.1] = "abc";
+a.length // 0
+```
 
 ## 数组的方法
+> 说明：
+* JavaScript数组有n种方法
+
+> ### isArray 方法
+>> 说明：
+* isArray方法用来判断一个值是否为数组。它可以弥补typeof运算符的不足
+
+>> 示例一：
+```javascript
+var a = [1,2,3];
+typeof a // "object"
+Array.isArray(a) // true
+```
+
+> ### valueOf 方法
+>> 说明：
+* valueOf方法返回数组本身
+
+>> 示例一：
+```javascript
+var a = [1,2,3];
+a.valueOf() // [1,2,3]
+```
+
+> ### toString 方法
+>> 说明：
+* toString方法返回数组的字符串形式
+
+>> 示例一：
+```javascript
+var a = [1,2,3];
+a.toString() // "1,2,3"
+var a = [1,2,3,[4,5,6]];
+a.toString() // "1,2,3,4,5,6"
+```
+
+> ### push 方法
+>> 说明：
+* push方法用于在数组的末端添加一个或多个元素，并返回添加后的数组的长度
+
+>> 示例一：
+```javascript
+var a = [];
+a.push(1) // 1
+a.push("a") // 2
+a.push(true, {}) // 4
+a // [1, "a", true, {}]
+```
+
+> ### pop 方法
+>> 说明：
+* pop方法用于删除数组的最后一个元素，并返回该元素
+
+>> 示例一：
+```javascript
+var a = ['a', 'b', 'c'];
+a.pop() // 'c'
+a // ['a', 'b']
+/* 对空数组使用pop方法，不会报错，而是返回undefined */
+[].pop() // undefined
+```
+
+> ### join 方法
+>> 说明：
+* pjoin方法以参数作为分隔符，将所有数组成员组成一个字符串返回
+* 如果不提供参数，默认用逗号分隔
+
+>> 示例一：
+```javascript
+var a = [1,2,3,4];
+a.join() // "1,2,3,4"
+a.join('') // '1234'
+a.join("|") // "1|2|3|4"
+```
+
+> ### concat 方法
+>> 说明：
+* concat方法将新数组的成员，添加到原数组的尾部，然后返回一个新数组，常用于连接多个数组
+
+>> 示例一：
+```javascript
+["hello"].concat(["world"]) // ["hello", "world"]
+[1,2,3].concat(4,5,6) // [1, 2, 3, 4, 5, 6]
+```
+
+> ### shift 方法
+>> 说明：
+* shift方法用于删除数组的第一个元素，并返回该元素
+
+>> 示例一：
+```javascript
+var a = ['a', 'b', 'c'];
+a.shift() // 'a'
+a // ['b', 'c']
+```
+
+> ### unshift 方法
+>> 说明：
+* unshift方法用于在数组的第一个位置添加元素，并返回添加新元素后的数组长度
+
+>> 示例一：
+```javascript
+var a = ['a', 'b', 'c'];
+a.unshift('x'); // 4
+a // ['x', 'a', 'b', 'c']
+```
+
+> ### reverse 方法
+>> 说明：
+* reverse方法用于颠倒数组中元素的顺序，使用这个方法以后，返回改变后的原数组
+
+>> 示例一：
+```javascript
+var a = ['a', 'b', 'c'];
+a.reverse() // ["c", "b", "a"]
+a // ["c", "b", "a"]
+```
+
+> ### slice 方法
+>> 说明：
+* slice方法返回指定位置的数组成员组成的新数组，原数组不变
+* 它的第一个参数为起始位置（从0开始），第二个参数为终止位置（但该位置的元素本身不包括在内）
+* 如果省略第二个参数，则一直返回到原数组的最后一个成员
+
+>> 示例一：
+```javascript
+var a = ["a","b","c"];
+a.slice(1,2) // ["b"]
+a.slice(1) // ["b", "c"]
+a.slice(0) // ["a","b","c"]
+a.slice(-2) // ["b", "c"]
+a.slice(4) // []
+a.slice(2, 6) // ["c"]
+a.slice(2, 1) // []
+```
+
+> ### splice 方法
+>> 说明：
+* splice方法用于删除元素，并可以在被删除的位置添加入新的数组元素，它的返回值是被删除的元素
+* 需要特别注意的是，该方法会改变原数组
+* splice的第一个参数是删除的起始位置，第二个参数是被删除的元素个数。如果后面还有更多的参数，则表示这些就是要被插入数组的新元素
+
+>> 示例一：
+```javascript
+var a = ["a","b","c","d","e","f"];
+a.splice(4,2) // ["e", "f"]
+a // ["a", "b", "c", "d"]
+```
+
+>> 示例二：
+```javascript
+var a = ["a","b","c","d","e","f"];
+a.splice(4,2,1,2) // ["e", "f"]
+a // ["a", "b", "c", "d", 1, 2]
+```
+
+>> 示例三：
+```javascript
+/* 如果只是单纯地插入元素，splice方法的第二个参数可以设为0 */
+var a = [1,1,1];
+a.splice(1,0,2) // []
+a // [1, 2, 1, 1]
+```
+
+>> 示例四：
+```javascript
+/* 如果只提供第一个参数，则实际上等同于将原数组在指定位置拆分成两个数组 */
+var a = [1,2,3,4];
+a.splice(2) // [3, 4]
+a // [1, 2]
+```
+
+> ### sort 方法
+>> 说明：
+* sort方法对数组元素进行排序，默认是按照字典顺序排序
+* 排序后，原数组将被改变
+* sort方法不是按照大小排序，而是按照对应字符串的字典顺序排序，所以101排在11的前面
+
+>> 示例一：
+```javascript
+["d","c","b","a"].sort() // ["a", "b", "c", "d"]
+[4,3,2,1].sort() // [1, 2, 3, 4]
+[11,101].sort() // [101, 11]
+[10111,1101,111].sort() // [10111, 1101, 111]
+```
