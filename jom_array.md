@@ -460,3 +460,10 @@ a // [1, 2]
 [11,101].sort() // [101, 11]
 [10111,1101,111].sort() // [10111, 1101, 111]
 ```
+
+## 数组的方法（ECMAScript 5）（待完成）
+> 说明：
+* ECMAScript 5新增了9个数组实例的方法，分别是map、forEach、filter、every、some、reduce、reduceRight、indexOf和lastIndexOf
+* 新增了9个数组方法中前7个与函数式（functional）操作有关
+* IE8等老旧浏览器不支持ECMAScript 5
+* 该部分内容二期开始添加
