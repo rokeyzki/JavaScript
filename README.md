@@ -1,19 +1,21 @@
 # JavaScript 手册
 ***
-- ### 语法 - Grammar
-> 1
 
-- ### 对象 - Object
-> OOP
+## 基础
 
-- ### JOM - JavaScript Object Model
-> 标准库
+> ### 语法 - Grammar
+> ### 对象 - Object
+> ### 原生对象模型 - JOM
+> ### 浏览器对象模型 - BOM
+> ### 文档对象模型 - DOM
 
-- ### BOM - Browser Object Model
-> 待定
+## 封装
 
-- ### DOM - Document Object Model
-> 通过函数库操作
-> 1. jQuery
-> 2. Underscore
+> ### 类库 - Library
+>> 1. jQuery
+>> 2. Underscore
+
+> ### 框架 - Library
+>> 1. Angular.js
+>> 2. Backbone.js
 
