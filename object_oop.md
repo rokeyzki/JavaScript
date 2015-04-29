@@ -3,28 +3,55 @@
 ***
 
 ## 封装
-> 说明：
+> ### 说明：
 * 即将可重复使用的属性、方法封装成父类对象
 
-> 示例：
+> ### 使用构造函数来封装：
 >> ```javascript
-function Person(name, age){
-    this.name = name;
-    this.age = age;
+// 构造(constructor)属性写法：
+// 构造函数内部的属性(property)在实例化之后就不再关联影响到实例对象
+function ParentClass(argumentA, argumentB){
+    this.propertyA = argumentA;
+    this.propertyB = argumentB + ',文字';
+    this.propertyC = '这里是属性C';
 }
-Person.test1 = '测试1';
-Person.test2 = function(){
-    console.log('测试2');
+// 原型(prototype)属性写法：
+// 函数原型(prototype)上的属性(property)在实例化之后就依然会实时关联影响到实例对象
+ParentClass.prototype.propertyD = '这里是属性D';
+ParentClass.prototype.propertyE = function(){
+    return '这里是方法E';
 };
-Person.prototype.LEGS_NUM = 2;
-Person.prototype.ARMS_NUM = 2;
-Person.prototype.hi = function(){
-    // console.log('你好，我叫' + this.name + '，我今年' + this.age + '岁了。');
-    return '你好，我叫' + this.name + '，我今年' + this.age + '岁了。';
+// 构造函数上的错误属性写法：
+// 不能直接在构造函数对象上添加属性，这样添加的属性无法被实例对象所继承
+ParentClass.propertyF = '属性F无法被实例对象继承';
+ParentClass.propertyG = function(){
+    return '方法G无法被实例对象继承';
 };
-Person.prototype.walk = function(){
-    console.log(this.name + '在散步...');
+```
+
+> ### 使用普通对象来封装：
+>> ```javascript
+// 对象(object)属性写法：
+// 普通对象(object)上的属性(property)在实例化之后就依然会实时关联影响到实例对象
+var ParentClass = {
+    'propertyA':'这里是属性A',
+    'propertyB':function(){return '这里是属性B';},
+    'propertyC':function(argumentA){return '这里是属性C:' + argumentA;},
+    'propertyD':function(argumentA, argumentB){
+        this.propertyA = argumentA;
+        this.propertyB = argumentB + ',文字';
+        this.propertyC = '这里是属性C';
+    }
 };
+// 实例化后(instantiate)属性写法：
+// 实例化父类对象后，再直接对父类对象添加属性(property)，新增的属性依然会映射添加到实例对象
+ParentClass.'propertyE' = '这里是属性E';
+ParentClass.'propertyF' = function(){
+    return '这里是属性E';
+};
+// 普通对象上的错误属性写法
+// 普通对象上不能直接使用原型(prototype)来添加属性，因为普通对象不存在原型属性，一般只有函数存在原型属性
+ParentClass.prototype.propertyF = '这里的属性F无法写入'; // TypeError: Cannot set property 'test' of undefined
 ```
 
 >> ```javascript

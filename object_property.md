@@ -92,7 +92,7 @@ var fooA = {x:1, y:2};
 // 第二种属性检测方式（使用 hasOwnProperty 检测范围，不包括对象原型链上(模板对象、元祖对象)的所有属性）：
 fooA.hasOwnProperty('x'); // true
 fooA.hasOwnProperty('z'); // false
-fooA.hasOwnPropetty('toString'); // false
+fooA.hasOwnProperty('toString'); // false
 ```
 
 > ### 属性枚举
