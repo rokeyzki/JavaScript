@@ -5,55 +5,102 @@
 ## 封装
 > ### 说明：
 * 即将可重复使用的属性、方法封装成父类对象
+* 一般情况下建议使用构造函数来封装父类对象
 
 > ### 使用构造函数来封装：
 >> ```javascript
-// 构造(constructor)属性写法：
-// 构造函数内部的属性(property)在实例化之后就不再关联影响到实例对象
-function ParentClass(argumentA, argumentB){
+/**
+ * 构造函数有两种声明方式：
+ * 一种为：function ClassName(argumentA, argumentB){ // code }
+ * 另一种为：var ClassName = function(argumentA, argumentB){ // code }
+ */
+var ParentClass = function(argumentA, argumentB){
+    // 构造(constructor)属性写法：
+    // 构造函数内部的属性(property)在实例化之后就不再关联影响到实例对象.
     this.propertyA = argumentA;
-    this.propertyB = argumentB + ',文字';
-    this.propertyC = '这里是属性C';
+    this.propertyB = '这里是父类的构造属性B：' + argumentB;
+    this.propertyC = function(){
+        return '这里是父类的构造方法C';
+    }
 }
 // 原型(prototype)属性写法：
-// 函数原型(prototype)上的属性(property)在实例化之后就依然会实时关联影响到实例对象
-ParentClass.prototype.propertyD = '这里是属性D';
+// 函数原型(prototype)上的属性(property)在实例化之后就依然会实时关联影响到实例对象.
+ParentClass.prototype.propertyD = '这里是父类的原型属性D';
 ParentClass.prototype.propertyE = function(){
-    return '这里是方法E';
+    return '这里是父类的原型方法E';
 };
 // 构造函数上的错误属性写法：
-// 不能直接在构造函数对象上添加属性，这样添加的属性无法被实例对象所继承
-ParentClass.propertyF = '属性F无法被实例对象继承';
+// 不能直接在构造函数对象上添加属性，这样添加的属性无法被实例对象所继承.
+ParentClass.propertyF = '父类的直接属性F无法被实例对象继承';
 ParentClass.propertyG = function(){
-    return '方法G无法被实例对象继承';
+    return '父类的直接方法G无法被实例对象继承';
 };
 ```
 
 > ### 使用普通对象来封装：
 >> ```javascript
-// 对象(object)属性写法：
-// 普通对象(object)上的属性(property)在实例化之后就依然会实时关联影响到实例对象
 var ParentClass = {
+    // 对象(object)属性写法：
+    // 普通对象(object)上的属性(property)在实例化之后就依然会实时关联影响到实例对象
     'propertyA':'这里是属性A',
-    'propertyB':function(){return '这里是属性B';},
-    'propertyC':function(argumentA){return '这里是属性C:' + argumentA;},
+    'propertyB':function(){return '这里是方法B';},
+    'propertyC':function(argumentA){return '这里是方法C:' + argumentA;},
     'propertyD':function(argumentA, argumentB){
         this.propertyA = argumentA;
-        this.propertyB = argumentB + ',文字';
-        this.propertyC = '这里是属性C';
+        this.propertyB = '这里是普通对象内置构造函数的属性B' + argumentB;
+        this.propertyC = function(){
+            return '这里是普通对象内置构造函数的方法C';
+        }
     }
 };
 // 实例化后(instantiate)属性写法：
 // 实例化父类对象后，再直接对父类对象添加属性(property)，新增的属性依然会映射添加到实例对象
-ParentClass.'propertyE' = '这里是属性E';
-ParentClass.'propertyF' = function(){
-    return '这里是属性E';
+ParentClass.propertyE = '这里是属性E';
+ParentClass.propertyF = function(){
+    return '这里是方法F';
 };
 // 普通对象上的错误属性写法
 // 普通对象上不能直接使用原型(prototype)来添加属性，因为普通对象不存在原型属性，一般只有函数存在原型属性
-ParentClass.prototype.propertyF = '这里的属性F无法写入'; // TypeError: Cannot set property 'test' of undefined
+ParentClass.prototype.propertyG = '这里的属性G无法写入';
 ```
 
+## 继承
+> ### 说明：
+* 即重复利用父类对象的属性与方法
+
+> ### 对构造函数型父类的继承：
+>> ```javascript
+/**
+ * 子类对(构造函数型)父类的继承分成两部分：
+ * 一部分是子类调用父类构造函数
+ * 另一部分是子类的原型指向父类的原型
+ */
+var ChildClass = function(argumentA, argumentB, argumentC){
+    ParentClass.call(this, argumentA, argumentB); // 子类调用父类构造函数
+    this.propertyH = '这里是子类的构造属性H：' + argumentC;
+    this.propertyI = function(){
+        return '这里是子类的构造方法I';
+    }
+}
+ChildClass.prototype = Object.create(ParentClass.prototype); // 子类的原型指向父类的原型
+ChildClass.prototype.constructor = ChildClass; // 子类的原型的控制器指向自己
+// 以下为子类原型的属性设置：
+ChildClass.prototype.propertyJ = '这里是子类的原型属性J';
+ChildClass.prototype.propertyK = function(){
+    return '这里是子类的原型方法K';
+}
+```
+
+> ### 对普通对象型父类的继承：
+>> ```javascript
+var ChildClass = Object.create(ParentClass);
+ChildClass.propertyH = '这里是属性H';
+ChildClass.propertyI = function(){
+    return '这里是方法I';
+}
+```
+
+## 旧案例
 >> ```javascript
 function Person(name, age){
     this.name = name;
