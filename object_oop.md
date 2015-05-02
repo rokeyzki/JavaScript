@@ -117,9 +117,9 @@ fooObject.propertyJ; // 这里是子类的原型属性J
 fooObject.propertyK(); // 这里是子类的原型方法K
 // 检验：
 // 获取实例对象的原型
-Object.getPrototypeOf(fooObject);
+Object.getPrototypeOf(fooObject); // 返回子类
 // 获取实例对象的构造函数
-fooObject.constructor;
+fooObject.constructor; // 返回子类构造函数
 // 判断对象是否为某个父类子类的实例对象
 fooObject instanceof ChildClass; // true
 fooObject instanceof ParentClass; // true
@@ -142,10 +142,8 @@ fooObject.propertyI(); // 这里是方法I
 // 检验：
 // 获取实例对象的原型
 Object.getPrototypeOf(fooObject); // 返回包含父类的子类对象
-// 获取实例对象的构造函数
-N/A // 普通对象不支持 constructor 属性
-// 判断对象是否为某个父类子类的实例对象
-N/A // 普通对象不支持 instanceo 关键词
+// 普通对象不支持 constructor 属性
+// 普通对象不支持 instanceo 关键词
 // 判断是否为实例对象的原型
 ChildClass.isPrototypeOf(fooObject); // true
 ParentClass.isPrototypeOf(ChildClass); // true
