@@ -83,7 +83,7 @@ var ChildClass = function(argumentA, argumentB, argumentC){
     }
 }
 ChildClass.prototype = Object.create(ParentClass.prototype); // 子类的原型指向父类的原型
-ChildClass.prototype.constructor = ChildClass; // 子类的原型的控制器指向自己
+ChildClass.prototype.constructor = ChildClass; // 子类的原型的构造函数指向自己
 // 以下为子类原型的属性设置：
 ChildClass.prototype.propertyJ = '这里是子类的原型属性J';
 ChildClass.prototype.propertyK = function(){
@@ -100,59 +100,53 @@ ChildClass.propertyI = function(){
 }
 ```
 
-## 旧案例
+## 实例
+> ### 构造函数型子类的实例化：
 >> ```javascript
-function Person(name, age){
-    this.name = name;
-    this.age = age;
-}
-Person.test1 = '测试1';
-Person.test2 = function(){
-    console.log('测试2');
-};
-Person.prototype.LEGS_NUM = 2;
-Person.prototype.ARMS_NUM = 2;
-Person.prototype.hi = function(){
-    // console.log('你好，我叫' + this.name + '，我今年' + this.age + '岁了。');
-    return '你好，我叫' + this.name + '，我今年' + this.age + '岁了。';
-};
-Person.prototype.walk = function(){
-    console.log(this.name + '在散步...');
-};
-/*
- * 父类子类的继承分成两部分：
- * 一部分是子类调用父类构造函数，
- * 另一部分是子类的原型指向父类的原型。
- */
-function Student(name, age, className){
-    Person.call(this, name, age); // 子类调用父类构造函数
-    this.className = className;
-}
-// 子类的原型指向父类的原型
-Student.prototype = Object.create(Person.prototype);
-Student.prototype.constructor = Student;
-Student.prototype.hi2 = function(){
-    // console.log('你好，我叫' + this.name + '，我今年' + this.age + '岁了，我来自' + this.className);
-    console.log(this.hi() + '我来自' + this.className) // 你好，我叫小明，我今年15岁了。我来自二年级三班
-};
-Student.prototype.learn = function(subject){
-    console.log(this.name + '在' + this.className +'学习' + subject);
-};
-// 示例化
-var xiaoMing = new Student('小明', '15', '二年级三班');
-console.log(xiaoMing instanceof Student); // true
-console.log(xiaoMing instanceof Person); // true
-xiaoMing.hi2(); // 你好，我叫小明，我今年15岁了，我来自二年级三班
-console.log(xiaoMing.LEGS_NUM); // 2
-xiaoMing.walk(); // 小明在散步...
-xiaoMing.learn('数学'); // 小明在二年级三班学习数学
-var xiaoHong = new Person('小红', '14');
-console.log(xiaoHong instanceof Student); // false
-console.log(xiaoHong instanceof Person); // true
-xiaoHong.hi(); // 你好，我叫小红，我今年14岁了。
-xiaoHong.walk(); // 小红在散步...
-// 只能继承构造函数或原型中的属性与方法，其他方式都是变成undefined
-console.log(xiaoHong.test1); // undefined
-xiaoHong.test2(); // undefined is not a function
+// 实例对象
+var fooObject = new ChildClass('参数A', '参数B', '参数C');
+// 结果：
+fooObject.propertyA; // 参数A
+fooObject.propertyB; // 这里是父类的构造属性B：参数B
+fooObject.propertyC(); // 这里是父类的构造方法C
+fooObject.propertyD; // 这里是父类的原型属性D
+fooObject.propertyE(); // 这里是父类的原型方法E
+fooObject.propertyH; // 这里是子类的构造属性H：参数C
+fooObject.propertyI(); // 这里是子类的构造方法I
+fooObject.propertyJ; // 这里是子类的原型属性J
+fooObject.propertyK(); // 这里是子类的原型方法K
+// 检验：
+// 获取实例对象的原型
+Object.getPrototypeOf(fooObject);
+// 获取实例对象的构造函数
+fooObject.constructor;
+// 判断对象是否为某个父类子类的实例对象
+fooObject instanceof ChildClass; // true
+fooObject instanceof ParentClass; // true
+// 判断是否为实例对象的原型
+ChildClass.prototype.isPrototypeOf(fooObject); // true
+ParentClass.prototype.isPrototypeOf(ChildClass.prototype); // true
 ```
 
+> ### 普通对象型子类的实例化：
+>> ```javascript
+// 实例对象
+var fooObject = Object.create(ChildClass);
+// 结果：
+fooObject.propertyA; // 这里是属性A
+fooObject.propertyB(); // 这里是方法B
+fooObject.propertyC('参数'); //  这里是方法C:参数
+fooObject.propertyD; // 返回一个构造函数
+fooObject.propertyH; // 这里是属性H
+fooObject.propertyI(); // 这里是方法I
+// 检验：
+// 获取实例对象的原型
+Object.getPrototypeOf(fooObject); // 返回包含父类的子类对象
+// 获取实例对象的构造函数
+N/A // 普通对象不支持 constructor 属性
+// 判断对象是否为某个父类子类的实例对象
+N/A // 普通对象不支持 instanceo 关键词
+// 判断是否为实例对象的原型
+ChildClass.isPrototypeOf(fooObject); // true
+ParentClass.isPrototypeOf(ChildClass); // true
+```
