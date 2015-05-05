@@ -33,6 +33,8 @@
 * `\W` 匹配所有字母、数字和下划线以外的字符，相当于/[^A-Za-z0-9_]/
 * `\s` 匹配空格（包括制表符、空格符、断行符等），相等于[\t\r\n\v\f]
 * `\S` 匹配非空格的字符，相当于[^\t\r\n\v\f]
+* `\b` 匹配词的边界
+* `\B` 匹配非词边界，即在词的内部
 
 > ### 重复类 `{}`
 >> #### 基础字符：
@@ -65,6 +67,136 @@
 * `/regexp/gim` 修饰符可以多个一起使用
 
 ## 正则表达式的属性
+> ### ignoreCase 属性
+>> 说明：
+* 返回一个布尔值，表示是否设置了i修饰符，该属性只读
+
+>> 示例：
+```javascript
+var r = /abc/igm;
+r.ignoreCase // true
+```
+
+> ### global 属性
+>> 说明：
+* 返回一个布尔值，表示是否设置了g修饰符，该属性只读
+
+>> 示例：
+```javascript
+var r = /abc/igm;
+r.global // true
+```
+
+> ### multiline 属性
+>> 说明：
+* 返回一个布尔值，表示是否设置了m修饰符，该属性只读
+
+>> 示例：
+```javascript
+var r = /abc/igm;
+r.multiline // true
+```
+
+> ### source 属性
+>> 说明：
+* 返回正则表达式的字符串形式（不包括反斜杠），该属性只读
+
+>> 示例：
+```javascript
+var r = /abc/igm;
+r.source // "abc"
+```
+
+> ### lastIndex 属性
+>> 说明：
+* 返回下一次开始搜索的位置。该属性可读写，但是只在设置了g修饰符时有意义
+
+>> 示例：
+```javascript
+var r = /abc/igm;
+r.lastIndex // 0
+```
 
 ## 正则表达式的方法
+> ### test 方法
+>> 说明：
+* test方法返回布尔值，用来验证字符串是否符合某个模式
+
+>> 示例：
+```javascript
+/cat/.test('cats and dogs') // true
+// 如果正则表达式带有g修饰符，则每一次test方法都从上一次结束的位置开始向后匹配
+var r = /x/g;
+var s = '_x_x';
+r.lastIndex // 0
+r.test(s) // true
+r.lastIndex // 2
+r.test(s) // true
+r.lastIndex // 4
+r.test(s) // false
+```
+
+> ### exec 方法
+>> 说明：
+* exec方法返回匹配结果
+* 如果匹配成功，exec方法返回一个数组，里面是匹配结果
+* 如果匹配失败，返回null
+
+>> 示例：
+```javascript
+var s = '_x_x';
+var r1 = /x/;
+var r2 = /y/;
+r1.exec(s) // ["x"]
+r2.exec(s) // null
+```
+
+>> 示例：
+```javascript
+/*
+ * exec方法的返回数组还包含以下两个属性：
+ * input：整个原字符串
+ * index：整个模式匹配成功的开始位置
+ */
+/cat/.test('cats and dogs') // true
+// 如果正则表达式带有g修饰符，则每一次test方法都从上一次结束的位置开始向后匹配
+var r = /a(b+)a/;
+var arr = regex.exec("_abbba_aba_");
+arr // ["abbba", "bbb"]
+arr.index // 1 (注释：index属性等于1，是因为从原字符串的第二个位置开始匹配成功)
+arr.input // "_abbba_aba_"
+```
+
+>> 示例：
+```javascript
+/*
+ * 如果正则表达式包含圆括号，则返回的数组会包括多个元素
+ * 其中，第一个元素是整个匹配成功的结果
+ * 后面的元素就是圆括号对应的匹配成功的组
+ * 也就是说第二个元素就对应第一个括号
+ * 第三个元素对应第二个括号
+ * 以此类推，整个返回数组的length属性等于匹配成功的组数+1
+ */
+var r = /a(b+)a/g;
+// 第一次匹配
+var a1 = r.exec("_abbba_aba_");
+a1 // ["abbba", "bbb"]
+a1.index // 1
+r.lastIndex // 6
+// 第二次匹配
+var a2 = r.exec("_abbba_aba_");
+a2 // ["aba", "b"]
+a2.index // 7
+r.lastIndex // 10
+// 第三次匹配
+var a3 = r.exec("_abbba_aba_");
+a3 // null
+a3.index // TypeError: Cannot read property 'index' of null
+r.lastIndex // 0
+// 第四次匹配
+var a4 = r.exec("_abbba_aba_");
+a4 // ["abbba", "bbb"]
+a4.index // 1
+r.lastIndex // 6
+```
 
