@@ -23,10 +23,10 @@ JSON格式（JavaScript Object Notation的缩写）是一种用于数据交换�
 [32, 64, 128, 0xFFF] // 不能使用十六进制值
 { "name": "张三", age: undefined } // 不能使用undefined
 { "name": "张三",
-  "birthday": new Date('Fri, 26 Aug 2011 07:13:10 GMT'),
-  "getName": function() {
-      return this.name;
-  }
+    "birthday": new Date('Fri, 26 Aug 2011 07:13:10 GMT'),
+    "getName": function() {
+        return this.name;
+    }
 } // 不能使用函数和日期对象
 ```
 
