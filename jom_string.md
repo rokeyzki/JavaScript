@@ -1,4 +1,4 @@
-# 字符串
+# JOM 字符串
 String对象是JavaScript的三个包装对象之一
 ***
 

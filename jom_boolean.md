@@ -1,4 +1,4 @@
-# 布尔
+# JOM 布尔
 Boolean对象是JavaScript的三个包装对象之一
 ***
 

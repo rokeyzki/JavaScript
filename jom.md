@@ -3,6 +3,7 @@
 * [函数](jom_function.md)
 * [数组](jom_array.md)
 * [布尔](jom_boolean.md)
+* [格式](jom_json.md)
 * [数值](jom_number.md)
 * [数学](jom_math.md)
 * [字符](jom_string.md)

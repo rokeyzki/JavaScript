@@ -1,4 +1,4 @@
-# 数值
+# JOM 数值
 Number对象是JavaScript的三个包装对象之一
 ***
 
