@@ -12,6 +12,7 @@
 * [JOM](jom.md)
    * [函数](jom_function.md)
    * [数组](jom_array.md)
+   * [时间](jom_data.md)
    * [布尔](jom_boolean.md)
    * [格式](jom_json.md)
    * [数值](jom_number.md)
