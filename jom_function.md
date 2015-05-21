@@ -427,7 +427,7 @@ console.log(objC.f); // 1
 * 每个函数对象包含两个标准属性：prototype和length
 * 还包含一个非标准属性：name
 
-> ### prototype属性
+> ### prototype 属性
 >> #### 说明：
 * prototype是函数的原型属性，toString()和valueOf()等方法实际上都保存在prototype名下，通过各自对象的实例来访问
 
@@ -441,7 +441,7 @@ var a = new A();
 console.log(a.x); // 1
 ```
 
-> ### length属性
+> ### length 属性
 >> #### 说明：
 * length代表函数定义的命名参数（形参）的个数
 
@@ -451,7 +451,7 @@ function A(x){};
 console.log(A.length); // 1
 ```
 
-> ### name属性
+> ### name 属性
 >> #### 说明：
 * name属性返回紧跟在function关键字之后的那个函数名
 * 大多数JavaScript引擎支持非标准的name属性
@@ -466,11 +466,12 @@ var f3 = function myName() {};
 console.log(f3.name) // 'myName'
 ```
 
-## 函数的方法
+## 函数实例对象的的方法
 > ### 说明：
+* 需要先实例化Function对象才可以调用的方法
 * JavaScript提供了call、apply、bind这三个方法，用来切换/固定this的指向
 
-> ### call() 方法
+> ### Function.prototype.call() 方法
 >> #### 说明：
 * 函数的call方法，可以改变指定该函数内部this的指向，然后再调用该函数
 * call方法的作用包括两个：
@@ -574,7 +575,7 @@ console.log(class3); // Class3 {showSub: function, showAdd: function}
 class3.showAdd(1, 2); // 3
 ```
 
-> ### apply() 方法
+> ### Function.prototype.apply() 方法
 >> #### 说明：
 * apply方法的作用与call方法类似，也是改变this指向，然后再调用该函数。
 * apply方法与call方法不同的地方在于，其第二个参数是一个数组，该数组的所有成员依次作为参数，传入原函数。
@@ -596,7 +597,7 @@ Math.max.apply(null, a); // 15
 Array.apply(null, ["a",,"b"]) // [ 'a', undefined, 'b' ]
 ```
 
-> ### bind() 方法
+> ### Function.prototype.bind() 方法
 >> #### 说明：
 * bind方法用于将函数体内的this绑定到某个对象，然后返回一个新函数
 * bind比call方法和apply方法更进一步的是，除了绑定this以外，还可以绑定原函数的参数
