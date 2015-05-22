@@ -30,8 +30,11 @@ JSON格式（JavaScript Object Notation的缩写）是一种用于数据交换�
 } // 不能使用函数和日期对象
 ```
 
-## 格式的方法
-> ### stringify 方法
+## 格式对象的方法
+> ### 说明：
+* JSON对象可以直接调用的方法
+
+> ### JSON.stringify() 方法
 >> #### 说明
 * JSON.stringify方法用于将一个对象转为JSON字符串
 * 转换后的字符串符合JSON格式，并且可以被JSON.parse方法还原
@@ -70,7 +73,7 @@ var fooA = {
 JSON.stringify(fooA); // '{"x":1, "y":2, "z":3}';
 ```
 
-> ### parse 方法
+> ### JSON.parse() 方法
 >> #### 说明
 * JSON.parse方法用于将JSON字符串转化还原成对象
 

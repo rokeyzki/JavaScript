@@ -466,7 +466,7 @@ var f3 = function myName() {};
 console.log(f3.name) // 'myName'
 ```
 
-## 函数实例对象的的方法
+## 函数实例对象的方法
 > ### 说明：
 * 需要先实例化Function对象才可以调用的方法
 * JavaScript提供了call、apply、bind这三个方法，用来切换/固定this的指向

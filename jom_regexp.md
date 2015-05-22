@@ -117,8 +117,11 @@ var r = /abc/igm;
 r.lastIndex // 0
 ```
 
-## 正则表达式的方法
-> ### test 方法
+## 正则表达式实例对象的方法
+> ### 说明：
+* 需要先实例化RegExp对象才可以调用的方法
+
+> ### RegExp.prototype.test() 方法
 >> 说明：
 * test方法返回布尔值，用来验证字符串是否符合某个模式
 
@@ -136,7 +139,7 @@ r.lastIndex // 4
 r.test(s) // false
 ```
 
-> ### exec 方法
+> ### RegExp.prototype.exec() 方法
 >> 说明：
 * exec方法返回匹配结果
 * 如果匹配成功，exec方法返回一个数组，里面是匹配结果

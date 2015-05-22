@@ -18,8 +18,11 @@ Number(true) // 1
 > ### 说明：
 * 因为使用率不高，暂不介绍
 
-## 数值的方法
-> ### toString 方法
+## 数值实例对象的方法
+> ### 说明：
+* 需要先实例化Number对象才可以调用的方法
+
+> ### Number.prototype.toString() 方法
 >> #### 说明：
 * toString方法可以接受一个参数，表示将一个数字转化成某个进制的字符串
 * 将其他进制的数，转回十进制，需要使用parseInt方法
@@ -40,7 +43,7 @@ Number(true) // 1
 10['toString'](2); // "1010"
 ```
 
-> ### toFixed 方法
+> ### Number.prototype.toFixed() 方法
 >> #### 说明：
 * toFixed方法用于将一个数转为指定位数的小数
 * 需要在数值外使用括号才能使用该方法
@@ -58,19 +61,19 @@ Number(true) // 1
 10['toFixed'](2); // "10.00"
 ```
 
-> ### toExponential 方法
+> ### Number.prototype.toExponential() 方法
 >> #### 说明：
 * 因为使用率不高，暂不介绍
 
-> ### toPrecision 方法
+> ### Number.prototype.toPrecision() 方法
 >> #### 说明：
 * 因为使用率不高，暂不介绍
 
-## 数值的自定义方法
-> ### 说明：
+> ### Number.prototype.custom() 自定义方法
+>> #### 说明：
 * 与其他对象一样，Number.prototype对象上面可以自定义方法，被Number的实例继承
 
-> ### 示例：
+>> #### 示例：
 ```javascript
 // 定义自定义方法
 Number.prototype.add = function (x) {
@@ -80,7 +83,7 @@ Number.prototype.add = function (x) {
 (8).add(2); // 10
 ```
 
-> ### 示例：
+>> #### 示例：
 ```javascript
 // 通过方括号运算符也可以调用自定义方法
 // 此时的数值不需要使用方括号

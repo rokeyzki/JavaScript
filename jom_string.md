@@ -24,8 +24,11 @@ s.valueOf() // "abc"
 "abc".length // 3
 ```
 
-## 字符串的普通方法
-> ### charAt 方法
+## 字符串实例对象的普通方法
+> ### 说明：
+* 需要先实例化String对象才可以调用的方法
+
+> ### String.prototype.charAt() 方法
 >> #### 说明：
 * charAt方法返回一个字符串的给定位置的字符，位置从0开始编号
 
@@ -42,7 +45,7 @@ s.charAt(s.length - 1); // "c"
 "abc"[1]; // "b"
 ```
 
-> ### concat 方法
+> ### String.prototype.concat() 方法
 >> #### 说明：
 * concat方法用于连接两个字符串
 * 使用该方法后，原字符串不受影响，返回一个新字符串
@@ -61,7 +64,7 @@ s1; // "abc"
 "a".concat("b","c"); // "abc"
 ```
 
-> ### substr 方法
+> ### String.prototype.substr() 方法
 >> #### 说明：
 * substr方法用于截取字符串，生成子字符串
 * 第一个参数是子字符串的开始位置
@@ -88,7 +91,7 @@ s1; // "abc"
 "Hello World".substr(4,-2); // ""
 ```
 
-> ### slice 方法、substring 方法
+> ### String.prototype.slice() 方法、String.prototype.substring() 方法
 >> #### 说明：
 * slice方法、substring方法也是用于截取字符串，生成子字符串
 * 第一个参数是子字符串的开始位置
@@ -125,7 +128,7 @@ s1; // "abc"
 "Hello World".substring(4,-2); // "Hell" 等于："Hello World".substring(4, 0);
 ```
 
-> ### indexOf 方法、lastIndexOf 方法
+> ### String.prototype.indexOf() 方法、String.prototype.lastIndexOf() 方法
 >> #### 说明：
 * indexOf方法、lastIndexOf方法都是用于确定一个字符串在另一个字符串中的位置
 * 如果返回-1，就表示不匹配
@@ -148,7 +151,7 @@ s1; // "abc"
 "hello world".lastIndexOf("o", 6); // 4
 ```
 
-> ### trim 方法
+> ### String.prototype.trim() 方法
 >> #### 说明：
 * 该方法用于去除字符串两端的空格
 * 该方法返回一个新字符串，不改变原字符串
@@ -169,7 +172,7 @@ s1; // "abc"
 "Hello World".toUpperCase(); // "HELLO WORLD"
 ```
 
-> ### localeCompare 方法
+> ### String.prototype.localeCompare() 方法
 >> #### 说明：
 * 该方法用于比较两个字符串
 * 它返回一个数字
@@ -184,8 +187,11 @@ s1; // "abc"
 'apple'.localeCompare('apple'); // 0
 ```
 
-## 字符串的正则方法
-> ### match 方法
+## 字符串实例对象的正则方法
+> ### 说明：
+* 需要先实例化String对象才可以调用的方法
+
+> ### String.prototype.match() 方法
 >> 说明：
 * 用于确定原字符串是否匹配某个子字符串，返回匹配的子字符串数组
 * match方法返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回null
@@ -205,7 +211,7 @@ m.index // 1
 m.input // "cat, bat, sat, fat"
 ```
 
-> ### search 方法
+> ### String.prototype.search() 方法
 >> 说明：
 * search方法的用法等同于match，但是其返回值等于match方法返回数组的index属性
 * search方法的为匹配的第一个位置，如果没有找到匹配，则返回-1
@@ -220,7 +226,7 @@ s // "cat, bat, sat, fat"
 m // 1
 ```
 
-> ### replace 方法
+> ### String.prototype.replace() 方法
 >> 说明：
 * replace方法用于替换匹配的子字符串
 * 一般情况下只替换第一个匹配（除非使用带有g修饰符的正则表达式）
@@ -235,7 +241,7 @@ s // "cat, bat, sat, fat"
 m // "cbt, bat, sat, fat"
 ```
 
-> ### split 方法
+> ### String.prototype.split() 方法
 >> 说明：
 * split方法按照给定规则分割字符串
 * 返回一个由分割出来的各部分组成的新数组
@@ -274,6 +280,6 @@ m5 // ["", "b", "c"]
 "a|b|c".split("|", 4) // ["a", "b", "c"]
 ```
 
-> ### eval 方法
+> ### ?: eval 方法
 >> 说明：
 * 待添加
