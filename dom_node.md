@@ -1,4 +1,4 @@
-# 节点
+# DOM 节点
 节点主要包含元素节点和文本节点
 ***
 
@@ -64,9 +64,38 @@ document.getElementById('foo').textContent = '<p>GoodBye!</p>';
 * document对象本身的ownerDocument属性，返回null
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-var d = p.ownerDocument;
-d === document // true
+/* 获取ID为foo的DIV元素节点的三种常用方法 */
+/* 1 */
+var div_1st = foo;
+console.log(div_1st); // div#foo
+/* 2 */
+var div_2nd = document.getElementById("foo");
+console.log(div_2nd); // div#foo
+/* 3 */
+var div_3rd = document.querySelector("#foo");
+console.log(div_3rd); // div#foo
+/* ownerDocument 属性示例 */
+console.log(foo.ownerDocument); // #document
 ```
 
 >> #### parentNode 属性
@@ -76,10 +105,29 @@ d === document // true
 * 如果当前节点没有父节点，则返回null
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-if (node.parentElement) {
-    node.parentElement.style.color = "red";
-}
+/* parentNode 属性示例 */
+var p_1st = foo.firstChild;
+console.log(p_1st.parentNode); // div#foo
 ```
 
 >> #### parentElement 属性
@@ -88,10 +136,29 @@ if (node.parentElement) {
 * 如果当前节点没有父节点，或者父节点类型不是Element节点，则返回null
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-if (node.parentElement) {
-    node.parentElement.style.color = "red";
-}
+/* parentElement 属性示例 */
+var p_1st = foo.firstChild;
+console.log(p_1st.parentElement); // div#foo
 ```
 
 > ### 平级属性
