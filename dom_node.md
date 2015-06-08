@@ -126,7 +126,7 @@ console.log(foo.ownerDocument); // #document
 ```
 ```javascript
 /* parentNode 属性示例 */
-var p_1st = foo.firstChild;
+var p_1st = foo.firstElementChild;
 console.log(p_1st.parentNode); // div#foo
 ```
 
@@ -157,7 +157,7 @@ console.log(p_1st.parentNode); // div#foo
 ```
 ```javascript
 /* parentElement 属性示例 */
-var p_1st = foo.firstChild;
+var p_1st = foo.firstElementChild;
 console.log(p_1st.parentElement); // div#foo
 ```
 
@@ -166,57 +166,164 @@ console.log(p_1st.parentElement); // div#foo
 >>> #### 说明：
 * nextsibling属性返回紧跟在当前节点后面的第一个同级兄弟节点
 * 如果当前节点后面没有同级节点，则返回null
+* 该属性包括元素节点和文本节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-var el = document.getelementbyid('div-01').firstchild;
-var i = 1;
-while (el) {
-    console.log(i + '. ' + el.nodename);
-    el = el.nextsibling;
-    i++;
-}
+/* nextSibling 属性示例 */
+var p_1st = foo.firstElementChild;
+var span_1st = p_1st.firstElementChild;
+console.log(span_1st.nextSibling); // span
 ```
 
 >> #### previousSibling 属性
 >>> #### 说明：
 * previoussibling属性返回当前节点前面的、距离最近的一个同级兄弟节点
 * 如果当前节点前面没有同级节点，则返回null
+* 该属性包括元素节点和文本节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-// html代码如下
-// <a><b1 id="b1"/><b2 id="b2"/></a>
-document.getelementbyid("b1").previoussibling // null
-document.getelementbyid("b2").previoussibling.id // "b1"
+/* previousSibling 属性示例 */
+var p_1st = foo.firstElementChild;
+var span_1st = p_1st.firstElementChild;
+console.log(span_1st.previousSibling); // null
 ```
 
 >> #### nextElementSibling 属性
 >>> #### 说明：
-* 123
+* nextElementSibling属性返回指定元素的后一个同级元素
+* 如果没有则返回null
+* 该属性只包括元素节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+/* nextElementSibling 属性示例 */
+var p_1st = foo.firstElementChild;
+var span_1st = p_1st.firstElementChild;
+console.log(span_1st.nextElementSibling); // span
 ```
 
 >> #### previousElementSibling 属性
 >>> #### 说明：
-* 123
+* previousElementSibling属性返回指定元素的前一个同级元素
+* 如果没有则返回null
+* 该属性只包括元素节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+/* previousElementSibling 属性示例 */
+var p_1st = foo.firstElementChild;
+var span_1st = p_1st.firstElementChild;
+console.log(span_1st.previousElementSibling); // null
 ```
 
 > ### 子级属性
 >> #### children 属性
 >>> #### 说明：
-* 123
+* children属性返回一个类似数组的动态对象（实时反映变化）
+* 如果当前元素没有子元素，则返回的对象包含零个成员
+* 该属性包括当前元素节点的所有子元素
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+/* children 属性示例 */
+console.log(foo.children); // HTMLCollection[3] 0:p,1:p,2:p
 ```
 
 >> #### childNodes 属性
@@ -224,57 +331,185 @@ document.getelementbyid("b2").previoussibling.id // "b1"
 * childNodes属性返回一个NodeList集合，成员包括当前节点的所有子节点
 * 如果当前节点不包括任何子节点，则返回一个空的NodeList集合
 * 由于NodeList对象是一个动态集合，一旦子节点发生变化，立刻会反映在返回结果之中
+* 该属性包括元素节点和文本节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-var ulElementChildNodes = document.querySelector('ul').childNodes;
+/* childNodes 属性示例 */
+console.log(foo.childNodes); // HTMLCollection[7] 0:text,1:p,2:text,3:p,4:text,5:p,6:text
 ```
 
 >> #### firstChild 属性
 >>> #### 说明：
 * firstChild属性返回当前节点的第一个子节点
 * 如果当前节点没有子节点，则返回null
+* 该属性包括元素节点和文本节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-// 暂无示例
+/* firstChild 属性示例 */
+console.log(foo.firstChild); // #text
 ```
 
 >> #### lastChild 属性
 >>> #### 说明：
 * lastChild属性返回当前节点的最后一个子节点
 * 如果当前节点没有子节点，则返回null
+* 该属性包括元素节点和文本节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-// 暂无示例
+/* lastChild 属性示例 */
+console.log(foo.lastChild); // #text
 ```
 
 >> #### childElementCount 属性
 >>> #### 说明：
-* 123
+* childElementCount属性返回当前元素节点包含的子元素节点的个数
+* 该属性只包括元素节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+/* childElementCount 属性示例 */
+console.log(foo.childElementCount); // 3
 ```
 
 >> #### firstElementChild 属性
 >>> #### 说明：
-* 123
+* firstElementChild属性返回第一个子元素
+* 如果没有，则返回null
+* 该属性只包括元素节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+/* firstElementChild 属性示例 */
+console.log(foo.firstElementChild); // p
 ```
 
 >> #### lastElementChild 属性
 >>> #### 说明：
-* 123
+* lastElementChild属性返回最后一个子元素
+* 如果没有，则返回null
+* 该属性只包括元素节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+/* lastElementChild 属性示例 */
+console.log(foo.lastElementChild); // p
 ```
 
 ## 节点的方法
