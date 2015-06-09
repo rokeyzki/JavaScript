@@ -514,122 +514,411 @@ console.log(foo.lastElementChild); // p
 
 ## 节点的方法
 > ### 判断方法
->> #### node.hasChildNodes() 方法
+>> #### node.isEqualNode() 方法
 >>> #### 说明：
-* 123
+* isEqualNode方法返回一个布尔值，用于检查两个节点是否相等
+* 所谓相等的节点，指的是两个节点的类型相同、属性相同、子节点相同
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+var p_1st = foo.firstElementChild;
+var p_3rd = foo.lastElementChild;
+console.log(p_1st.isEqualNode(p_3rd)); // true
+```
+
+>> #### node.hasChildNodes() 方法
+>>> #### 说明：
+* hasChildNodes方法判断节点是否包含子节点
+* hasChildNodes方法结合firstChild属性和nextSibling属性，可以遍历当前节点的所有后代节点
+* 该方法包括元素节点和文本节点
+
+>>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
+```javascript
+console.log(foo.hasChildNodes()); // true
+console.log(foo.firstElementChild.firstElementChild.firstChild.hasChildNodes()); // false
 ```
 
 >> #### node.contains() 方法
 >>> #### 说明：
-* 123
+* contains方法接受一个节点作为参数，返回一个布尔值，表示参数节点是否为当前节点的后代节点
+* 如果将当前节点传入contains方法，会返回true
+* 该方法包括元素节点和文本节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+var span_1st = foo.firstElementChild.firstElementChild;
+console.log(foo.contains(span_1st)); // true
+console.log(foo.contains(foo)); // true
 ```
 
 >> #### node.compareDocumentPosition() 方法
 >>> #### 说明：
-* 123
+* compareDocumentPosition方法表示参数节点与当前节点的关系
+* 该方法包括元素节点和文本节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+// 当参数节点等于当前节点时，返回值为0，表示节点相同
+console.log(foo.compareDocumentPosition(foo)); // 0
+// 纵向比较
+var span_1st = foo.firstElementChild.firstElementChild;
+// 判断参数节点`span_1st`对于当前节点`foo`的位置，值20表示参数节点是当前节点的后代节点
+console.log(foo.compareDocumentPosition(span_1st)); // 20
+// 判断参数节点`foo`对于当前节点`span_1st`的位置，值10表示参数节点在当前节点的祖先节点
+console.log(span_1st.compareDocumentPosition(foo)); // 10
+// 横向比较
+var span_2nd = span_1st.nextElementSibling;
+// 判断参数节点`span_2nd`对于当前节点`span_1st`的位置，值4表示参数节点是当前节点的后面节点(不一定同级)
+console.log(span_1st.compareDocumentPosition(span_2nd)); // 4
+// 判断参数节点`span_1st`对于当前节点`span_2nd`的位置，值2表示参数节点是当前节点的前面节点(不一定同级)
+console.log(span_2nd.compareDocumentPosition(span_1st)); // 2
+var p_3rd = foo.lastElementChild;
+console.log(span_1st.compareDocumentPosition(p_3rd)); // 4
+console.log(p_3rd.compareDocumentPosition(span_1st)); // 2
 ```
 
->> #### node.isEqualNode() 方法
+>> #### element.matches() 方法
 >>> #### 说明：
-* 123
+* matches方法返回一个布尔值，表示当前元素是否匹配给定的CSS选择器
+* 该方法包括元素节点和文本节点
 
 >>> #### 示例：
-```javascript
-123
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
 ```
-
->> #### element.match() 方法
->>> #### 说明：
-* 123
-
->>> #### 示例：
 ```javascript
-123
+var span_1st = foo.firstElementChild.firstElementChild;
+console.log(span_1st.matches('#foo .someClass span')); // true
 ```
 
 > ### 获取方法
->> #### element.closest() 方法
->>> #### 说明：
-* 123
-
->>> #### 示例：
-```javascript
-123
-```
-
 >> #### element.querySelector() 方法
 >>> #### 说明：
-* 123
+* querySelector方法接受CSS选择器作为参数
+* 返回父元素的第一个匹配的子元素
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+console.log(foo.querySelector("#foo .someClass span")); // span
 ```
 
 >> #### element.querySelectorAll() 方法
 >>> #### 说明：
-* 123
+* querySelectorAll方法接受CSS选择器作为参数
+* 返回一个NodeList对象，包含所有匹配的子元素
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+console.log(foo.querySelectorAll("#foo .someClass span")); // 0:span,1:span,2:span
 ```
 
 >> #### element.getElementsByClassName() 方法
 >>> #### 说明：
-* 123
+* getElementsByClassName方法返回一个HTMLCollection对象
+* 成员是当前元素节点的所有匹配指定class的子元素
+*
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+console.log(foo.getElementsByClassName("someClass")); // p.someClass
 ```
 
 >> #### element.getElementsByTagName() 方法
 >>> #### 说明：
-* 123
+* getElementsByTagName方法返回一个HTMLCollection对象
+* 成员是当前元素节点的所有匹配指定标签名的子元素
+* 该方法搜索之前，会统一将标签名转为小写
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+console.log(foo.getElementsByTagName("span")); // 0:span,1:span,2:span,3:span,4:span,5:span,6:span,7:span,8:span
+```
+
+>> #### element.closest() 方法
+>>> #### 说明：
+* closest方法返回当前元素节点的最接近的父元素（或者当前节点本身）
+* 条件是必须匹配给定的CSS选择器
+* 如果不满足匹配，则返回null
+
+>>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
+```javascript
+var span_1st = foo.firstElementChild.firstElementChild;
+console.log(span_1st.closest("#foo .someClass")); // p.someClass
 ```
 
 >> #### document.getElementById() 方法
 >>> #### 说明：
-* 123
+* getElementById方法返回匹配指定ID属性的元素节点
+* 在搜索匹配节点时，ID属性是大小写敏感的
+* 如果没有发现匹配的节点，则返回null
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+console.log(document.getElementById("foo")); // div#foo
 ```
 
 >> #### document.getElementsByName() 方法
 >>> #### 说明：
-* 123
+* getElementsByName方法用于选择拥有name属性的HTML元素
+* 返回一个NodeList格式的对象，不会实时反映元素的变化
+* 在IE浏览器使用这个方法，会将没有name属性、但有同名id属性的元素也返回，所以name和id属性最好设为不一样的值
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+console.log(document.getElementsByName("someName")); // p[someName]
 ```
 
 >> #### document.elementFromPoint() 方法
 >>> #### 说明：
-* 123
+* elementFromPoint方法返回位于页面指定位置的元素
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+```
 ```javascript
-123
+console.log(document.elementFromPoint(1,1)); // html
 ```
 
 > ### 插入方法
