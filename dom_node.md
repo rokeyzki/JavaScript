@@ -924,101 +924,335 @@ console.log(document.elementFromPoint(1,1)); // html
 > ### 插入方法
 >> #### node.appendChild() 方法
 >>> #### 说明：
-* 123
+* appendChild方法接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点
+* 如果参数节点是文档中现有的其他节点，appendChild方法会将其从原来的位置，移动到新位置
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
 ```javascript
-123
+var p_1st = foo.querySelector('#foo .someClass');
+p_1st.appendChild(demo);
 ```
 
 >> #### node.cloneNode() 方法
 >>> #### 说明：
-* 123
+* cloneNode方法用于克隆一个节点
+* 它接受一个布尔值作为参数，表示是否同时克隆子节点，默认是false，即不克隆子节点
+* 克隆一个节点之后，DOM树有可能出现两个有相同ID属性（即id="xxx"）的HTML元素，这时应该修改其中一个HTML元素的ID属性
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
 ```javascript
-123
+var p_1st = foo.querySelector('#foo .someClass');
+// 复制一个demo节点（cloneNode方法默认只复制元素节点，不包括文本节点）
+var demo2 = demo.cloneNode();
+// 复制文本
+demo2.textContent = demo.textContent;
+p_1st.appendChild(demo2);
 ```
 
 >> #### node.insertBefore() 方法
 >>> #### 说明：
-* 123
+* insertBefore方法用于将某个节点插入当前节点的指定位置
+* 它接受两个参数，第一个参数是所要插入的节点
+* 第二个参数是当前节点的一个子节点，新的节点将插在这个节点的前面
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
 ```javascript
-123
+var p_1st = foo.querySelector('#foo .someClass');
+p_1st.insertBefore(demo, p_1st.firstElementChild);
 ```
 
 >> #### element.insertAdjacentHTML() 方法
 >>> #### 说明：
-* 123
+* insertAdjacentHTML方法解析字符串，然后将生成的节点插入DOM树的指定位置
+* 该方法接受两个参数，第一个是指定位置，第二个是待解析的字符串
+* 指定位置共有四个
+* 该方法不是彻底置换现有的DOM结构，这使得它的执行速度比innerHTML操作快得多
+* 所有浏览器都支持这个方法，包括IE 6
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
 ```javascript
-123
+// beforebegin：在当前元素节点的前面
+foo.insertAdjacentHTML('beforebegin', '<div id="test">test</div>');
+// afterend：在当前元素节点的后面
+foo.insertAdjacentHTML('afterend', '<div id="test">test</div>');
+// afterbegin：在当前元素节点的里面，插在它的第一个子元素之前
+foo.insertAdjacentHTML('afterbegin', '<div id="test">test</div>');
+// beforeend：在当前元素节点的里面，插在它的最后一个子元素之后
+foo.insertAdjacentHTML('beforeend', '<div id="test">test</div>');
 ```
 
 >> #### document.createElement() 方法
 >>> #### 说明：
-* 123
+* createElement方法用来生成HTML元素节点
+* createElement方法的参数为元素的标签名，即元素节点的tagName属性
+* 如果传入大写的标签名，会被转为小写。如果参数带有尖括号（即<和>）或者是null，会报错
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
 ```javascript
-123
+var newDiv = document.createElement("div");
+demo.appendChild(newDiv);
 ```
 
 >> #### document.createTextNode() 方法
 >>> #### 说明：
-* 123
+* createTextNode方法用来生成文本节点，参数为所要生成的文本节点的内容
 
 >>> #### 示例：
-```javascript
-123
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
 ```
-
->> #### document.createAttribute() 方法
->>> #### 说明：
-* 123
-
->>> #### 示例：
 ```javascript
-123
+var newDiv = document.createElement("div");
+var newText = document.createTextNode("hello");
+newDiv.appendChild(newText);
+demo.appendChild(newDiv);
 ```
 
 >> #### document.createDocumentFragment() 方法
 >>> #### 说明：
-* 123
+* createDocumentFragment方法生成一个DocumentFragment对象
+* DocumentFragment对象是一个存在于内存的DOM片段，但是不属于当前文档，常常用来生成较复杂的DOM结构，然后插入当前文档
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
 ```javascript
-123
+var newFrag = document.createDocumentFragment();
+[1, 2, 3, 4].forEach(function(e) {
+    var li = document.createElement("li");
+    li.textContent = e;
+    newFrag.appendChild(li);
+});
+demo.appendChild(newFrag);
 ```
 
 > ### 修改方法
 >> #### node.replaceChild() 方法
 >>> #### 说明：
-* 123
+* replaceChild方法用于将一个新的节点，替换当前节点的某一个子节点
+* 它接受两个参数，第一个参数是用来替换的新节点
+* 第二个参数将要被替换走的子节点。它返回被替换走的那个节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
 ```javascript
-123
+// 使用demo替换p_1st
+var p_1st = foo.querySelector('#foo .someClass');
+foo.replaceChild(demo, p_1st);
+// 使用demo替换foo
+foo.parentNode.replaceChild(demo, foo);
 ```
 
 > ### 删除方法
 >> #### node.removeChild() 方法
 >>> #### 说明：
-* 123
+* removeChild方法接受一个子节点作为参数，用于从当前节点移除该节点
+* 它返回被移除的节点
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
 ```javascript
-123
+foo.removeChild(foo.firstElementChild);
 ```
 
->> #### node.remove() 方法
+>> #### element.remove() 方法
 >>> #### 说明：
-* 123
+* remove方法用于将当前元素节点从DOM树删除
 
 >>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
 ```javascript
-123
+foo.remove();
 ```
