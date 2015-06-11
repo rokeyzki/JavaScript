@@ -1093,6 +1093,38 @@ var newDiv = document.createElement("div");
 demo.appendChild(newDiv);
 ```
 
+>> #### document.createAttribute() 方法
+>>> #### 说明：
+* createAttribute方法生成一个新的属性对象节点，并返回它
+* createAttribute方法的参数name，是属性的名称
+
+>>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
+```javascript
+var newAttr = document.createAttribute("my_attr_key");
+newAttr.value = "my_attr_value";
+demo.setAttributeNode(newAttr);
+```
+
 >> #### document.createTextNode() 方法
 >>> #### 说明：
 * createTextNode方法用来生成文本节点，参数为所要生成的文本节点的内容
