@@ -1229,6 +1229,38 @@ foo.replaceChild(demo, p_1st);
 foo.parentNode.replaceChild(demo, foo);
 ```
 
+>> #### element.setAttributeNode() 方法
+>>> #### 说明：
+* setAttributeNode() 方法向元素中添加指定的属性节点
+* 如果这个指定的属性已存在，则此方法会替换它
+
+>>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
+```javascript
+var newAttr = document.createAttribute("my_attr_key");
+newAttr.value = "my_attr_value";
+demo.setAttributeNode(newAttr);
+```
+
 > ### 删除方法
 >> #### node.removeChild() 方法
 >>> #### 说明：
