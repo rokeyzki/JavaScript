@@ -25,5 +25,6 @@
    * [元素](dom_element.md)
    * [属性](dom_attribute.md)
    * [文本](dom_text.md)
-   * [样式](dom_css.md)
    * [事件](dom_event.md)
+   * [样式](dom_style.md)
+   
