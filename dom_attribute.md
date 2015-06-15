@@ -119,7 +119,7 @@ console.log(foo.hasAttribute("id")); // true
 console.log(foo.getAttribute("id")); // foo
 ```
 
-> ### attribute.removeAttribute() 方法
+> ### element.removeAttribute() 方法
 >> #### 说明：
 * removeAttribute方法用于从当前元素节点移除属性
 
