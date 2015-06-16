@@ -1292,9 +1292,9 @@ demo.setAttributeNode(newAttr);
 foo.removeChild(foo.firstElementChild);
 ```
 
->> #### element.remove() 方法
+>> #### node.remove() 方法
 >>> #### 说明：
-* remove方法用于将当前元素节点从DOM树删除
+* remove方法用于将当前节点从DOM树删除
 
 >>> #### 示例：
 ```html
