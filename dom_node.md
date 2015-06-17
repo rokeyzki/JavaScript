@@ -921,6 +921,84 @@ console.log(document.getElementsByName("someName")); // p[someName]
 console.log(document.elementFromPoint(1,1)); // html
 ```
 
+> ### 遍历方法
+>> #### document.createNodeIterator() 方法
+>>> #### 说明：
+* createNodeIterator方法返回一个DOM的子节点遍历器
+* createNodeIterator方法的第一个参数为遍历器的根节点
+* 第二个参数为所要遍历的节点类型，类型包括
+* 所有节点（NodeFilter.SHOW_ALL）
+* 元素节点（NodeFilter.SHOW_ELEMENT）
+* 文本节点（NodeFilter.SHOW_TEXT）
+* 评论节点（NodeFilter.SHOW_COMMENT）
+* 所谓“遍历器”，在这里指可以用nextNode方法和previousNode方法依次遍历根节点的所有子节点
+* 遍历器返回的第一个节点，总是根节点
+
+>>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
+```javascript
+var fooNodeIterator = document.createNodeIterator(foo, NodeFilter.SHOW_ELEMENT);
+while (currentNode = fooNodeIterator.nextNode()) {
+    console.log(currentNode.tagName); // DIV、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN
+}
+var nextNode = fooNodeIterator.nextNode(); console.log(nextNode); // null
+var previousNode = fooNodeIterator.previousNode(); console.log(previousNode); // <span>3</span>
+```
+
+>> #### document.createTreeWalker() 方法
+>>> #### 说明：
+* createTreeWalker方法返回一个DOM的子树遍历器
+* 它与createNodeIterator方法的区别在于，createTreeWalker方法不遍历最初始的根节点
+* createTreeWalker方法的第一个参数，是所要遍历的根节点
+* 第二个参数指定所要遍历的节点类型
+
+>>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
+```javascript
+var fooTreeWalker = document.createTreeWalker(foo, NodeFilter.SHOW_ELEMENT);
+while (currentNode = fooTreeWalker.nextNode()) {
+    console.log(currentNode.tagName); // P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN
+}
+```
+
 > ### 插入方法
 >> #### node.appendChild() 方法
 >>> #### 说明：
@@ -1320,3 +1398,32 @@ foo.removeChild(foo.firstElementChild);
 ```javascript
 foo.remove();
 ```
+
+> ### 外部方法
+>> #### document.adoptNode() 方法
+>>> #### 说明：
+* adoptNode方法将某个节点，从其原来所在的文档移除，插入当前文档，并返回插入后的新节点
+
+>>> #### 示例：
+```html
+/* 暂无示例 */
+```
+```javascript
+// 暂无示例
+```
+
+>> #### document.importNode() 方法
+>>> #### 说明：
+* importNode方法用于创造一个外部节点的拷贝，然后插入当前文档
+* 它的第一个参数是外部节点
+* 第二个参数是一个布尔值，表示对外部节点是深拷贝还是浅拷贝，默认是浅拷贝（false）
+* 虽然第二个参数是可选的，但是建议总是保留这个参数，并设为true
+
+>>> #### 示例：
+```html
+/* 暂无示例 */
+```
+```javascript
+// 暂无示例
+```
+
