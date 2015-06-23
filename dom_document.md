@@ -4,6 +4,7 @@ document节点是文档的根节点，document节点有不同的办法可以获�
 * 对于iframe载入的网页，使用iframe节点的contentDocument属性
 * 对Ajax操作返回的文档，使用XMLHttpRequest对象的responseXML属性
 * 对于某个节点包含的文档，使用该节点的ownerDocument属性
+
 ***
 
 ## 文档的属性
