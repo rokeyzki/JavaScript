@@ -32,7 +32,7 @@ console.log(document.firstChild == document.doctype); // true
 
 > ### documentElement 属性
 >> #### 说明：
-* document对象一般有两个子节点。第二个子节点是documentElement
+* document对象一般有两个子节点。第二个子节点是document.documentElement
 * document.documentElement属性，表示当前文档的根节点（root）
 * 返回值为<html>标签内的全部内容
 
