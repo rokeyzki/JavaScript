@@ -248,6 +248,7 @@ console.log(document.cookie); // someCookieName=true;
 // 暂无示例
 ```
 
+## 文档的集合属性
 > ### anchors 属性
 >> #### 说明：
 * 暂无说明
@@ -309,6 +310,80 @@ console.log(document.cookie); // someCookieName=true;
 >> #### 示例：
 ```javascript
 // 暂无示例
+```
+
+## 文档的方法
+> ### document.open() 方法
+>> #### 说明：
+* document.open方法用于新建一个文档，供write方法写入内容
+* 它实际上等于清除当前文档，重新写入内容
+* 不要将此方法与window.open()混淆，后者用来打开一个新窗口，与当前文档无关
+
+>> #### 示例：
+```javascript
+// 页面显示“helloworld”
+document.open();
+document.write("hello ");
+document.write("world!");
+document.close();
+```
+
+> ### document.close() 方法
+>> #### 说明：
+* document.close方法用于关闭open方法所新建的文档
+* 一旦关闭，write方法就无法写入内容了
+* 如果再调用write方法，就等同于又调用open方法，新建一个文档，再写入内容
+
+>> #### 示例：
+```javascript
+// 页面显示“helloworld”
+document.open();
+document.write("hello ");
+document.write("world!");
+document.close();
+```
+
+> ### document.write() 方法
+>> #### 说明：
+* document.write方法用于向当前文档写入内容
+* 只要当前文档还没有用close方法关闭，它所写入的内容就会追加在已有内容的后面
+* 除了某些特殊情况，应该尽量避免使用document.write这个方法
+
+>> #### 示例：
+```javascript
+// 页面显示“helloworld”
+document.open();
+document.write("hello ");
+document.write("world!");
+document.close();
+```
+
+> ### document.writeln() 方法
+>> #### 说明：
+* document.writeln方法与write方法完全一致，除了会在输出内容的尾部添加换行符
+* 注意，writeln方法添加的是ASCII码的换行符，渲染成HTML网页时不起作用
+* 除了某些特殊情况，应该尽量避免使用document.writeln这个方法
+
+>> #### 示例：
+```javascript
+document.write(1);
+document.write(2);
+// 12
+document.writeln(1);
+document.writeln(2);
+// 1
+// 2
+//
+```
+
+> ### document.hasFocus() 方法
+>> #### 说明：
+* document.hasFocus方法返回一个布尔值，表示当前文档之中是否有元素被激活或获得焦点
+
+>> #### 示例：
+```javascript
+focused = document.hasFocus();
+console.log(focused); // true
 ```
 
 
