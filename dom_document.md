@@ -1,4 +1,4 @@
-# 文档
+# DOM 文档
 document节点是文档的根节点，document节点有不同的办法可以获取
 * 对于正常的网页，直接使用document或window.document
 * 对于iframe载入的网页，使用iframe节点的contentDocument属性

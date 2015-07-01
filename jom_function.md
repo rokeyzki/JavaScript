@@ -34,14 +34,14 @@ var fooA = function(a, b) {
 };
 ```
 
->> #### 示例：NFE 命名式函数表达式
+>> #### 示例：NFE 命名函数表达式
 ```javascript
 var fooA = function fooB(a, b) {
     // code
 }
 ```
 
->> #### 示例：IIFE 立即执行函数表达式
+>> #### 示例：IIFE 即调函数表达式
 ```javascript
 // 用法一
 (function() {
@@ -76,7 +76,7 @@ function(){
 // 二是IIFE内部形成了一个单独的作用域，可以封装一些外部无法读取的私有变量。
 ```
 
->> #### 示例：first-class function 首类函数表达式
+>> #### 示例：FCFE 首类函数表达式
 ```javascript
 return function() {
     // code
