@@ -153,7 +153,7 @@ window.addEventListener('beforeunload', function(e) {
 >>>> #### 示例：
 ```html
 <script>
-window.addEventListener('load', function(event) {
+window.addEventListener('load', function(e) {
     console.log('load 文档加载完成');
 }, false);
 </script>
@@ -384,7 +384,7 @@ input.addEventListener('blur', function(e) {
 >> #### 原生
 >>> #### input 事件
 >>>> #### 说明：
-* input事件当<input>、<textarea>的值发生变化时触发
+* input事件当`<input>`、`<textarea>`的值发生变化时触发
 
 >>>> #### 示例：
 ```html
@@ -398,7 +398,7 @@ foo1.addEventListener('input', function(e){
 
 >>> #### select 事件
 >>>> #### 说明：
-* select事件当在<input>、<textarea>中选中文本时触发
+* select事件当在`<input>`、`<textarea>`中选中文本时触发
 
 >>>> #### 示例：
 ```html
@@ -412,7 +412,7 @@ foo2.addEventListener('select', function(e){
 
 >>> #### change 事件
 >>>> #### 说明：
-* change事件当<input>、<select>、<textarea>的值发生变化，并且丧失焦点时触发
+* change事件当`<input>`、`<select>`、`<textarea>`的值发生变化，并且丧失焦点时触发
 
 >>>> #### 示例：
 ```html
@@ -882,38 +882,62 @@ document.addEventListener('keyup', function(e){
 >> #### 原生
 >>> #### touchstart 事件
 >>>> #### 说明：
-* 123
+* touchstart事件当用户接触触摸屏时触发
+* APPLE Magic Trackpad 不支持 DOM 触摸事件
 
 >>>> #### 示例：
-```javascript
-123
+```html
+<div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
+<script>
+foo.addEventListener('touchstart', function(e){
+    console.log('touchstart 触发');
+}, false);
+</script>
 ```
 
 >>> #### touchend 事件
 >>>> #### 说明：
-* 123
+* touchend事件当用户不再接触触摸屏时（或者移出屏幕边缘时）触发
+* APPLE Magic Trackpad 不支持 DOM 触摸事件
 
 >>>> #### 示例：
-```javascript
-123
+```html
+<div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
+<script>
+foo.addEventListener('touchend', function(e){
+    console.log('touchend 触发');
+}, false);
+</script>
 ```
 
 >>> #### touchmove 事件
 >>>> #### 说明：
-* 123
+* touchmove事件当用户移动触摸点时触发
+* APPLE Magic Trackpad 不支持 DOM 触摸事件
 
 >>>> #### 示例：
-```javascript
-123
+```html
+<div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
+<script>
+foo.addEventListener('touchmove', function(e){
+    console.log('touchmove 触发');
+}, false);
+</script>
 ```
 
 >>> #### touchcancel 事件
 >>>> #### 说明：
-* 123
+* touchcancel事件当触摸点取消时触发
+* APPLE Magic Trackpad 不支持 DOM 触摸事件
 
 >>>> #### 示例：
-```javascript
-123
+```html
+<div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
+<script>
+foo.addEventListener('touchcancel', function(e){
+    console.log('touchcancel 触发');
+}, false);
+</script>
 ```
 
 >> #### 定制
@@ -928,67 +952,105 @@ document.addEventListener('keyup', function(e){
 
 > ### 进度事件
 >> #### 原生
->>> #### abort 事件
+>>> #### load 事件
 >>>> #### 说明：
-* 123
+* load事件当进度成功结束时触发
 
 >>>> #### 示例：
-```javascript
-123
+```html
+<img id="foo1" src="https://www.baidu.com/img/bd_logo1.png" alt="">
+<script>
+foo1.addEventListener('load', function(e) {
+    console.log('img 加载完成');
+}, false);
+</script>
 ```
 
 >>> #### error 事件
 >>>> #### 说明：
-* 123
+* error事件当由于错误导致资源无法加载时触发
 
 >>>> #### 示例：
-```javascript
-123
+```html
+<img id="foo1" src="1212121212121" alt="">
+<script>
+foo1.addEventListener('error', function(e) {
+    console.log('img 加载失败');
+}, false);
+</script>
 ```
 
->>> #### load 事件
+>>> #### abort 事件
 >>>> #### 说明：
-* 123
+* abort事件当进度事件被中止时触发
+* 如果发生错误，导致进程中止，不会触发该事件
 
 >>>> #### 示例：
 ```javascript
-123
-```
-
->>> #### loadstart 事件
->>>> #### 说明：
-* 123
-
->>>> #### 示例：
-```javascript
-123
-```
-
->>> #### loadend 事件
->>>> #### 说明：
-* 123
-
->>>> #### 示例：
-```javascript
-123
-```
-
->>> #### progress 事件
->>>> #### 说明：
-* 123
-
->>>> #### 示例：
-```javascript
-123
+暂无
 ```
 
 >>> #### timeout 事件
 >>>> #### 说明：
-* 123
+* timeout事件当进度超过限时时触发
 
 >>>> #### 示例：
 ```javascript
-123
+暂无
+```
+
+>>> #### loadstart 事件
+>>>> #### 说明：
+* loadstart事件当进度开始时触发
+
+>>>> #### 示例：
+```html
+<video id="video1" controls="controls">
+    <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
+</video>
+<script>
+video1.addEventListener('loadstart', function(e){
+    console.log('loadstart 触发');
+}, false);
+</script>
+```
+
+>>> #### progress 事件
+>>>> #### 说明：
+* progress事件当操作处于进度之中，由传输的数据块不断触发
+
+>>>> #### 示例：
+```html
+<video id="video1" controls="controls">
+    <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
+</video>
+<script>
+video1.addEventListener('progress', function(e){
+    console.log('progress 触发');
+    if (e.lengthComputable) {
+        var percentComplete = e.loaded / e.total;
+        console.log(percentComplete);
+    } else {
+        console.log('不能计算进度');
+    }
+}, false);
+</script>
+```
+
+>>> #### canplay 事件
+>>>> #### 说明：
+* canplay事件当浏览器能够开始播放指定的音频/视频时触发
+
+>>>> #### 示例：
+```html
+<video id="video1" controls="controls">
+    <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
+</video>
+<script>
+video1.addEventListener('canplay', function(e){
+    console.log('canplay 触发');
+}, false);
+</script>
 ```
 
 >> #### 定制
