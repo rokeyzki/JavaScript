@@ -1085,6 +1085,178 @@ video1.addEventListener('canplay', function(e){
 ```
 
 ## 事件的监听
+> ### 说明
+* 监听函数是事件发生时，程序所要执行的函数，它是事件驱动编程模式的主要编程方式
+* DOM提供两种方式，可以用来为事件绑定监听函数
 
+> ### 第一种：事件监听属性
+>> #### 节点监听
+>>> #### 说明：
+* 节点有事件属性，通过这些事件属性可以定义监听函数
+* 使用这个方法指定的监听函数，只会在冒泡阶段触发
+* 缺点：同一个事件只能定义一个监听函数，也就是说，如果定义两次onclick属性，后一次定义会覆盖前一次
+* 不推荐使用这种事件监听方式
+
+>>> #### 示例：
+```html
+<script>
+div.onclick = function(e){
+    console.log('触发事件');
+};
+</script>
+```
+
+>> #### 元素监听
+>>> #### 说明：
+* HTML语言允许在元素标签的属性中，直接定义某些事件的监听代码
+* 使用这种方法时，on-属性的值是“监听代码”，而不是“监听函数”。也就是说，一旦指定事件发生，这些代码是原样传入JavaScript引擎执行。因此如果要执行函数，必须在函数名后面加上一对圆括号
+* 使用这个方法指定的监听函数，只会在冒泡阶段触发
+* 缺点：违反了HTML与JavaScript代码相分离的原则
+* 不推荐使用这种事件监听方式
+
+>>> #### 示例：
+```html
+<body onload="doSomething()">
+    <div onclick="console.log('触发事件')"></div>
+</body>
+```
+
+> ### 第二种：事件监听方法
+>> addEventListener() 方法
+>>> #### 说明：
+* addEventListener方法用于在当前节点或对象上，定义一个特定事件的监听函数
+* addEventListener方法是推荐的事件监听方式
+
+>>> #### 示例：
+```html
+<script>
+/**
+ * addEventListener方法接受三个参数
+ *
+ * target.addEventListener(type, listener[, useCapture]);
+ *
+ * 第一个参数：type，事件名称，大小写不敏感。
+ * 第二个参数：listener，监听函数，指定事件发生时，会调用该监听函数
+ * 第三个参数：useCapture，监听函数是否在捕获阶段（capture）触发，该参数是一个布尔值，默认为false（表示监听函数只在冒泡阶段被触发）
+ */
+window.addEventListener('beforeunload', function(e) {
+    e.returnValue = '你确认要离开吗？';
+}, false);
+</script>
+```
+
+>> removeEventListener() 方法
+>>> #### 说明：
+* removeEventListener方法用来移除addEventListener方法添加的事件监听函数
+* emoveEventListener方法移除的监听函数，必须与对应的addEventListener方法的参数完全一致，而且在同一个元素节点，否则无效
+
+>>> #### 示例：
+```html
+<script>
+// removeEventListener方法的参数，与addEventListener方法完全一致。它对第一个参数“事件类型”，也是大小写不敏感
+div.addEventListener('click', listener, false);
+div.removeEventListener('click', listener, false);
+</script>
+```
+
+>> dispatchEvent() 方法
+>>> #### 说明：
+* dispatchEvent方法在当前节点上触发指定事件，从而触发监听函数的执行
+* 该方法返回一个布尔值，只要有一个监听函数调用了Event.preventDefault()，则返回值为false，否则为true
+
+>>> #### 示例：
+```html
+<p id="test">123</p>
+<script>
+testClick();
+function testClick() {
+    var event = new MouseEvent('click', {
+        'bubbles': true,
+        'cancelable': true
+    });
+    var test = document.getElementById('test');
+    test.dispatchEvent(event);
+}
+</script>
+```
 
 ## 事件的传播
+> ### 说明
+* 当一个事件发生以后，它会在不同的DOM节点之间传播
+* 这种传播分成三个阶段
+
+> ### capture 捕获阶段
+>> #### 说明：
+* 第一阶段：从window对象传导到目标节点，称为“捕获阶段”（capture phase）
+
+>> #### 示例：
+```html
+<div>
+    <p>test</p>
+</div>
+<script>
+var div = document.querySelector('div');
+var p = document.querySelector('p');
+function callback(event){
+    var tag = event.currentTarget.tagName;
+    var phase = event.eventPhase;
+    // 捕获阶段：event.eventPhase = 1
+    // 目标阶段：event.eventPhase = 2
+    // 冒泡阶段：event.eventPhase = 3
+    console.log("Tag: " + tag + ", EventPhase: " + phase);
+}
+// 捕获阶段触发
+div.addEventListener('click', callback, true); // 返回 Tag: DIV, EventPhase: 1
+</script>
+```
+
+> ### target 目标阶段
+>> #### 说明：
+* 第二阶段：在目标节点上触发，称为“目标阶段”（target phase）
+
+>> #### 示例：
+```html
+<div>
+    <p>test</p>
+</div>
+<script>
+var div = document.querySelector('div');
+var p = document.querySelector('p');
+function callback(event){
+    var tag = event.currentTarget.tagName;
+    var phase = event.eventPhase;
+    // 捕获阶段：event.eventPhase = 1
+    // 目标阶段：event.eventPhase = 2
+    // 冒泡阶段：event.eventPhase = 3
+    console.log("Tag: " + tag + ", EventPhase: " + phase);
+}
+// 目标阶段触发
+p.addEventListener('click', callback, true); // 返回 Tag: P, EventPhase: 2
+p.addEventListener('click', callback, false); // 返回 Tag: P, EventPhase: 2
+</script>
+```
+
+> ### bubble 冒泡阶段
+>> #### 说明：
+* 第三阶段：从目标节点传导回window对象，称为“冒泡阶段”（bubble phase）
+
+>> #### 示例：
+```html
+<div>
+    <p>test</p>
+</div>
+<script>
+var div = document.querySelector('div');
+var p = document.querySelector('p');
+function callback(event){
+    var tag = event.currentTarget.tagName;
+    var phase = event.eventPhase;
+    // 捕获阶段：event.eventPhase = 1
+    // 目标阶段：event.eventPhase = 2
+    // 冒泡阶段：event.eventPhase = 3
+    console.log("Tag: " + tag + ", EventPhase: " + phase);
+}
+// 冒泡阶段触发
+div.addEventListener('click', callback, false); // 返回 Tag: DIV, EventPhase: 3
+</script>
+```
