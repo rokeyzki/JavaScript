@@ -2,123 +2,208 @@
 事件是一种异步编程的实现方式，本质上是程序各个组成部分之间传递的特定消息
 ***
 
+## 事件的对象
+> ### 说明：
+* 事件发生以后，会生成一个事件对象，作为参数传给监听函数
+* 浏览器原生提供一个Event对象，所有的事件都是这个对象的实例，或者说继承了Event.prototype对象
+* Event对象本身就是一个构造函数，可以用来生成新的实例
+* Event构造函数接受两个参数
+* 第一个参数是字符串，表示事件的名称
+* 第二个参数是一个对象，表示事件对象的配置，该参数可以有以下两个属性：bubbles与cancelable
+
+> ### 示例：
+```html
+<script>
+// 下面代码新建一个look事件，然后使用dispatchEvent方法触发该事件
+var eventLook = new Event("look", {"bubbles":true, "cancelable":false});
+/**
+ * 第二参数属性说明：
+ * bubbles：布尔值，可选，默认为false，表示事件对象是否冒泡
+ * cancelable：布尔值，可选，默认为false，表示事件是否可以被取消
+ */
+document.dispatchEvent(eventLook);
+</script>
+```
+
 ## 事件的属性
 > ### bubbles 属性
 >> #### 说明：
-* 123
+* bubbles属性返回一个布尔值，表示当前事件是否会冒泡
+* 该属性为只读属性，只能在新建事件时改变
+* 除非显式声明，Event构造函数生成的事件，默认是不冒泡的
 
 >> #### 示例：
-```javascript
-123
-```
-
-> ### eventPhase 属性
->> #### 说明：
-* 123
-
->> #### 示例：
-```javascript
-123
+```html
+<script>
+// 新建一个冒泡事件，并触发它
+var eventLook = new Event("look", {"bubbles":true, "cancelable":false});
+document.dispatchEvent(eventLook);
+</script>
 ```
 
 > ### cancelable 属性
 >> #### 说明：
-* 123
+* cancelable属性返回一个布尔值，表示事件是否可以取消
+* 该属性为只读属性，只能在新建事件时改变
+* 除非显式声明，Event构造函数生成的事件，默认是不可以取消的
 
 >> #### 示例：
-```javascript
-123
+```html
+<script>
+// 新建一个不可取消事件，并触发它
+var eventLook = new Event("look", {"bubbles":true, "cancelable":false});
+document.dispatchEvent(eventLook);
+</script>
+```
+
+> ### eventPhase 属性
+>> #### 说明：
+* eventPhase属性返回一个整数值，表示事件目前所处的节点
+* 0表示：事件目前没有发生
+* 1表示：事件目前处于捕获阶段，即处于从祖先节点向目标节点的传播过程中。该过程是从Window对象到Document节点，再到HTMLHtmlElement节点，直到目标节点的父节点为止。
+* 2表示：事件到达目标节点，即target属性指向的那个节点
+* 3表示：事件处于冒泡阶段，即处于从目标节点向祖先节点的反向传播过程中。该过程是从父节点一直到Window对象。只有bubbles属性为true时，这个阶段才可能发生
+
+>> #### 示例：
+```html
+<script>
+var phase = event.eventPhase;
+</script>
 ```
 
 > ### defaultPrevented 属性
 >> #### 说明：
-* 123
+* defaultPrevented属性返回一个布尔值，表示该事件是否调用过preventDefault方法
 
 >> #### 示例：
-```javascript
-123
+```html
+<script>
+if (e.defaultPrevented) {
+    // ...
+}
+</script>
 ```
 
 > ### currentTarget 属性
 >> #### 说明：
-* 123
+* currentTarget属性返回事件当前所在的节点，即正在执行的监听函数所绑定的那个节点
+* 在监听函数中，currentTarget属性实际上等同于this对象
+* 作为比较，target属性返回事件发生的节点，如果监听函数在捕获阶段和冒泡阶段触发，那么这两个属性返回的值是不一样的
 
 >> #### 示例：
-```javascript
-123
+```html
+<script>
+function hide(e){
+    console.log(this === e.currentTarget);  // true
+    e.currentTarget.style.visibility = "hidden";
+}
+para.addEventListener('click', hide, false);
+</script>
 ```
 
 > ### target 属性
 >> #### 说明：
-* 123
+* target属性返回触发事件的那个节点，即事件最初发生的节点
+* 如果监听函数不在该节点触发，那么它与currentTarget属性返回的值是不一样的
 
 >> #### 示例：
-```javascript
-123
+```html
+<script>
+function hide(e){
+    console.log(this === e.target);  // true
+    e.currentTarget.style.visibility = "hidden";
+}
+para.addEventListener('click', hide, false);
+// 在IE6—IE8之中，该属性的名字不是target，而是srcElement，因此经常可以看到下面这样的代码
+function hide(e) {
+    var target = e.target || e.srcElement;
+    target.style.visibility = 'hidden';
+}
+</script>
 ```
 
 > ### type 属性
 >> #### 说明：
-* 123
+* type属性返回一个字符串，表示事件名称
+* 具体的值同addEventListener方法和removeEventListener方法的第一个参数一致，大小写不敏感
 
 >> #### 示例：
-```javascript
-123
+```html
+<script>
+var string = event.type;
+</script>
 ```
 
 > ### detail 属性
 >> #### 说明：
-* 123
+* detail属性返回一个数值，表示事件的某种信息
+* 具体含义与事件类型有关
 
 >> #### 示例：
 ```javascript
-123
+暂无
 ```
 
 > ### timeStamp 属性
 >> #### 说明：
-* 123
+* timeStamp属性返回一个毫秒时间戳，表示事件发生的时间
 
 >> #### 示例：
-```javascript
-123
-```
-
-> ### isTrusted 属性
->> #### 说明：
-* 123
-
->> #### 示例：
-```javascript
-123
+```html
+<script>
+var number = event.timeStamp;
+</script>
 ```
 
 ## 事件的方法
 > ### event.preventDefault() 方法
 >> #### 说明：
-* 123
+* preventDefault方法取消浏览器对当前事件的默认行为
+* 事件的默认行为比如点击链接后，浏览器跳转到指定页面，或者按一下空格键，页面向下滚动一段距离
+* 该方法生效的前提是，事件的cancelable属性为true，如果为false，则调用该方法没有任何效果
+* 只要在事件的传播过程中（捕获阶段、目标阶段、冒泡阶段皆可），使用了preventDefault方法，该事件的默认方法就不会执行
+* 但是该方法不会阻止事件的进一步传播
 
 >> #### 示例：
-```javascript
-123
+```html
+<script>
+// 取消click事件的默认行为
+foo.addEventListener('click', function (e){       e.preventDefault();
+}, false);
+</script>
 ```
 
 > ### event.stopPropagation() 方法
 >> #### 说明：
-* 123
+* stopPropagation方法阻止事件在DOM中继续传播，防止再触发定义在别的节点上的监听函数，但是不包括在当前节点上新定义的事件监听函数
 
 >> #### 示例：
-```javascript
-123
+```html
+<script>
+function stopEvent(e) {
+    e.stopPropagation();
+}
+el.addEventListener('click', stopEvent, false);
+</script>
 ```
 
 > ### event.stopImmediatePropagation() 方法
 >> #### 说明：
-* 123
+* 如果同一个节点对于同一个事件指定了多个监听函数，这些函数会根据添加的顺序依次调用
+* 但是只要其中有一个监听函数调用了stopImmediatePropagation方法，其他的监听函数就不会再执行了
 
 >> #### 示例：
-```javascript
-123
+```html
+<script>
+function l1(e){
+    e.stopImmediatePropagation();
+}
+function l2(e){
+    console.log('hello world');
+}
+el.addEventListener('click', l1, false);
+el.addEventListener('click', l2, false);
+</script>
 ```
 
 ## 事件的名称
