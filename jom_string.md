@@ -161,7 +161,7 @@ s1; // "abc"
 "  hello world  ".trim(); // "hello world"
 ```
 
-> ### toLowerCase 方法、toUpperCase 方法
+> ### String.prototype.toLowerCase() 方法、String.prototype.toUpperCase() 方法
 >> #### 说明：
 * toLowerCase方法、toUpperCase方法都是用于转换字符串的大小写
 * toLowerCase方法与toUpperCase方法的区别在于，toLowerCase用于将字符串转为小写，toUpperCase用于将字符串转为大写
