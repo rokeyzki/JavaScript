@@ -5,7 +5,22 @@
 ## 封装
 > ### 说明：
 * 即将可重复使用的属性、方法封装成父类对象
-* 一般情况下建议使用构造函数来封装父类对象
+* 一般情况下建议使用闭包函数来封装父类对象
+
+> ### 使用闭包函数来封装：
+>> ```javascript
+var math = (function() {
+    var _flag = 10;
+    return {
+        add: function(a, b) {
+            return _flag + (a + b);
+        },
+        minus: function(a, b) {
+            return _flag + (a - b);
+        }
+    };
+})();
+```
 
 > ### 使用构造函数来封装：
 >> ```javascript
@@ -68,6 +83,17 @@ ParentClass.prototype.propertyG = '这里的属性G无法写入';
 > ### 说明：
 * 即重复利用父类对象的属性与方法
 
+> ### 对闭包函数型父类的继承：
+>> ```javascript
+var math = (function(m) {
+    // console.log(m._flag); // 无法继承_flag, Uncaught ReferenceError: _flag is not defined
+    m.divide = function(a, b) {
+        return a / b;
+    }
+    return m; // 返回扩展后的 math 对象
+})(math || {});
+```
+
 > ### 对构造函数型父类的继承：
 >> ```javascript
 /**
@@ -101,6 +127,13 @@ ChildClass.propertyI = function(){
 ```
 
 ## 实例
+> ### 闭包函数型子类的实例化：
+>> ```javascript
+// 实例对象
+var result = math.divide(7, 8);
+console.log(result); // 0.875
+```
+
 > ### 构造函数型子类的实例化：
 >> ```javascript
 // 实例对象
@@ -148,3 +181,105 @@ Object.getPrototypeOf(fooObject); // 返回包含父类的子类对象
 ChildClass.isPrototypeOf(fooObject); // true
 ParentClass.isPrototypeOf(ChildClass); // true
 ```
+
+## AMD规范
+> ### AMD规范的基础加载：index.html
+>> ```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 此处为HTML代码 -->
+    <!-- AMD规范：以require.js为例 -->
+    <script src="http://cdn.staticfile.org/require.js/2.1.15/require.min.js" data-main="2.main" defer async="true"></script>
+</body>
+</html>
+```
+
+> ### AMD规范的主模块：2.main.js
+>> ```javascript
+/**
+ * AMD的模块配置规则
+ *
+ * AMD规范允许对加载进行一些配置，这些配置选项不是必须的，但灵活更改配置，会给开发带来一些方便。
+ * baseUrl 以字符串形式规定根目录的路径，以后在加载模块时都会以该路径为标准。
+ * path 可以指定需加载模块的路径，模块名与路径以键-值对的方式写在对象中。如果一个模块有多个可选地址，可以将这些地址写在一个数组中。
+ * 关于模块路径的设置项还有packages，map等。
+ */
+// 配置模块ID与模块加载路径
+require.config({
+    baseUrl: "./",
+    paths: {
+        // 自定义模块
+        "mathA": "2.module-a",
+        "mathB": "2.module-b"
+    }
+});
+/**
+ * AMD的模块加载规则
+ *
+ * AMD采用require()语句加载模块，该语句接受两个参数
+ * require([module], callback);
+ * 第一个参数 [module]，是一个数组，里面的成员就是要加载的模块
+ * 第二个参数 callback，则是加载成功之后的回调函数
+ */
+// 模块加载示例
+require(['mathA', 'mathB'], function(mA, mB) {
+    var result = mA.add(1, 3); // 在回调函数中，可以通过math变量引用模块
+    console.log(result);
+    var result = mB.divide(mA.minus(1, 3), mA.add(1, 3));
+    console.log(result);
+});
+```
+
+> ### AMD规范的独立模块：2.module-a.js
+>> ```javascript
+/**
+ * AMD的模块定义规则
+ *
+ * AMD采用define()语句定义模块，该语句接受三个参数
+ * define(id?, [dependencies]?, factory);
+ * 第一个参数 id，是一个可选参数，相当于模块的名字，加载器可通过id名加载对应的模块。如果没有提供id，加载器会将模块文件名作为默认id。
+ * 第二个参数 dependencies，是一个可选数组参数，传入当前对象依赖的对象id，这个参数如果不填则直接忽略，不要留空
+ * 第三个参数 factory，即回调函数，在依赖模块加载完成后会调用，它的参数是所有依赖模块的引用。回调函数的返回值就是当前对象的导出值。
+ * 如果省去id和dependencies参数的话，就是一个完全的匿名模块，这个时候，factory的参数将为默认值require，exports和module加载器将完全通过文件路径的方式加载模块，同时如果有依赖模块的话可通过require方法加载
+ */
+// 独立模块示例：
+define('mathA', function() {
+    var _flag = 10;
+    return {
+        add: function(a, b) {
+            return _flag + (a + b);
+        },
+        minus: function(a, b) {
+            return _flag + (a - b);
+        }
+    };
+});
+```
+
+> ### AMD规范的依赖模块：2.module-b.js
+>> ```javascript
+/**
+ * AMD的模块定义规则
+ *
+ * AMD采用define()语句定义模块，该语句接受三个参数
+ * define(id?, [dependencies]?, factory);
+ * 第一个参数 id，是一个可选参数，相当于模块的名字，加载器可通过id名加载对应的模块。如果没有提供id，加载器会将模块文件名作为默认id。
+ * 第二个参数 dependencies，是一个可选数组参数，传入当前对象依赖的对象id，这个参数如果不填则直接忽略，不要留空
+ * 第三个参数 factory，即回调函数，在依赖模块加载完成后会调用，它的参数是所有依赖模块的引用。回调函数的返回值就是当前对象的导出值。
+ * 如果省去id和dependencies参数的话，就是一个完全的匿名模块，这个时候，factory的参数将为默认值require，exports和module加载器将完全通过文件路径的方式加载模块，同时如果有依赖模块的话可通过require方法加载
+ */
+// 依赖模块示例：
+define('mathB', ['mathA'], function(mA) {
+    return {
+        divide: function(a, b) {
+            return a / mA.add(a, b);
+        }
+    };
+});
+```
+
