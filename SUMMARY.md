@@ -27,7 +27,6 @@
    * [事件](dom_event.md)
    * [样式](dom_style.md)
 * [BOM](bom.md)
-<<<<<<< HEAD
    * [引擎](bom_navigator.md)
    * [窗口](bom_window.md)
    * [历史](bom_history.md)
@@ -35,12 +34,3 @@
    * [定时](bom_timer.md)
    * [数据](bom_data.md)
    * [接口](bom_api.md)
-=======
-    * [引擎](bom_navigator.md)
-    * [窗口](bom_window.md)
-    * [历史](bom_history.md)
-    * [请求](bom_ajax.md)
-    * [定时](bom_timer.md)
-    * [数据](bom_data.md)
-    * [接口](bom_api.md)
->>>>>>> 6fba449c3bf78ecf557917959797dfd762b70e21
