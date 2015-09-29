@@ -66,3 +66,17 @@
 <script src="1.js" defer></script>
 <script src="2.js" defer></script>
 ```
+
+## 脚本加载协议
+> ### 说明：
+* 一般情况下，浏览器采用HTTP或HTTPs协议来下载脚本
+
+> ### 示例：
+```html
+<!-- 如果不指定协议，浏览器默认采用HTTP协议下载 -->
+<script src="example.js"></script>
+<!-- 如果要采用HTTPs协议下载，必需写明（假定服务器支持） -->
+<script src="https://example.js"></script>
+<!-- 如果希望根据页面本身的协议来决定加载协议，这时可以采用下面的写法 -->
+<script src="//example.js"></script>
+```
