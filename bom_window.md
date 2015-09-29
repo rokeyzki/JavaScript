@@ -116,7 +116,7 @@ console.log(encodeURIComponent(test1)); // http%3A%2F%2Fwww.example.com%2Ffirst%
 console.log(decodeURIComponent(test1)); // http://www.example.com/first/
 ```
 
-> ### alert() 方法
+> ### window.alert() 方法
 >> #### 说明：
 * alert方法弹出的对话框，只有一个“确定”按钮，往往用来通知用户某些信息
 * 用户只有点击“确定”按钮，对话框才会消失
@@ -130,7 +130,7 @@ alert(message);
 alert("Hello World");
 ```
 
-> ### confirm() 方法
+> ### window.confirm() 方法
 >> #### 说明：
 * confirm方法弹出的对话框，除了提示信息之外，只有“确定”和“取消”两个按钮，往往用来征询用户的意见
 * confirm方法返回一个布尔值，如果用户点击“确定”，则返回true；如果用户点击“取消”，则返回false
@@ -143,7 +143,7 @@ var result = confirm(message);
 var result = confirm("你最近好吗？");
 ```
 
-> ### prompt() 方法
+> ### window.prompt() 方法
 >> #### 说明：
 * prompt方法弹出的对话框，在提示文字的下方，还有一个输入框，要求用户输入信息，并有“确定”和“取消”两个按钮。它往往用来获取用户输入的数据
 * prompt方法的返回值是一个字符串（有可能为空）或者null，具体分成三种情况:
@@ -159,7 +159,7 @@ var result = prompt(text[, default]);
 var result = prompt('您的年龄？', 25)
 ```
 
-> ### getComputedStyle() 方法
+> ### window.getComputedStyle() 方法
 >> #### 说明：
 * window.getComputedStyle方法接受一个HTML元素作为参数，返回一个包含该HTML元素的最终样式信息的对象
 
@@ -168,7 +168,7 @@ var result = prompt('您的年龄？', 25)
 // 暂无示例
 ```
 
-> ### matchMedia() 方法
+> ### window.matchMedia() 方法
 >> #### 说明：
 * window.matchMedia方法用来检查CSS的mediaQuery语句
 
