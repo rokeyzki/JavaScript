@@ -28,13 +28,26 @@ try {
 try {
 	// 在这里运行代码
 	var x = 11;
-	// 定义错误类型
-	if(x == "")     throw "值为空";
-	if(isNaN(x)) 	throw "不是数字";
-	if(x > 10)      throw "太大";
-	if(x < 5)       throw "太小";
+	// 自定义错误类型
+	if(x == ""){
+  	    throw "null";
+    }
+    if(isNaN(x)){
+  	    throw "no number";
+    }
+    if(x > 10){
+  	    throw "too big";
+    }
+    if(x < 5){
+  	    throw "too small";
+    }
+    // 无异常时执行的函数
+    foo(x);
 } catch(err) {
-	//在这里处理错误
+	// 显示未自定义的错误类型
 	console.log("出现错误：\n\n" + err);
+}
+function foo(x){
+	console.log(2*x);
 }
 ```
