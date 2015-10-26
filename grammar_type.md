@@ -6,14 +6,14 @@
 > ### 五种原始类型
 >> 1. undefined
 >> 2. null
->> 3. boolean
->> 4. string
->> 5. number
+>> 3. boolean 布尔
+>> 4. number 数值
+>> 5. string 字符
 
 > ### N种对象类型
->> 1. function
->> 2. array
->> 3. date
+>> 1. function 函数
+>> 2. array 数组
+>> 3. date 日期
 >> 4. ...
 
 ## 数据类型的判断
@@ -33,7 +33,7 @@ typeof true === 'boolean';
 typeof xxx === 'undefined';
 typeof {空或者不空都可} === 'object';
 typeof [空或者不空都可] === 'object';
-typeof new Date() === 'object';\\Boolean(), Number(), String()同理
+typeof new Date() === 'object'; // Boolean(), Number(), String()同理
 typeof function(){} === 'function';
 ```
 

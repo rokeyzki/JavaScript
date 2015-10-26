@@ -16,6 +16,6 @@
 >> 2. Underscore
 
 > ### 框架 - Framework
->> 1. Angular.js
->> 2. Backbone.js
+>> 1. React
+>> 2. Redux
 
