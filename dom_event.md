@@ -1,5 +1,62 @@
 # DOM 事件
 事件是一种异步编程的实现方式，本质上是程序各个组成部分之间传递的特定消息
+
+## 大纲
+> ### 属性
+>> * 判断是否能够冒泡：bubbles
+* 判断是否能够取消：cancelable
+* 判断事件当前阶段：eventPhase
+* 判断事件是否用过：defaultPrevented
+* 获取事件当前所在节点：currentTarget
+* 获取事件最初触发节点：target
+* 获取事件名称：type
+* 获取事件发生毫秒时长：timeStamp
+
+> ### 方法
+>> * 注销单一事件行为：Event.prototype.preventDefault()
+* 中止单一事件传播：Event.prototype.stopPropagation()
+* 中止后续事件调用：Event.prototype.stopImmediatePropagation()
+
+> ### 名称
+>> * 文档事件
+ * 当窗口将要关闭或者重载的时候触发：beforeunload 
+ * 当页面加载成功的时候触发：load
+ * 当页面加载失败的时候触发：error
+ * 当页面开始加载的时候触发：pageshow
+ * 当文档下载解析完成的时候触发：DOMContentLoaded
+ * 当文档状态改变的时候触发：readystatechange
+* 网址事件
+ * 当URL的hash部分发生变化的时候触发：hashchange
+ * 当URL历史发生显式切换的时候触发：popstate
+* 剪贴板事件
+ * 当选中的内容被复制到剪贴板的时候触发：copy
+ * 当剪贴板内容被粘贴到文档的时候触发：paste
+ * 当选中的内容被剪切到剪贴板的时候触发：cut
+* 焦点事件
+ * 当元素获得焦点的时候触发：focus
+ * 当元素失去焦点的时候触发：blur
+* 表单事件
+ * 当表单的内容发生变化的时候触发：input
+ * 当表单的内容被选中的时候触发：select
+ * 当失去焦点的表单的内容发生变化的时候触发：change
+ * 当表单被重置的时候触发：reset
+ * 当表单被提交的时候触发：submit
+* 鼠标事件
+ * 当元素被点击的时候触发：click
+ * 当元素被双击的时候触发：dblclick 
+ * 当元素区域鼠标被按下的时候触发：mousedown
+ * 当元素区域鼠标被松开的时候触发：mouseup
+ * 当元素区域鼠标被移动的时候触发：mousemove
+ * 当鼠标进入元素区域的时候触发：mouseover
+ * 当鼠标进入元素区域的时候触发：mouseenter
+ * 当鼠标离开元素区域的时候触发：mouseout
+ * 当鼠标离开元素区域的时候触发：mouseleave
+ * 当元素区域鼠标右键被按下的时候触发：contextmenu
+* 滚轮事件
+ * 当元素滚动时触发：scroll
+* 缩放事件
+ * 未完待续
+
 ***
 
 ## 事件的对象
