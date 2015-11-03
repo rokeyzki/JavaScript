@@ -1,5 +1,23 @@
 # JOM 数组
 数组是按次序排列的一组值，它们的位置都有编号（从0开始）。整个数组用方括号表示。
+
+## 大纲
+> ### 属性
+>> * 获取数组的成员数量：length
+
+> ### 方法
+>> * 判断是否为数组：Array.isArray()
+* 数组开头添加成员：Array.prototype.unshift()
+* 数组末尾添加成员：Array.prototype.push()
+* 删除数组首个成员：Array.prototype.shift()
+* 删除数组最后成员：Array.prototype.pop()
+* 数组转为字符串：Array.prototype.join()
+* 合并两个数组：Array.prototype.concat()
+* 颠倒数组成员排序：Array.prototype.reverse()
+* 截取指定范围的数组成员：Array.prototype.slice()
+* 删除指定范围的数组成员：Array.prototype.splice()
+* 对数组进行字母排序：Array.prototype.sort()
+
 ***
 
 ## 数组的创建
