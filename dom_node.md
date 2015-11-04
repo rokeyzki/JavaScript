@@ -25,6 +25,22 @@
  * 获取末个子级元素：lastElementChild
 
 > ### 方法
+>> * 判断方法
+  * 判断两个节点是否相等：Node.prototype.isEqualNode()
+  * 判断节点是否包含子节点：Node.prototype.hasChildNodes()
+  * 判断是否为当前节点的后代节点：Node.prototype.contains()
+  * 判断两个节点的关系：Node.prototype.compareDocumentPosition()
+  * 判断当前元素是否匹配给定的CSS选择器：
+Element.prototype.matches()
+
+>> * 获取方法
+  * 根据CSS选择器获取第一个匹配的子元素：Element.prototype.querySelector()
+  * 根据CSS选择器获取所有匹配的子元素：Element.prototype.querySelectorAll()
+  * 根据class选择器获取所有匹配的子元素：Element.prototype.getElementsByClassName()
+  * 根据tag选择器获取所有匹配的子元素：Element.prototype.getElementsByTagName()
+  * 根据CSS选择器获取当前元素节点的最接近的父元素：Element.prototype.closest()
+  * 根据id选择器获取文档中所有匹配的子元素：document.getElementById()
+  * 根据name选择器获取文档中所有匹配的子元素：document.getElementsByName()
 >> * 未完待续
 
 ***
