@@ -4,13 +4,13 @@
 ## 大纲
 > ### 属性
 >> * 判断是否能够冒泡：bubbles
-* 判断是否能够取消：cancelable
-* 判断事件当前阶段：eventPhase
-* 判断事件是否用过：defaultPrevented
-* 获取事件当前所在节点：currentTarget
-* 获取事件最初触发节点：target
-* 获取事件名称：type
-* 获取事件发生毫秒时长：timeStamp
+  * 判断是否能够取消：cancelable
+  * 判断事件当前阶段：eventPhase
+  * 判断事件是否用过：defaultPrevented
+  * 获取事件当前所在节点：currentTarget
+  * 获取事件最初触发节点：target
+  * 获取事件名称：type
+  * 获取事件发生毫秒时长：timeStamp
 
 > ### 方法
 >> * 注销单一事件行为：Event.prototype.preventDefault()
@@ -19,43 +19,72 @@
 
 > ### 名称
 >> * 文档事件
- * 当窗口将要关闭或者重载的时候触发：beforeunload 
- * 当页面加载成功的时候触发：load
- * 当页面加载失败的时候触发：error
- * 当页面开始加载的时候触发：pageshow
- * 当文档下载解析完成的时候触发：DOMContentLoaded
- * 当文档状态改变的时候触发：readystatechange
+  * 当窗口将要关闭或者重载的时候触发：beforeunload 
+  * 当页面加载成功的时候触发：load
+  * 当页面加载失败的时候触发：error
+  * 当页面开始加载的时候触发：pageshow
+  * 当文档下载解析完成的时候触发：DOMContentLoaded
+  * 当文档状态改变的时候触发：readystatechange
 * 网址事件
- * 当URL的hash部分发生变化的时候触发：hashchange
- * 当URL历史发生显式切换的时候触发：popstate
+  * 当URL的hash部分发生变化的时候触发：hashchange
+  * 当URL历史发生显式切换的时候触发：popstate
 * 剪贴板事件
- * 当选中的内容被复制到剪贴板的时候触发：copy
- * 当剪贴板内容被粘贴到文档的时候触发：paste
- * 当选中的内容被剪切到剪贴板的时候触发：cut
+  * 当选中的内容被复制到剪贴板的时候触发：copy
+  * 当剪贴板内容被粘贴到文档的时候触发：paste
+  * 当选中的内容被剪切到剪贴板的时候触发：cut
 * 焦点事件
- * 当元素获得焦点的时候触发：focus
- * 当元素失去焦点的时候触发：blur
+  * 当元素获得焦点的时候触发：focus
+  * 当元素失去焦点的时候触发：blur
 * 表单事件
- * 当表单的内容发生变化的时候触发：input
- * 当表单的内容被选中的时候触发：select
- * 当失去焦点的表单的内容发生变化的时候触发：change
- * 当表单被重置的时候触发：reset
- * 当表单被提交的时候触发：submit
+  * 当表单的内容发生变化的时候触发：input
+  * 当表单的内容被选中的时候触发：select
+  * 当失去焦点的表单的内容发生变化的时候触发：change
+  * 当表单被重置的时候触发：reset
+  * 当表单被提交的时候触发：submit
 * 鼠标事件
- * 当元素被点击的时候触发：click
- * 当元素被双击的时候触发：dblclick 
- * 当元素区域鼠标被按下的时候触发：mousedown
- * 当元素区域鼠标被松开的时候触发：mouseup
- * 当元素区域鼠标被移动的时候触发：mousemove
- * 当鼠标进入元素区域的时候触发：mouseover
- * 当鼠标进入元素区域的时候触发：mouseenter
- * 当鼠标离开元素区域的时候触发：mouseout
- * 当鼠标离开元素区域的时候触发：mouseleave
- * 当元素区域鼠标右键被按下的时候触发：contextmenu
+  * 当元素被点击的时候触发：click
+  * 当元素被双击的时候触发：dblclick 
+  * 当元素区域鼠标被按下的时候触发：mousedown
+  * 当元素区域鼠标被松开的时候触发：mouseup
+  * 当元素区域鼠标被移动的时候触发：mousemove
+  * 当鼠标进入元素区域的时候触发：mouseover
+  * 当鼠标进入元素区域的时候触发：mouseenter
+  * 当鼠标离开元素区域的时候触发：mouseout
+  * 当鼠标离开元素区域的时候触发：mouseleave
+  * 当元素区域鼠标右键被按下的时候触发：contextmenu
 * 滚轮事件
- * 当元素滚动时触发：scroll
+  * 当元素滚动时触发：scroll
 * 缩放事件
- * 未完待续
+  * 当窗口改变大小时触发：resize
+  *
+* 拖拉事件
+  * 当节点在上方被拖拉时持续触发：drag
+  * 当节点在上方被拖拉的开始时触发：dragstart
+  * 当节点在上方被拖拉的结束时触发：dragend
+  * 当拖拉进入当前节点时触发：dragenter
+  * 当拖拉进入当前节点时持续触发：dragover
+  * 当拖拉离开当前节点时触发：dragleave
+  * 当拖拉进入当前节点后被释放时触发：drop
+* 键盘事件
+  * 当键盘被按下时触发：keydown
+  * 当键盘被松开时触发：keyup
+  * 当（非Ctrl、Alt、Shift和Meta）键被按下时触发：keypress
+* 触摸事件
+  * 当用户接触触摸屏时触发：touchstart
+  * 当用户离开触摸屏时触发：touchend
+  * 当用户移动触摸点时触发：touchmove
+* 进度事件
+  * 当进度事件开始时触发：loadstart
+  * 当进度事件成功结束时触发：load
+  * 当由于错误导致资源无法加载时触发：error
+  * 当进度事件被中止时触发：abort
+  * 当进度事件传输数据时不断触发：progress
+  * 当浏览器开始播放音视频时触发：canplay
+
+> ### 监听方法
+>> * 用于在当前节点上的监听方法：Node.prototype.addEventListener()
+* 移除在当前节点上的监听方法：Node.prototype.removeEventListener()
+* 主动触发当前节点的某一事件：Node.prototype.dispatchEvent()
 
 ***
 
