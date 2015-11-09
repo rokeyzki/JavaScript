@@ -889,10 +889,10 @@ window.addEventListener('resize', function(e) {
 <div><div id="foo" draggable="true"></div></div>
 <div></div>
 <div></div>
-<div id="anchor"></div>
+<div></div>
 <script>
-  anchor.addEventListener('dragenter', function(e){
-    console.log('dragenter 触发');
+  foo.addEventListener('dragstart', function(e){
+    console.log('dragstart 触发');
   }, false);
 </script>
 ```
@@ -924,33 +924,6 @@ window.addEventListener('resize', function(e) {
 </script>
 ```
 
->>> #### dragenter 事件
->>>> #### 说明：
-* dragenter事件，拖拉进入当前节点时，在当前节点上触发
-
->>>> #### 示例：
-```html
-<style>
-  div {
-    width:100px;
-    height:100px;
-    border:1px solid #000;
-  }
-  #foo {
-    background-color:red;
-  }
-</style>
-<div><div id="foo" draggable="true"></div></div>
-<div></div>
-<div></div>
-<div id="anchor"></div>
-<script>
-  anchor.addEventListener('dragenter', function(e){
-    console.log('dragenter 触发');
-  }, false);
-</script>
-```
-
 >>> #### dragover 事件
 >>>> #### 说明：
 * dragover事件，拖拉到当前节点上方时，在当前节点上持续触发
@@ -974,6 +947,33 @@ window.addEventListener('resize', function(e) {
 <script>
   anchor.addEventListener('dragover', function(e){
     console.log('dragover 触发');
+  }, false);
+</script>
+```
+
+>>> #### dragenter 事件
+>>>> #### 说明：
+* dragenter事件，拖拉进入当前节点时，在当前节点上触发
+
+>>>> #### 示例：
+```html
+<style>
+  div {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+  }
+  #foo {
+    background-color:red;
+  }
+</style>
+<div><div id="foo" draggable="true"></div></div>
+<div></div>
+<div></div>
+<div id="anchor"></div>
+<script>
+  anchor.addEventListener('dragenter', function(e){
+    console.log('dragenter 触发');
   }, false);
 </script>
 ```
@@ -1426,15 +1426,14 @@ div.removeEventListener('click', listener, false);
 ```html
 <p id="test">123</p>
 <script>
-testClick();
-function testClick() {
-    var event = new MouseEvent('click', {
-        'bubbles': true,
-        'cancelable': true
-    });
-    var test = document.getElementById('test');
-    test.dispatchEvent(event);
-}
+// 新建事件实例
+var event = new Event('foo');
+// 添加监听函数
+test.addEventListener('foo', function (e) {
+  console.log('触发 foo 事件');
+}, false);
+// 触发事件（参数为事件实例）
+test.dispatchEvent(event);
 </script>
 ```
 
