@@ -4,13 +4,13 @@
 ## 大纲
 > ### 属性
 >> * 判断是否能够冒泡：bubbles
-  * 判断是否能够取消：cancelable
-  * 判断事件当前阶段：eventPhase
-  * 判断事件是否用过：defaultPrevented
-  * 获取事件当前所在节点：currentTarget
-  * 获取事件最初触发节点：target
-  * 获取事件名称：type
-  * 获取事件发生毫秒时长：timeStamp
+* 判断是否能够取消：cancelable
+* 判断事件当前阶段：eventPhase
+* 判断事件是否用过：defaultPrevented
+* 获取事件当前所在节点：currentTarget
+* 获取事件最初触发节点：target
+* 获取事件名称：type
+* 获取事件发生毫秒时长：timeStamp
 
 > ### 方法
 >> * 注销单一事件行为：Event.prototype.preventDefault()
@@ -19,7 +19,7 @@
 
 > ### 名称
 >> * 文档事件
-  * 当窗口将要关闭或者重载的时候触发：beforeunload 
+  * 当窗口将要关闭或者重载的时候触发：beforeunload
   * 当页面加载成功的时候触发：load
   * 当页面加载失败的时候触发：error
   * 当页面开始加载的时候触发：pageshow
@@ -43,7 +43,7 @@
   * 当表单被提交的时候触发：submit
 * 鼠标事件
   * 当元素被点击的时候触发：click
-  * 当元素被双击的时候触发：dblclick 
+  * 当元素被双击的时候触发：dblclick
   * 当元素区域鼠标被按下的时候触发：mousedown
   * 当元素区域鼠标被松开的时候触发：mouseup
   * 当元素区域鼠标被移动的时候触发：mousemove
@@ -849,16 +849,24 @@ window.addEventListener('resize', function(e) {
 
 >>>> #### 示例：
 ```html
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;">
-    <div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
-</div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
+<style>
+  div {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+  }
+  #foo {
+    background-color:red;
+  }
+</style>
+<div><div id="foo" draggable="true"></div></div>
+<div></div>
+<div></div>
+<div></div>
 <script>
-foo.addEventListener('drag', function(e){
+  foo.addEventListener('drag', function(e){
     console.log('drap 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -868,16 +876,24 @@ foo.addEventListener('drag', function(e){
 
 >>>> #### 示例：
 ```html
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;">
-    <div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
-</div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
+<style>
+  div {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+  }
+  #foo {
+    background-color:red;
+  }
+</style>
+<div><div id="foo" draggable="true"></div></div>
+<div></div>
+<div></div>
+<div id="anchor"></div>
 <script>
-foo.addEventListener('dragstart', function(e){
-    console.log('dragstart 触发');
-}, false);
+  anchor.addEventListener('dragenter', function(e){
+    console.log('dragenter 触发');
+  }, false);
 </script>
 ```
 
@@ -887,16 +903,24 @@ foo.addEventListener('dragstart', function(e){
 
 >>>> #### 示例：
 ```html
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;">
-    <div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
-</div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
+<style>
+  div {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+  }
+  #foo {
+    background-color:red;
+  }
+</style>
+<div><div id="foo" draggable="true"></div></div>
+<div></div>
+<div></div>
+<div></div>
 <script>
-foo.addEventListener('dragend', function(e){
+  foo.addEventListener('dragend', function(e){
     console.log('dragend 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -906,16 +930,24 @@ foo.addEventListener('dragend', function(e){
 
 >>>> #### 示例：
 ```html
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;">
-    <div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
-</div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
+<style>
+  div {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+  }
+  #foo {
+    background-color:red;
+  }
+</style>
+<div><div id="foo" draggable="true"></div></div>
+<div></div>
+<div></div>
+<div id="anchor"></div>
 <script>
-foo.addEventListener('dragenter', function(e){
+  anchor.addEventListener('dragenter', function(e){
     console.log('dragenter 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -925,16 +957,24 @@ foo.addEventListener('dragenter', function(e){
 
 >>>> #### 示例：
 ```html
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;">
-    <div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
-</div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
+<style>
+  div {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+  }
+  #foo {
+    background-color:red;
+  }
+</style>
+<div><div id="foo" draggable="true"></div></div>
+<div></div>
+<div></div>
+<div id="anchor"></div>
 <script>
-foo.addEventListener('dragover', function(e){
+  anchor.addEventListener('dragover', function(e){
     console.log('dragover 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -944,16 +984,24 @@ foo.addEventListener('dragover', function(e){
 
 >>>> #### 示例：
 ```html
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;">
-    <div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
-</div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
+<style>
+  div {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+  }
+  #foo {
+    background-color:red;
+  }
+</style>
+<div><div id="foo" draggable="true"></div></div>
+<div></div>
+<div></div>
+<div id="anchor"></div>
 <script>
-foo.addEventListener('dragleave', function(e){
+  anchor.addEventListener('dragleave', function(e){
     console.log('dragleave 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -963,57 +1011,65 @@ foo.addEventListener('dragleave', function(e){
 
 >>>> #### 示例：
 ```html
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;">
-    <div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
-</div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
-<div class="dropzone" style="height:100px; width:100px; border:1px solid #000;"></div>
+<style>
+  div {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+  }
+  #foo {
+    background-color:red;
+  }
+</style>
+<div class="dropzone"><div id="foo" draggable="true"></div></div>
+<div class="dropzone"></div>
+<div class="dropzone"></div>
+<div class="dropzone"></div>
 <script>
 // 被拖拉节点
 var dragged;
 // dragstart 事件：拖拉开始时在被拖拉的节点上触发
-document.addEventListener("dragstart", function( event ) {
-    // 保存被拖拉节点
-    dragged = event.target;
-    // 被拖拉节点的背景色变透明
-    event.target.style.opacity = 0.5;
+document.addEventListener("dragstart", function(e) {
+  // 保存被拖拉节点
+  dragged = e.target;
+  // 被拖拉节点的背景色变透明
+  e.target.style.opacity = 0.5;
 }, false);
-// dragend 事件：拖拉结束时（释放鼠标键或按下escape键）在被拖拉的节点上触发
-document.addEventListener("dragend", function( event ) {
+  // dragend 事件：拖拉结束时（释放鼠标键或按下escape键）在被拖拉的节点上触发
+  document.addEventListener("dragend", function(e) {
     // 被拖拉节点的背景色恢复不透明
-    event.target.style.opacity = 1;
-}, false);
-// dragover 事件：拖拉到当前节点上方时，在当前节点上持续触发
-document.addEventListener("dragover", function( event ) {
+    e.target.style.opacity = 1;
+  }, false);
+  // dragover 事件：拖拉到当前节点上方时，在当前节点上持续触发
+  document.addEventListener("dragover", function(e) {
     // 防止拖拉效果被重置，允许被拖拉的节点放入目标节点
-    event.preventDefault();
-}, false);
-// dragenter 事件：拖拉进入当前节点时，在当前节点上触发
-document.addEventListener("dragenter", function( event ) {
+    e.preventDefault();
+  }, false);
+  // dragenter 事件：拖拉进入当前节点时，在当前节点上触发
+  document.addEventListener("dragenter", function(e) {
     // 目标节点的背景色变紫色
     // 由于该事件会冒泡，所以要过滤节点
-    if ( event.target.className == "dropzone" ) {
-        event.target.style.background = "purple";
+    if ( e.target.className == "dropzone" ) {
+      e.target.style.background = "purple";
     }
-}, false);
-// dragleave 事件：拖拉离开当前节点范围时，在当前节点上触发
-document.addEventListener("dragleave", function( event ) {
+  }, false);
+  // dragleave 事件：拖拉离开当前节点范围时，在当前节点上触发
+  document.addEventListener("dragleave", function(e) {
     // 目标节点的背景色恢复原样
-    if ( event.target.className == "dropzone" ) {
-        event.target.style.background = "";
+    if ( e.target.className == "dropzone" ) {
+      e.target.style.background = "";
     }
-}, false);
-// drop 事件：被拖拉的节点或选中的文本，释放到目标节点时，在目标节点上触发
-document.addEventListener("drop", function( event ) {
+  }, false);
+  // drop 事件：被拖拉的节点或选中的文本，释放到目标节点时，在目标节点上触发
+  document.addEventListener("drop", function(e) {
     // 防止事件默认行为（比如某些Elment节点上可以打开链接）
-    event.preventDefault();
-    if ( event.target.className == "dropzone" ) {
-        // 恢复目标节点背景色
-        event.target.style.background = "";
-        // 将被拖拉节点插入目标节点
-        dragged.parentNode.removeChild( dragged );
-        event.target.appendChild( dragged );
+    e.preventDefault();
+    if ( e.target.className == "dropzone" ) {
+      // 恢复目标节点背景色
+      e.target.style.background = "";
+      // 将被拖拉节点插入目标节点
+      dragged.parentNode.removeChild( dragged );
+      e.target.appendChild( dragged );
     }
 }, false);
 </script>
