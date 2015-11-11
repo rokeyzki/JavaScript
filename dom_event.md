@@ -432,7 +432,7 @@ window.addEventListener('popstate', function(e) {
 </script>
 ```
 
-> ### 剪贴板事件
+> ### 剪贴事件
 >> #### copy 事件
 >>> #### 说明：
 * copy事件在选中的内容加入剪贴板后触发
