@@ -1374,3 +1374,145 @@ function callback(event){
 div.addEventListener('click', callback, false); // 返回 Tag: DIV, EventPhase: 3
 </script>
 ```
+
+## 类库 jQuery
+> ### $('#foo').bind();
+>> #### 说明：
+* 为一个元素绑定一个事件处理程序
+
+>> #### 示例：
+```html
+<style>
+  .red {
+    color: red;
+  }
+</style>
+<div id="foo">hello world</div>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script>
+  $("#foo").bind('mouseenter mouseleave', function() {
+    $(this).toggleClass('red');
+  });
+</script>
+```
+
+> ### $('#foo').unbind();
+>> #### 说明：
+* 从元素上删除一个以前附加事件处理程序
+
+>> #### 示例：
+```html
+<style>
+  .red {
+    color: red;
+  }
+</style>
+<div id="foo">hello world</div>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script>
+  $("#foo").bind('mouseenter mouseleave', function() {
+    $(this).toggleClass('red');
+  });
+  $("#foo").unbind('mouseenter mouseleave');
+</script>
+```
+
+> ### $('#foo').on();
+>> #### 说明：
+* 为一个元素绑定多个事件处理程序
+
+>> #### 示例：
+```html
+<style>
+  .red {
+    color: red;
+  }
+</style>
+<div id="foo">hello world</div>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script>
+  $("#foo").on({
+    click: function(){
+      alert('hello');
+    },
+    mouseenter: function(){
+      $(this).addClass("red");
+    },
+    mouseleave: function(){
+      $(this).removeClass("red");
+    }
+  });
+</script>
+```
+
+> ### $('#foo').off();
+>> #### 说明：
+* 从元素上删除多个以前附加事件处理程序
+
+>> #### 示例：
+```html
+<style>
+  .red {
+    color: red;
+  }
+</style>
+<div id="foo">hello world</div>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script>
+  $("#foo").on({
+    click: function(){
+      alert('hello');
+    },
+    mouseenter: function(){
+      $(this).addClass("red");
+    },
+    mouseleave: function(){
+      $(this).removeClass("red");
+    }
+  });
+  $("#foo").off('mouseenter mouseleave');
+</script>
+```
+
+> ### $('#foo').one();
+>> #### 说明：
+* 为元素的事件添加处理函数
+* 处理函数在每个元素上每种事件类型最多执行一次
+
+>> #### 示例：
+```html
+<style>
+  .red {
+    color: red;
+  }
+</style>
+<div id="foo">hello world</div>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script>
+  $("#foo").one('mouseenter mouseleave', function() {
+    $(this).toggleClass('red');
+  });
+</script>
+```
+
+> ### $('#foo').trigger();
+>> #### 说明：
+* 主动执行元素上的事件类型处理函数
+
+>> #### 示例：
+```html
+<style>
+  .red {
+    color: red;
+  }
+</style>
+<div id="foo">hello world</div>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script>
+  $("#foo").on('mouseenter mouseleave', function() {
+    $(this).toggleClass('red');
+  });
+  $('#foo').trigger('mouseenter');
+</script>
+```
+
