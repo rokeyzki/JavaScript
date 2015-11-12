@@ -19,21 +19,17 @@
 
 > ### 名称
 >> * 网络类1 - 网址事件
-  * 当URL的hash部分发生变化的时候触发：hashchange
-  * 当URL历史发生显式切换的时候触发：popstate
+  * 当URL的hash部分(#)发生变化的时候触发：hashchange
 * 网络类2 - 加载事件
-  * 当窗口将要关闭或者重载的时候触发：beforeunload
-  * 当页面加载成功的时候触发：load
-  * 当页面加载失败的时候触发：error
-  * 当页面开始加载的时候触发：pageshow
-  * 当文档下载解析完成的时候触发：DOMContentLoaded
-  * 当文档状态改变的时候触发：readystatechange
-* 网络类3 - 进度事件
-  * 当进度事件开始时触发：loadstart
-  * 当进度事件成功结束时触发：load
-  * 当由于错误导致资源无法加载时触发：error
-  * 当进度事件被中止时触发：abort
-  * 当进度事件传输数据时不断触发：progress
+  * 当加载状态改变的时候触发：readystatechange
+  * 当页面解析完成的时候触发：DOMContentLoaded
+  * 当页面最后展示的时候触发：pageshow
+  * 当页面将要离开的时候触发：beforeunload
+  * 当资源开始加载时触发：loadstart
+  * 当资源加载过程时不断触发：progress
+  * 当资源加载成功则触发：load
+  * 当资源加载失败则触发：error
+* 网络类3 - 媒体事件
   * 当浏览器开始播放音视频时触发：canplay
 * 文档类1 - 焦点事件
   * 当元素获得焦点的时候触发：focus
@@ -253,7 +249,8 @@ var number = event.timeStamp;
 ```html
 <script>
 // 取消click事件的默认行为
-foo.addEventListener('click', function (e){       e.preventDefault();
+foo.addEventListener('click', function (e){       
+  e.preventDefault();
 }, false);
 </script>
 ```
@@ -293,19 +290,6 @@ el.addEventListener('click', l2, false);
 
 ## 事件的名称
 > ### 网络类1 - 网址事件
->> #### hashchange 事件
->>> #### 说明：
-* hashchange事件在URL的hash部分（即#号后面的部分，包括#号）发生变化时触发
-
->>> #### 示例：
-```html
-<script>
-window.addEventListener('hashchange', function(e) {
-    console.log('hashchange ' + window.location.hash);
-}, false);
-</script>
-```
-
 >> #### popstate 事件
 >>> #### 说明：
 * popstate事件在浏览器的history对象的当前记录发生显式切换时触发
@@ -313,88 +297,26 @@ window.addEventListener('hashchange', function(e) {
 >>> #### 示例：
 ```html
 <script>
-window.addEventListener('popstate', function(e) {
-    console.log('popstate' + document.documentURI);
-}, false);
+  window.addEventListener('popstate', function(e) {
+    console.log('popstate ' + document.documentURI);
+  }, false);
+</script>
+```
+
+>> #### hashchange 事件
+>>> #### 说明：
+* hashchange事件在URL的hash部分（即#号后面的部分，包括#号）发生变化时触发
+
+>>> #### 示例：
+```html
+<script>
+  window.addEventListener('hashchange', function(e) {
+    console.log('hashchange ' + window.location.hash);
+  }, false);
 </script>
 ```
 
 > ### 网络类2 - 加载事件
->> #### beforeunload 事件
->>> #### 说明：
-* beforeunload事件当窗口将要关闭或者重载的时候触发
-
->>> #### 示例：
-```html
-<script>
-window.addEventListener('beforeunload', function(e) {
-    e.returnValue = '你确认要离开吗？';
-}, false);
-</script>
-```
-
->> #### unload 事件
->>> #### 说明：
-* 不明
-
->>> #### 示例：
-```html
-123
-```
-
->> #### load 事件
->>> #### 说明：
-* load事件在页面加载成功的时候触发
-
->>> #### 示例：
-```html
-<script>
-window.addEventListener('load', function(e) {
-    console.log('load 文档加载完成');
-}, false);
-</script>
-```
-
->> #### error 事件
->>> #### 说明：
-* error事件在页面加载失败时触发
-
->>> #### 示例：
-```html
-<img id="error_img" src="2121212121" alt="">
-<script>
-error_img.addEventListener('error', function(e) {
-    console.log('error 文档加载错误');
-}, false);
-</script>
-```
-
->> #### pageshow 事件
->>> #### 说明：
-* pageshow事件在页面加载时触发，包括第一次加载和从缓存加载两种情况。如果要指定页面每次加载（不管是不是从浏览器缓存）时都运行的代码，可以放在这个事件的监听函数
-
->>> #### 示例：
-```html
-<script>
-window.addEventListener('pageshow', function(e) {
-    if(e.persisted === false){
-        console.log('pageshow 网络加载');
-    }else{
-        console.log('pageshow 缓存加载');
-    }
-}, false);
-</script>
-```
-
->> #### pagehide 事件
->>> #### 说明：
-* 不明
-
->>> #### 示例：
-```javascript
-123
-```
-
 >> #### DOMContentLoaded 事件
 >>> #### 说明：
 * DOMContentLoaded事件,当HTML文档下载并解析完成以后，就会在document对象上触发DOMContentLoaded事件。这时，仅仅完成了HTML文档的解析（整张页面的DOM生成），所有外部资源（样式表、脚本、iframe等等）可能还没有下载结束。也就是说，这个事件比load事件，发生时间早得多。
@@ -402,9 +324,9 @@ window.addEventListener('pageshow', function(e) {
 >>> #### 示例：
 ```html
 <script>
-document.addEventListener("DOMContentLoaded", function(e) {
-    console.log("DOMContentLoaded DOM生成");
-}, false);
+  document.addEventListener("DOMContentLoaded", function(e) {
+    console.log("DOMContentLoaded DOM加载和解析完成");
+  }, false);
 </script>
 ```
 
@@ -415,49 +337,116 @@ document.addEventListener("DOMContentLoaded", function(e) {
 >>> #### 示例：
 ```html
 <script>
-console.log(document.readyState);
-document.addEventListener("readystatechange", function(e) {
-    if(document.readyState == "loading") {
-        // readyState属性返回当前文档的状态，共有三种可能的值
-        // 加载HTML代码阶段（尚未完成解析）是“loading”
-        // 加载外部资源阶段是“interactive”
-        // 全部加载完成是“complete”
-        console.log('readystatechange loading 开始加载文档中。。。');
-    }else if(document.readyState == "interactive") {
-        console.log('readystatechange interactive 文档加载完成，开始加载外部资源中。。。');
+  /* 
+    readyState属性返回当前文档的状态，共有三种可能的值：
+    1、加载HTML代码阶段，是“loading”
+    2、加载外部资源阶段是“interactive”
+    3、全部加载完成是“complete”
+  */
+  console.log(document.readyState);
+  document.addEventListener("readystatechange", function(e) {
+    if(document.readyState == "interactive") {
+      console.log('readystatechange interactive DOM加载和解析完成，开始加载外部资源中。。。');
     }else{
-        console.log('readystatechange complete 全部加载完成');
+      console.log('readystatechange complete 页面全部加载完成');
     }
-}, false);
+  }, false);
 </script>
 ```
 
-> ### 网络类3 - 进度事件
+>> #### pageshow 事件
+>>> #### 说明：
+* pageshow事件在页面最后显示时触发，包括第一次加载和从缓存加载两种情况。如果要指定页面每次最后显示（不管是不是从浏览器缓存）时都运行的代码，可以放在这个事件的监听函数
+
+>>> #### 示例：
+```html
+<script>
+  window.addEventListener('pageshow', function(e) {
+    if(e.persisted === false){
+      console.log('pageshow 网络加载');
+    }else{
+      console.log('pageshow 缓存加载');
+    }
+  }, false);
+</script>
+```
+
+>> #### beforeunload 事件
+>>> #### 说明：
+* beforeunload事件当窗口将要关闭或者重载的时候触发
+
+>>> #### 示例：
+```html
+<script>
+  window.addEventListener('beforeunload', function(e) {
+    e.returnValue = '你确认要离开吗？';
+  }, false);
+</script>
+```
+
+>> #### loadstart 事件
+>>> #### 说明：
+* loadstart事件当资源开始加载时触发
+
+>>> #### 示例：
+```html
+<video id="video1" controls="controls">
+  <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
+</video>
+<script>
+  video1.addEventListener('loadstart', function(e){
+    console.log('loadstart 触发');
+  }, false);
+</script>
+```
+
+>> #### progress 事件
+>>> #### 说明：
+* progress事件当操作处于下载进度之中，由传输的数据块不断触发
+
+>>> #### 示例：
+```html
+<video id="video1" controls="controls">
+  <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
+</video>
+<script>
+  video1.addEventListener('progress', function(e){
+    console.log('progress 触发');
+    if (e.lengthComputable) {
+      var percentComplete = e.loaded / e.total;
+      console.log(percentComplete);
+    } else {
+      console.log('不能计算进度');
+    }
+  }, false);
+</script>
+```
+
 >> #### load 事件
 >>> #### 说明：
-* load事件当进度成功结束时触发
+* load事件当资源加载成功则触发
 
 >>> #### 示例：
 ```html
 <img id="foo1" src="https://www.baidu.com/img/bd_logo1.png" alt="">
 <script>
-foo1.addEventListener('load', function(e) {
+  foo1.addEventListener('load', function(e) {
     console.log('img 加载完成');
-}, false);
+  }, false);
 </script>
 ```
 
 >> #### error 事件
 >>> #### 说明：
-* error事件当由于错误导致资源无法加载时触发
+* error事件当资源加载失败则触发
 
 >>> #### 示例：
 ```html
-<img id="foo1" src="1212121212121" alt="">
+<img id="error_img" src="2121212121" alt="">
 <script>
-foo1.addEventListener('error', function(e) {
-    console.log('img 加载失败');
-}, false);
+  error_img.addEventListener('error', function(e) {
+    console.log('error 资源加载失败');
+  }, false);
 </script>
 ```
 
@@ -480,44 +469,25 @@ foo1.addEventListener('error', function(e) {
 暂无
 ```
 
->> #### loadstart 事件
+>> #### unload 事件
 >>> #### 说明：
-* loadstart事件当进度开始时触发
+* 不明
 
 >>> #### 示例：
 ```html
-<video id="video1" controls="controls">
-    <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
-</video>
-<script>
-video1.addEventListener('loadstart', function(e){
-    console.log('loadstart 触发');
-}, false);
-</script>
+123
 ```
 
->> #### progress 事件
+>> #### pagehide 事件
 >>> #### 说明：
-* progress事件当操作处于进度之中，由传输的数据块不断触发
+* 不明
 
 >>> #### 示例：
-```html
-<video id="video1" controls="controls">
-    <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
-</video>
-<script>
-video1.addEventListener('progress', function(e){
-    console.log('progress 触发');
-    if (e.lengthComputable) {
-        var percentComplete = e.loaded / e.total;
-        console.log(percentComplete);
-    } else {
-        console.log('不能计算进度');
-    }
-}, false);
-</script>
+```javascript
+123
 ```
 
+> ### 网络类3 - 媒体事件
 >> #### canplay 事件
 >>> #### 说明：
 * canplay事件当浏览器能够开始播放指定的音频/视频时触发
@@ -525,12 +495,12 @@ video1.addEventListener('progress', function(e){
 >>> #### 示例：
 ```html
 <video id="video1" controls="controls">
-    <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
+  <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
 </video>
 <script>
-video1.addEventListener('canplay', function(e){
+  video1.addEventListener('canplay', function(e){
     console.log('canplay 触发');
-}, false);
+  }, false);
 </script>
 ```
 
