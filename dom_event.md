@@ -525,7 +525,7 @@ el.addEventListener('click', l2, false);
 * blur事件当Element节点失去焦点后触发
 
 >>> #### 示例：
-```javascript
+```html
 <input type="text" id="foo" />
 <script>
   foo.addEventListener('blur', function(e) {
@@ -536,20 +536,6 @@ el.addEventListener('click', l2, false);
 ```
 
 > ### 文档类2 - 表单事件
->> #### input 事件
->>> #### 说明：
-* input事件当`<input>`、`<textarea>`的值发生变化时触发
-
->>> #### 示例：
-```html
-<input type="text" id="foo" />
-<script>
-  foo.addEventListener('input', function(e){
-    console.log('input 触发');
-  }, false);
-</script>
-```
-
 >> #### select 事件
 >>> #### 说明：
 * select事件当在`<input>`、`<textarea>`中选中文本时触发
@@ -560,6 +546,20 @@ el.addEventListener('click', l2, false);
 <script>
   foo.addEventListener('select', function(e){
     console.log('select 触发');
+  }, false);
+</script>
+```
+
+>> #### input 事件
+>>> #### 说明：
+* input事件当`<input>`、`<textarea>`的值发生变化时触发
+
+>>> #### 示例：
+```html
+<input type="text" id="foo" />
+<script>
+  foo.addEventListener('input', function(e){
+    console.log('input 触发');
   }, false);
 </script>
 ```
