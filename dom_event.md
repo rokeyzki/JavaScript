@@ -20,16 +20,16 @@
 > ### 名称
 >> * 网络类1 - 网址事件
   * 当URL的hash部分(#)发生变化的时候触发：hashchange
-* 网络类2 - 加载事件
-  * 当加载状态改变的时候触发：readystatechange
+* 网络类2 - 页面事件
+  * 当页面加载状态改变的时候触发：readystatechange
   * 当页面解析完成的时候触发：DOMContentLoaded
   * 当页面最后展示的时候触发：pageshow
   * 当页面将要离开的时候触发：beforeunload
+* 网络类3 - 资源事件
   * 当资源开始加载时触发：loadstart
   * 当资源加载过程时不断触发：progress
   * 当资源加载成功则触发：load
   * 当资源加载失败则触发：error
-* 网络类3 - 媒体事件
   * 当浏览器开始播放音视频时触发：canplay
 * 文档类1 - 焦点事件
   * 当元素获得焦点的时候触发：focus
@@ -316,20 +316,7 @@ el.addEventListener('click', l2, false);
 </script>
 ```
 
-> ### 网络类2 - 加载事件
->> #### DOMContentLoaded 事件
->>> #### 说明：
-* DOMContentLoaded事件,当HTML文档下载并解析完成以后，就会在document对象上触发DOMContentLoaded事件。这时，仅仅完成了HTML文档的解析（整张页面的DOM生成），所有外部资源（样式表、脚本、iframe等等）可能还没有下载结束。也就是说，这个事件比load事件，发生时间早得多。
-
->>> #### 示例：
-```html
-<script>
-  document.addEventListener("DOMContentLoaded", function(e) {
-    console.log("DOMContentLoaded DOM加载和解析完成");
-  }, false);
-</script>
-```
-
+> ### 网络类2 - 页面事件
 >> #### readystatechange 事件
 >>> #### 说明：
 * readystatechange事件发生在Document对象和XMLHttpRequest对象，当它们的readyState属性发生变化时触发。
@@ -350,6 +337,19 @@ el.addEventListener('click', l2, false);
     }else{
       console.log('readystatechange complete 页面全部加载完成');
     }
+  }, false);
+</script>
+```
+
+>> #### DOMContentLoaded 事件
+>>> #### 说明：
+* DOMContentLoaded事件,当HTML文档下载并解析完成以后，就会在document对象上触发DOMContentLoaded事件。这时，仅仅完成了HTML文档的解析（整张页面的DOM生成），所有外部资源（样式表、脚本、iframe等等）可能还没有下载结束。也就是说，这个事件比load事件，发生时间早得多。
+
+>>> #### 示例：
+```html
+<script>
+  document.addEventListener("DOMContentLoaded", function(e) {
+    console.log("DOMContentLoaded DOM加载和解析完成");
   }, false);
 </script>
 ```
@@ -384,6 +384,16 @@ el.addEventListener('click', l2, false);
 </script>
 ```
 
+>> #### pagehide 事件
+>>> #### 说明：
+* 不明
+
+>>> #### 示例：
+```javascript
+123
+```
+
+> ### 网络类3 - 资源事件
 >> #### loadstart 事件
 >>> #### 说明：
 * loadstart事件当资源开始加载时触发
@@ -450,6 +460,22 @@ el.addEventListener('click', l2, false);
 </script>
 ```
 
+>> #### canplay 事件
+>>> #### 说明：
+* canplay事件当浏览器能够开始播放指定的音频/视频时触发
+
+>>> #### 示例：
+```html
+<video id="video1" controls="controls">
+  <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
+</video>
+<script>
+  video1.addEventListener('canplay', function(e){
+    console.log('canplay 触发');
+  }, false);
+</script>
+```
+
 >> #### abort 事件
 >>> #### 说明：
 * abort事件当进度事件被中止时触发
@@ -478,60 +504,34 @@ el.addEventListener('click', l2, false);
 123
 ```
 
->> #### pagehide 事件
->>> #### 说明：
-* 不明
-
->>> #### 示例：
-```javascript
-123
-```
-
-> ### 网络类3 - 媒体事件
->> #### canplay 事件
->>> #### 说明：
-* canplay事件当浏览器能够开始播放指定的音频/视频时触发
-
->>> #### 示例：
-```html
-<video id="video1" controls="controls">
-  <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="video/mp4">
-</video>
-<script>
-  video1.addEventListener('canplay', function(e){
-    console.log('canplay 触发');
-  }, false);
-</script>
-```
-
 > ### 文档类1 - 焦点事件
 >> #### focus 事件
 >>> #### 说明：
-* focus事件当Element节点获得焦点后触发，该事件不会冒泡，只能在捕获阶段触发，所以addEventListener方法的第三个参数需要设为true
+* focus事件当Element节点获得焦点后触发
 
 >>> #### 示例：
 ```html
-<input id="input" type="text">
+<input type="text" id="foo" />
 <script>
-input.addEventListener('focus', function(e) {
+  foo.addEventListener('focus', function(e) {
     e.target.style.background = "pink";
     console.log('focus 获取焦点');
-}, true);
+  }, false);
 </script>
 ```
 
 >> #### blur 事件
 >>> #### 说明：
-* blur事件当Element节点失去焦点后触发，该事件不会冒泡，只能在捕获阶段触发，所以addEventListener方法的第三个参数需要设为true
+* blur事件当Element节点失去焦点后触发
 
 >>> #### 示例：
 ```javascript
-<input id="input" type="text">
+<input type="text" id="foo" />
 <script>
-input.addEventListener('blur', function(e) {
+  foo.addEventListener('blur', function(e) {
     e.target.style.background = "";
     console.log('blur 失去焦点');
-}, true);
+  }, false);
 </script>
 ```
 
@@ -542,11 +542,11 @@ input.addEventListener('blur', function(e) {
 
 >>> #### 示例：
 ```html
-<input type="text" id="foo1">
+<input type="text" id="foo" />
 <script>
-foo1.addEventListener('input', function(e){
+  foo.addEventListener('input', function(e){
     console.log('input 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -556,11 +556,11 @@ foo1.addEventListener('input', function(e){
 
 >>> #### 示例：
 ```html
-<input type="text" id="foo2">
+<input type="text" id="foo" />
 <script>
-foo2.addEventListener('select', function(e){
+  foo.addEventListener('select', function(e){
     console.log('select 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -570,11 +570,11 @@ foo2.addEventListener('select', function(e){
 
 >>> #### 示例：
 ```html
-<input type="text" id="foo3">
+<input type="text" id="foo" />
 <script>
-foo3.addEventListener('change', function(e){
+  foo.addEventListener('change', function(e){
     console.log('change 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -585,13 +585,13 @@ foo3.addEventListener('change', function(e){
 >>> #### 示例：
 ```html
 <form action="" id="form">
-    <input type="text" id="foo1">
-    <button type="reset">重置</button>
+  <input type="text" id="foo">
+  <button type="reset">重置</button>
 </form>
 <script>
-form.addEventListener('reset', function(e){
+  form.addEventListener('reset', function(e){
     console.log('reset 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -602,13 +602,13 @@ form.addEventListener('reset', function(e){
 >>> #### 示例：
 ```html
 <form action="" id="form">
-    <input type="text" id="foo1">
-    <button type="reset">重置</button>
+  <input type="text" id="foo">
+  <button type="submit">提交</button>
 </form>
 <script>
-form.addEventListener('submit', function(e){
+  form.addEventListener('submit', function(e){
     alert('submit 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -619,11 +619,11 @@ form.addEventListener('submit', function(e){
 
 >>> #### 示例：
 ```html
-<input id="input" type="text">
+<input type="text" id="foo" value="hello world" />
 <script>
-window.addEventListener('copy', function(e) {
+  foo.addEventListener('copy', function(e) {
     console.log('copy 复制文本');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -633,11 +633,11 @@ window.addEventListener('copy', function(e) {
 
 >>> #### 示例：
 ```html
-<input id="input" type="text">
+<input type="text" id="foo" />
 <script>
-window.addEventListener('paste', function(e) {
+  foo.addEventListener('paste', function(e) {
     console.log('paste 粘贴文本');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -647,11 +647,11 @@ window.addEventListener('paste', function(e) {
 
 >>> #### 示例：
 ```html
-<input id="input" type="text">
+<input type="text" id="foo" value="hello world" />
 <script>
-window.addEventListener('cut', function(e) {
+  foo.addEventListener('cut', function(e) {
     console.log('cut 剪切文本');
-}, false);
+  }, false);
 </script>
 ```
 
