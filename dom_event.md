@@ -51,9 +51,7 @@
   * 当元素区域鼠标被松开的时候触发：mouseup
   * 当元素区域鼠标被移动的时候触发：mousemove
   * 当鼠标进入元素区域的时候触发：mouseover
-  * 当鼠标进入元素区域的时候触发：mouseenter
   * 当鼠标离开元素区域的时候触发：mouseout
-  * 当鼠标离开元素区域的时候触发：mouseleave
   * 当元素区域鼠标右键被按下的时候触发：contextmenu
 * 外设类2 - 键盘事件
   * 当键盘被按下时触发：keydown
@@ -61,20 +59,20 @@
   * 当（非Ctrl、Alt、Shift和Meta）键被按下时触发：keypress
 * 外设类3 - 触摸事件
   * 当用户接触触摸屏时触发：touchstart
-  * 当用户离开触摸屏时触发：touchend
   * 当用户移动触摸点时触发：touchmove
+  * 当用户离开触摸屏时触发：touchend
 * 动作类1 - 缩放事件
   * 当窗口改变大小时触发：resize
 * 动作类2 - 滚动事件
   * 当元素滚动时触发：scroll
 * 动作类3 - 拖拉事件
-  * 当节点在上方被拖拉时持续触发：drag
-  * 当节点在上方被拖拉的开始时触发：dragstart
-  * 当节点在上方被拖拉的结束时触发：dragend
-  * 当拖拉进入当前节点时触发：dragenter
-  * 当拖拉进入当前节点时持续触发：dragover
-  * 当拖拉离开当前节点时触发：dragleave
-  * 当拖拉进入当前节点后被释放时触发：drop
+  * 当对象节点开始被拖拉时触发：dragstart
+  * 当对象节点处于拖拉状态时持续触发：drag
+  * 当对象节点结束被拖拉时触发：dragend
+  * 当拖拉进入对象节点时触发：dragenter
+  * 当拖拉进入对象节点范围时持续触发：dragover
+  * 当拖拉离开对象节点时触发：dragleave
+  * 当拖拉进入对象节点后被释放时触发：drop
 
 > ### 监听方法
 >> * 用于在当前节点上的监听方法：Node.prototype.addEventListener()
@@ -662,11 +660,18 @@ el.addEventListener('click', l2, false);
 
 >>> #### 示例：
 ```html
-<div id="foo" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo"></div>
 <script>
-foo.addEventListener('click', function(e){
+  foo.addEventListener('click', function(e){
     console.log('click 事件');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -676,11 +681,18 @@ foo.addEventListener('click', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo"></div>
 <script>
-foo.addEventListener('dblclick', function(e){
+  foo.addEventListener('dblclick', function(e){
     console.log('dblclick 事件');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -690,11 +702,18 @@ foo.addEventListener('dblclick', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo"></div>
 <script>
-foo.addEventListener('mousedown', function(e){
+  foo.addEventListener('mousedown', function(e){
     console.log('mousedown 事件');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -704,11 +723,18 @@ foo.addEventListener('mousedown', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo"></div>
 <script>
-foo.addEventListener('mouseup', function(e){
+  foo.addEventListener('mouseup', function(e){
     console.log('mouseup 事件');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -718,11 +744,18 @@ foo.addEventListener('mouseup', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo"></div>
 <script>
-foo.addEventListener('mousemove', function(e){
+  foo.addEventListener('mousemove', function(e){
     console.log('mousemove 事件');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -732,11 +765,18 @@ foo.addEventListener('mousemove', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo"></div>
 <script>
-foo.addEventListener('mouseover', function(e){
+  foo.addEventListener('mouseover', function(e){
     console.log('mouseover 事件');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -746,11 +786,18 @@ foo.addEventListener('mouseover', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo"></div>
 <script>
-foo.addEventListener('mouseenter', function(e){
+  foo.addEventListener('mouseenter', function(e){
     console.log('mouseenter 事件');
-}, true);
+  }, true);
 </script>
 ```
 
@@ -760,11 +807,18 @@ foo.addEventListener('mouseenter', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo"></div>
 <script>
-foo.addEventListener('mouseout', function(e){
+  foo.addEventListener('mouseout', function(e){
     console.log('mouseout 事件');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -774,11 +828,18 @@ foo.addEventListener('mouseout', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo"></div>
 <script>
-foo.addEventListener('mouseleave', function(e){
+  foo.addEventListener('mouseleave', function(e){
     console.log('mouseleave 事件');
-}, true);
+  }, true);
 </script>
 ```
 
@@ -788,11 +849,18 @@ foo.addEventListener('mouseleave', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo"></div>
 <script>
-foo.addEventListener('contextmenu', function(e){
+  foo.addEventListener('contextmenu', function(e){
     console.log('contextmenu 事件');
-}, false);
+  }, false);
 </script>
 ```
 > ### 外设类2 - 键盘事件
@@ -803,22 +871,9 @@ foo.addEventListener('contextmenu', function(e){
 >>> #### 示例：
 ```html
 <script>
-document.addEventListener('keydown', function(e){
+  document.addEventListener('keydown', function(e){
     console.log('keydown 触发');
-}, false);
-</script>
-```
-
->> #### keypress 事件
->>> #### 说明：
-* keypress事件在按下键盘时（非Ctrl、Alt、Shift和Meta）触发
-
->>> #### 示例：
-```html
-<script>
-document.addEventListener('keypress', function(e){
-    console.log('keypress 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -829,9 +884,22 @@ document.addEventListener('keypress', function(e){
 >>> #### 示例：
 ```html
 <script>
-document.addEventListener('keyup', function(e){
+  document.addEventListener('keyup', function(e){
     console.log('keyup 触发');
-}, false);
+  }, false);
+</script>
+```
+
+>> #### keypress 事件
+>>> #### 说明：
+* keypress事件在按下键盘时（非Ctrl、Alt、Shift和Meta）触发
+
+>>> #### 示例：
+```html
+<script>
+  document.addEventListener('keypress', function(e){
+    console.log('keypress 触发');
+  }, false);
 </script>
 ```
 
@@ -843,26 +911,18 @@ document.addEventListener('keyup', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo" draggable="true"></div>
 <script>
-foo.addEventListener('touchstart', function(e){
+  foo.addEventListener('touchstart', function(e){
     console.log('touchstart 触发');
-}, false);
-</script>
-```
-
->> #### touchend 事件
->>> #### 说明：
-* touchend事件当用户不再接触触摸屏时（或者移出屏幕边缘时）触发
-* APPLE Magic Trackpad 不支持 DOM 触摸事件
-
->>> #### 示例：
-```html
-<div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
-<script>
-foo.addEventListener('touchend', function(e){
-    console.log('touchend 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -873,11 +933,40 @@ foo.addEventListener('touchend', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo" draggable="true"></div>
 <script>
-foo.addEventListener('touchmove', function(e){
+  foo.addEventListener('touchmove', function(e){
     console.log('touchmove 触发');
-}, false);
+  }, false);
+</script>
+```
+
+>> #### touchend 事件
+>>> #### 说明：
+* touchend事件当用户不再接触触摸屏时（或者移出屏幕边缘时）触发
+* APPLE Magic Trackpad 不支持 DOM 触摸事件
+
+>>> #### 示例：
+```html
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo" draggable="true"></div>
+<script>
+  foo.addEventListener('touchend', function(e){
+    console.log('touchend 触发');
+  }, false);
 </script>
 ```
 
@@ -888,11 +977,18 @@ foo.addEventListener('touchmove', function(e){
 
 >>> #### 示例：
 ```html
-<div id="foo" draggable="true" style="height:100px; width:100px; background-color:red"></div>
+<style>
+  #foo {
+    width:100px;
+    height:100px;
+    background-color:red;
+  }
+</style>
+<div id="foo" draggable="true"></div>
 <script>
-foo.addEventListener('touchcancel', function(e){
+  foo.addEventListener('touchcancel', function(e){
     console.log('touchcancel 触发');
-}, false);
+  }, false);
 </script>
 ```
 
@@ -904,9 +1000,9 @@ foo.addEventListener('touchcancel', function(e){
 >>> #### 示例：
 ```html
 <script>
-window.addEventListener('resize', function(e) {
+  window.addEventListener('resize', function(e) {
     console.log('resize' + document.body.clientWidth);
-}, false);
+  }, false);
 </script>
 ```
 
@@ -919,40 +1015,13 @@ window.addEventListener('resize', function(e) {
 ```html
 <div style="height:1000px;"></div>
 <script>
-window.addEventListener('scroll', function(e) {
+  window.addEventListener('scroll', function(e) {
     console.log('scroll 文档元素滚动');
-}, false);
-</script>
-```
-
-> ### 动作类3 - 拖拉事件
->> #### drag 事件
->>> #### 说明：
-* drag事件，拖拉过程中，在被拖拉的节点上持续触发
-
->>> #### 示例：
-```html
-<style>
-  div {
-    width:100px;
-    height:100px;
-    border:1px solid #000;
-  }
-  #foo {
-    background-color:red;
-  }
-</style>
-<div><div id="foo" draggable="true"></div></div>
-<div></div>
-<div></div>
-<div></div>
-<script>
-  foo.addEventListener('drag', function(e){
-    console.log('drap 触发');
   }, false);
 </script>
 ```
 
+> ### 动作类3 - 拖拉事件
 >> #### dragstart 事件
 >>> #### 说明：
 * dragstart事件，拖拉开始时在被拖拉的节点上触发
@@ -976,6 +1045,33 @@ window.addEventListener('scroll', function(e) {
 <script>
   foo.addEventListener('dragstart', function(e){
     console.log('dragstart 触发');
+  }, false);
+</script>
+```
+
+>> #### drag 事件
+>>> #### 说明：
+* drag事件，拖拉过程中，在被拖拉的节点上持续触发
+
+>>> #### 示例：
+```html
+<style>
+  div {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+  }
+  #foo {
+    background-color:red;
+  }
+</style>
+<div><div id="foo" draggable="true"></div></div>
+<div></div>
+<div></div>
+<div></div>
+<script>
+  foo.addEventListener('drag', function(e){
+    console.log('drap 触发');
   }, false);
 </script>
 ```
@@ -1007,33 +1103,6 @@ window.addEventListener('scroll', function(e) {
 </script>
 ```
 
->> #### dragover 事件
->>> #### 说明：
-* dragover事件，拖拉到当前节点上方时，在当前节点上持续触发
-
->>> #### 示例：
-```html
-<style>
-  div {
-    width:100px;
-    height:100px;
-    border:1px solid #000;
-  }
-  #foo {
-    background-color:red;
-  }
-</style>
-<div><div id="foo" draggable="true"></div></div>
-<div></div>
-<div></div>
-<div id="anchor"></div>
-<script>
-  anchor.addEventListener('dragover', function(e){
-    console.log('dragover 触发');
-  }, false);
-</script>
-```
-
 >> #### dragenter 事件
 >>> #### 说明：
 * dragenter事件，拖拉进入当前节点时，在当前节点上触发
@@ -1057,6 +1126,33 @@ window.addEventListener('scroll', function(e) {
 <script>
   anchor.addEventListener('dragenter', function(e){
     console.log('dragenter 触发');
+  }, false);
+</script>
+```
+
+>> #### dragover 事件
+>>> #### 说明：
+* dragover事件，拖拉到当前节点上方时，在当前节点上持续触发
+
+>>> #### 示例：
+```html
+<style>
+  div {
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+  }
+  #foo {
+    background-color:red;
+  }
+</style>
+<div><div id="foo" draggable="true"></div></div>
+<div></div>
+<div></div>
+<div id="anchor"></div>
+<script>
+  anchor.addEventListener('dragover', function(e){
+    console.log('dragover 触发');
   }, false);
 </script>
 ```
@@ -1109,24 +1205,19 @@ window.addEventListener('scroll', function(e) {
 <div class="dropzone"></div>
 <div class="dropzone"></div>
 <script>
-// 被拖拉节点
-var dragged;
-// dragstart 事件：拖拉开始时在被拖拉的节点上触发
-document.addEventListener("dragstart", function(e) {
-  // 保存被拖拉节点
-  dragged = e.target;
-  // 被拖拉节点的背景色变透明
-  e.target.style.opacity = 0.5;
-}, false);
+  // 被拖拉节点
+  var dragged;
+  // dragstart 事件：拖拉开始时在被拖拉的节点上触发
+  document.addEventListener("dragstart", function(e) {
+    // 保存被拖拉节点
+    dragged = e.target;
+    // 被拖拉节点的背景色变透明
+    e.target.style.opacity = 0.5;
+  }, false);
   // dragend 事件：拖拉结束时（释放鼠标键或按下escape键）在被拖拉的节点上触发
   document.addEventListener("dragend", function(e) {
     // 被拖拉节点的背景色恢复不透明
     e.target.style.opacity = 1;
-  }, false);
-  // dragover 事件：拖拉到当前节点上方时，在当前节点上持续触发
-  document.addEventListener("dragover", function(e) {
-    // 防止拖拉效果被重置，允许被拖拉的节点放入目标节点
-    e.preventDefault();
   }, false);
   // dragenter 事件：拖拉进入当前节点时，在当前节点上触发
   document.addEventListener("dragenter", function(e) {
@@ -1135,6 +1226,11 @@ document.addEventListener("dragstart", function(e) {
     if ( e.target.className == "dropzone" ) {
       e.target.style.background = "purple";
     }
+  }, false);
+  // dragover 事件：拖拉到当前节点上方时，在当前节点上持续触发
+  document.addEventListener("dragover", function(e) {
+    // 防止拖拉效果被重置，允许被拖拉的节点放入目标节点
+    e.preventDefault();
   }, false);
   // dragleave 事件：拖拉离开当前节点范围时，在当前节点上触发
   document.addEventListener("dragleave", function(e) {
@@ -1154,7 +1250,7 @@ document.addEventListener("dragstart", function(e) {
       dragged.parentNode.removeChild( dragged );
       e.target.appendChild( dragged );
     }
-}, false);
+  }, false);
 </script>
 ```
 
