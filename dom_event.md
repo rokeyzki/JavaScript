@@ -3,14 +3,14 @@
 
 ## 大纲
 > ### 属性
->> * 判断是否能够冒泡：bubbles
-* 判断是否能够取消：cancelable
-* 判断事件当前阶段：eventPhase
-* 判断事件是否用过：defaultPrevented
-* 获取事件当前所在节点：currentTarget
-* 获取事件最初触发节点：target
-* 获取事件名称：type
-* 获取事件发生毫秒时长：timeStamp
+>> * 判断是否能够冒泡：Event.prototype.bubbles
+* 判断是否能够取消：Event.prototype.cancelable
+* 判断事件当前阶段：Event.prototype.eventPhase
+* 判断事件是否用过：Event.prototype.defaultPrevented
+* 获取事件当前所在节点：Event.prototype.currentTarget
+* 获取事件最初触发节点：Event.prototype.target
+* 获取事件名称：Event.prototype.type
+* 获取事件发生毫秒时长：Event.prototype.timeStamp
 
 > ### 方法
 >> * 注销单一事件行为：Event.prototype.preventDefault()
