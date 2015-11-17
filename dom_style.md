@@ -1,6 +1,16 @@
 # DOM 样式
 CSS与JavaScript是两个有着明确分工的领域，前者负责页面的视觉效果，后者负责与用户的行为互动，但是，它们毕竟同属网页开发的前端，因此不可避免有着交叉和互相配合
 
+## 大纲
+> ### 属性
+>> * 获取元素的各种样式属性：Element.prototype.style.cssScripts
+* 获取元素的完整样式文本信息：Element.prototype.style.cssText
+
+> ### 方法
+>> * 设置目标元素的样式属性：Element.prototype.style.setPropertyValue()
+* 读取目标元素的样式属性：Element.prototype.style.getPropertyValue()
+* 移除目标元素的样式属性：Element.prototype.style.removeProperty()
+
 ## CSS
 > ### 基础
 >> * 区块：display
@@ -410,7 +420,7 @@ CSS与JavaScript是两个有着明确分工的领域，前者负责页面的视�
 ```html
 <div>Hello JavaScript</div>
 <script>
-var divStyle = document.querySelector('div').style;
+  var divStyle = document.querySelector('div').style;
 </script>
 ```
 

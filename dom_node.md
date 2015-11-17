@@ -4,25 +4,25 @@
 ## 大纲
 > ### 属性
 >> * 特征属性
- * 获取节点名称：nodeName
- * 获取节点类型：nodeType
+  * 获取节点名称：Node.prototype.nodeName
+   * 获取节点类型：Node.prototype.nodeType
 * 父级属性
- * 获取文档对象：ownerDocument
- * 获取父级节点：parentNode
- * 获取父级元素：parentElement
+   * 获取文档对象：Node.prototype.ownerDocument
+   * 获取父级节点：Node.prototype.parentNode
+   * 获取父级元素：Node.prototype.parentElement
 * 平级属性
- * 获取下一个平级节点：nextSibling
- * 获取下一个平级元素：nextElementSibling
- * 获取上一个平级节点：previousSibling
- * 获取上一个平级元素：previousElementSibling
+   * 获取下一个平级节点：Node.prototype.nextSibling
+   * 获取下一个平级元素：Node.prototype.nextElementSibling
+   * 获取上一个平级节点：Node.prototype.previousSibling
+   * 获取上一个平级元素：Node.prototype.previousElementSibling
 * 子级属性
- * 获取所有子级节点：childNodes
- * 获取所有子级元素：children
- * 获取子级元素总数：childElementCount
- * 获取首个子级节点：firstChild
- * 获取首个子级元素：firstElementChild
- * 获取末个子级节点：lastChild
- * 获取末个子级元素：lastElementChild
+   * 获取所有子级节点：Node.prototype.childNodes
+   * 获取所有子级元素：Node.prototype.children
+   * 获取子级元素总数：Node.prototype.childElementCount
+   * 获取首个子级节点：Node.prototype.firstChild
+   * 获取首个子级元素：Node.prototype.firstElementChild
+   * 获取末个子级节点：Node.prototype.lastChild
+   * 获取末个子级元素：Node.prototype.lastElementChild
 
 > ### 方法
 >> * 判断方法

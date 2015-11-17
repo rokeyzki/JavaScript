@@ -3,7 +3,7 @@
 
 ## 大纲
 > ### 属性
->> * 获取数组的成员数量：length
+>> * 获取数组的成员数量：Array.prototype.length
 
 > ### 方法
 >> * 判断是否为数组：Array.isArray()
