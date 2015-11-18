@@ -648,3 +648,57 @@ styleSheet.insertRule('p { color:red }', 1);
 var styleSheet = document.querySelector('#styleElement').sheet;
 styleSheet.deleteRule(1);
 ```
+
+## 类库 jQuery
+> ### $('#foo').css();
+>> #### 说明：
+* 为匹配元素设置一个或多个CSS属性
+
+>> #### 示例：
+```javascript
+$('#foo').css("color","red");
+$('#foo').css({"color":"red", "background-color":"yellow"});
+```
+
+> ### $('#foo').hasClass();
+>> #### 说明：
+* 判断匹配元素是否被分配制定的样式类
+
+>> #### 示例：
+```javascript
+$('#foo').hasClass('#test'); // true
+$('#foo').hasClass('#test').css("color","red");
+```
+
+> ### $('#foo').addClass();
+>> #### 说明：
+* 为匹配元素设置一个或多个样式类
+* 一次添加多个用空格隔开
+
+>> #### 示例：
+```javascript
+$('#foo').addClass("myClass");
+$('#foo').addClass("myClass yourClass");
+```
+
+> ### $('#foo').removeClass();
+>> #### 说明：
+* 为匹配元素移除一个或多个样式类
+* 一次移除多个用空格隔开
+
+>> #### 示例：
+```javascript
+$('#foo').removeClass("myClass");
+$('#foo').removeClass("myClass yourClass");
+```
+
+> ### $('#foo').toggleClass();
+>> #### 说明：
+* 为匹配元素切换（设置或移除）一个或多个样式类
+* 一次切换多个用空格隔开
+
+>> #### 示例：
+```javascript
+$('#foo').toggleClass("myClass");
+$('#foo').toggleClass("myClass yourClass");
+```
