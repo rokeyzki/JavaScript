@@ -41,7 +41,28 @@ Element.prototype.matches()
   * 根据CSS选择器获取当前元素节点的最接近的父元素：Element.prototype.closest()
   * 根据id选择器获取文档中所有匹配的子元素：document.getElementById()
   * 根据name选择器获取文档中所有匹配的子元素：document.getElementsByName()
->> * 未完待续
+
+>> * 遍历方法
+  * 获取一个节点的包括根节点的子节点遍历集合：document.createNodeIterator()
+  * 获取一个节点的不包括根节点的子节点遍历集合：document.createTreeWalker()
+
+>> * 插入方法
+  * 移动一个节点到对象节点的子节点后面：Node.appendChild()
+  * 克隆一个节点：Node.cloneNode()
+  * 移动一个节点到对象节点的子节点前面：Node.insertBefore()
+  * 移动一个节点到对象节点的指定位置：Element.insertAdjacentHTML()
+  * 生成一个元素节点：document.createElement()
+  * 生成一个属性节点：document.createAttribute()
+  * 生成一个文本节点：document.createTextNode()
+  * 生成一个碎片节点：document.createDocumentFragment()
+
+>> * 修改方法
+  * 使用一个节点替换另一个节点：Node.replaceChild()
+  * 使用一个属性替换另一个属性：Element.setAttributeNode() 
+
+>> * 删除方法
+  * 移除节点的一个子节点：Node.removeChild()
+  * 移除整个节点：Node.remove()
 
 ***
 
@@ -557,7 +578,7 @@ console.log(foo.lastElementChild); // p
 
 ## 节点的方法
 > ### 判断方法
->> #### node.isEqualNode() 方法
+>> #### Node.prototype.isEqualNode() 方法
 >>> #### 说明：
 * isEqualNode方法返回一个布尔值，用于检查两个节点是否相等
 * 所谓相等的节点，指的是两个节点的类型相同、属性相同、子节点相同
@@ -588,7 +609,7 @@ var p_3rd = foo.lastElementChild;
 console.log(p_1st.isEqualNode(p_3rd)); // true
 ```
 
->> #### node.hasChildNodes() 方法
+>> #### Node.prototype.hasChildNodes() 方法
 >>> #### 说明：
 * hasChildNodes方法判断节点是否包含子节点
 * hasChildNodes方法结合firstChild属性和nextSibling属性，可以遍历当前节点的所有后代节点
@@ -619,7 +640,7 @@ console.log(foo.hasChildNodes()); // true
 console.log(foo.firstElementChild.firstElementChild.firstChild.hasChildNodes()); // false
 ```
 
->> #### node.contains() 方法
+>> #### Node.prototype.contains() 方法
 >>> #### 说明：
 * contains方法接受一个节点作为参数，返回一个布尔值，表示参数节点是否为当前节点的后代节点
 * 如果将当前节点传入contains方法，会返回true
@@ -651,7 +672,7 @@ console.log(foo.contains(span_1st)); // true
 console.log(foo.contains(foo)); // true
 ```
 
->> #### node.compareDocumentPosition() 方法
+>> #### Node.prototype.compareDocumentPosition() 方法
 >>> #### 说明：
 * compareDocumentPosition方法表示参数节点与当前节点的关系
 * 该方法包括元素节点和文本节点
@@ -696,7 +717,7 @@ console.log(span_1st.compareDocumentPosition(p_3rd)); // 4
 console.log(p_3rd.compareDocumentPosition(span_1st)); // 2
 ```
 
->> #### element.matches() 方法
+>> #### Element.prototype.matches() 方法
 >>> #### 说明：
 * matches方法返回一个布尔值，表示当前元素是否匹配给定的CSS选择器
 * 该方法包括元素节点和文本节点
@@ -727,7 +748,7 @@ console.log(span_1st.matches('#foo .someClass span')); // true
 ```
 
 > ### 获取方法
->> #### element.querySelector() 方法
+>> #### Element.prototype.querySelector() 方法
 >>> #### 说明：
 * querySelector方法接受CSS选择器作为参数
 * 返回父元素的第一个匹配的子元素
@@ -756,7 +777,7 @@ console.log(span_1st.matches('#foo .someClass span')); // true
 console.log(foo.querySelector("#foo .someClass span")); // span
 ```
 
->> #### element.querySelectorAll() 方法
+>> #### Element.prototype.querySelectorAll() 方法
 >>> #### 说明：
 * querySelectorAll方法接受CSS选择器作为参数
 * 返回一个NodeList对象，包含所有匹配的子元素
@@ -785,7 +806,7 @@ console.log(foo.querySelector("#foo .someClass span")); // span
 console.log(foo.querySelectorAll("#foo .someClass span")); // 0:span,1:span,2:span
 ```
 
->> #### element.getElementsByClassName() 方法
+>> #### Element.prototype.getElementsByClassName() 方法
 >>> #### 说明：
 * getElementsByClassName方法返回一个HTMLCollection对象
 * 成员是当前元素节点的所有匹配指定class的子元素
@@ -815,7 +836,7 @@ console.log(foo.querySelectorAll("#foo .someClass span")); // 0:span,1:span,2:sp
 console.log(foo.getElementsByClassName("someClass")); // p.someClass
 ```
 
->> #### element.getElementsByTagName() 方法
+>> #### Element.prototype.getElementsByTagName() 方法
 >>> #### 说明：
 * getElementsByTagName方法返回一个HTMLCollection对象
 * 成员是当前元素节点的所有匹配指定标签名的子元素
@@ -845,7 +866,7 @@ console.log(foo.getElementsByClassName("someClass")); // p.someClass
 console.log(foo.getElementsByTagName("span")); // 0:span,1:span,2:span,3:span,4:span,5:span,6:span,7:span,8:span
 ```
 
->> #### element.closest() 方法
+>> #### Element.prototype.closest() 方法
 >>> #### 说明：
 * closest方法返回当前元素节点的最接近的父元素（或者当前节点本身）
 * 条件是必须匹配给定的CSS选择器
@@ -1043,7 +1064,7 @@ while (currentNode = fooTreeWalker.nextNode()) {
 ```
 
 > ### 插入方法
->> #### node.appendChild() 方法
+>> #### Node.prototype.appendChild() 方法
 >>> #### 说明：
 * appendChild方法接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点
 * 如果参数节点是文档中现有的其他节点，appendChild方法会将其从原来的位置，移动到新位置
@@ -1074,7 +1095,7 @@ var p_1st = foo.querySelector('#foo .someClass');
 p_1st.appendChild(demo);
 ```
 
->> #### node.cloneNode() 方法
+>> #### Node.prototype.cloneNode() 方法
 >>> #### 说明：
 * cloneNode方法用于克隆一个节点
 * 它接受一个布尔值作为参数，表示是否同时克隆子节点，默认是false，即不克隆子节点
@@ -1110,7 +1131,7 @@ demo2.textContent = demo.textContent;
 p_1st.appendChild(demo2);
 ```
 
->> #### node.insertBefore() 方法
+>> #### Node.prototype.insertBefore() 方法
 >>> #### 说明：
 * insertBefore方法用于将某个节点插入当前节点的指定位置
 * 它接受两个参数，第一个参数是所要插入的节点
@@ -1142,7 +1163,7 @@ var p_1st = foo.querySelector('#foo .someClass');
 p_1st.insertBefore(demo, p_1st.firstElementChild);
 ```
 
->> #### element.insertAdjacentHTML() 方法
+>> #### Element.prototype.insertAdjacentHTML() 方法
 >>> #### 说明：
 * insertAdjacentHTML方法解析字符串，然后将生成的节点插入DOM树的指定位置
 * 该方法接受两个参数，第一个是指定位置，第二个是待解析的字符串
@@ -1315,7 +1336,7 @@ demo.appendChild(newFrag);
 ```
 
 > ### 修改方法
->> #### node.replaceChild() 方法
+>> #### Node.prototype.replaceChild() 方法
 >>> #### 说明：
 * replaceChild方法用于将一个新的节点，替换当前节点的某一个子节点
 * 它接受两个参数，第一个参数是用来替换的新节点
@@ -1350,7 +1371,7 @@ foo.replaceChild(demo, p_1st);
 foo.parentNode.replaceChild(demo, foo);
 ```
 
->> #### element.setAttributeNode() 方法
+>> #### Element.prototype.setAttributeNode() 方法
 >>> #### 说明：
 * setAttributeNode() 方法向元素中添加指定的属性节点
 * 如果这个指定的属性已存在，则此方法会替换它
@@ -1383,7 +1404,7 @@ demo.setAttributeNode(newAttr);
 ```
 
 > ### 删除方法
->> #### node.removeChild() 方法
+>> #### Node.prototype.removeChild() 方法
 >>> #### 说明：
 * removeChild方法接受一个子节点作为参数，用于从当前节点移除该节点
 * 它返回被移除的节点
@@ -1413,7 +1434,7 @@ demo.setAttributeNode(newAttr);
 foo.removeChild(foo.firstElementChild);
 ```
 
->> #### node.remove() 方法
+>> #### Node.prototype.remove() 方法
 >>> #### 说明：
 * remove方法用于将当前节点从DOM树删除
 
