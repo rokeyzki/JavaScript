@@ -30,10 +30,8 @@
   * 判断节点是否包含子节点：Node.prototype.hasChildNodes()
   * 判断是否为当前节点的后代节点：Node.prototype.contains()
   * 判断两个节点的关系：Node.prototype.compareDocumentPosition()
-  * 判断当前元素是否匹配给定的CSS选择器：
-Element.prototype.matches()
-
->> * 获取方法
+  * 判断当前元素是否匹配给定的CSS选择器：Element.prototype.matches()
+* 获取方法
   * 根据CSS选择器获取第一个匹配的子元素：Element.prototype.querySelector()
   * 根据CSS选择器获取所有匹配的子元素：Element.prototype.querySelectorAll()
   * 根据class选择器获取所有匹配的子元素：Element.prototype.getElementsByClassName()
@@ -41,28 +39,25 @@ Element.prototype.matches()
   * 根据CSS选择器获取当前元素节点的最接近的父元素：Element.prototype.closest()
   * 根据id选择器获取文档中所有匹配的子元素：document.getElementById()
   * 根据name选择器获取文档中所有匹配的子元素：document.getElementsByName()
-
->> * 遍历方法
+* 遍历方法
   * 获取一个节点的包括根节点的子节点遍历集合：document.createNodeIterator()
   * 获取一个节点的不包括根节点的子节点遍历集合：document.createTreeWalker()
-
->> * 插入方法
-  * 移动一个节点到对象节点的子节点后面：Node.appendChild()
-  * 克隆一个节点：Node.cloneNode()
-  * 移动一个节点到对象节点的子节点前面：Node.insertBefore()
-  * 移动一个节点到对象节点的指定位置：Element.insertAdjacentHTML()
+* 生成方法
   * 生成一个元素节点：document.createElement()
   * 生成一个属性节点：document.createAttribute()
   * 生成一个文本节点：document.createTextNode()
   * 生成一个碎片节点：document.createDocumentFragment()
-
->> * 修改方法
-  * 使用一个节点替换另一个节点：Node.replaceChild()
-  * 使用一个属性替换另一个属性：Element.setAttributeNode() 
-
->> * 删除方法
-  * 移除节点的一个子节点：Node.removeChild()
-  * 移除整个节点：Node.remove()
+  * 克隆一个节点：Node.prototype.cloneNode()
+* 插入方法
+  * 移动一个节点到对象节点的子节点后面：Node.prototype.appendChild()
+  * 移动一个节点到对象节点的子节点前面：Node.prototype.insertBefore()
+  * 移动一个节点到对象节点的指定位置：Element.prototype.insertAdjacentHTML()
+* 修改方法
+  * 使用一个节点替换另一个节点：Node.prototype.replaceChild()
+  * 使用一个属性替换另一个属性：Element.prototype.setAttributeNode() 
+* 删除方法
+  * 移除节点的一个子节点：Node.prototype.removeChild()
+  * 移除整个节点：Node.prototype.remove()
 
 ***
 
@@ -1063,146 +1058,7 @@ while (currentNode = fooTreeWalker.nextNode()) {
 }
 ```
 
-> ### 插入方法
->> #### Node.prototype.appendChild() 方法
->>> #### 说明：
-* appendChild方法接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点
-* 如果参数节点是文档中现有的其他节点，appendChild方法会将其从原来的位置，移动到新位置
-
->>> #### 示例：
-```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var p_1st = foo.querySelector('#foo .someClass');
-p_1st.appendChild(demo);
-```
-
->> #### Node.prototype.cloneNode() 方法
->>> #### 说明：
-* cloneNode方法用于克隆一个节点
-* 它接受一个布尔值作为参数，表示是否同时克隆子节点，默认是false，即不克隆子节点
-* 克隆一个节点之后，DOM树有可能出现两个有相同ID属性（即id="xxx"）的HTML元素，这时应该修改其中一个HTML元素的ID属性
-
->>> #### 示例：
-```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var p_1st = foo.querySelector('#foo .someClass');
-// 复制一个demo节点（cloneNode方法默认只复制元素节点，不包括文本节点）
-var demo2 = demo.cloneNode();
-// 复制文本
-demo2.textContent = demo.textContent;
-p_1st.appendChild(demo2);
-```
-
->> #### Node.prototype.insertBefore() 方法
->>> #### 说明：
-* insertBefore方法用于将某个节点插入当前节点的指定位置
-* 它接受两个参数，第一个参数是所要插入的节点
-* 第二个参数是当前节点的一个子节点，新的节点将插在这个节点的前面
-
->>> #### 示例：
-```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var p_1st = foo.querySelector('#foo .someClass');
-p_1st.insertBefore(demo, p_1st.firstElementChild);
-```
-
->> #### Element.prototype.insertAdjacentHTML() 方法
->>> #### 说明：
-* insertAdjacentHTML方法解析字符串，然后将生成的节点插入DOM树的指定位置
-* 该方法接受两个参数，第一个是指定位置，第二个是待解析的字符串
-* 指定位置共有四个
-* 该方法不是彻底置换现有的DOM结构，这使得它的执行速度比innerHTML操作快得多
-* 所有浏览器都支持这个方法，包括IE 6
-
->>> #### 示例：
-```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-// beforebegin：在当前元素节点的前面
-foo.insertAdjacentHTML('beforebegin', '<div id="test">test</div>');
-// afterend：在当前元素节点的后面
-foo.insertAdjacentHTML('afterend', '<div id="test">test</div>');
-// afterbegin：在当前元素节点的里面，插在它的第一个子元素之前
-foo.insertAdjacentHTML('afterbegin', '<div id="test">test</div>');
-// beforeend：在当前元素节点的里面，插在它的最后一个子元素之后
-foo.insertAdjacentHTML('beforeend', '<div id="test">test</div>');
-```
-
+> ### 生成方法
 >> #### document.createElement() 方法
 >>> #### 说明：
 * createElement方法用来生成HTML元素节点
@@ -1333,6 +1189,146 @@ var newFrag = document.createDocumentFragment();
     newFrag.appendChild(li);
 });
 demo.appendChild(newFrag);
+```
+
+>> #### Node.prototype.cloneNode() 方法
+>>> #### 说明：
+* cloneNode方法用于克隆一个节点
+* 它接受一个布尔值作为参数，表示是否同时克隆子节点，默认是false，即不克隆子节点
+* 克隆一个节点之后，DOM树有可能出现两个有相同ID属性（即id="xxx"）的HTML元素，这时应该修改其中一个HTML元素的ID属性
+
+>>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
+```javascript
+var p_1st = foo.querySelector('#foo .someClass');
+// 复制一个demo节点（cloneNode方法默认只复制元素节点，不包括文本节点）
+var demo2 = demo.cloneNode();
+// 复制文本
+demo2.textContent = demo.textContent;
+p_1st.appendChild(demo2);
+```
+
+> ### 插入方法
+>> #### Node.prototype.appendChild() 方法
+>>> #### 说明：
+* appendChild方法接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点
+* 如果参数节点是文档中现有的其他节点，appendChild方法会将其从原来的位置，移动到新位置
+
+>>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
+```javascript
+var p_1st = foo.querySelector('#foo .someClass');
+p_1st.appendChild(demo);
+```
+
+>> #### Node.prototype.insertBefore() 方法
+>>> #### 说明：
+* insertBefore方法用于将某个节点插入当前节点的指定位置
+* 它接受两个参数，第一个参数是所要插入的节点
+* 第二个参数是当前节点的一个子节点，新的节点将插在这个节点的前面
+
+>>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
+```javascript
+var p_1st = foo.querySelector('#foo .someClass');
+p_1st.insertBefore(demo, p_1st.firstElementChild);
+```
+
+>> #### Element.prototype.insertAdjacentHTML() 方法
+>>> #### 说明：
+* insertAdjacentHTML方法解析字符串，然后将生成的节点插入DOM树的指定位置
+* 该方法接受两个参数，第一个是指定位置，第二个是待解析的字符串
+* 指定位置共有四个
+* 该方法不是彻底置换现有的DOM结构，这使得它的执行速度比innerHTML操作快得多
+* 所有浏览器都支持这个方法，包括IE 6
+
+>>> #### 示例：
+```html
+<div id="foo">
+    <p class="someClass">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p name="someName">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</div>
+<div id="demo">4</div>
+```
+```javascript
+// beforebegin：在当前元素节点的前面
+foo.insertAdjacentHTML('beforebegin', '<div id="test">test</div>');
+// afterend：在当前元素节点的后面
+foo.insertAdjacentHTML('afterend', '<div id="test">test</div>');
+// afterbegin：在当前元素节点的里面，插在它的第一个子元素之前
+foo.insertAdjacentHTML('afterbegin', '<div id="test">test</div>');
+// beforeend：在当前元素节点的里面，插在它的最后一个子元素之后
+foo.insertAdjacentHTML('beforeend', '<div id="test">test</div>');
 ```
 
 > ### 修改方法
