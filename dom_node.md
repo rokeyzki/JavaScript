@@ -26,22 +26,22 @@
 
 > ### 方法
 >> * 判断方法
-  * 判断两个节点是否相同：Node.prototype.isEqualNode()
-  * 判断节点是否包含子节点：Node.prototype.hasChildNodes()
-  * 判断是否为当前节点的后代节点：Node.prototype.contains()
-  * 判断两个节点的位置关系：Node.prototype.compareDocumentPosition()
   * 判断当前元素是否匹配给定的CSS选择器：Element.prototype.matches()
+  * 判断当前节点是否包含子节点：Node.prototype.hasChildNodes()
+  * 判断是否为当前节点的后代节点：Node.prototype.contains()
+  * 判断两个节点是否相同：Node.prototype.isEqualNode()
+  * 判断两个节点的位置关系：Node.prototype.compareDocumentPosition()
 * 获取方法
   * 根据CSS选择器获取第一个匹配的子元素：Element.prototype.querySelector()
   * 根据CSS选择器获取所有匹配的子元素：Element.prototype.querySelectorAll()
   * 根据CSS选择器获取当前元素节点的最接近的父元素：Element.prototype.closest()
-  * 根据id选择器获取文档中所有匹配的子元素：document.getElementById()
-  * 根据name选择器获取文档中所有匹配的子元素：document.getElementsByName()
-  * 根据class选择器获取所有匹配的子元素：Element.prototype.getElementsByClassName()
-  * 根据tag选择器获取所有匹配的子元素：Element.prototype.getElementsByTagName()
+  * 根据id选择器获取一个文档中匹配的子元素：document.getElementById()
+  * 根据name选择器获取所有文档中匹配的子元素：document.getElementsByName()
+  * 根据class选择器获取所有文档中匹配的子元素：Element.prototype.getElementsByClassName()
+  * 根据tag选择器获取所有文档中匹配的子元素：Element.prototype.getElementsByTagName()
 * 遍历方法
-  * 获取一个节点的包括根节点的子节点遍历集合：document.createNodeIterator()
-  * 获取一个节点的不包括根节点的子节点遍历集合：document.createTreeWalker()
+  * 生成一个包括根节点的子节点遍历器：document.createNodeIterator()
+  * 生成一个不包括根节点的子节点遍历器：document.createTreeWalker()
 * 生成方法
   * 生成一个元素节点：document.createElement()
   * 生成一个属性节点：document.createAttribute()
@@ -49,8 +49,8 @@
   * 生成一个碎片节点：document.createDocumentFragment()
   * 克隆一个节点：Node.prototype.cloneNode()
 * 插入方法
-  * 移动一个节点到对象节点的子节点后面：Node.prototype.appendChild()
   * 移动一个节点到对象节点的子节点前面：Node.prototype.insertBefore()
+  * 移动一个节点到对象节点的子节点后面：Node.prototype.appendChild()
   * 移动一个节点到对象节点的指定位置：Element.prototype.insertAdjacentHTML()
 * 修改方法
   * 使用一个节点替换另一个节点：Node.prototype.replaceChild()
@@ -573,10 +573,10 @@ console.log(foo.lastElementChild); // p
 
 ## 节点的方法
 > ### 判断方法
->> #### Node.prototype.isEqualNode() 方法
+>> #### Element.prototype.matches() 方法
 >>> #### 说明：
-* isEqualNode方法返回一个布尔值，用于检查两个节点是否相等
-* 所谓相等的节点，指的是两个节点的类型相同、属性相同、子节点相同
+* matches方法返回一个布尔值，表示当前元素是否匹配给定的CSS选择器
+* 该方法包括元素节点和文本节点
 
 >>> #### 示例：
 ```html
@@ -592,16 +592,15 @@ console.log(foo.lastElementChild); // p
       <span>2</span>
       <span>3</span>
     </p>
-    <p>
+    <p class="someClass">
       <span>1</span>
       <span>2</span>
       <span>3</span>
     </p>
   </div>
   <script>
-    var p_1st = foo.firstElementChild;
-    var p_3rd = foo.lastElementChild;
-    console.log(p_1st.isEqualNode(p_3rd)); // true
+    var span_1st = foo.lastElementChild.firstElementChild;
+    console.log(span_1st.matches('#foo .someClass span')); // true
   </script>
 </body>
 ```
@@ -673,6 +672,39 @@ console.log(foo.lastElementChild); // p
 </body>
 ```
 
+>> #### Node.prototype.isEqualNode() 方法
+>>> #### 说明：
+* isEqualNode方法返回一个布尔值，用于检查两个节点是否相等
+* 所谓相等的节点，指的是两个节点的类型相同、属性相同、子节点相同
+
+>>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script>
+    var p_1st = foo.firstElementChild;
+    var p_3rd = foo.lastElementChild;
+    console.log(p_1st.isEqualNode(p_3rd)); // true
+  </script>
+</body>
+```
+
 >> #### Node.prototype.compareDocumentPosition() 方法
 >>> #### 说明：
 * compareDocumentPosition方法表示参数节点与当前节点的关系
@@ -716,38 +748,6 @@ console.log(foo.lastElementChild); // p
     var p_3rd = foo.lastElementChild;
     console.log(span_1st.compareDocumentPosition(p_3rd)); // 4
     console.log(p_3rd.compareDocumentPosition(span_1st)); // 2
-  </script>
-</body>
-```
-
->> #### Element.prototype.matches() 方法
->>> #### 说明：
-* matches方法返回一个布尔值，表示当前元素是否匹配给定的CSS选择器
-* 该方法包括元素节点和文本节点
-
->>> #### 示例：
-```html
-<body>
-  <div id="foo">
-    <p>
-      <span>1</span>
-      <span>2</span>
-      <span>3</span>
-    </p>
-    <p>
-      <span>1</span>
-      <span>2</span>
-      <span>3</span>
-    </p>
-    <p class="someClass">
-      <span>1</span>
-      <span>2</span>
-      <span>3</span>
-    </p>
-  </div>
-  <script>
-    var span_1st = foo.lastElementChild.firstElementChild;
-    console.log(span_1st.matches('#foo .someClass span')); // true
   </script>
 </body>
 ```
@@ -1021,32 +1021,35 @@ console.log(foo.lastElementChild); // p
 
 >>> #### 示例：
 ```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var fooNodeIterator = document.createNodeIterator(foo, NodeFilter.SHOW_ELEMENT);
-while (currentNode = fooNodeIterator.nextNode()) {
-    console.log(currentNode.tagName); // DIV、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN
-}
-var nextNode = fooNodeIterator.nextNode(); console.log(nextNode); // null
-var previousNode = fooNodeIterator.previousNode(); console.log(previousNode); // <span>3</span>
+    <p class="someClass">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script>
+    var fooNodeIterator = document.createNodeIterator(foo, NodeFilter.SHOW_ELEMENT);
+    while (currentNode = fooNodeIterator.nextNode()) {
+        console.log(currentNode.tagName); // DIV、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN
+    }
+    var nextNode = fooNodeIterator.nextNode(); 
+    console.log(nextNode); // null
+    var previousNode = fooNodeIterator.previousNode(); 
+    console.log(previousNode); // [object HTMLSpanElement]
+  </script>
+</body>
 ```
 
 >> #### document.createTreeWalker() 方法
@@ -1058,30 +1061,31 @@ var previousNode = fooNodeIterator.previousNode(); console.log(previousNode); //
 
 >>> #### 示例：
 ```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var fooTreeWalker = document.createTreeWalker(foo, NodeFilter.SHOW_ELEMENT);
-while (currentNode = fooTreeWalker.nextNode()) {
-    console.log(currentNode.tagName); // P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN
-}
+    <p class="someClass">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script>
+    var fooTreeWalker = document.createTreeWalker(foo, NodeFilter.SHOW_ELEMENT);
+    while (currentNode = fooTreeWalker.nextNode()) {
+      console.log(currentNode.tagName); // P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN
+    }
+  </script>
+</body>
 ```
 
 > ### 生成方法
@@ -1093,28 +1097,15 @@ while (currentNode = fooTreeWalker.nextNode()) {
 
 >>> #### 示例：
 ```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var newDiv = document.createElement("div");
-demo.appendChild(newDiv);
+<body>
+  <div id="demo">
+    <div>4</div>
+  </div>
+  <script>
+    var newDiv = document.createElement("div");
+    demo.appendChild(newDiv);
+  </script>
+</body>
 ```
 
 >> #### document.createAttribute() 方法
@@ -1124,29 +1115,16 @@ demo.appendChild(newDiv);
 
 >>> #### 示例：
 ```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var newAttr = document.createAttribute("my_attr_key");
-newAttr.value = "my_attr_value";
-demo.setAttributeNode(newAttr);
+<body>
+  <div id="demo">
+    <div>4</div>
+  </div>
+  <script>
+    var newAttr = document.createAttribute("my_attr_key");
+    newAttr.value = "my_attr_value";
+    demo.setAttributeNode(newAttr);
+  </script>
+</body>
 ```
 
 >> #### document.createTextNode() 方法
@@ -1155,30 +1133,17 @@ demo.setAttributeNode(newAttr);
 
 >>> #### 示例：
 ```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var newDiv = document.createElement("div");
-var newText = document.createTextNode("hello");
-newDiv.appendChild(newText);
-demo.appendChild(newDiv);
+<body>
+  <div id="demo">
+    <div>4</div>
+  </div>
+  <script>
+    var newDiv = document.createElement("div");
+    var newText = document.createTextNode("hello");
+    newDiv.appendChild(newText);
+    demo.appendChild(newDiv);
+  </script>
+</body>
 ```
 
 >> #### document.createDocumentFragment() 方法
@@ -1188,33 +1153,20 @@ demo.appendChild(newDiv);
 
 >>> #### 示例：
 ```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var newFrag = document.createDocumentFragment();
-[1, 2, 3, 4].forEach(function(e) {
-    var li = document.createElement("li");
-    li.textContent = e;
-    newFrag.appendChild(li);
-});
-demo.appendChild(newFrag);
+<body>
+  <div id="demo">
+    <div>4</div>
+  </div>
+  <script>
+    var newFrag = document.createDocumentFragment();
+    [1, 2, 3, 4].forEach(function(e) {
+      var li = document.createElement("li");
+      li.textContent = e;
+      newFrag.appendChild(li);
+    });
+    demo.appendChild(newFrag);
+  </script>
+</body>
 ```
 
 >> #### Node.prototype.cloneNode() 方法
@@ -1225,66 +1177,21 @@ demo.appendChild(newFrag);
 
 >>> #### 示例：
 ```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var p_1st = foo.querySelector('#foo .someClass');
-// 复制一个demo节点（cloneNode方法默认只复制元素节点，不包括文本节点）
-var demo2 = demo.cloneNode();
-// 复制文本
-demo2.textContent = demo.textContent;
-p_1st.appendChild(demo2);
+<body>
+  <div id="demo">
+    <div>4</div>
+  </div>
+  <script>
+    // 复制一个demo节点（cloneNode方法默认只复制元素节点，不包括文本节点）
+    var demo2 = demo.cloneNode();
+    // 复制文本
+    demo2.textContent = demo.textContent;
+    demo.appendChild(demo2);
+  </script>
+</body>
 ```
 
 > ### 插入方法
->> #### Node.prototype.appendChild() 方法
->>> #### 说明：
-* appendChild方法接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点
-* 如果参数节点是文档中现有的其他节点，appendChild方法会将其从原来的位置，移动到新位置
-
->>> #### 示例：
-```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var p_1st = foo.querySelector('#foo .someClass');
-p_1st.appendChild(demo);
-```
-
 >> #### Node.prototype.insertBefore() 方法
 >>> #### 说明：
 * insertBefore方法用于将某个节点插入当前节点的指定位置
@@ -1293,28 +1200,63 @@ p_1st.appendChild(demo);
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-<div id="demo">4</div>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <div id="demo">4</div>
+  <script>
+    var p_1st = foo.querySelector('#foo .someClass');
+    p_1st.insertBefore(demo, p_1st.firstElementChild);
+  </script>
+</body>
 ```
-```javascript
-var p_1st = foo.querySelector('#foo .someClass');
-p_1st.insertBefore(demo, p_1st.firstElementChild);
+
+>> #### Node.prototype.appendChild() 方法
+>>> #### 说明：
+* appendChild方法接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点
+* 如果参数节点是文档中现有的其他节点，appendChild方法会将其从原来的位置，移动到新位置
+
+>>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p class="someClass">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <div id="demo">4</div>
+  <script>
+    var p_1st = foo.querySelector('#foo .someClass');
+    p_1st.appendChild(demo);
+  </script>
+</body>
 ```
 
 >> #### Element.prototype.insertAdjacentHTML() 方法
@@ -1327,34 +1269,36 @@ p_1st.insertBefore(demo, p_1st.firstElementChild);
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-// beforebegin：在当前元素节点的前面
-foo.insertAdjacentHTML('beforebegin', '<div id="test">test</div>');
-// afterend：在当前元素节点的后面
-foo.insertAdjacentHTML('afterend', '<div id="test">test</div>');
-// afterbegin：在当前元素节点的里面，插在它的第一个子元素之前
-foo.insertAdjacentHTML('afterbegin', '<div id="test">test</div>');
-// beforeend：在当前元素节点的里面，插在它的最后一个子元素之后
-foo.insertAdjacentHTML('beforeend', '<div id="test">test</div>');
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <div id="demo">4</div>
+  <script>
+    // beforebegin：在当前元素节点的前面
+    foo.insertAdjacentHTML('beforebegin', '<div id="test">test</div>');
+    // afterend：在当前元素节点的后面
+    foo.insertAdjacentHTML('afterend', '<div id="test">test</div>');
+    // afterbegin：在当前元素节点的里面，插在它的第一个子元素之前
+    foo.insertAdjacentHTML('afterbegin', '<div id="test">test</div>');
+    // beforeend：在当前元素节点的里面，插在它的最后一个子元素之后
+    foo.insertAdjacentHTML('beforeend', '<div id="test">test</div>');
+  </script>
+</body>
 ```
 
 > ### 修改方法
@@ -1366,31 +1310,33 @@ foo.insertAdjacentHTML('beforeend', '<div id="test">test</div>');
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-// 使用demo替换p_1st
-var p_1st = foo.querySelector('#foo .someClass');
-foo.replaceChild(demo, p_1st);
-// 使用demo替换foo
-foo.parentNode.replaceChild(demo, foo);
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <div id="demo">4</div>
+  <script>
+    // 使用demo替换p_1st
+    var p_1st = foo.querySelector('#foo .someClass');
+    foo.replaceChild(demo, p_1st);
+    // 使用demo替换foo
+    // foo.parentNode.replaceChild(demo, foo);
+  </script>
+</body>
 ```
 
 >> #### Element.prototype.setAttributeNode() 方法
@@ -1400,29 +1346,31 @@ foo.parentNode.replaceChild(demo, foo);
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-var newAttr = document.createAttribute("my_attr_key");
-newAttr.value = "my_attr_value";
-demo.setAttributeNode(newAttr);
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <div id="demo">4</div>
+  <script>
+    var newAttr = document.createAttribute("my_attr_key");
+    newAttr.value = "my_attr_value";
+    demo.setAttributeNode(newAttr);
+  </script>
+</body>
 ```
 
 > ### 删除方法
@@ -1433,27 +1381,28 @@ demo.setAttributeNode(newAttr);
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-foo.removeChild(foo.firstElementChild);
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script>
+    foo.removeChild(foo.firstElementChild);
+  </script>
+</body>
 ```
 
 >> #### Node.prototype.remove() 方法
@@ -1462,27 +1411,28 @@ foo.removeChild(foo.firstElementChild);
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-<div id="demo">4</div>
-```
-```javascript
-foo.remove();
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script>
+    foo.remove();
+  </script>
+</body>
 ```
 
 > ### 外部方法
