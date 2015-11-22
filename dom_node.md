@@ -26,19 +26,19 @@
 
 > ### 方法
 >> * 判断方法
-  * 判断两个节点是否相等：Node.prototype.isEqualNode()
+  * 判断两个节点是否相同：Node.prototype.isEqualNode()
   * 判断节点是否包含子节点：Node.prototype.hasChildNodes()
   * 判断是否为当前节点的后代节点：Node.prototype.contains()
-  * 判断两个节点的关系：Node.prototype.compareDocumentPosition()
+  * 判断两个节点的位置关系：Node.prototype.compareDocumentPosition()
   * 判断当前元素是否匹配给定的CSS选择器：Element.prototype.matches()
 * 获取方法
   * 根据CSS选择器获取第一个匹配的子元素：Element.prototype.querySelector()
   * 根据CSS选择器获取所有匹配的子元素：Element.prototype.querySelectorAll()
-  * 根据class选择器获取所有匹配的子元素：Element.prototype.getElementsByClassName()
-  * 根据tag选择器获取所有匹配的子元素：Element.prototype.getElementsByTagName()
   * 根据CSS选择器获取当前元素节点的最接近的父元素：Element.prototype.closest()
   * 根据id选择器获取文档中所有匹配的子元素：document.getElementById()
   * 根据name选择器获取文档中所有匹配的子元素：document.getElementsByName()
+  * 根据class选择器获取所有匹配的子元素：Element.prototype.getElementsByClassName()
+  * 根据tag选择器获取所有匹配的子元素：Element.prototype.getElementsByTagName()
 * 遍历方法
   * 获取一个节点的包括根节点的子节点遍历集合：document.createNodeIterator()
   * 获取一个节点的不包括根节点的子节点遍历集合：document.createTreeWalker()
@@ -580,28 +580,30 @@ console.log(foo.lastElementChild); // p
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-```
-```javascript
-var p_1st = foo.firstElementChild;
-var p_3rd = foo.lastElementChild;
-console.log(p_1st.isEqualNode(p_3rd)); // true
+  </div>
+  <script>
+    var p_1st = foo.firstElementChild;
+    var p_3rd = foo.lastElementChild;
+    console.log(p_1st.isEqualNode(p_3rd)); // true
+  </script>
+</body>
 ```
 
 >> #### Node.prototype.hasChildNodes() 方法
@@ -612,27 +614,29 @@ console.log(p_1st.isEqualNode(p_3rd)); // true
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-```
-```javascript
-console.log(foo.hasChildNodes()); // true
-console.log(foo.firstElementChild.firstElementChild.firstChild.hasChildNodes()); // false
+  </div>
+  <script>
+    console.log(foo.hasChildNodes()); // true
+    console.log(foo.firstElementChild.firstElementChild.firstChild.hasChildNodes()); // false
+  </script>
+</body>
 ```
 
 >> #### Node.prototype.contains() 方法
@@ -643,28 +647,30 @@ console.log(foo.firstElementChild.firstElementChild.firstChild.hasChildNodes());
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-```
-```javascript
-var span_1st = foo.firstElementChild.firstElementChild;
-console.log(foo.contains(span_1st)); // true
-console.log(foo.contains(foo)); // true
+  </div>
+  <script>
+    var span_1st = foo.firstElementChild.firstElementChild;
+    console.log(foo.contains(span_1st)); // true
+    console.log(foo.contains(foo)); // true
+  </script>
+</body>
 ```
 
 >> #### Node.prototype.compareDocumentPosition() 方法
@@ -674,42 +680,44 @@ console.log(foo.contains(foo)); // true
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
-```
-```javascript
-// 当参数节点等于当前节点时，返回值为0，表示节点相同
-console.log(foo.compareDocumentPosition(foo)); // 0
-// 纵向比较
-var span_1st = foo.firstElementChild.firstElementChild;
-// 判断参数节点`span_1st`对于当前节点`foo`的位置，值20表示参数节点是当前节点的后代节点
-console.log(foo.compareDocumentPosition(span_1st)); // 20
-// 判断参数节点`foo`对于当前节点`span_1st`的位置，值10表示参数节点在当前节点的祖先节点
-console.log(span_1st.compareDocumentPosition(foo)); // 10
-// 横向比较
-var span_2nd = span_1st.nextElementSibling;
-// 判断参数节点`span_2nd`对于当前节点`span_1st`的位置，值4表示参数节点是当前节点的后面节点(不一定同级)
-console.log(span_1st.compareDocumentPosition(span_2nd)); // 4
-// 判断参数节点`span_1st`对于当前节点`span_2nd`的位置，值2表示参数节点是当前节点的前面节点(不一定同级)
-console.log(span_2nd.compareDocumentPosition(span_1st)); // 2
-var p_3rd = foo.lastElementChild;
-console.log(span_1st.compareDocumentPosition(p_3rd)); // 4
-console.log(p_3rd.compareDocumentPosition(span_1st)); // 2
+  </div>
+  <script>
+    // 当参数节点等于当前节点时，返回值为0，表示节点相同
+    console.log(foo.compareDocumentPosition(foo)); // 0
+    // 纵向比较
+    var span_1st = foo.firstElementChild.firstElementChild;
+    // 判断参数节点`span_1st`对于当前节点`foo`的位置，值20表示参数节点是当前节点的后代节点
+    console.log(foo.compareDocumentPosition(span_1st)); // 20
+    // 判断参数节点`foo`对于当前节点`span_1st`的位置，值10表示参数节点在当前节点的祖先节点
+    console.log(span_1st.compareDocumentPosition(foo)); // 10
+    // 横向比较
+    var span_2nd = span_1st.nextElementSibling;
+    // 判断参数节点`span_2nd`对于当前节点`span_1st`的位置，值4表示参数节点是当前节点的后面节点(不一定同级)
+    console.log(span_1st.compareDocumentPosition(span_2nd)); // 4
+    // 判断参数节点`span_1st`对于当前节点`span_2nd`的位置，值2表示参数节点是当前节点的前面节点(不一定同级)
+    console.log(span_2nd.compareDocumentPosition(span_1st)); // 2
+    var p_3rd = foo.lastElementChild;
+    console.log(span_1st.compareDocumentPosition(p_3rd)); // 4
+    console.log(p_3rd.compareDocumentPosition(span_1st)); // 2
+  </script>
+</body>
 ```
 
 >> #### Element.prototype.matches() 方法
@@ -719,27 +727,29 @@ console.log(p_3rd.compareDocumentPosition(span_1st)); // 2
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-```
-```javascript
-var span_1st = foo.firstElementChild.firstElementChild;
-console.log(span_1st.matches('#foo .someClass span')); // true
+  </div>
+  <script>
+    var span_1st = foo.lastElementChild.firstElementChild;
+    console.log(span_1st.matches('#foo .someClass span')); // true
+  </script>
+</body>
 ```
 
 > ### 获取方法
@@ -750,26 +760,28 @@ console.log(span_1st.matches('#foo .someClass span')); // true
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-```
-```javascript
-console.log(foo.querySelector("#foo .someClass span")); // span
+  </div>
+  <script>
+    console.log(foo.querySelector(".someClass span")); // [object HTMLSpanElement]
+  </script>
+</body>
 ```
 
 >> #### Element.prototype.querySelectorAll() 方法
@@ -779,86 +791,28 @@ console.log(foo.querySelector("#foo .someClass span")); // span
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-```
-```javascript
-console.log(foo.querySelectorAll("#foo .someClass span")); // 0:span,1:span,2:span
-```
-
->> #### Element.prototype.getElementsByClassName() 方法
->>> #### 说明：
-* getElementsByClassName方法返回一个HTMLCollection对象
-* 成员是当前元素节点的所有匹配指定class的子元素
-*
-
->>> #### 示例：
-```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-```
-```javascript
-console.log(foo.getElementsByClassName("someClass")); // p.someClass
-```
-
->> #### Element.prototype.getElementsByTagName() 方法
->>> #### 说明：
-* getElementsByTagName方法返回一个HTMLCollection对象
-* 成员是当前元素节点的所有匹配指定标签名的子元素
-* 该方法搜索之前，会统一将标签名转为小写
-
->>> #### 示例：
-```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-```
-```javascript
-console.log(foo.getElementsByTagName("span")); // 0:span,1:span,2:span,3:span,4:span,5:span,6:span,7:span,8:span
+  </div>
+  <script>
+    console.log(foo.querySelectorAll("#foo .someClass span")); // [object NodeList] { 0: [object HTMLSpanElement], 1: [object HTMLSpanElement], 2: [object HTMLSpanElement] }
+  </script>
+</body>
 ```
 
 >> #### Element.prototype.closest() 方法
@@ -869,27 +823,29 @@ console.log(foo.getElementsByTagName("span")); // 0:span,1:span,2:span,3:span,4:
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-```
-```javascript
-var span_1st = foo.firstElementChild.firstElementChild;
-console.log(span_1st.closest("#foo .someClass")); // p.someClass
+  </div>
+  <script>
+    var span_1st = foo.lastElementChild.firstElementChild;
+    console.log(span_1st.closest("#foo .someClass")); // [object HTMLParagraphElement]
+  </script>
+</body>
 ```
 
 >> #### document.getElementById() 方法
@@ -900,26 +856,28 @@ console.log(span_1st.closest("#foo .someClass")); // p.someClass
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-```
-```javascript
-console.log(document.getElementById("foo")); // div#foo
+  </div>
+  <script>
+    console.log(document.getElementById("foo")); // [object HTMLDivElement]
+  </script>
+</body>
 ```
 
 >> #### document.getElementsByName() 方法
@@ -930,26 +888,92 @@ console.log(document.getElementById("foo")); // div#foo
 
 >>> #### 示例：
 ```html
-<div id="foo">
-    <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p name="someName">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
     <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-</div>
+    <p name="someName">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script>
+    console.log(document.getElementsByName("someName")); // [object NodeList] { 0: [object HTMLParagraphElement] } 
+  </script>
+</body>
 ```
-```javascript
-console.log(document.getElementsByName("someName")); // p[someName]
+
+>> #### Element.prototype.getElementsByClassName() 方法
+>>> #### 说明：
+* getElementsByClassName方法返回一个HTMLCollection对象
+* 成员是当前元素节点的所有匹配指定class的子元素
+*
+
+>>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p class="someClass">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script>
+    console.log(foo.getElementsByClassName("someClass")); // [object HTMLCollection] { 0: [object HTMLParagraphElement] } 
+  </script>
+</body>
+```
+
+>> #### Element.prototype.getElementsByTagName() 方法
+>>> #### 说明：
+* getElementsByTagName方法返回一个HTMLCollection对象
+* 成员是当前元素节点的所有匹配指定标签名的子元素
+* 该方法搜索之前，会统一将标签名转为小写
+
+>>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p class="someClass">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script>
+    console.log(foo.getElementsByTagName("p")); // [object HTMLCollection] { 0: [object HTMLParagraphElement], 1: [object HTMLParagraphElement], 2: [object HTMLParagraphElement] } 
+  </script>
+</body>
 ```
 
 >> #### document.elementFromPoint() 方法
@@ -958,26 +982,28 @@ console.log(document.getElementsByName("someName")); // p[someName]
 
 >>> #### 示例：
 ```html
-<div id="foo">
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
     <p class="someClass">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
     </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-    <p>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-    </p>
-</div>
-```
-```javascript
-console.log(document.elementFromPoint(1,1)); // html
+  </div>
+  <script>
+    console.log(document.elementFromPoint(1,1)); // [object HTMLHtmlElement]
+  </script>
+</body>
 ```
 
 > ### 遍历方法
