@@ -649,7 +649,7 @@ var styleSheet = document.querySelector('#styleElement').sheet;
 styleSheet.deleteRule(1);
 ```
 
-## 类库 jQuery
+## 类库 jQuery - 方法
 > ### $('#foo').css();
 >> #### 说明：
 * 为匹配元素设置一个或多个CSS属性

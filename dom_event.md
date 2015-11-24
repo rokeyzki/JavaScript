@@ -1441,7 +1441,7 @@ div.addEventListener('click', callback, false); // 返回 Tag: DIV, EventPhase: 
 </script>
 ```
 
-## 类库 jQuery
+## 类库 jQuery - 方法
 > ### $('#foo').bind();
 >> #### 说明：
 * 为一个元素绑定一个事件处理程序

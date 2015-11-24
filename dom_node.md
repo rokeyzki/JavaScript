@@ -1495,3 +1495,449 @@ document.nodeValue // "hello world"
 // 暂无示例
 ```
 
+## 类库 jQuery - 选择器
+> ### $('selector')
+>> #### 说明：
+* 基础选择器 1
+* 根据tag选择元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">  <!-- red -->
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('div').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('.selector')
+>> #### 说明：
+* 基础选择器 2
+* 根据class选择元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p class="someClass">  <!-- red -->
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('.someClass').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('#selector')
+>> #### 说明：
+* 基础选择器 3
+* 根据id选择元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span id="oneID">1</span>  <!-- red -->
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p class="someClass">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#oneID').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector1, selector2')
+>> #### 说明：
+* 基础选择器 4
+* 一次选择多个元素，参数通过逗号分隔开
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span id="oneID">1</span>  <!-- red -->
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p class="someClass">  <!-- red -->
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('.someClass, #oneID').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector1 ~ selector2')
+>> #### 说明：
+* 基础选择器 5
+* 向后选择符合条件的所有平级元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">    
+    <h3>3</h3>
+    <h2>2</h2>  <!-- no -->
+    <h1>1</h1>  <!-- no -->
+    <p>0</p>
+    <h1>1</h1>  <!-- red -->
+    <h2>2</h2>  <!-- red -->
+    <h3>3</h3>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p ~ h1').css('color', 'red');
+    $('p ~ h2').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector1 + selector2')
+>> #### 说明：
+* 基础选择器 6
+* 向后选择符合条件的相邻平级元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">    
+    <h3>3</h3>
+    <h2>2</h2>  <!-- no -->
+    <h1>1</h1>  <!-- no -->
+    <p>0</p>
+    <h1>1</h1>  <!-- red -->
+    <h2>2</h2>  <!-- no -->
+    <h3>3</h3>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p + h1').css('color', 'red');
+    $('p + h2').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector1 selector2')
+>> #### 说明：
+* 基础选择器 7
+* 选择符合条件的所有泛后代元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span id="oneID">1</span>  <!-- red -->
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p class="someClass">  <!-- red -->
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('div #oneID').css('color', 'red');
+    $('div .someClass').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector1 > selector2')
+>> #### 说明：
+* 基础选择器 8
+* 选择符合条件的所有子级元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p>
+      <span id="oneID">1</span>  <!-- no -->
+      <span>2</span>
+      <span>3</span>
+    </p>
+    <p class="someClass">  <!-- red -->
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('div > #oneID').css('color', 'red');
+    $('div > .someClass').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector[attr]')
+>> #### 说明：
+* 属性选择器 1
+* 如果存在某元素，且该元素具有某属性，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span attr>1</span>  <!-- red -->
+      <span>2</span>
+      <span>3</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span[attr]').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector[attr = "value"]')
+>> #### 说明：
+* 属性选择器 2
+* 如果存在某元素，且该元素具有某属性，且该属性的值 等于 指定值，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span attr="value">1</span>  <!-- red -->
+      <span attr>2</span>  <!-- no -->
+      <span>3</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span[attr = "value"]').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector[attr != "value"]')
+>> #### 说明：
+* 属性选择器 3
+* 如果存在某元素，且该元素具有某属性，且该属性的值 不等于 指定值，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span attr="1">1</span>  <!-- no -->
+      <span attr="2">2</span>  <!-- red -->
+      <span attr>3</span>  <!-- red -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span[attr != "1"]').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector[attr $= "value"]')
+>> #### 说明：
+* 属性选择器 4
+* 如果存在某元素，且该元素具有某属性，且该属性的值 等于 区分大小写的指定值，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span attr="a1">1</span>  <!-- red -->
+      <span attr="A1">2</span>  <!-- no -->
+      <span attr="a1234">3</span>  <!-- no -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span[attr $= "a1"]').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector[attr *= "value"]')
+>> #### 说明：
+* 属性选择器 5
+* 如果存在某元素，且该元素具有某属性，且该属性的值 包含 指定值，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span attr="a1">1</span>  <!-- red -->
+      <span attr="a2">2</span>  <!-- red -->
+      <span attr="b1">3</span>  <!-- no -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span[attr *= "a"]').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector[attr ^= "value"]')
+>> #### 说明：
+* 属性选择器 6
+* 如果存在某元素，且该元素具有某属性，且该属性的值的开头 等于 指定值，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span attr="a1">1</span>  <!-- red -->
+      <span attr="a2">2</span>  <!-- red -->
+      <span attr="1a">3</span>  <!-- no -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span[attr ^= "a"]').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector[attr |= "value"]')
+>> #### 说明：
+* 属性选择器 7
+* 如果存在某元素，且该元素具有某属性，且该属性的值的前缀(在连字符-之前) 等于 指定值，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span attr="a-1">1</span>  <!-- red -->
+      <span attr="a2">2</span>  <!-- no -->
+      <span attr="1-a">3</span>  <!-- no -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span[attr |= "a"]').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector[attr ~= "value"]')
+>> #### 说明：
+* 属性选择器 8
+* 如果存在某元素，且该元素具有某属性，且该属性的值 包含 用空格分隔的指定值，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span attr="a 1">1</span>  <!-- red -->
+      <span attr="a-2">2</span>  <!-- no -->
+      <span attr="b 1">3</span>  <!-- no -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span[attr ~= "a"]').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector[attr1][attr2]')
+>> #### 说明：
+* 属性选择器 9
+* 如果存在某元素，且该元素符合第一个属性过滤器的条件，且该元素符合第二个属性过滤器的条件，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span attr="a 1">1</span>  <!-- red -->
+      <span attr="a-2">2</span>  <!-- no -->
+      <span attr="b 1">3</span>  <!-- no -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span[attr ~= "a"][attr *= "1"]').css('color', 'red');
+  </script>
+</body>
+```
+
+## 类库 jQuery - 过滤器
+
+## 类库 jQuery - 方法
