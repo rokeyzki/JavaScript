@@ -2167,7 +2167,7 @@ document.nodeValue // "hello world"
 >> #### 说明：
 * 层级过滤器 1
 * 如果存在多个符合选择条件的父元素，且每个父元素存在多个符合选择条件的子元素，则选中每个符合选择条件父元素的第一个符合条件子元素
-* 也可写做：`$('parent child:first-child')`
+* 相同用法：`$('parent child:first-child')`
 
 >> #### 示例：
 ```html
@@ -2200,7 +2200,7 @@ document.nodeValue // "hello world"
 >> #### 说明：
 * 层级过滤器 2
 * 如果存在多个符合选择条件的父元素，且每个父元素存在多个符合选择条件的子元素，则选中每个符合选择条件父元素的最后一个符合条件子元素
-* 也可写做：`$('parent child:last-child')`
+* 相同用法：`$('parent child:last-child')`
 
 >> #### 示例：
 ```html
@@ -2233,7 +2233,7 @@ document.nodeValue // "hello world"
 >> #### 说明：
 * 层级过滤器 3
 * 如果存在多个符合选择条件的父元素，且每个父元素存在多个符合选择条件的子元素，则选中每个符合选择条件父元素的第n个(从1计数)符合条件子元素
-* 也可写做：`$('parent child:nth-child(n)')`
+* 相同用法：`$('parent child:nth-child(n)')`
 
 >> #### 示例：
 ```html
@@ -2266,7 +2266,7 @@ document.nodeValue // "hello world"
 >> #### 说明：
 * 层级过滤器 4
 * 如果存在多个符合选择条件的父元素，且每个父元素存在多个符合选择条件的子元素，则选中每个符合选择条件父元素的倒数第n个(从1计数)符合条件子元素
-* 也可写做：`$('parent child:nth-last-child(n)')`
+* 相同用法：`$('parent child:nth-last-child(n)')`
 
 >> #### 示例：
 ```html
@@ -2299,7 +2299,7 @@ document.nodeValue // "hello world"
 >> #### 说明：
 * 层级过滤器 5
 * 如果存在多个符合选择条件的父元素，且每个父元素存在多个符合选择条件的子元素，则选中每个符合选择条件父元素的唯一符合条件子元素
-* 也可写做：`$('parent child:only-child')`
+* 相同用法：`$('parent child:only-child')`
 
 >> #### 示例：
 ```html
