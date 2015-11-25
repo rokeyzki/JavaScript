@@ -1939,5 +1939,391 @@ document.nodeValue // "hello world"
 ```
 
 ## 类库 jQuery - 过滤器
+> ### $('selector:first')
+>> #### 说明：
+* 索引过滤器 1
+* 如果存在多个符合选择条件的元素，则选中符合选择条件的第一个的元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>  <!-- red -->
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>  
+      <span>5</span>  
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:first').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector:last')
+>> #### 说明：
+* 索引过滤器 2
+* 如果存在多个符合选择条件的元素，则选中符合选择条件的最后一个的元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>  
+      <span>5</span>  
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>  <!-- red -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:last').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector:eq(index)')
+>> #### 说明：
+* 索引过滤器 3
+* 如果存在多个符合选择条件的元素，则选中符合选择条件的索引值(从0计数) 等于 index的元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>  <!-- red -->
+      <span>5</span>  
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:eq(4)').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector:gt(index)')
+>> #### 说明：
+* 索引过滤器 4
+* 如果存在多个符合选择条件的元素，则选中符合选择条件的索引值(从0计数) 大于且不等于 index的元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>  
+      <span>5</span>  <!-- red -->
+    </p>
+    <p>
+      <span>6</span>  <!-- red -->
+      <span>7</span>  <!-- red -->
+      <span>8</span>  <!-- red -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:gt(4)').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector:lt(index)')
+>> #### 说明：
+* 索引过滤器 5
+* 如果存在多个符合选择条件的元素，则选中符合选择条件的索引值(从0计数) 小于且不等于 index的元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>  <!-- red -->
+      <span>1</span>  <!-- red -->
+      <span>2</span>  <!-- red -->
+    </p>
+    <p>
+      <span>3</span>  <!-- red -->
+      <span>4</span>  
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:lt(4)').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector:even')
+>> #### 说明：
+* 索引过滤器 6
+* 如果存在多个符合选择条件的元素，则选中符合选择条件的索引值(从0计数) 等于 偶数(包括0)的元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>  <!-- red -->
+      <span>1</span>
+      <span>2</span>  <!-- red -->
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>  <!-- red -->
+      <span>5</span>  
+    </p>
+    <p>
+      <span>6</span>  <!-- red -->
+      <span>7</span>
+      <span>8</span>  <!-- red -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:even').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector:odd')
+>> #### 说明：
+* 索引过滤器 7
+* 如果存在多个符合选择条件的元素，则选中符合选择条件的索引值(从0计数) 等于 奇数(不包括0)的元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>  
+      <span>1</span>  <!-- red -->
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>  <!-- red -->
+      <span>4</span>
+      <span>5</span>  <!-- red -->
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>  <!-- red -->
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:odd').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('parent child:first-of-type')
+>> #### 说明：
+* 层级过滤器 1
+* 如果存在多个符合选择条件的父元素，且每个父元素存在多个符合选择条件的子元素，则选中每个符合选择条件父元素的第一个符合条件子元素
+* 也可写做：`$('parent child:first-child')`
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>  <!-- red -->
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>  <!-- red -->
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>  <!-- red -->
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p span:first-of-type').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('parent child:last-of-type')
+>> #### 说明：
+* 层级过滤器 2
+* 如果存在多个符合选择条件的父元素，且每个父元素存在多个符合选择条件的子元素，则选中每个符合选择条件父元素的最后一个符合条件子元素
+* 也可写做：`$('parent child:last-child')`
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>
+      <span>1</span>
+      <span>2</span>  <!-- red -->
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>  <!-- red -->
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>  <!-- red -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p span:last-of-type').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('parent child:nth-of-type(n)')
+>> #### 说明：
+* 层级过滤器 3
+* 如果存在多个符合选择条件的父元素，且每个父元素存在多个符合选择条件的子元素，则选中每个符合选择条件父元素的第n个(从1计数)符合条件子元素
+* 也可写做：`$('parent child:nth-child(n)')`
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>  <!-- red -->
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>  <!-- red -->
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>  <!-- red -->
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p span:nth-of-type(1)').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('parent child:nth-last-of-type(n)')
+>> #### 说明：
+* 层级过滤器 4
+* 如果存在多个符合选择条件的父元素，且每个父元素存在多个符合选择条件的子元素，则选中每个符合选择条件父元素的倒数第n个(从1计数)符合条件子元素
+* 也可写做：`$('parent child:nth-last-child(n)')`
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>
+      <span>1</span>
+      <span>2</span>  <!-- red -->
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>  <!-- red -->
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>  <!-- red -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p span:nth-last-of-type(1)').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('parent child:only-of-type')
+>> #### 说明：
+* 层级过滤器 5
+* 如果存在多个符合选择条件的父元素，且每个父元素存在多个符合选择条件的子元素，则选中每个符合选择条件父元素的唯一符合条件子元素
+* 也可写做：`$('parent child:only-child')`
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>  <!-- red -->
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p span:only-of-type').css('color', 'red');
+  </script>
+</body>
+```
 
 ## 类库 jQuery - 方法
