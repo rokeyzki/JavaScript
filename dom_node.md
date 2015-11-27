@@ -2326,4 +2326,95 @@ document.nodeValue // "hello world"
 </body>
 ```
 
+> ### $('selector:focus')
+>> #### 说明：
+* 状态过滤器 1
+* 如果存在多个符合选择条件的元素，且该元素获得焦点，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <input type="text" id="1">
+  <input type="text" id="2">
+  <input type="text" id="3">
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $("input:text").bind('click', function() {
+      var id = $('input:text:focus').attr('id');
+      console.log(id);
+    });
+  </script>
+</body>
+```
+
+> ### $('selector:hidden')
+>> #### 说明：
+* 状态过滤器 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:visible')
+>> #### 说明：
+* 状态过滤器 3
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:disabled')
+>> #### 说明：
+* 状态过滤器 4
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:enabled')
+>> #### 说明：
+* 状态过滤器 5
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:checked')
+>> #### 说明：
+* 状态过滤器 6
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:target')
+>> #### 说明：
+* 状态过滤器 7
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:animated')
+>> #### 说明：
+* 状态过滤器 8
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
 ## 类库 jQuery - 方法
