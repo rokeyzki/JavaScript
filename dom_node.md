@@ -1939,6 +1939,393 @@ document.nodeValue // "hello world"
 ```
 
 ## 类库 jQuery - 过滤器
+> ### $('selector:has()')
+>> #### 说明：
+* 条件过滤器 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:not()')
+>> #### 说明：
+* 条件过滤器 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:contains()')
+>> #### 说明：
+* 内容过滤器 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:parent')
+>> #### 说明：
+* 内容过滤器 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:empty')
+>> #### 说明：
+* 内容过滤器 3
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:focus')
+>> #### 说明：
+* 状态过滤器 1
+* 如果存在多个符合选择条件的元素，且该元素获得焦点，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <input type="text" id="1">
+  <input type="text" id="2">
+  <input type="text" id="3">
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $("input:text").bind('click', function() {
+      var id = $('input:text:focus').attr('id');
+      console.log(id);
+    });
+  </script>
+</body>
+```
+
+> ### $('selector:hidden')
+>> #### 说明：
+* 状态过滤器 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:visible')
+>> #### 说明：
+* 状态过滤器 3
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:disabled')
+>> #### 说明：
+* 状态过滤器 4
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:enabled')
+>> #### 说明：
+* 状态过滤器 5
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:checked')
+>> #### 说明：
+* 状态过滤器 6
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:target')
+>> #### 说明：
+* 状态过滤器 7
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector:animated')
+>> #### 说明：
+* 状态过滤器 8
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+## 类库 jQuery - 探测方法
+> ### $('selector').closest()
+>> #### 说明：
+* 父级探测方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').offsetParent()
+>> #### 说明：
+* 父级探测方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').parent()
+>> #### 说明：
+* 父级探测方法 3
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').parents()
+>> #### 说明：
+* 父级探测方法 4
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').parentsUntil()
+>> #### 说明：
+* 父级探测方法 5
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').siblings()
+>> #### 说明：
+* 平级探测方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').next()
+>> #### 说明：
+* 平级探测方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').nextAll()
+>> #### 说明：
+* 平级探测方法 3
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').nextUntil()
+>> #### 说明：
+* 平级探测方法 4
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').prev()
+>> #### 说明：
+* 平级探测方法 5
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').prevAll()
+>> #### 说明：
+* 平级探测方法 6
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').prevUntil()
+>> #### 说明：
+* 平级探测方法 7
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').children()
+>> #### 说明：
+* 子级探测方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').find()
+>> #### 说明：
+* 子级探测方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+## 类库 jQuery - 索引方法
+> ### $('selector').first()
+>> #### 说明：
+* 索引方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').last()
+>> #### 说明：
+* 索引方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').eq()
+>> #### 说明：
+* 索引方法 3
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').slice()
+>> #### 说明：
+* 索引方法 4
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+## 类库 jQuery - 合成方法
+> ### $('selector').add()
+>> #### 说明：
+* 合成方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').addBack()
+>> #### 说明：
+* 合成方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+## 类库 jQuery - 遍历方法
+> ### $('selector').map()
+>> #### 说明：
+* 遍历方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').each()
+>> #### 说明：
+* 遍历方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+## 类库 jQuery - 特殊方法
+> ### $('selector').is()
+>> #### 说明：
+* 特殊方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').end()
+>> #### 说明：
+* 特殊方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+## 类库 jQuery - 保留内容（不推荐）
 > ### $('selector:first')
 >> #### 说明：
 * 索引过滤器 1
@@ -2325,96 +2712,3 @@ document.nodeValue // "hello world"
   </script>
 </body>
 ```
-
-> ### $('selector:focus')
->> #### 说明：
-* 状态过滤器 1
-* 如果存在多个符合选择条件的元素，且该元素获得焦点，则选中该元素
-
->> #### 示例：
-```html
-<body>
-  <input type="text" id="1">
-  <input type="text" id="2">
-  <input type="text" id="3">
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $("input:text").bind('click', function() {
-      var id = $('input:text:focus').attr('id');
-      console.log(id);
-    });
-  </script>
-</body>
-```
-
-> ### $('selector:hidden')
->> #### 说明：
-* 状态过滤器 2
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector:visible')
->> #### 说明：
-* 状态过滤器 3
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector:disabled')
->> #### 说明：
-* 状态过滤器 4
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector:enabled')
->> #### 说明：
-* 状态过滤器 5
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector:checked')
->> #### 说明：
-* 状态过滤器 6
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector:target')
->> #### 说明：
-* 状态过滤器 7
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector:animated')
->> #### 说明：
-* 状态过滤器 8
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-## 类库 jQuery - 方法
