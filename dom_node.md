@@ -1946,7 +1946,29 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div id="foo">
+    <p>  <!-- red -->
+      <span attr="a1">1</span>  
+      <span attr="a2">2</span>
+      <span attr="a3">3</span>
+    </p>
+    <p>  <!-- no -->
+      <span attr="b1">1</span>
+      <span attr="b2">2</span>
+      <span attr="b3">3</span>
+    </p>
+    <p>  <!-- no -->
+      <span attr="c1">1</span>
+      <span attr="c2">2</span>
+      <span attr="c3">3</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p:has("span[attr = \'a2\']")').css('color', 'red');
+  </script>
+</body>
 ```
 
 > ### $('selector:not()')
@@ -1956,7 +1978,29 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div id="foo">
+    <p>
+      <span attr="a1">1</span>  <!-- red -->
+      <span attr="a2">2</span>  <!-- no -->
+      <span attr="a3">3</span>  <!-- red -->
+    </p>
+    <p>
+      <span attr="b1">1</span>  <!-- red -->
+      <span attr="b2">2</span>  <!-- red -->
+      <span attr="b3">3</span>  <!-- red -->
+    </p>
+    <p>
+      <span attr="c1">1</span>  <!-- red -->
+      <span attr="c2">2</span>  <!-- red -->
+      <span attr="c3">3</span>  <!-- red -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:not("span[attr = \'a2\']")').css('color', 'red');
+  </script>
+</body>
 ```
 
 > ### $('selector:contains()')
@@ -1966,7 +2010,29 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div id="foo">
+    <p>
+      <span attr="a1">1</span>
+      <span attr="a2">2</span>  <!-- red -->
+      <span attr="a3">3</span>
+    </p>
+    <p>
+      <span attr="b1">1</span>
+      <span attr="b2">2</span>  <!-- red -->
+      <span attr="b3">3</span>
+    </p>
+    <p>
+      <span attr="c1">1</span>
+      <span attr="c2">2</span>  <!-- red -->
+      <span attr="c3">3</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:contains(2)').css('color', 'red');
+  </script>
+</body>
 ```
 
 > ### $('selector:parent')
@@ -1976,7 +2042,21 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div id="foo">
+    <p>  <!-- red -->
+      <span attr="a1">1</span>
+      <span attr="a2">2</span>
+      <span attr="a3">3</span>
+    </p>
+    <p></p>
+    <p></p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p:parent').css('color', 'red');
+  </script>
+</body>
 ```
 
 > ### $('selector:empty')
@@ -1986,7 +2066,85 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div id="foo">
+    <p>
+      <span attr="a1">1</span>
+      <span attr="a2">2</span>
+      <span attr="a3">3</span>
+    </p>
+    <p></p>
+    <p></p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p:empty').append('test');
+  </script>
+</body>
+```
+
+> ### $('selector:even')
+>> #### 说明：
+* 奇偶过滤器 1
+* 如果存在多个符合选择条件的元素，则选中符合选择条件的索引值(从0计数) 等于 偶数(包括0)的元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>  <!-- red -->
+      <span>1</span>
+      <span>2</span>  <!-- red -->
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>  <!-- red -->
+      <span>5</span>  
+    </p>
+    <p>
+      <span>6</span>  <!-- red -->
+      <span>7</span>
+      <span>8</span>  <!-- red -->
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:even').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector:odd')
+>> #### 说明：
+* 奇偶过滤器 2
+* 如果存在多个符合选择条件的元素，则选中符合选择条件的索引值(从0计数) 等于 奇数(不包括0)的元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>  
+      <span>1</span>  <!-- red -->
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>  <!-- red -->
+      <span>4</span>
+      <span>5</span>  <!-- red -->
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>  <!-- red -->
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span:odd').css('color', 'red');
+  </script>
+</body>
 ```
 
 > ### $('selector:focus')
@@ -2017,7 +2175,16 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <input type="text" id="1">
+  <input type="text" id="2">
+  <input type="text" id="3">
+  <input type="hidden" value="4">  <!-- show 4 -->
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('input:hidden').attr('type', 'text');
+  </script>
+</body>
 ```
 
 > ### $('selector:visible')
@@ -2027,7 +2194,16 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <input type="text" id="1">  <!-- test -->
+  <input type="text" id="2">  <!-- test -->
+  <input type="text" id="3">  <!-- test -->
+  <input type="hidden" value="4">
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('input:visible').attr('value', 'test');
+  </script>
+</body>
 ```
 
 > ### $('selector:disabled')
@@ -2037,7 +2213,16 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <input type="text" id="1">
+  <input type="text" id="2" disabled>  <!-- test -->
+  <input type="text" id="3">
+  <input type="hidden" value="4">
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('input:disabled').attr('value', 'test');
+  </script>
+</body>
 ```
 
 > ### $('selector:enabled')
@@ -2047,7 +2232,16 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <input type="text" id="1">  <!-- test -->
+  <input type="text" id="2" disabled>
+  <input type="text" id="3">  <!-- test -->
+  <input type="hidden" value="4">  <!-- test -->
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('input:enabled').attr('value', 'test');
+  </script>
+</body>
 ```
 
 > ### $('selector:checked')
@@ -2057,7 +2251,14 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <input type="radio" name="sex" value="male" checked> Male
+  <input type="radio" name="sex" value="female"> Female
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    console.log($('input:checked').val()); // male
+  </script>
+</body>
 ```
 
 > ### $('selector:target')
@@ -2067,7 +2268,19 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div id="target1">target1</div>
+  <div id="target2">target2</div>
+  <div id="target3">target3</div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    // 如果当前文档的URI为 index.html#target2，则选中 div#target2
+    // 在Chrome中，使用$(document).ready()仍然无法获取到匹配的元素，必须使用$(window).load()来获取
+    $(window).load(function(){
+        $(':target').css('color', 'red');
+    });
+  </script>
+</body>
 ```
 
 > ### $('selector:animated')
@@ -2077,7 +2290,31 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <style>
+    #box1, #box2 {
+      height:40px;
+      width:100px;
+      background: red;
+    }
+  </style>
+  <div id="box1"></div>
+  <br/>
+  <div id="box2"></div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $(document).ready(function(){
+      function aniDiv1(){
+        $("#box1").animate({width:300}, "slow");
+        $("#box1").animate({width:100}, "slow", aniDiv1);
+      }
+      aniDiv1();
+      $(":root").click(function(){
+        $(":animated").css("background-color","blue");
+      });
+    });
+  </script>
+</body>
 ```
 
 ## 类库 jQuery - 探测方法
