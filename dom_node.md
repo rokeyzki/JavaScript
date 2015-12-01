@@ -2083,486 +2083,6 @@ document.nodeValue // "hello world"
 </body>
 ```
 
-> ### $('selector:even')
->> #### 说明：
-* 奇偶过滤器 1
-* 如果存在多个符合选择条件的元素，则选中符合选择条件的索引值(从0计数) 等于 偶数(包括0)的元素
-
->> #### 示例：
-```html
-<body>
-  <div id="foo">
-    <p>
-      <span>0</span>  <!-- red -->
-      <span>1</span>
-      <span>2</span>  <!-- red -->
-    </p>
-    <p>
-      <span>3</span>
-      <span>4</span>  <!-- red -->
-      <span>5</span>  
-    </p>
-    <p>
-      <span>6</span>  <!-- red -->
-      <span>7</span>
-      <span>8</span>  <!-- red -->
-    </p>
-  </div>
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $('span:even').css('color', 'red');
-  </script>
-</body>
-```
-
-> ### $('selector:odd')
->> #### 说明：
-* 奇偶过滤器 2
-* 如果存在多个符合选择条件的元素，则选中符合选择条件的索引值(从0计数) 等于 奇数(不包括0)的元素
-
->> #### 示例：
-```html
-<body>
-  <div id="foo">
-    <p>
-      <span>0</span>  
-      <span>1</span>  <!-- red -->
-      <span>2</span>
-    </p>
-    <p>
-      <span>3</span>  <!-- red -->
-      <span>4</span>
-      <span>5</span>  <!-- red -->
-    </p>
-    <p>
-      <span>6</span>
-      <span>7</span>  <!-- red -->
-      <span>8</span>
-    </p>
-  </div>
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $('span:odd').css('color', 'red');
-  </script>
-</body>
-```
-
-> ### $('selector:focus')
->> #### 说明：
-* 状态过滤器 1
-* 如果存在多个符合选择条件的元素，且该元素获得焦点，则选中该元素
-
->> #### 示例：
-```html
-<body>
-  <input type="text" id="1">
-  <input type="text" id="2">
-  <input type="text" id="3">
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $("input:text").bind('click', function() {
-      var id = $('input:text:focus').attr('id');
-      console.log(id);
-    });
-  </script>
-</body>
-```
-
-> ### $('selector:hidden')
->> #### 说明：
-* 状态过滤器 2
-* 1
-
->> #### 示例：
-```html
-<body>
-  <input type="text" id="1">
-  <input type="text" id="2">
-  <input type="text" id="3">
-  <input type="hidden" value="4">  <!-- show 4 -->
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $('input:hidden').attr('type', 'text');
-  </script>
-</body>
-```
-
-> ### $('selector:visible')
->> #### 说明：
-* 状态过滤器 3
-* 1
-
->> #### 示例：
-```html
-<body>
-  <input type="text" id="1">  <!-- test -->
-  <input type="text" id="2">  <!-- test -->
-  <input type="text" id="3">  <!-- test -->
-  <input type="hidden" value="4">
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $('input:visible').attr('value', 'test');
-  </script>
-</body>
-```
-
-> ### $('selector:disabled')
->> #### 说明：
-* 状态过滤器 4
-* 1
-
->> #### 示例：
-```html
-<body>
-  <input type="text" id="1">
-  <input type="text" id="2" disabled>  <!-- test -->
-  <input type="text" id="3">
-  <input type="hidden" value="4">
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $('input:disabled').attr('value', 'test');
-  </script>
-</body>
-```
-
-> ### $('selector:enabled')
->> #### 说明：
-* 状态过滤器 5
-* 1
-
->> #### 示例：
-```html
-<body>
-  <input type="text" id="1">  <!-- test -->
-  <input type="text" id="2" disabled>
-  <input type="text" id="3">  <!-- test -->
-  <input type="hidden" value="4">  <!-- test -->
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $('input:enabled').attr('value', 'test');
-  </script>
-</body>
-```
-
-> ### $('selector:checked')
->> #### 说明：
-* 状态过滤器 6
-* 1
-
->> #### 示例：
-```html
-<body>
-  <input type="radio" name="sex" value="male" checked> Male
-  <input type="radio" name="sex" value="female"> Female
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    console.log($('input:checked').val()); // male
-  </script>
-</body>
-```
-
-> ### $('selector:target')
->> #### 说明：
-* 状态过滤器 7
-* 1
-
->> #### 示例：
-```html
-<body>
-  <div id="target1">target1</div>
-  <div id="target2">target2</div>
-  <div id="target3">target3</div>
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    // 如果当前文档的URI为 index.html#target2，则选中 div#target2
-    // 在Chrome中，使用$(document).ready()仍然无法获取到匹配的元素，必须使用$(window).load()来获取
-    $(window).load(function(){
-        $(':target').css('color', 'red');
-    });
-  </script>
-</body>
-```
-
-> ### $('selector:animated')
->> #### 说明：
-* 状态过滤器 8
-* 1
-
->> #### 示例：
-```html
-<body>
-  <style>
-    #box1, #box2 {
-      height:40px;
-      width:100px;
-      background: red;
-    }
-  </style>
-  <div id="box1"></div>
-  <br/>
-  <div id="box2"></div>
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $(document).ready(function(){
-      function aniDiv1(){
-        $("#box1").animate({width:300}, "slow");
-        $("#box1").animate({width:100}, "slow", aniDiv1);
-      }
-      aniDiv1();
-      $(":root").click(function(){
-        $(":animated").css("background-color","blue");
-      });
-    });
-  </script>
-</body>
-```
-
-## 类库 jQuery - 探测方法
-> ### $('selector').closest()
->> #### 说明：
-* 父级探测方法 1
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').offsetParent()
->> #### 说明：
-* 父级探测方法 2
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').parent()
->> #### 说明：
-* 父级探测方法 3
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').parents()
->> #### 说明：
-* 父级探测方法 4
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').parentsUntil()
->> #### 说明：
-* 父级探测方法 5
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').siblings()
->> #### 说明：
-* 平级探测方法 1
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').next()
->> #### 说明：
-* 平级探测方法 2
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').nextAll()
->> #### 说明：
-* 平级探测方法 3
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').nextUntil()
->> #### 说明：
-* 平级探测方法 4
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').prev()
->> #### 说明：
-* 平级探测方法 5
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').prevAll()
->> #### 说明：
-* 平级探测方法 6
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').prevUntil()
->> #### 说明：
-* 平级探测方法 7
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').children()
->> #### 说明：
-* 子级探测方法 1
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').find()
->> #### 说明：
-* 子级探测方法 2
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-## 类库 jQuery - 索引方法
-> ### $('selector').first()
->> #### 说明：
-* 索引方法 1
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').last()
->> #### 说明：
-* 索引方法 2
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').eq()
->> #### 说明：
-* 索引方法 3
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').slice()
->> #### 说明：
-* 索引方法 4
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-## 类库 jQuery - 合成方法
-> ### $('selector').add()
->> #### 说明：
-* 合成方法 1
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').addBack()
->> #### 说明：
-* 合成方法 2
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-## 类库 jQuery - 遍历方法
-> ### $('selector').map()
->> #### 说明：
-* 遍历方法 1
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').each()
->> #### 说明：
-* 遍历方法 2
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-## 类库 jQuery - 特殊方法
-> ### $('selector').is()
->> #### 说明：
-* 特殊方法 1
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-> ### $('selector').end()
->> #### 说明：
-* 特殊方法 2
-* 1
-
->> #### 示例：
-```html
-1
-```
-
-## 类库 jQuery - 保留内容（不推荐）
 > ### $('selector:first')
 >> #### 说明：
 * 索引过滤器 1
@@ -2948,4 +2468,725 @@ document.nodeValue // "hello world"
     $('p span:only-of-type').css('color', 'red');
   </script>
 </body>
+```
+
+> ### $('selector:focus')
+>> #### 说明：
+* 状态过滤器 1
+* 如果存在多个符合选择条件的元素，且该元素获得焦点，则选中该元素
+
+>> #### 示例：
+```html
+<body>
+  <input type="text" id="1">
+  <input type="text" id="2">
+  <input type="text" id="3">
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $("input:text").bind('click', function() {
+      var id = $('input:text:focus').attr('id');
+      console.log(id);
+    });
+  </script>
+</body>
+```
+
+> ### $('selector:hidden')
+>> #### 说明：
+* 状态过滤器 2
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <input type="text" id="1">
+  <input type="text" id="2">
+  <input type="text" id="3">
+  <input type="hidden" value="4">  <!-- show 4 -->
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('input:hidden').attr('type', 'text');
+  </script>
+</body>
+```
+
+> ### $('selector:visible')
+>> #### 说明：
+* 状态过滤器 3
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <input type="text" id="1">  <!-- test -->
+  <input type="text" id="2">  <!-- test -->
+  <input type="text" id="3">  <!-- test -->
+  <input type="hidden" value="4">
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('input:visible').attr('value', 'test');
+  </script>
+</body>
+```
+
+> ### $('selector:disabled')
+>> #### 说明：
+* 状态过滤器 4
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <input type="text" id="1">
+  <input type="text" id="2" disabled>  <!-- test -->
+  <input type="text" id="3">
+  <input type="hidden" value="4">
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('input:disabled').attr('value', 'test');
+  </script>
+</body>
+```
+
+> ### $('selector:enabled')
+>> #### 说明：
+* 状态过滤器 5
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <input type="text" id="1">  <!-- test -->
+  <input type="text" id="2" disabled>
+  <input type="text" id="3">  <!-- test -->
+  <input type="hidden" value="4">  <!-- test -->
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('input:enabled').attr('value', 'test');
+  </script>
+</body>
+```
+
+> ### $('selector:checked')
+>> #### 说明：
+* 状态过滤器 6
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <input type="radio" name="sex" value="male" checked> Male
+  <input type="radio" name="sex" value="female"> Female
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    console.log($('input:checked').val()); // male
+  </script>
+</body>
+```
+
+> ### $('selector:target')
+>> #### 说明：
+* 状态过滤器 7
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div id="target1">target1</div>
+  <div id="target2">target2</div>
+  <div id="target3">target3</div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    // 如果当前文档的URI为 index.html#target2，则选中 div#target2
+    // 在Chrome中，使用$(document).ready()仍然无法获取到匹配的元素，必须使用$(window).load()来获取
+    $(window).load(function(){
+        $(':target').css('color', 'red');
+    });
+  </script>
+</body>
+```
+
+> ### $('selector:animated')
+>> #### 说明：
+* 状态过滤器 8
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <style>
+    #box1, #box2 {
+      height:40px;
+      width:100px;
+      background: red;
+    }
+  </style>
+  <div id="box1"></div>
+  <br/>
+  <div id="box2"></div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $(document).ready(function(){
+      function aniDiv1(){
+        $("#box1").animate({width:300}, "slow");
+        $("#box1").animate({width:100}, "slow", aniDiv1);
+      }
+      aniDiv1();
+      $(":root").click(function(){
+        $(":animated").css("background-color","blue");
+      });
+    });
+  </script>
+</body>
+```
+
+## 类库 jQuery - 探测方法
+> ### $('selector').parent()
+>> #### 说明：
+* 父级探测方法 1
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>  <!-- red -->
+      <span>0</span>  
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>  <!-- red -->
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>  <!-- red -->
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span').parent().css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').closest()
+>> #### 说明：
+* 父级探测方法 2
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>  <!-- red -->
+      <span>0</span>  
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>  <!-- red -->
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>  <!-- red -->
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span').closest('p').css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').parents()
+>> #### 说明：
+* 父级探测方法 3
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">  <!-- red -->
+    <p>
+      <span>0</span>  
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span').parents('div').css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').parentsUntil()
+>> #### 说明：
+* 父级探测方法 4
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>  <!-- red -->
+      <span>0</span>  
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>  <!-- red -->
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>  <!-- red -->
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span').parentsUntil('div').css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').offsetParent()
+>> #### 说明：
+* 父级探测方法 5
+* 1
+
+>> #### 示例：
+```html
+<style>
+  #foo {
+    position: relative;
+    top:100px;
+  }
+</style>
+<body>
+  <div id="foo">  <!-- red -->
+    <p>
+      <span>0</span>  
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span').offsetParent().css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').siblings()
+>> #### 说明：
+* 平级探测方法 1
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div>
+    <p>
+      <span id="foo">0</span>  
+      <span>1</span>  <!-- red -->
+      <span>2</span>  <!-- red -->
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo').siblings().css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').next()
+>> #### 说明：
+* 平级探测方法 2
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div>
+    <p>
+      <span id="foo">0</span>  
+      <span>1</span>  <!-- red -->
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo').next().css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').nextAll()
+>> #### 说明：
+* 平级探测方法 3
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div>
+    <p>
+      <span id="foo">0</span>  
+      <span>1</span>  <!-- red -->
+      <span>2</span>  <!-- red -->
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo').nextAll().css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').nextUntil()
+>> #### 说明：
+* 平级探测方法 4
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div>
+    <p>
+      <span id="foo0">0</span>  
+      <span>1</span>
+      <span>2</span>
+      <span id="foo3">3</span>  <!-- red -->
+      <span>4</span>
+      <span id="foo5">5</span>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo0').nextUntil('#foo5', '#foo3').css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').prev()
+>> #### 说明：
+* 平级探测方法 5
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div>
+    <p>
+      <span>0</span>  
+      <span>1</span>  <!-- red -->
+      <span id="foo">2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo').prev().css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').prevAll()
+>> #### 说明：
+* 平级探测方法 6
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div>
+    <p>
+      <span>0</span>  <!-- red --> 
+      <span>1</span>  <!-- red -->
+      <span id="foo">2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo').prevAll().css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').prevUntil()
+>> #### 说明：
+* 平级探测方法 7
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div>
+    <p>
+      <span id="foo0">0</span>  
+      <span>1</span>
+      <span>2</span>
+      <span id="foo3">3</span>  <!-- red -->
+      <span>4</span>
+      <span id="foo5">5</span>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo5').prevUntil('#foo0', '#foo3').css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').children()
+>> #### 说明：
+* 子级探测方法 1
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>
+      <span>0</span>  <!-- red --> 
+      <span>1</span>  <!-- red -->
+      <span>2</span>  <!-- red -->
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo p:first').children().css("background-color","red");
+  </script>
+</body>
+```
+
+> ### $('selector').find()
+>> #### 说明：
+* 子级探测方法 2
+* 1
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo1">
+    <p>
+      <span>0</span>
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span id="foo2">6</span>  <!-- red -->
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo1').find('#foo2').css("background-color","red");
+  </script>
+</body>
+```
+
+## 类库 jQuery - 合成方法
+> ### $('selector').add()
+>> #### 说明：
+* 合成方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').addBack()
+>> #### 说明：
+* 合成方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+## 类库 jQuery - 遍历方法
+> ### $('selector').map()
+>> #### 说明：
+* 遍历方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').each()
+>> #### 说明：
+* 遍历方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+## 类库 jQuery - 特殊方法
+> ### $('selector').is()
+>> #### 说明：
+* 特殊方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').end()
+>> #### 说明：
+* 特殊方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+## 类库 jQuery - 索引方法（不推荐）
+> ### $('selector').first()
+>> #### 说明：
+* 索引方法 1
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').last()
+>> #### 说明：
+* 索引方法 2
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').eq()
+>> #### 说明：
+* 索引方法 3
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('selector').slice()
+>> #### 说明：
+* 索引方法 4
+* 1
+
+>> #### 示例：
+```html
+1
 ```
