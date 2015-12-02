@@ -2633,7 +2633,7 @@ document.nodeValue // "hello world"
       }
       aniDiv1();
       $(":root").click(function(){
-        $(":animated").css("background-color","blue");
+        $(":animated").css('background-color', 'blue');
       });
     });
   </script>
@@ -2668,7 +2668,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('span').parent().css("background-color","red");
+    $('span').parent().css('background-color', 'red');
   </script>
 </body>
 ```
@@ -2700,7 +2700,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('span').closest('p').css("background-color","red");
+    $('span').closest('p').css('background-color', 'red');
   </script>
 </body>
 ```
@@ -2732,7 +2732,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('span').parents('div').css("background-color","red");
+    $('span').parents('div').css('background-color', 'red');
   </script>
 </body>
 ```
@@ -2764,7 +2764,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('span').parentsUntil('div').css("background-color","red");
+    $('span').parentsUntil('div').css('background-color', 'red');
   </script>
 </body>
 ```
@@ -2802,7 +2802,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('span').offsetParent().css("background-color","red");
+    $('span').offsetParent().css('background-color', 'red');
   </script>
 </body>
 ```
@@ -2834,7 +2834,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('#foo').siblings().css("background-color","red");
+    $('#foo').siblings().css('background-color', 'red');
   </script>
 </body>
 ```
@@ -2866,7 +2866,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('#foo').next().css("background-color","red");
+    $('#foo').next().css('background-color', 'red');
   </script>
 </body>
 ```
@@ -2898,7 +2898,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('#foo').nextAll().css("background-color","red");
+    $('#foo').nextAll().css('background-color', 'red');
   </script>
 </body>
 ```
@@ -2926,7 +2926,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('#foo0').nextUntil('#foo5', '#foo3').css("background-color","red");
+    $('#foo0').nextUntil('#foo5', '#foo3').css('background-color', 'red');
   </script>
 </body>
 ```
@@ -2958,7 +2958,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('#foo').prev().css("background-color","red");
+    $('#foo').prev().css('background-color', 'red');
   </script>
 </body>
 ```
@@ -2990,7 +2990,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('#foo').prevAll().css("background-color","red");
+    $('#foo').prevAll().css('background-color', 'red');
   </script>
 </body>
 ```
@@ -3018,7 +3018,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('#foo5').prevUntil('#foo0', '#foo3').css("background-color","red");
+    $('#foo5').prevUntil('#foo0', '#foo3').css('background-color', 'red');
   </script>
 </body>
 ```
@@ -3050,7 +3050,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('#foo p:first').children().css("background-color","red");
+    $('#foo p:first').children().css('background-color', 'red');
   </script>
 </body>
 ```
@@ -3082,7 +3082,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('#foo1').find('#foo2').css("background-color","red");
+    $('#foo1').find('#foo2').css('background-color', 'red');
   </script>
 </body>
 ```
@@ -3095,7 +3095,29 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div>
+    <p>
+      <span>0</span>
+      <span id="foo1">1</span>  <!-- red bg:yellow -->
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span id="foo2">6</span>  <!-- bg:yellow -->
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo1').css('color', 'red').add('#foo2').css('background-color', 'yellow');
+  </script>
+</body>
 ```
 
 > ### $('selector').addBack()
@@ -3105,7 +3127,29 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div>
+    <p>  <!-- bg:yellow -->
+      <span>0</span>
+      <span id="foo1">1</span>  <!-- red -->
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>  
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p:first').find('#foo1').css('color', 'red').addBack().css('background-color', 'yellow');
+  </script>
+</body>
 ```
 
 ## 类库 jQuery - 遍历方法
@@ -3116,7 +3160,32 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div>
+    <p>
+      <span>0</span>
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>  
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    var test = $('div p:eq(1) span').map(function(){
+              return $(this).text();
+            }).get().join(", ");
+    console.log(test); // "3, 4, 5"
+  </script>
+</body>
 ```
 
 > ### $('selector').each()
@@ -3126,7 +3195,33 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div>
+    <p>
+      <span>0</span>
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>  
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    var test = [];
+    $('div p:eq(1) span').each(function(){
+      test.push($(this).text());
+    });
+    console.log(test); // ["3", "4", "5"]
+  </script>
+</body>
 ```
 
 ## 类库 jQuery - 特殊方法
@@ -3137,7 +3232,30 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div>
+    <p>
+      <span>0</span>
+      <span id="foo1">1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>  
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    var status = $('div p:first span:eq(2)').is('#foo1');
+    console.log(status); // "true"
+  </script>
+</body>
 ```
 
 > ### $('selector').end()
@@ -3147,7 +3265,29 @@ document.nodeValue // "hello world"
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div>
+    <p>  <!-- red bg:yellow -->
+      <span>0</span>
+      <span>1</span>  
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>  <!-- red -->
+      <span>6</span>  
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('p:first').add('p:last').css('color', 'red').end().css('background-color', 'yellow');
+  </script>
+</body>
 ```
 
 ## 类库 jQuery - 索引方法（不推荐）
