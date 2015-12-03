@@ -1942,7 +1942,7 @@ document.nodeValue // "hello world"
 > ### $('selector:has()')
 >> #### 说明：
 * 条件过滤器 1
-* 1
+* 如果存在某父元素，且该父元素 包含 符合指定选择条件的后代元素，则选中该父元素
 
 >> #### 示例：
 ```html
@@ -1974,7 +1974,7 @@ document.nodeValue // "hello world"
 > ### $('selector:not()')
 >> #### 说明：
 * 条件过滤器 2
-* 1
+* 如果存在某元素，且该元素不符合指定选择条件，则选中该元素
 
 >> #### 示例：
 ```html
@@ -1998,7 +1998,7 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    $('span:not("span[attr = \'a2\']")').css('color', 'red');
+    $('span:not("[attr = \'a2\']")').css('color', 'red');
   </script>
 </body>
 ```
@@ -2006,7 +2006,7 @@ document.nodeValue // "hello world"
 > ### $('selector:contains()')
 >> #### 说明：
 * 内容过滤器 1
-* 1
+* 如果存在某元素，且该元素 包含 不区分大小写的指定文本内容，则选中该元素
 
 >> #### 示例：
 ```html
@@ -2038,7 +2038,7 @@ document.nodeValue // "hello world"
 > ### $('selector:parent')
 >> #### 说明：
 * 内容过滤器 2
-* 1
+* 如果存在某元素，该元素 包含 任何子元素或内容，则选中该元素
 
 >> #### 示例：
 ```html
@@ -2062,7 +2062,7 @@ document.nodeValue // "hello world"
 > ### $('selector:empty')
 >> #### 说明：
 * 内容过滤器 3
-* 1
+* 如果存在某元素，且该元素 不包含 任何子元素或内容，则选中该元素
 
 >> #### 示例：
 ```html
@@ -2473,7 +2473,7 @@ document.nodeValue // "hello world"
 > ### $('selector:focus')
 >> #### 说明：
 * 状态过滤器 1
-* 如果存在多个符合选择条件的元素，且该元素获得焦点，则选中该元素
+* 如果存在某元素，且该元素为 获得焦点 状态，则选中所有标的元素
 
 >> #### 示例：
 ```html
@@ -2494,7 +2494,7 @@ document.nodeValue // "hello world"
 > ### $('selector:hidden')
 >> #### 说明：
 * 状态过滤器 2
-* 1
+* 如果存在某元素，且该元素为 隐藏 状态，则选中所有标的元素
 
 >> #### 示例：
 ```html
@@ -2513,7 +2513,7 @@ document.nodeValue // "hello world"
 > ### $('selector:visible')
 >> #### 说明：
 * 状态过滤器 3
-* 1
+* 如果存在某元素，且该元素为 可视 状态，则选中所有标的元素
 
 >> #### 示例：
 ```html
@@ -2532,7 +2532,7 @@ document.nodeValue // "hello world"
 > ### $('selector:disabled')
 >> #### 说明：
 * 状态过滤器 4
-* 1
+* 如果存在某元素，且该元素为 禁用 状态，则选中所有标的元素
 
 >> #### 示例：
 ```html
@@ -2551,7 +2551,7 @@ document.nodeValue // "hello world"
 > ### $('selector:enabled')
 >> #### 说明：
 * 状态过滤器 5
-* 1
+* 如果存在某元素，且该元素为 启用 状态，则选中所有标的元素
 
 >> #### 示例：
 ```html
@@ -2570,7 +2570,7 @@ document.nodeValue // "hello world"
 > ### $('selector:checked')
 >> #### 说明：
 * 状态过滤器 6
-* 1
+* 如果存在某元素，且该元素为 已选 状态，则选中所有标的元素
 
 >> #### 示例：
 ```html
@@ -2587,7 +2587,7 @@ document.nodeValue // "hello world"
 > ### $('selector:target')
 >> #### 说明：
 * 状态过滤器 7
-* 1
+* 如果存在某元素，且该元素为 hash匹配 状态，则选中所有标的元素
 
 >> #### 示例：
 ```html
@@ -2609,7 +2609,7 @@ document.nodeValue // "hello world"
 > ### $('selector:animated')
 >> #### 说明：
 * 状态过滤器 8
-* 1
+* 如果存在某元素，且该元素为 动画 状态，则选中所有标的元素
 
 >> #### 示例：
 ```html
@@ -2644,7 +2644,7 @@ document.nodeValue // "hello world"
 > ### $('selector').parent()
 >> #### 说明：
 * 父级探测方法 1
-* 1
+* 如果存在某元素，从该元素起向上探测，且该元素 拥有 符合指定选择条件的父元素，则选中所有标的父元素
 
 >> #### 示例：
 ```html
@@ -2673,42 +2673,10 @@ document.nodeValue // "hello world"
 </body>
 ```
 
-> ### $('selector').closest()
->> #### 说明：
-* 父级探测方法 2
-* 1
-
->> #### 示例：
-```html
-<body>
-  <div id="foo">
-    <p>  <!-- red -->
-      <span>0</span>  
-      <span>1</span>
-      <span>2</span>
-    </p>
-    <p>  <!-- red -->
-      <span>3</span>
-      <span>4</span>
-      <span>5</span>
-    </p>
-    <p>  <!-- red -->
-      <span>6</span>
-      <span>7</span>
-      <span>8</span>
-    </p>
-  </div>
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $('span').closest('p').css('background-color', 'red');
-  </script>
-</body>
-```
-
 > ### $('selector').parents()
 >> #### 说明：
-* 父级探测方法 3
-* 1
+* 父级探测方法 2
+* 如果存在某元素，从本元素向上探测，且该元素 拥有 符合指定选择条件的祖先元素，则选中所有标的祖先元素
 
 >> #### 示例：
 ```html
@@ -2739,8 +2707,8 @@ document.nodeValue // "hello world"
 
 > ### $('selector').parentsUntil()
 >> #### 说明：
-* 父级探测方法 4
-* 1
+* 父级探测方法 3
+* 如果存在某元素，从本元素向上探测，到制定选择条件的祖先元素为止，且该元素 拥有 祖先元素，则选中所有标的祖先元素
 
 >> #### 示例：
 ```html
@@ -2771,8 +2739,8 @@ document.nodeValue // "hello world"
 
 > ### $('selector').offsetParent()
 >> #### 说明：
-* 父级探测方法 5
-* 1
+* 父级探测方法 4
+* 如果存在某元素，从本元素向上探测，且该元素 拥有 符合指定选择条件的祖先元素，且祖先元素带有position属性，则选中所有标的祖先元素
 
 >> #### 示例：
 ```html
@@ -2807,10 +2775,42 @@ document.nodeValue // "hello world"
 </body>
 ```
 
+> ### $('selector').closest()
+>> #### 说明：
+* 父级探测方法 5
+* 如果存在某元素，从本元素起向上探测，且该元素 拥有 符合指定选择条件的祖先元素或本元素，则选中所有标的祖先元素或本元素
+
+>> #### 示例：
+```html
+<body>
+  <div id="foo">
+    <p>  <!-- red -->
+      <span>0</span>  
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>  <!-- red -->
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>  <!-- red -->
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('span').closest('p').css('background-color', 'red');
+  </script>
+</body>
+```
+
 > ### $('selector').siblings()
 >> #### 说明：
 * 平级探测方法 1
-* 1
+* 如果存在某元素，从本元素起平行探测，且该元素 拥有 符合指定选择条件的兄弟元素，则选中所有标的兄弟元素
 
 >> #### 示例：
 ```html
@@ -2842,7 +2842,7 @@ document.nodeValue // "hello world"
 > ### $('selector').next()
 >> #### 说明：
 * 平级探测方法 2
-* 1
+* 如果存在某元素，从本元素起平行探测，且该元素 拥有 符合指定选择条件的兄弟元素，则选中下一个标的兄弟元素
 
 >> #### 示例：
 ```html
@@ -2874,7 +2874,7 @@ document.nodeValue // "hello world"
 > ### $('selector').nextAll()
 >> #### 说明：
 * 平级探测方法 3
-* 1
+* 如果存在某元素，从本元素起平行探测，且该元素 拥有 符合指定选择条件的兄弟元素，则选中后面所有标的兄弟元素
 
 >> #### 示例：
 ```html
@@ -2906,7 +2906,7 @@ document.nodeValue // "hello world"
 > ### $('selector').nextUntil()
 >> #### 说明：
 * 平级探测方法 4
-* 1
+* 如果存在某元素，从本元素起平行探测，到指定选择条件的兄弟元素为止，且该元素 拥有 符合指定选择条件的兄弟元素，则选中后面所有标的兄弟元素
 
 >> #### 示例：
 ```html
@@ -2934,7 +2934,7 @@ document.nodeValue // "hello world"
 > ### $('selector').prev()
 >> #### 说明：
 * 平级探测方法 5
-* 1
+* 如果存在某元素，从本元素起平行探测，且该元素 拥有 符合指定选择条件的兄弟元素，则选中上一个标的兄弟元素
 
 >> #### 示例：
 ```html
@@ -2966,7 +2966,7 @@ document.nodeValue // "hello world"
 > ### $('selector').prevAll()
 >> #### 说明：
 * 平级探测方法 6
-* 1
+* 如果存在某元素，从本元素起平行探测，且该元素 拥有 符合指定选择条件的兄弟元素，则选中前面所有标的兄弟元素
 
 >> #### 示例：
 ```html
@@ -2998,7 +2998,7 @@ document.nodeValue // "hello world"
 > ### $('selector').prevUntil()
 >> #### 说明：
 * 平级探测方法 7
-* 1
+* 如果存在某元素，从本元素起平行探测，到指定选择条件的兄弟元素为止，且该元素 拥有 符合指定选择条件的兄弟元素，则选中前面所有标的兄弟元素
 
 >> #### 示例：
 ```html
@@ -3026,7 +3026,7 @@ document.nodeValue // "hello world"
 > ### $('selector').children()
 >> #### 说明：
 * 子级探测方法 1
-* 1
+* 如果存在某元素，从本元素起向下探测，且该元素 拥有 符合指定选择条件的子元素，则选中所有标的子元素
 
 >> #### 示例：
 ```html
@@ -3058,7 +3058,7 @@ document.nodeValue // "hello world"
 > ### $('selector').find()
 >> #### 说明：
 * 子级探测方法 2
-* 1
+* 如果存在某元素，从本元素起向下探测，且该元素 拥有 符合指定选择条件的后代元素，则选中所有标的后代元素
 
 >> #### 示例：
 ```html
@@ -3087,11 +3087,11 @@ document.nodeValue // "hello world"
 </body>
 ```
 
-## 类库 jQuery - 合成方法
+## 类库 jQuery - 集合方法
 > ### $('selector').add()
 >> #### 说明：
-* 合成方法 1
-* 1
+* 集合方法 1
+* 如果存在某元素集合，且存在另一个元素集合，则将两个元素集合合并成新的元素集合
 
 >> #### 示例：
 ```html
@@ -3122,8 +3122,8 @@ document.nodeValue // "hello world"
 
 > ### $('selector').addBack()
 >> #### 说明：
-* 合成方法 2
-* 1
+* 集合方法 2
+* 如果存在某元素集合，且存在上一个元素集合，则将两个元素集合合并成新的元素集合
 
 >> #### 示例：
 ```html
@@ -3152,19 +3152,18 @@ document.nodeValue // "hello world"
 </body>
 ```
 
-## 类库 jQuery - 遍历方法
-> ### $('selector').map()
+> ### $('selector').end()
 >> #### 说明：
-* 遍历方法 1
-* 1
+* 集合方法 3
+* 如果存在某元素集合，且存在上一个元素集合，则将当前元素集合还原回退为上一个元素集合
 
 >> #### 示例：
 ```html
 <body>
   <div>
-    <p>
+    <p>  <!-- red bg:yellow -->
       <span>0</span>
-      <span>1</span>
+      <span>1</span>  
       <span>2</span>
     </p>
     <p>
@@ -3172,7 +3171,7 @@ document.nodeValue // "hello world"
       <span>4</span>
       <span>5</span>
     </p>
-    <p>
+    <p>  <!-- red -->
       <span>6</span>  
       <span>7</span>
       <span>8</span>
@@ -3180,18 +3179,18 @@ document.nodeValue // "hello world"
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-    var test = $('div p:eq(1) span').map(function(){
-              return $(this).text();
-            }).get().join(", ");
-    console.log(test); // "3, 4, 5"
+    $('p:first').add('p:last').css('color', 'red').end().css('background-color', 'yellow');
   </script>
 </body>
 ```
 
+## 类库 jQuery - 遍历方法
 > ### $('selector').each()
 >> #### 说明：
-* 遍历方法 2
-* 1
+* 遍历方法 1
+* 如果存在某元素集合，则遍历每一个符合选择指定选择条件的元素
+* each() 方法主要用于遍历jQuery对象
+* each() 方法返回的是原来的数组，并不会新创建一个数组
 
 >> #### 示例：
 ```html
@@ -3224,11 +3223,50 @@ document.nodeValue // "hello world"
 </body>
 ```
 
-## 类库 jQuery - 特殊方法
+> ### $('selector').map()
+>> #### 说明：
+* 遍历方法 2
+* 如果存在某元素集合，则遍历每一个符合选择指定选择条件的元素
+* map() 方法主要用于遍历JS原生数组或对象
+* map() 方法会返回一个新的数组
+* 如果在没有必要的情况下使用map，则有可能造成内存浪费
+
+>> #### 示例：
+```html
+<body>
+  <div>
+    <p>
+      <span>0</span>
+      <span>1</span>
+      <span>2</span>
+    </p>
+    <p>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+    </p>
+    <p>
+      <span>6</span>  
+      <span>7</span>
+      <span>8</span>
+    </p>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    var test = $('div p:eq(1) span').map(function(){
+              return $(this).text();
+            }).get().join(", ");
+    console.log(test); // "3, 4, 5"
+  </script>
+</body>
+```
+
+## 类库 jQuery - 判定方法
 > ### $('selector').is()
 >> #### 说明：
-* 特殊方法 1
-* 1
+* 判定方法 1
+* is() 方法根据指定选择条件判定某元素是否匹配
+* is() 方法返回一个布尔值
 
 >> #### 示例：
 ```html
@@ -3254,38 +3292,6 @@ document.nodeValue // "hello world"
   <script>
     var status = $('div p:first span:eq(2)').is('#foo1');
     console.log(status); // "true"
-  </script>
-</body>
-```
-
-> ### $('selector').end()
->> #### 说明：
-* 特殊方法 2
-* 1
-
->> #### 示例：
-```html
-<body>
-  <div>
-    <p>  <!-- red bg:yellow -->
-      <span>0</span>
-      <span>1</span>  
-      <span>2</span>
-    </p>
-    <p>
-      <span>3</span>
-      <span>4</span>
-      <span>5</span>
-    </p>
-    <p>  <!-- red -->
-      <span>6</span>  
-      <span>7</span>
-      <span>8</span>
-    </p>
-  </div>
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <script>
-    $('p:first').add('p:last').css('color', 'red').end().css('background-color', 'yellow');
   </script>
 </body>
 ```
