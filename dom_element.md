@@ -228,3 +228,138 @@ myDiv.classList.contains('myCssClass'); // 返回 true 或者 false
 myDiv.classList.item(0); // 返回第一个Class
 myDiv.classList.toString();
 ```
+
+## 类库 jQuery - 表单
+> ### 普通
+>> #### 说明：
+* 1
+
+>> #### 示例：
+```html
+1
+```
+
+> ### radio 单选框
+>> #### JS 示例：
+```html
+<body>
+  <label><input type="radio" name="foo1" value="1"> one</label>
+  <label><input type="radio" name="foo1" value="2" checked> two</label>
+  <label><input type="radio" name="foo1" value="3"> three</label>
+  <script>
+    // 取值
+    var foo1 = document.getElementsByName('foo1');
+    for(var i in foo1){
+      if(foo1[i].checked){
+        console.log(foo1[i].value);
+      }
+    }
+    // 赋值
+    var foo1 = document.getElementsByName('foo1');
+    for(var i in foo1){
+      if(foo1[i].value == 3){
+        foo1[i].checked = 'checked';
+      }else{
+        foo1[i].checked = false;
+      }
+    }
+  </script>
+</body>
+```
+
+>> #### JQ 示例：
+```html
+<body>
+  <label><input type="radio" name="foo1" value="1"> one</label>
+  <label><input type="radio" name="foo1" value="2" checked> two</label>
+  <label><input type="radio" name="foo1" value="3"> three</label>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    // 取值
+    var radioVal = $('[name = "foo1"]:checked').val();
+    console.log(radioVal);
+    // 赋值
+    $('[name = "foo1"]').attr('checked', '3');
+  </script>
+</body>
+```
+
+> ### checkbox 多选框
+>> #### JS 示例：
+```html
+<body>
+  <input type="checkbox" name="foo1" value="1"> one
+  <input type="checkbox" name="foo1" value="2" checked> two
+  <input type="checkbox" name="foo1" value="3"> three
+  <input type="checkbox" name="foo1" value="4" checked> four
+  <input type="checkbox" name="foo1" value="5"> five
+  <script>
+    // 取值
+    var foo1 = document.getElementsByName('foo1');
+    var val = [];
+    for(var i in foo1){
+      if(foo1[i].checked){
+        val.push(foo1[i].value);
+      }
+    }
+    console.log(val); // [2,4]
+    // 赋值
+    var foo1 = document.getElementsByName('foo1');
+    for(var i in foo1){
+      if(foo1[i].value == 1 || foo1[i].value == 3 || foo1[i].value == 5){
+        foo1[i].checked = 'checked';
+      }else{
+        foo1[i].checked = false;
+      }
+    }
+    // 反选
+    var foo1 = document.getElementsByName('foo1');
+    for(var i in foo1){
+      if(foo1[i].checked){
+        foo1[i].checked = false;
+      }else{
+        foo1[i].checked = 'checked';
+      }
+    }
+    // 全选
+    var foo1 = document.getElementsByName('foo1');
+    for(var i in foo1){
+      foo1[i].checked = 'checked';
+    }
+  </script>
+</body>
+```
+
+>> #### JQ 示例：
+```html
+<body>
+  <label><input type="checkbox" name="foo1" value="1"> one</label>
+  <label><input type="checkbox" name="foo1" value="2" checked> two</label>
+  <label><input type="checkbox" name="foo1" value="3"> three</label>
+  <label><input type="checkbox" name="foo1" value="4" checked> four</label>
+  <label><input type="checkbox" name="foo1" value="5"> five</label>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    // 取值
+    var val = [];
+    $('[name = "foo1"]:checked').each(function(){
+      val.push($(this).val());
+    });
+    console.log(val); // [2,4]
+    // 赋值 1
+    $('[name = "foo1"]').val([1,3,5]);
+    // 赋值 2
+    $('[name = "foo1"]').attr('checked', [1,3,5]);
+    // 反选
+    $('[name = "foo1"]').each(function(){
+      if($(this).attr('checked')){
+        $(this).removeAttr('checked');
+      }else{
+        $(this).attr('checked', 'checked');
+      }
+    });
+    // 全选
+    $('[name = "foo1"]').attr('checked', 'true');
+  </script>
+</body>
+```
