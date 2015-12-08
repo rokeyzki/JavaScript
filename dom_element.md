@@ -229,14 +229,101 @@ myDiv.classList.item(0); // 返回第一个Class
 myDiv.classList.toString();
 ```
 
-## 类库 jQuery - 表单
-> ### 普通
+## 类库 jQuery - 元素属性
+> ### $('#foo').attr()
 >> #### 说明：
-* 1
+* http://www.w3school.com.cn/jquery/attributes_attr.asp
 
 >> #### 示例：
 ```html
 1
+```
+
+> ### $('#foo').removeAttr()
+>> #### 说明：
+* http://www.w3school.com.cn/jquery/attributes_removeattr.asp
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('#foo').hasClass()
+>> #### 说明：
+* http://www.w3school.com.cn/jquery/attributes_hasclass.asp
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('#foo').addClass()
+>> #### 说明：
+* http://www.w3school.com.cn/jquery/attributes_addclass.asp
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('#foo').removeClass()
+>> #### 说明：
+* http://www.w3school.com.cn/jquery/attributes_removeclass.asp
+
+>> #### 示例：
+```html
+1
+```
+
+> ### $('#foo').toggleClass()
+>> #### 说明：
+* http://www.w3school.com.cn/jquery/attributes_toggleclass.asp
+
+>> #### 示例：
+```html
+1
+```
+
+## 类库 jQuery - 表单元素
+> ### select 下拉框
+>> #### JS 示例：
+```html
+<body>
+  <select id="foo1">
+    <option value="1">one</option>
+    <option value="2" selected>two</option>
+    <option value="3">three</option>
+    <option value="4">four</option>
+    <option value="5">five</option>
+  </select>
+  <script>
+    // 取值
+    console.log(foo1.value); 
+    // 赋值
+    foo1.value = 4;
+  </script>
+</body>
+```
+
+>> #### JQ 示例：
+```html
+<body>
+  <select id="foo1">
+    <option value="1">one</option>
+    <option value="2" selected>two</option>
+    <option value="3">three</option>
+    <option value="4">four</option>
+    <option value="5">five</option>
+  </select>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    // 取值
+    var val = $('#foo1').val();
+    console.log(val);
+    // 赋值
+    $('#foo1').val(4);
+  </script>
+</body>
 ```
 
 > ### radio 单选框
@@ -279,7 +366,7 @@ myDiv.classList.toString();
     var radioVal = $('[name = "foo1"]:checked').val();
     console.log(radioVal);
     // 赋值
-    $('[name = "foo1"]').attr('checked', '3');
+    $('[name = "foo1"]').val([3]);
   </script>
 </body>
 ```
@@ -346,10 +433,8 @@ myDiv.classList.toString();
       val.push($(this).val());
     });
     console.log(val); // [2,4]
-    // 赋值 1
+    // 赋值
     $('[name = "foo1"]').val([1,3,5]);
-    // 赋值 2
-    $('[name = "foo1"]').attr('checked', [1,3,5]);
     // 反选
     $('[name = "foo1"]').each(function(){
       if($(this).attr('checked')){

@@ -271,4 +271,14 @@ demo.normalize();
 console.log(demo.firstChild.data); // "4  5"
 ```
 
+## 类库 jQuery - 元素内容
+> ### $('#foo').html()
+>> #### 说明：
+* http://www.w3school.com.cn/jquery/manipulation_html.asp
+
+>> #### 示例：
+```html
+1
+```
+
 
