@@ -232,56 +232,122 @@ myDiv.classList.toString();
 ## 类库 jQuery - 元素属性
 > ### $('#foo').attr()
 >> #### 说明：
-* http://www.w3school.com.cn/jquery/attributes_attr.asp
+* attr() 方法设置或返回被选元素的属性值
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div id="foo" style="color: red">hello world</div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    // 取属性值
+    var attr = $('#foo').attr('style');
+    console.log(attr); // color: red
+    // 赋属性值
+    $('#foo').attr('style', 'color: blue');
+  </script>
+</body>
 ```
 
 > ### $('#foo').removeAttr()
 >> #### 说明：
-* http://www.w3school.com.cn/jquery/attributes_removeattr.asp
+* removeAttr() 方法从被选元素中移除属性
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div id="foo" style="color: red">hello world</div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo').removeAttr('style');
+  </script>
+</body>
 ```
 
 > ### $('#foo').hasClass()
 >> #### 说明：
-* http://www.w3school.com.cn/jquery/attributes_hasclass.asp
+* hasClass() 方法检查被选元素是否包含指定的 class
 
 >> #### 示例：
 ```html
-1
+<body>
+  <style>
+    .test {
+      color: red;
+    }
+  </style>
+  <div id="foo" class="test">hello world</div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    var status = $('#foo').hasClass('test');
+    console.log(status); // true
+  </script>
+</body>
 ```
 
 > ### $('#foo').addClass()
 >> #### 说明：
-* http://www.w3school.com.cn/jquery/attributes_addclass.asp
+* addClass() 方法向被选元素添加一个或多个类
+* 如需添加多个类，请使用空格分隔类名
 
 >> #### 示例：
 ```html
-1
+<body>
+  <style>
+    .test {
+      color: red;
+    }
+  </style>
+  <div id="foo">hello world</div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo').addClass('test');
+  </script>
+</body>
 ```
 
 > ### $('#foo').removeClass()
 >> #### 说明：
-* http://www.w3school.com.cn/jquery/attributes_removeclass.asp
+* removeClass() 方法从被选元素移除一个或多个类
+* 如需移除若干类，请使用空格来分隔类名
+* 如果没有规定参数，则该方法将从被选元素中删除所有类
 
 >> #### 示例：
 ```html
-1
+<body>
+  <style>
+    .test {
+      color: red;
+    }
+  </style>
+  <div id="foo" class="test">hello world</div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo').removeClass('test');
+  </script>
+</body>
 ```
 
 > ### $('#foo').toggleClass()
 >> #### 说明：
-* http://www.w3school.com.cn/jquery/attributes_toggleclass.asp
+* toggleClass() 对设置或移除被选元素的一个或多个类进行切换
 
 >> #### 示例：
 ```html
-1
+<body>
+  <style>
+    .test {
+      color: red;
+    }
+  </style>
+  <div id="foo">hello world</div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $('#foo').bind('click', function(){
+      $('#foo').toggleClass('test');
+    });
+  </script>
+</body>
 ```
 
 ## 类库 jQuery - 表单元素
@@ -298,7 +364,7 @@ myDiv.classList.toString();
   </select>
   <script>
     // 取值
-    console.log(foo1.value); 
+    console.log(foo1.value);
     // 赋值
     foo1.value = 4;
   </script>
