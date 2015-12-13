@@ -272,13 +272,21 @@ console.log(demo.firstChild.data); // "4  5"
 ```
 
 ## 类库 jQuery - 元素内容
-> ### $('#foo').html()
+> ### $('#foo').text()
 >> #### 说明：
-* http://www.w3school.com.cn/jquery/manipulation_html.asp
+* text() 方法设置或返回被选元素的文本内容
 
 >> #### 示例：
 ```html
-1
+<body>
+  <div id="foo">hello world</div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    // 取值
+    var val = $('#foo').text();
+    console.log(val); // hello world
+    // 赋属性值
+    $('#foo').text('hello javascript');
+  </script>
+</body>
 ```
-
-
