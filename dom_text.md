@@ -285,7 +285,7 @@ console.log(demo.firstChild.data); // "4  5"
     // 取值
     var val = $('#foo').text();
     console.log(val); // hello world
-    // 赋属性值
+    // 赋值
     $('#foo').text('hello javascript');
   </script>
 </body>
