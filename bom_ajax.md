@@ -565,7 +565,6 @@ router.post('/users', koaBody,
   function *(next) {
     console.log('p2');
     console.log(this.user+', '+this.request.body.name);
-
     var arr = {'title': 'some message: '+this.user+' : '+this.request.body.name, 'content': ['内容一', '内容二', '内容三']};
     this.body = JSON.stringify(arr);
   }
