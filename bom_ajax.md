@@ -98,7 +98,7 @@ xhr.send(null);
 </html>
 ```
 
-> ### 服务端：
+> ### 服务端（PHP）：
 ```php
 <?php
 $resArray = array();
@@ -208,7 +208,7 @@ echo json_encode($resArray);
 </html>
 ```
 
-> ### 服务端：
+> ### 服务端（PHP）：
 ```php
 <?php
 header('Access-Control-Allow-Origin:*'); // 加了这句才支持现代浏览器的跨域AJAX通信请求，并且需要重启服务器，星号表示接受所有主机的AJAX请求
@@ -301,7 +301,7 @@ echo json_encode($resArray);
 </html>
 ```
 
-> ### 服务端：
+> ### 服务端（PHP）：
 ```php
 <?php
 $picname = $_FILES['img']['name'];
@@ -437,7 +437,7 @@ echo json_encode($arr); // 输出json数据
 </html>
 ```
 
-> ### 服务端：
+> ### 服务端（PHP）：
 ```php
 <?php
 $picname = $_FILES['img']['name'];
@@ -467,5 +467,113 @@ $arr = array(
 echo json_encode($arr); // 输出json数据
 ```
 
+## 类库 jQuery - AJAX
+> ### 客户端：
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div class="loading" style="display:none;position:absolute;top:50%;left:50%;">
+    <p>加载中。。。</p>
+  </div>
+  <!-- Post form -->
+  <div class="ex1">
+    <p>show post</p>
+    <button type='button'>click</button>
+  </div>
+  <!-- Get form -->
+  <div class="ex2">
+    <p>show get</p>
+    <button type='button'>click</button>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    $(document).ready(function(){
+      // 设置是否异步
+      $.ajaxSetup({
+        async : false // true为异步方式、false为同步方式，默认为true
+      });
+      // Post req
+      $(".ex1 button").click(function(){
+        $(".loading").show();
+        $.post("http://127.0.0.1:3000/users",{id:"s11111pot", name:"haha"},function(data){
+          data = eval('(' + data + ')');
+          htmlContent = '';
+          htmlContent += '<p><b>' + data['title'] + '</b></p>';
+          for (var i = 0; i < data['content'].length; i++) {
+            htmlContent += '<p style="color:red;">' + data['content'][i] + '</p>';
+          };
+          $(".ex1 p").html(htmlContent);
+          $(".loading").hide();
+        });
+      });
+      // Get req
+      $(".ex2 button").click(function(){
+        $(".loading").show();
+        var id   = "22222get",
+            name = "xixi";
+        $.get("http://127.0.0.1:3000/users/"+id+"/"+name,'',function(data){
+          $(".ex2 p").html(data);
+          $(".loading").hide();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+```
 
+> ### 服务端（NodeJS:Koa）：
+```javascript
+// router.js
+var app     = require('koa')(), // 框架内核
+    router  = require('koa-router')(), // 路由中间件
+    cors    = require('koa-cors'), // 支持跨域ajax中间件
+    koaBody = require('koa-body')(); // 增强body中间件，获取post数据需要使用koa-body中间件，获取get数据则不需要使用koa-body中间件
+// Get route
+router.get('/users/:id/:name',
+  function *(next) {
+    console.log('g1');
+    // console.log(this);
+    console.log(this.params); // { id: 17, name: "Alex" }
+    this.user = this.params.id;
+    yield next;
+  },
+  function *(next) {
+    console.log('g2');
+    console.log(this.user+', '+this.params.name);
+    this.body = JSON.stringify('some message: '+this.user+', '+this.params.name);
+    yield next;
+  },
+  function *(next) {
+    console.log('g3');
+    // this.redirect('http://google.com'); // 页面跳转至谷歌 PS：不要在ajax处理逻辑中使用
+  }
+);
+// Post route
+router.post('/users', koaBody,
+  function *(next) {
+    console.log('p1');
+    console.log(this.request.body); // { id: 17, name: "Alex" } PS: 数据采用x-www-form格式
+    this.user = this.request.body.id;
+    yield next;
+  },
+  function *(next) {
+    console.log('p2');
+    console.log(this.user+', '+this.request.body.name);
 
+    var arr = {'title': 'some message: '+this.user+' : '+this.request.body.name, 'content': ['内容一', '内容二', '内容三']};
+    this.body = JSON.stringify(arr);
+  }
+);
+// 配置应用
+app.use(cors());
+app.use(router.routes());
+// 监听3000端口
+app.listen(3000);
+console.log('koa ajax start');
+```
