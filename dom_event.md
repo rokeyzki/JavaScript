@@ -247,7 +247,7 @@ var number = event.timeStamp;
 ```html
 <script>
 // 取消click事件的默认行为
-foo.addEventListener('click', function (e){       
+foo.addEventListener('click', function (e){
   e.preventDefault();
 }, false);
 </script>
@@ -322,7 +322,7 @@ el.addEventListener('click', l2, false);
 >>> #### 示例：
 ```html
 <script>
-  /* 
+  /*
     readyState属性返回当前文档的状态，共有三种可能的值：
     1、加载HTML代码阶段，是“loading”
     2、加载外部资源阶段是“interactive”
@@ -1582,3 +1582,31 @@ div.addEventListener('click', callback, false); // 返回 Tag: DIV, EventPhase: 
 </script>
 ```
 
+> ### $(document).ready();
+>> #### 说明：
+* 在文档加载解析完成后激活的函数
+* 当 DOM 已经加载，并且页面（包括图像）已经完全呈现时，会发生 ready 事件
+* ready() 函数仅能用于当前文档，因此可以无需选择器
+* ready() 函数不应与 `<body onload="">` 一起使用
+* ready() 函数允许使用以下三种语法
+
+>> #### 示例：
+```html
+<body>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script>
+    // 语法 1 $(document).ready(function);
+    $(document).ready(function(){
+      console.log('hello 1');
+    });
+    // 语法 2 $().ready(function);
+    $().ready(function(){
+      console.log('hello 2');
+    });
+    // 语法 3 $(function);
+    $(function(){
+      console.log('hello 3');
+    });
+  </script>
+</body>
+```
