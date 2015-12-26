@@ -489,3 +489,115 @@ a // [1, 2]
 * 新增了9个数组方法中前7个与函数式（functional）操作有关
 * IE8等老旧浏览器不支持ECMAScript 5
 * 该部分内容二期开始添加
+
+## 类库 jQuery - 方法
+> ### $.each();
+>> #### 说明：
+* 遍历数据
+
+>> #### 示例：
+```html
+<body>
+  <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+  <script>
+    var foo = ['red', 'blue', 'green', 'yellow'];
+    $.each(foo, function(key, value){
+      console.log(key + ':' + value);
+    });
+  </script>
+</body>
+```
+
+> ### $.grep();
+>> #### 说明：
+* 过滤数据
+
+>> #### 示例：
+```html
+<body>
+  <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+  <script>
+    var foo = ['red', 'blue', 'green', 'yellow'];
+    foo = $.grep(foo, function(value, key){ // 注意：这里回调函数中的参数是value在前，key在后
+      return key >= 2;
+    });
+    console.log(foo); // ["green", "yellow"]
+    var foo = ['red', 'blue', 'green', 'yellow'];
+    foo = $.grep(foo, function(value, key){ // 注意：这里回调函数中的参数是value在前，key在后
+      return key >= 2;
+    }, true); // 注意：最后一个参数为是否反向过滤，默认为 false，当设为 true 时，返回的过滤数组为相反的
+    console.log(foo); // ["red", "blue"]
+  </script>
+</body>
+```
+
+> ### $.inArray();
+>> #### 说明：
+* 判断某个值是否为数组成员
+* 如果是数组成员，则返回该值在数组中的索引值
+* 如果不是数组成员，则返回-1
+
+>> #### 示例：
+```html
+<body>
+  <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+  <script>
+    var foo = ['red', 'blue', 'green', 'yellow'];
+    var status = $.inArray('green', foo);
+    console.log(status); // 2
+    var status = $.inArray('black', foo);
+    console.log(status); // -1
+  </script>
+</body>
+```
+
+> ### $.map();
+>> #### 说明：
+* 重构数据
+
+>> #### 示例：
+```html
+<body>
+  <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+  <script>
+    var foo = ['red', 'blue', 'green', 'yellow'];
+    foo = $.map(foo, function(value, key) { // 注意：这里回调函数中的参数是value在前，key在后
+      return value + '(test)';
+    });
+    console.log(foo); // ["red(test)", "blue(test)", "green(test)", "yellow(test)"]
+  </script>
+</body>
+```
+
+> ### $.merge();
+>> #### 说明：
+* 合并数据
+
+>> #### 示例：
+```html
+<body>
+  <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+  <script>
+    var one = ['red', 'blue'];
+    var two = ['green', 'yellow'];
+    var foo = $.merge(one, two);
+    console.log(foo); // ["red", "blue", "green", "yellow"]
+  </script>
+</body>
+```
+
+> ### $.merge();
+>> #### 说明：
+* 数据除去重复的成员
+
+>> #### 示例：
+```html
+<body>
+  <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+  <script>
+    var foo = ['red', 'blue', 'green', 'yellow', 'red', 'blue', 'green', 'yellow'];
+    foo = $.unique(foo);
+    console.log(foo); // ["red", "blue", "green", "yellow"]
+  </script>
+</body>
+```
