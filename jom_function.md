@@ -647,3 +647,48 @@ var newAdd = add.bind(obj, 3); // 即设置x=3
 newAdd(4); // 11
 ```
 
+## 类库 jQuery - 扩展
+> ### $.extend();
+>> #### 说明：
+* 为jQuery类添加类方法，可以理解为添加静态方法
+
+>> #### 示例：
+```html
+<body>
+  <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+  <script>
+    $.extend({
+      min: function(a, b){
+        return a < b ? a : b;
+      },
+      max: function(a, b){
+        return a > b ? a : b;
+      }
+    });
+    console.log($.min(2,3)); // 2
+    console.log($.max(4,5)); // 5
+  </script>
+</body>
+```
+
+> ### $.fn.extend();
+>> #### 说明：
+* jQuery.fn = jQuery.prototype
+* 为jQuery类添加成员函数，可以理解为对jQuery.prototype进得扩展
+* jQuery类的实例可以使用这个成员函数
+
+>> #### 示例：
+```html
+<body>
+  <p id="foo">hello world</p>
+  <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+  <script>
+    $.fn.extend({
+      content: function(){
+        return 'content : ' + $(this).text();
+      }
+    });
+    console.log($('#foo').content()); // "content : hello world"
+  </script>
+</body>
+```

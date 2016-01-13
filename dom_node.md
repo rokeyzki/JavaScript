@@ -54,7 +54,7 @@
   * 移动一个节点到对象节点的指定位置：Element.prototype.insertAdjacentHTML()
 * 修改方法
   * 使用一个节点替换另一个节点：Node.prototype.replaceChild()
-  * 使用一个属性替换另一个属性：Element.prototype.setAttributeNode() 
+  * 使用一个属性替换另一个属性：Element.prototype.setAttributeNode()
 * 删除方法
   * 移除节点的一个子节点：Node.prototype.removeChild()
   * 移除整个节点：Node.prototype.remove()
@@ -939,7 +939,7 @@ document.nodeValue // "hello world"
     </p>
   </div>
   <script>
-    console.log(document.getElementsByName("someName")); // [object NodeList] { 0: [object HTMLParagraphElement] } 
+    console.log(document.getElementsByName("someName")); // [object NodeList] { 0: [object HTMLParagraphElement] }
   </script>
 </body>
 ```
@@ -971,7 +971,7 @@ document.nodeValue // "hello world"
     </p>
   </div>
   <script>
-    console.log(foo.getElementsByClassName("someClass")); // [object HTMLCollection] { 0: [object HTMLParagraphElement] } 
+    console.log(foo.getElementsByClassName("someClass")); // [object HTMLCollection] { 0: [object HTMLParagraphElement] }
   </script>
 </body>
 ```
@@ -1003,7 +1003,7 @@ document.nodeValue // "hello world"
     </p>
   </div>
   <script>
-    console.log(foo.getElementsByTagName("p")); // [object HTMLCollection] { 0: [object HTMLParagraphElement], 1: [object HTMLParagraphElement], 2: [object HTMLParagraphElement] } 
+    console.log(foo.getElementsByTagName("p")); // [object HTMLCollection] { 0: [object HTMLParagraphElement], 1: [object HTMLParagraphElement], 2: [object HTMLParagraphElement] }
   </script>
 </body>
 ```
@@ -1076,9 +1076,9 @@ document.nodeValue // "hello world"
     while (currentNode = fooNodeIterator.nextNode()) {
         console.log(currentNode.tagName); // DIV、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN、P、SPAN、SPAN、SPAN
     }
-    var nextNode = fooNodeIterator.nextNode(); 
+    var nextNode = fooNodeIterator.nextNode();
     console.log(nextNode); // null
-    var previousNode = fooNodeIterator.previousNode(); 
+    var previousNode = fooNodeIterator.previousNode();
     console.log(previousNode); // [object HTMLSpanElement]
   </script>
 </body>
@@ -1592,9 +1592,28 @@ document.nodeValue // "hello world"
 </body>
 ```
 
-> ### $('selector1, selector2')
+> ### $('selector1selector2')
 >> #### 说明：
 * 基础选择器 4
+* 示例：$('.a.b')
+* 两个选择器连在一起（中间没有空格），表示选中同时拥有这些选择条件的元素
+
+>> #### 示例：
+```html
+<body>
+  <p class="a">1111111111</p>
+  <p class="a b">1111111111</p>  <!-- red -->
+  <p class="b">1111111111</p>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script type="text/javascript">
+    $('.a.b').css('color', 'red');
+  </script>
+</body>
+```
+
+> ### $('selector1, selector2')
+>> #### 说明：
+* 基础选择器 5
 * 一次选择多个元素，参数通过逗号分隔开
 
 >> #### 示例：
@@ -1626,13 +1645,13 @@ document.nodeValue // "hello world"
 
 > ### $('selector1 ~ selector2')
 >> #### 说明：
-* 基础选择器 5
+* 基础选择器 6
 * 向后选择符合条件的所有平级元素
 
 >> #### 示例：
 ```html
 <body>
-  <div id="foo">    
+  <div id="foo">
     <h3>3</h3>
     <h2>2</h2>  <!-- no -->
     <h1>1</h1>  <!-- no -->
@@ -1651,13 +1670,13 @@ document.nodeValue // "hello world"
 
 > ### $('selector1 + selector2')
 >> #### 说明：
-* 基础选择器 6
+* 基础选择器 7
 * 向后选择符合条件的相邻平级元素
 
 >> #### 示例：
 ```html
 <body>
-  <div id="foo">    
+  <div id="foo">
     <h3>3</h3>
     <h2>2</h2>  <!-- no -->
     <h1>1</h1>  <!-- no -->
@@ -1676,7 +1695,7 @@ document.nodeValue // "hello world"
 
 > ### $('selector1 selector2')
 >> #### 说明：
-* 基础选择器 7
+* 基础选择器 8
 * 选择符合条件的所有泛后代元素
 
 >> #### 示例：
@@ -1709,7 +1728,7 @@ document.nodeValue // "hello world"
 
 > ### $('selector1 > selector2')
 >> #### 说明：
-* 基础选择器 8
+* 基础选择器 9
 * 选择符合条件的所有子级元素
 
 >> #### 示例：
@@ -1949,7 +1968,7 @@ document.nodeValue // "hello world"
 <body>
   <div id="foo">
     <p>  <!-- red -->
-      <span attr="a1">1</span>  
+      <span attr="a1">1</span>
       <span attr="a2">2</span>
       <span attr="a3">3</span>
     </p>
@@ -2099,8 +2118,8 @@ document.nodeValue // "hello world"
     </p>
     <p>
       <span>3</span>
-      <span>4</span>  
-      <span>5</span>  
+      <span>4</span>
+      <span>5</span>
     </p>
     <p>
       <span>6</span>
@@ -2131,8 +2150,8 @@ document.nodeValue // "hello world"
     </p>
     <p>
       <span>3</span>
-      <span>4</span>  
-      <span>5</span>  
+      <span>4</span>
+      <span>5</span>
     </p>
     <p>
       <span>6</span>
@@ -2164,7 +2183,7 @@ document.nodeValue // "hello world"
     <p>
       <span>3</span>
       <span>4</span>  <!-- red -->
-      <span>5</span>  
+      <span>5</span>
     </p>
     <p>
       <span>6</span>
@@ -2195,7 +2214,7 @@ document.nodeValue // "hello world"
     </p>
     <p>
       <span>3</span>
-      <span>4</span>  
+      <span>4</span>
       <span>5</span>  <!-- red -->
     </p>
     <p>
@@ -2227,7 +2246,7 @@ document.nodeValue // "hello world"
     </p>
     <p>
       <span>3</span>  <!-- red -->
-      <span>4</span>  
+      <span>4</span>
       <span>5</span>
     </p>
     <p>
@@ -2260,7 +2279,7 @@ document.nodeValue // "hello world"
     <p>
       <span>3</span>
       <span>4</span>  <!-- red -->
-      <span>5</span>  
+      <span>5</span>
     </p>
     <p>
       <span>6</span>  <!-- red -->
@@ -2285,7 +2304,7 @@ document.nodeValue // "hello world"
 <body>
   <div id="foo">
     <p>
-      <span>0</span>  
+      <span>0</span>
       <span>1</span>  <!-- red -->
       <span>2</span>
     </p>
@@ -2651,7 +2670,7 @@ document.nodeValue // "hello world"
 <body>
   <div id="foo">
     <p>  <!-- red -->
-      <span>0</span>  
+      <span>0</span>
       <span>1</span>
       <span>2</span>
     </p>
@@ -2683,7 +2702,7 @@ document.nodeValue // "hello world"
 <body>
   <div id="foo">  <!-- red -->
     <p>
-      <span>0</span>  
+      <span>0</span>
       <span>1</span>
       <span>2</span>
     </p>
@@ -2715,7 +2734,7 @@ document.nodeValue // "hello world"
 <body>
   <div id="foo">
     <p>  <!-- red -->
-      <span>0</span>  
+      <span>0</span>
       <span>1</span>
       <span>2</span>
     </p>
@@ -2753,7 +2772,7 @@ document.nodeValue // "hello world"
 <body>
   <div id="foo">  <!-- red -->
     <p>
-      <span>0</span>  
+      <span>0</span>
       <span>1</span>
       <span>2</span>
     </p>
@@ -2785,7 +2804,7 @@ document.nodeValue // "hello world"
 <body>
   <div id="foo">
     <p>  <!-- red -->
-      <span>0</span>  
+      <span>0</span>
       <span>1</span>
       <span>2</span>
     </p>
@@ -2817,7 +2836,7 @@ document.nodeValue // "hello world"
 <body>
   <div>
     <p>
-      <span id="foo">0</span>  
+      <span id="foo">0</span>
       <span>1</span>  <!-- red -->
       <span>2</span>  <!-- red -->
     </p>
@@ -2849,7 +2868,7 @@ document.nodeValue // "hello world"
 <body>
   <div>
     <p>
-      <span id="foo">0</span>  
+      <span id="foo">0</span>
       <span>1</span>  <!-- red -->
       <span>2</span>
     </p>
@@ -2881,7 +2900,7 @@ document.nodeValue // "hello world"
 <body>
   <div>
     <p>
-      <span id="foo">0</span>  
+      <span id="foo">0</span>
       <span>1</span>  <!-- red -->
       <span>2</span>  <!-- red -->
     </p>
@@ -2913,7 +2932,7 @@ document.nodeValue // "hello world"
 <body>
   <div>
     <p>
-      <span id="foo0">0</span>  
+      <span id="foo0">0</span>
       <span>1</span>
       <span>2</span>
       <span id="foo3">3</span>  <!-- red -->
@@ -2941,7 +2960,7 @@ document.nodeValue // "hello world"
 <body>
   <div>
     <p>
-      <span>0</span>  
+      <span>0</span>
       <span>1</span>  <!-- red -->
       <span id="foo">2</span>
     </p>
@@ -2973,7 +2992,7 @@ document.nodeValue // "hello world"
 <body>
   <div>
     <p>
-      <span>0</span>  <!-- red --> 
+      <span>0</span>  <!-- red -->
       <span>1</span>  <!-- red -->
       <span id="foo">2</span>
     </p>
@@ -3005,7 +3024,7 @@ document.nodeValue // "hello world"
 <body>
   <div>
     <p>
-      <span id="foo0">0</span>  
+      <span id="foo0">0</span>
       <span>1</span>
       <span>2</span>
       <span id="foo3">3</span>  <!-- red -->
@@ -3033,7 +3052,7 @@ document.nodeValue // "hello world"
 <body>
   <div id="foo">
     <p>
-      <span>0</span>  <!-- red --> 
+      <span>0</span>  <!-- red -->
       <span>1</span>  <!-- red -->
       <span>2</span>  <!-- red -->
     </p>
@@ -3140,7 +3159,7 @@ document.nodeValue // "hello world"
       <span>5</span>
     </p>
     <p>
-      <span>6</span>  
+      <span>6</span>
       <span>7</span>
       <span>8</span>
     </p>
@@ -3163,7 +3182,7 @@ document.nodeValue // "hello world"
   <div>
     <p>  <!-- red bg:yellow -->
       <span>0</span>
-      <span>1</span>  
+      <span>1</span>
       <span>2</span>
     </p>
     <p>
@@ -3172,7 +3191,7 @@ document.nodeValue // "hello world"
       <span>5</span>
     </p>
     <p>  <!-- red -->
-      <span>6</span>  
+      <span>6</span>
       <span>7</span>
       <span>8</span>
     </p>
@@ -3207,7 +3226,7 @@ document.nodeValue // "hello world"
       <span>5</span>
     </p>
     <p>
-      <span>6</span>  
+      <span>6</span>
       <span>7</span>
       <span>8</span>
     </p>
@@ -3246,7 +3265,7 @@ document.nodeValue // "hello world"
       <span>5</span>
     </p>
     <p>
-      <span>6</span>  
+      <span>6</span>
       <span>7</span>
       <span>8</span>
     </p>
@@ -3283,7 +3302,7 @@ document.nodeValue // "hello world"
       <span>5</span>
     </p>
     <p>
-      <span>6</span>  
+      <span>6</span>
       <span>7</span>
       <span>8</span>
     </p>
