@@ -22,7 +22,7 @@
 
 ## 宽度：width
 > ### 说明
-```
+```css
 /* == 前缀 ==
  * 固定：(none)
  * 极大：max-
@@ -40,7 +40,7 @@ ${1:min-}width: ${2:value};
 
 ## 高度：height
 > ### 说明
-```
+```css
 /* == 前缀 ==
  * 固定：(none)
  * 极大：max-
@@ -57,7 +57,7 @@ ${1:min-}height: ${2:value};
 ```
 
 ## 边框：border
-```
+```css
 /* == 后缀 ==
  * 无：(none)
  * 上：-top
@@ -94,7 +94,7 @@ border${1:-top}: ${2:border-width} ${3:border-style} ${4:border-color};
 ```
 
 ## 边框宽度：border-width
-```
+```css
 /* == 方向 ==
  * 全：one
  * 上下、右左：one two
@@ -112,7 +112,7 @@ border-width: ${1:value};
 ```
 
 ## 边框样式：border-style
-```
+```css
 /* == 方向 ==
  * 全：one
  * 上下、右左：one two
@@ -131,7 +131,7 @@ border-style: ${1:value};
 ```
 
 ## 边框颜色：border-color
-```
+```css
 /* == 方向 ==
  * 全：one
  * 上下、右左：one two
@@ -150,7 +150,7 @@ border-color: ${1:value};
 ```
 
 ## 边框圆角：border-radius
-```
+```css
 /* == 方向 ==
  * 全：one
  * 西北和东南、东北和西南：one two
@@ -172,7 +172,7 @@ border-radius: ${1:value};
 ```
 
 ## 轮廓：outline
-```
+```css
 /* == 参数 ==
  * 默认值：轮廓宽度 轮廓样式 轮廓颜色
  *
@@ -202,7 +202,7 @@ outline: ${1:outline-width} ${2:outline-style} ${3:outline-color};
 ```
 
 ## 轮廓宽度：outline-width
-```
+```css
 /* == 方向 ==
  * 全：one
  * 上下、右左：one two
@@ -220,7 +220,7 @@ outline-width: ${1:value};
 ```
 
 ## 轮廓样式：outline-style
-```
+```css
 /* == 方向 ==
  * 全：one
  * 上下、右左：one two
@@ -239,7 +239,7 @@ outline-style: ${1:value};
 ```
 
 ## 轮廓颜色：outline-color
-```
+```css
 /* == 方向 ==
  * 全：one
  * 上下、右左：one two
@@ -258,7 +258,7 @@ outline-color: ${1:value};
 ```
 
 ## 内边距：padding
-```
+```css
 /* == 后缀 ==
  * 无：(none)
  * 上：-top
@@ -283,7 +283,7 @@ padding${1:-left}: ${2:value};
 ```
 
 ## 外边距：margin
-```
+```css
 /* == 后缀 ==
  * 无：(none)
  * 上：-top
@@ -308,7 +308,7 @@ margin${1:-left}: ${2:value};
 ```
 
 ## 内容溢出：overflow
-```
+```css
 /* == 后缀 ==
  * 全部：(none)
  * 水平：-x
@@ -325,7 +325,7 @@ overflow${1:-y}: ${2:value};
 ```
 
 ## 内容裁剪：clip
-```
+```css
 /* == 参数 ==
  * 矩形：rect(0px,60px,200px,0px)
  * 自动：auto
@@ -335,7 +335,7 @@ clip: ${1:value};
 ```
 
 ## 盒子限制：box-sizing
-```
+```css
 /* == 参数 ==
  * 内容基准：content-box
  * 边框基准：border-box
@@ -345,7 +345,7 @@ box-sizing: ${1:value};
 ```
 
 ## 盒子阴影：box-shadow
-```
+```css
 /* == 参数 ==
  * 默认值：水平位置(必填) 垂直位置(必填) 模糊距离 阴影尺寸 阴影颜色
  *
@@ -386,7 +386,7 @@ box-shadow: ${1:value};
 ```
 
 ## 媒体查询：@media
-```
+```css
 @media screen and (min-width: 568px) { /* 大屏手机 */
   ${1:foo} {
     ${2:background-color:red;}

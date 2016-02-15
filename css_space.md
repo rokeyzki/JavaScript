@@ -11,7 +11,7 @@
 
 ## 行级对齐：vertical-align
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 基线对齐：baseline
  * 上标对齐：text-top
@@ -24,7 +24,7 @@ vertical-align: ${1:value};
 
 ## 块级对齐：text-align
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 左侧对齐：left
  * 中间对齐：center
@@ -37,7 +37,7 @@ text-align: ${1:value};
 
 ## 文本缩进：text-indent
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 绝对值：px
  * 相对值：em
@@ -50,7 +50,7 @@ text-indent: ${1:value};
 
 ## 字母间距：letter-spacing
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 绝对值：px
  * 相对值：em
@@ -63,7 +63,7 @@ letter-spacing: ${1:value};
 
 ## 单词间距：word-spacing
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 绝对值：px
  * 相对值：em
@@ -76,7 +76,7 @@ word-spacing: ${1:value};
 
 ## 空白间距：white-space
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 正常：normal
  * 不换行：nowrap
@@ -87,7 +87,7 @@ white-space: ${1:value};
 
 ## 列表：list-style
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 默认值：列表类型 列表位置 列表图像
  *

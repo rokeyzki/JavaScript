@@ -9,7 +9,7 @@
 
 ## 区块：display
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 无样式：none
  * 块级：block
@@ -22,7 +22,7 @@ display: ${1:value};
 
 ## 显示：visibility
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 可见：visible
  * 隐藏：hidden
@@ -34,7 +34,7 @@ visibility: ${1:value};
 
 ## 透明：opacity
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 完全不透明：1.0
  * 完全透明：0.0
@@ -46,13 +46,13 @@ filter:Alpha(opacity=${1:value}0); /* 兼容 IE8 以及更早的浏览器 */
 
 ## 兼容：zoom
 > ### 说明
-```
+```css
 zoom: 1; ${1:/* IE 私有属性，解决兼容问题 */}
 ```
 
 ## 优先：!important
 > ### 说明
-```
+```css
 !important${1:/* 优先级最高 */}
 ```
 

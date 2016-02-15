@@ -2,11 +2,11 @@
 
 ## 大纲
 > * 侧边（设固定宽度）：sidebar
- * 栅栏（包含响应式）：grid
- * 居中（块级带边距）：center
- * 居左（块级带边距）：left
- * 居右（块级带边距）：right
- * 平铺（块级瀑布流）：tile
+* 栅栏（包含响应式）：grid
+* 居中（块级带边距）：center
+* 居左（块级带边距）：left
+* 居右（块级带边距）：right
+* 平铺（块级瀑布流）：tile
 
 ## 侧边（设固定宽度）：sidebar
 > ### 说明
@@ -33,7 +33,7 @@
 
 ## 栅栏（包含响应式）：grid
 > ### 说明
-```
+```css
 /*
 1、准备：
 1.1：栅栏布局依赖于 cdn-pure-grid
@@ -53,7 +53,7 @@
 
 ## 居中（块级带边距）：center
 > ### 说明
-```
+```css
 .section-center {
   margin: 0 auto; /* 设置块级居中 */
   max-width: ${1:300px}; /* 设置最大宽度 */
@@ -64,7 +64,7 @@
 
 ## 居左（块级带边距）：left
 > ### 说明
-```
+```css
 .section-left {
   max-width: ${1:300px}; /* 设置最大宽度 */
   padding: ${2:50px}; /* 设置内边距 */
@@ -74,7 +74,7 @@
 
 ## 居右（块级带边距）：right
 > ### 说明
-```
+```css
 .section-right {
   float: right; /* 设置块级向右浮动 */
   max-width: ${1:300px}; /* 设置最大宽度 */
@@ -86,7 +86,7 @@
 
 ## 平铺（块级瀑布流）：tile
 > ### 说明
-```
+```css
 .section-tile {
   display: inline-block; /* 设置块级可平铺 */
   vertical-align: top;

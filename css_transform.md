@@ -2,11 +2,11 @@
 
 ## 大纲
 > * 变形：transform
- * 变形原点：transform-origin
+* 变形原点：transform-origin
 
 ## 变形：transform
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 无样式：none
  * 旋转：rotate(45deg)
@@ -39,6 +39,6 @@ transform: ${1:value};
 
 ## 变形原点：transform-origin
 > ### 说明
-```
+```css
 transform-origin: ${1:20%} ${2:40%};
 ```

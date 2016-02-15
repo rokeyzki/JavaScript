@@ -2,11 +2,11 @@
 
 ## 大纲
 > * 设定：animation
- * 规则：@keyframes
+* 规则：@keyframes
 
 ## 设定：animation
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 默认值：动画名称(必填) 动画时长(必填) 动画速度曲线 动画延迟 动画播放次数 动画轮流反向播放
  *
@@ -38,7 +38,7 @@ animation: ${1:value};
 
 ## 规则：@keyframes
 > ### 说明
-```
+```css
 @keyframes ${1:name} {
   ${2:0}% {
     ${3:background-color: #FF984C;}

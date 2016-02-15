@@ -12,7 +12,7 @@
 
 ## 背景可视范围：background-clip
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 内容基准：content-box
  * 边框基准：border-box
@@ -23,7 +23,7 @@ background-clip: ${1:value};
 
 ## 背景颜色：background-color
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 名字：red
  * hex：#000000
@@ -37,7 +37,7 @@ background-color: ${1:value};
 
 ## 背景图片起点：background-origin
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 内容基准：content-box
  * 边框基准：border-box
@@ -48,7 +48,7 @@ background-origin: ${1:value};
 
 ## 背景图片：background-image
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 图片路径：url(URL)
  * 无样式：none
@@ -59,7 +59,7 @@ background-image: ${1:value};
 
 ## 背景图片尺寸：background-size
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 绝对值拉伸：px
  * 百分比拉伸：%
@@ -71,7 +71,7 @@ background-size: ${1:value};
 
 ## 背景图片位置：background-position
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 中央：center
  * 顶部：top
@@ -84,7 +84,7 @@ background-position: ${1:value};
 
 ## 背景图片重复：background-repeat
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 全重复：repeat
  * 水平重复：repeat-x
@@ -97,7 +97,7 @@ background-repeat: ${1:value};
 
 ## 背景图片滚动：background-attachment
 > ### 说明
-```
+```css
 /* == 参数 ==
  * 滚动：scroll
  * 固定：fixed
