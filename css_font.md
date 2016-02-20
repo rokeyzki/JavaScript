@@ -5,13 +5,12 @@
 * 字体尺寸：font-size
 * 字体粗细：font-weight
 * 字体倾斜：font-style
-* 字体划线：text-decoration
+* 字母大写浓缩：font-variant
 * 字体颜色：color
+* 字体划线：text-decoration
 * 字体阴影：text-shadow
 * 字体渲染：text-rendering
-* 字体行高：line-height
 * 字母大小写：text-transform
-* 字母大写浓缩：font-variant
 
 ## 字体栈：font-family
 > ### 说明
@@ -21,7 +20,7 @@
  * 锤子：Helvetica, Arial, "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", STHeiti, "华文细黑", sans-serif;
  * 继承：inherit
  */
-font-family: ${1:"Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif};
+font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
 ```
 
 ## 字体尺寸：font-size
@@ -65,17 +64,15 @@ font-weight: ${1:value};
 font-style: ${1:value};
 ```
 
-## 字体划线：text-decoration
+## 字母大写浓缩：font-variant
 > ### 说明
 ```css
 /* == 参数 ==
- * 无样式：none
- * 上划线：overline
- * 中划线：line-through
- * 下划线：underline
+ * 正常：normal
+ * 全部大写并缩小尺寸：small-caps
  * 继承：inherit
  */
-text-decoration: ${1:value};
+font-variant: ${1:value};
 ```
 
 ## 字体颜色：color
@@ -90,6 +87,19 @@ text-decoration: ${1:value};
  * 继承：inherit
  */
 color: ${1:value};
+```
+
+## 字体划线：text-decoration
+> ### 说明
+```css
+/* == 参数 ==
+ * 无样式：none
+ * 上划线：overline
+ * 中划线：line-through
+ * 下划线：underline
+ * 继承：inherit
+ */
+text-decoration: ${1:value};
 ```
 
 ## 字体阴影：text-shadow
@@ -141,19 +151,6 @@ text-shadow: ${1:value};
 text-rendering: ${1:auto};
 ```
 
-## 字体行高：line-height
-> ### 说明
-```css
-/* == 参数 ==
- * 绝对值：px
- * 相对值：em
- * 百分比：%
- * 自动：auto
- * 继承：inherit
- */
-line-height: ${1:value};
-```
-
 ## 字母大小写：text-transform
 > ### 说明
 ```css
@@ -165,15 +162,4 @@ line-height: ${1:value};
  * 继承：inherit
  */
 text-transform: ${1:value};
-```
-
-## 字母大写浓缩：font-variant
-> ### 说明
-```css
-/* == 参数 ==
- * 正常：normal
- * 全部大写并缩小尺寸：small-caps
- * 继承：inherit
- */
-font-variant: ${1:value};
 ```

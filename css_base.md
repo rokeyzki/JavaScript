@@ -1,20 +1,20 @@
 # CSS 基础
 
 ## 大纲
-> * 区块：display
+> * 底线：display
 * 显示：visibility
 * 透明：opacity
 * 兼容：zoom
 * 优先：!important
 
-## 区块：display
+## 底线：display
 > ### 说明
 ```css
 /* == 参数 ==
  * 无样式：none
- * 块级：block
- * 行内：inline
- * 行内块级：inline-block
+ * 块级元素：block (底线向下换行)
+ * 内联元素：inline (底线向左对齐)
+ * 外部内联、内部块级元素：inline-block
  * 继承：inherit
  */
 display: ${1:value};

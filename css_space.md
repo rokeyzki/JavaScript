@@ -1,12 +1,13 @@
 # CSS 格式
 
 ## 大纲
-> * 行级对齐：vertical-align
-* 块级对齐：text-align
+> * 行级对齐：vertical-align (垂直线中分)
+* 块级对齐：text-align (水平线中分)
 * 文本缩进：text-indent
 * 字母间距：letter-spacing
 * 单词间距：word-spacing
 * 空白间距：white-space
+* 行高间距：line-height
 * 列表：list-style
 
 ## 行级对齐：vertical-align
@@ -83,6 +84,19 @@ word-spacing: ${1:value};
  * 换行：pre
  */
 white-space: ${1:value};
+```
+
+## 行高间距：line-height
+> ### 说明
+```css
+/* == 参数 ==
+ * 绝对值：px
+ * 相对值：em
+ * 百分比：%
+ * 自动：auto
+ * 继承：inherit
+ */
+line-height: ${1:value};
 ```
 
 ## 列表：list-style
