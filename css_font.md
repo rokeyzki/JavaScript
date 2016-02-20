@@ -5,12 +5,11 @@
 * 字体尺寸：font-size
 * 字体粗细：font-weight
 * 字体倾斜：font-style
-* 字母大写浓缩：font-variant
 * 字体颜色：color
-* 字体划线：text-decoration
-* 字体阴影：text-shadow
-* 字体渲染：text-rendering
-* 字母大小写：text-transform
+* 文本大小写：text-transform
+* 文本划线：text-decoration
+* 文本阴影：text-shadow
+* 文本渲染：text-rendering
 
 ## 字体栈：font-family
 > ### 说明
@@ -64,17 +63,6 @@ font-weight: ${1:value};
 font-style: ${1:value};
 ```
 
-## 字母大写浓缩：font-variant
-> ### 说明
-```css
-/* == 参数 ==
- * 正常：normal
- * 全部大写并缩小尺寸：small-caps
- * 继承：inherit
- */
-font-variant: ${1:value};
-```
-
 ## 字体颜色：color
 > ### 说明
 ```css
@@ -89,7 +77,20 @@ font-variant: ${1:value};
 color: ${1:value};
 ```
 
-## 字体划线：text-decoration
+## 文本大小写：text-transform
+> ### 说明
+```css
+/* == 参数 ==
+ * 无样式：none
+ * 单词首字母大写：capitalize
+ * 全部大写：uppercase
+ * 全部小写：lowercase
+ * 继承：inherit
+ */
+text-transform: ${1:value};
+```
+
+## 文本划线：text-decoration
 > ### 说明
 ```css
 /* == 参数 ==
@@ -102,7 +103,7 @@ color: ${1:value};
 text-decoration: ${1:value};
 ```
 
-## 字体阴影：text-shadow
+## 文本阴影：text-shadow
 > ### 说明
 ```css
 /* == 参数 ==
@@ -138,7 +139,7 @@ text-decoration: ${1:value};
 text-shadow: ${1:value};
 ```
 
-## 字体渲染：text-rendering
+## 文本渲染：text-rendering
 > ### 说明
 ```css
 /* == 参数 ==
@@ -149,17 +150,4 @@ text-shadow: ${1:value};
  * 继承：inherit
  */
 text-rendering: ${1:auto};
-```
-
-## 字母大小写：text-transform
-> ### 说明
-```css
-/* == 参数 ==
- * 无样式：none
- * 单词首字母大写：capitalize
- * 全部大写：uppercase
- * 全部小写：lowercase
- * 继承：inherit
- */
-text-transform: ${1:value};
 ```

@@ -1,42 +1,29 @@
 # CSS 格式
 
 ## 大纲
-> * 行级对齐：vertical-align (垂直线中分)
-* 块级对齐：text-align (水平线中分)
-* 文本缩进：text-indent
+> * 文本对齐：text-align
+* 文本开头缩进：text-indent
 * 字母间距：letter-spacing
 * 单词间距：word-spacing
 * 空白间距：white-space
 * 行高间距：line-height
 * 列表：list-style
+* 垂直对齐：vertical-align
 
-## 行级对齐：vertical-align
+## 文本对齐：text-align
 > ### 说明
 ```css
 /* == 参数 ==
- * 基线对齐：baseline
- * 上标对齐：text-top
- * 中部对齐：middle
- * 下标对齐：text-bottom
- * 继承：inherit
- */
-vertical-align: ${1:value};
-```
-
-## 块级对齐：text-align
-> ### 说明
-```css
-/* == 参数 ==
- * 左侧对齐：left
- * 中间对齐：center
- * 右侧对齐：right
+ * 文本居左：left
+ * 文本居中：center
+ * 文本居右：right
  * 两端对齐：justify
  * 继承：inherit
  */
 text-align: ${1:value};
 ```
 
-## 文本缩进：text-indent
+## 文本开头缩进：text-indent
 > ### 说明
 ```css
 /* == 参数 ==
@@ -124,4 +111,17 @@ line-height: ${1:value};
  * - 继承：inherit
  */
 list-style: ${1:value};
+```
+
+## 垂直对齐：vertical-align
+> ### 说明
+```css
+/* == 参数 ==
+ * 默认基线对齐：baseline
+ * 把内联元素(如图片)的顶端与文字的顶端对齐：text-top
+ * 把内联元素(如图片)的中端与文本的中端对齐：middle
+ * 把内联元素(如图片)的底端与文字的底端对齐：text-bottom
+ * 继承：inherit
+ */
+vertical-align: ${1:value};
 ```
