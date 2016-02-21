@@ -1,14 +1,25 @@
 # CSS 定位
 
 ## 大纲
-> * 位置：position
+> * 层级：z-index
+* 位置：position
 * 上移：top
 * 下移：bottom
 * 左移：left
 * 右移：right
 * 浮动：float
 * 清除：clear
-* 层级：z-index
+
+## 层级：z-index
+> ### 说明
+```css
+/* == 参数 ==
+ * 自动：auto
+ * 级数：0 到 2147483647
+ * 继承：inherit
+ */
+z-index: ${1:value};
+```
 
 ## 位置：position
 > ### 说明
@@ -97,15 +108,4 @@ float: ${1:value};
  * 继承：inherit
  */
 clear: ${1:value};
-```
-
-## 层级：z-index
-> ### 说明
-```css
-/* == 参数 ==
- * 自动：auto
- * 级数：0 到 2147483647
- * 继承：inherit
- */
-z-index: ${1:value};
 ```
