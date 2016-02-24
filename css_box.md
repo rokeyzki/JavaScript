@@ -51,6 +51,7 @@ ${1:min-}height: ${2:value};
 ```
 
 ## 边框：border
+> ### 说明
 ```css
 /* == 后缀 ==
  * 无：(none)
@@ -88,6 +89,7 @@ border${1:-top}: ${2:border-width} ${3:border-style} ${4:border-color};
 ```
 
 ## 边框宽度：border-width
+> ### 说明
 ```css
 /* == 方向 ==
  * 全：one
@@ -106,6 +108,7 @@ border-width: ${1:value};
 ```
 
 ## 边框样式：border-style
+> ### 说明
 ```css
 /* == 方向 ==
  * 全：one
@@ -125,6 +128,7 @@ border-style: ${1:value};
 ```
 
 ## 边框颜色：border-color
+> ### 说明
 ```css
 /* == 方向 ==
  * 全：one
@@ -144,6 +148,7 @@ border-color: ${1:value};
 ```
 
 ## 边框圆角：border-radius
+> ### 说明
 ```css
 /* == 方向 ==
  * 全：one
@@ -166,6 +171,7 @@ border-radius: ${1:value};
 ```
 
 ## 内边距：padding
+> ### 说明
 ```css
 /* == 后缀 ==
  * 无：(none)
@@ -191,6 +197,7 @@ padding${1:-left}: ${2:value};
 ```
 
 ## 外边距：margin
+> ### 说明
 ```css
 /* == 后缀 ==
  * 无：(none)
@@ -216,6 +223,7 @@ margin${1:-left}: ${2:value};
 ```
 
 ## 盒子限制：box-sizing
+> ### 说明
 ```css
 /* == 参数 ==
  * 内容基准：content-box
@@ -226,6 +234,7 @@ box-sizing: ${1:value};
 ```
 
 ## 盒子阴影：box-shadow
+> ### 说明
 ```css
 /* == 参数 ==
  * 默认值：水平位置(必填) 垂直位置(必填) 模糊距离 阴影尺寸 阴影颜色

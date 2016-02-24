@@ -37,7 +37,6 @@ animation: ${1:value};
 ```
 
 ## 规则：@keyframes
-> ### 说明
 ```css
 @keyframes ${1:name} {
   ${2:0}% {

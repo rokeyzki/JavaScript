@@ -7,6 +7,7 @@
 * 鼠标指针：cursor
 
 ## 内容溢出：overflow
+> ### 说明
 ```css
 /* == 后缀 ==
  * 全部：(none)
@@ -24,6 +25,7 @@ overflow${1:-y}: ${2:value};
 ```
 
 ## 内容裁剪：clip
+> ### 说明
 ```css
 /* == 参数 ==
  * 矩形：rect(0px,60px,200px,0px)
@@ -34,6 +36,7 @@ clip: ${1:value};
 ```
 
 ## 长词换行：word-wrap
+> ### 说明
 ```css
 /* == 参数 ==
  * 浏览器保持默认处理：normal
