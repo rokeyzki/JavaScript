@@ -3,7 +3,7 @@
 ## 大纲
 > * 内容溢出：overflow
 * 内容裁剪：clip
-* 长词换行 word-wrap
+* 长词换行：word-wrap
 * 鼠标指针：cursor
 
 ## 内容溢出：overflow
@@ -37,7 +37,7 @@ clip: ${1:value};
 ```css
 /* == 参数 ==
  * 浏览器保持默认处理：normal
- * 在长单词或长数字自动进行换行：break-word
+ * 对行尾的长单词或长数字自动进行换行：break-word
  */
 word-wrap: break-word;
 ```

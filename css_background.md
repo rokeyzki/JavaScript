@@ -5,10 +5,10 @@
 * 背景颜色：background-color
 * 背景图片路径：background-image
 * 背景图片尺寸：background-size
-* 背景图片位置：background-position
 * 背景图片重复：background-repeat
-* 背景图片起点：background-origin
 * 背景图片吸附：background-attachment
+* 背景图片位置：background-position
+* 背景图片起点：background-origin
 
 ## 背景可视范围：background-clip
 > ### 说明
@@ -58,19 +58,6 @@ background-image: ${1:value};
 background-size: ${1:value};
 ```
 
-## 背景图片位置：background-position
-> ### 说明
-```css
-/* == 参数 ==
- * 中央：center
- * 顶部：top
- * 底部：bottom
- * 左边：left
- * 右边：right
- */
-background-position: ${1:value};
-```
-
 ## 背景图片重复：background-repeat
 > ### 说明
 ```css
@@ -84,17 +71,6 @@ background-position: ${1:value};
 background-repeat: ${1:value};
 ```
 
-## 背景图片起点：background-origin
-> ### 说明
-```css
-/* == 参数 ==
- * 内容基准：content-box
- * 边框基准：border-box
- * 继承：inherit
- */
-background-origin: ${1:value};
-```
-
 ## 背景图片吸附：background-attachment
 > ### 说明
 ```css
@@ -104,4 +80,28 @@ background-origin: ${1:value};
  * 继承：inherit
  */
 background-attachment: ${1:value};
+```
+
+## 背景图片位置：background-position
+> ### 说明
+```css
+/* == 参数 ==
+ * 中央：center
+ * 顶部：top
+ * 底部：bottom
+ * 左边：left
+ * 右边：right
+ */
+background-position: ${1:value};
+```
+
+## 背景图片起点：background-origin
+> ### 说明
+```css
+/* == 参数 ==
+ * 内容基准：content-box
+ * 边框基准：border-box
+ * 继承：inherit
+ */
+background-origin: ${1:value};
 ```
