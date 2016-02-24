@@ -3,13 +3,12 @@
 ## 大纲
 > * 字体栈：font-family
 * 字体尺寸：font-size
-* 字体粗细：font-weight
-* 字体倾斜：font-style
+* 字体粗体：font-weight
+* 字体斜体：font-style
 * 字体颜色：color
 * 文本大小写：text-transform
-* 文本划线：text-decoration
+* 文本下划线：text-decoration
 * 文本阴影：text-shadow
-* 文本渲染：text-rendering
 
 ## 字体栈：font-family
 > ### 说明
@@ -35,7 +34,7 @@ font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino San
 font-size: ${1:value};
 ```
 
-## 字体粗细：font-weight
+## 字体粗体：font-weight
 > ### 说明
 ```css
 /* == 参数 ==
@@ -51,7 +50,7 @@ font-size: ${1:value};
 font-weight: ${1:value};
 ```
 
-## 字体倾斜：font-style
+## 字体斜体：font-style
 > ### 说明
 ```css
 /* == 参数 ==
@@ -90,7 +89,7 @@ color: ${1:value};
 text-transform: ${1:value};
 ```
 
-## 文本划线：text-decoration
+## 文本下划线：text-decoration
 > ### 说明
 ```css
 /* == 参数 ==
@@ -137,17 +136,4 @@ text-decoration: ${1:value};
  * - 继承：inherit
  */
 text-shadow: ${1:value};
-```
-
-## 文本渲染：text-rendering
-> ### 说明
-```css
-/* == 参数 ==
- * 根据性能智能识别：auto
- * 着重字体渲染速度：optimizeSpeed
- * 着重字体渲染清晰度：optimizeLegibility
- * 着重字体渲染排版：geometricPrecision
- * 继承：inherit
- */
-text-rendering: ${1:auto};
 ```

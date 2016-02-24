@@ -8,14 +8,8 @@
 * 边框样式：border-style
 * 边框颜色：border-color
 * 边框圆角：border-radius
-* 轮廓：outline
-* 轮廓宽度：outline-width
-* 轮廓样式：outline-style
-* 轮廓颜色：outline-color
 * 内边距：padding
 * 外边距：margin
-* 内容溢出：overflow
-* 内容裁剪：clip
 * 盒子限制：box-sizing
 * 盒子阴影：box-shadow
 * 媒体查询：@media
@@ -171,92 +165,6 @@ border-color: ${1:value};
 border-radius: ${1:value};
 ```
 
-## 轮廓：outline
-```css
-/* == 参数 ==
- * 默认值：轮廓宽度 轮廓样式 轮廓颜色
- *
- * == 详细说明 ==
- * 1.轮廓宽度：none
- * - 绝对值：px
- * - 相对值：em
- * - 百分比：%
- * - 自动：auto
- * - 继承：inherit
- * 2.轮廓样式：none
- * - 无样式：none
- * - 隐藏：hidden
- * - 实线：solid
- * - 虚线：dashed
- * - 点状：dotted
- * - 继承：inherit
- * 3.轮廓颜色：none
- * - 名字：red
- * - hex：#000000
- * - rgb：rgb(255,0,0)
- * - 透明：transparent
- * - 反转：invert
- * - 继承：inherit
- */
-outline: ${1:outline-width} ${2:outline-style} ${3:outline-color};
-```
-
-## 轮廓宽度：outline-width
-```css
-/* == 方向 ==
- * 全：one
- * 上下、右左：one two
- * 上、右左、下：one two three
- * 上、右、下、左：one two three four
- *
- * == 参数 ==
- * 绝对值：px
- * 相对值：em
- * 百分比：%
- * 自动：auto
- * 继承：inherit
- */
-outline-width: ${1:value};
-```
-
-## 轮廓样式：outline-style
-```css
-/* == 方向 ==
- * 全：one
- * 上下、右左：one two
- * 上、右左、下：one two three
- * 上、右、下、左：one two three four
- *
- * == 参数 ==
- * 无样式：none
- * 隐藏：hidden
- * 实线：solid
- * 虚线：dashed
- * 点状：dotted
- * 继承：inherit
- */
-outline-style: ${1:value};
-```
-
-## 轮廓颜色：outline-color
-```css
-/* == 方向 ==
- * 全：one
- * 上下、右左：one two
- * 上、右左、下：one two three
- * 上、右、下、左：one two three four
- *
- * == 参数 ==
- * 名字：red
- * hex：#000000
- * rgb：rgb(255,0,0)
- * 透明：transparent
- * 反转：invert
- * 继承：inherit
- */
-outline-color: ${1:value};
-```
-
 ## 内边距：padding
 ```css
 /* == 后缀 ==
@@ -307,38 +215,11 @@ padding${1:-left}: ${2:value};
 margin${1:-left}: ${2:value};
 ```
 
-## 内容溢出：overflow
-```css
-/* == 后缀 ==
- * 全部：(none)
- * 水平：-x
- * 垂直：-y
- *
- * == 参数 ==
- * 可见：visible
- * 隐藏：hidden
- * 滚动：scroll
- * 自动：auto
- * 继承：inherit
- */
-overflow${1:-y}: ${2:value};
-```
-
-## 内容裁剪：clip
-```css
-/* == 参数 ==
- * 矩形：rect(0px,60px,200px,0px)
- * 自动：auto
- * 继承：inherit
- */
-clip: ${1:value};
-```
-
 ## 盒子限制：box-sizing
 ```css
 /* == 参数 ==
  * 内容基准：content-box
- * 边框基准：border-box
+ * 边框基准：border-box (内边距 padding 和边框 border 不再会增加元素的宽度和高度)
  * 继承：inherit
  */
 box-sizing: ${1:value};

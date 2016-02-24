@@ -1,4 +1,4 @@
-# CSS 格式
+# CSS 留白
 
 ## 大纲
 > * 文本对齐：text-align
@@ -6,8 +6,8 @@
 * 字母间距：letter-spacing
 * 单词间距：word-spacing
 * 空白间距：white-space
-* 行高间距：line-height
-* 列表：list-style
+* 行高：line-height
+* 列表样式：list-style
 * 垂直对齐：vertical-align
 
 ## 文本对齐：text-align
@@ -73,7 +73,7 @@ word-spacing: ${1:value};
 white-space: ${1:value};
 ```
 
-## 行高间距：line-height
+## 行高：line-height
 > ### 说明
 ```css
 /* == 参数 ==
@@ -86,7 +86,7 @@ white-space: ${1:value};
 line-height: ${1:value};
 ```
 
-## 列表：list-style
+## 列表样式：list-style
 > ### 说明
 ```css
 /* == 参数 ==
