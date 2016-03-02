@@ -6,7 +6,7 @@ COPY package.json /usr/src/app/
 RUN npm install
 COPY . /usr/src/app
 RUN cd docs \
-    && gitbook build \
+    && ./node_modules/.bin/gitbook build \
     && cd ..
 RUN cd blog \
     && npm install \
