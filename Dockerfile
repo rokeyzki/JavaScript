@@ -5,7 +5,13 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 RUN npm install
 COPY . /usr/src/app
-RUN ls
+RUN cd docs \
+    && gitbook build \
+    && cd ..
+RUN cd blog \
+    && npm install \
+    && hexo generate \
+    && cd ..
 
 EXPOSE 80
 
