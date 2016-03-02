@@ -4,7 +4,8 @@
   "description": "oulve package.json",
   "main": "index.html",
   "dependencies": {
-    "gitbook-cli": "^2.0.1"
+    "gitbook-cli": "^2.0.1",
+    "hexo-cli": "^1.0.1"
   },
   "devDependencies": {},
   "scripts": {
