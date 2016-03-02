@@ -2,7 +2,7 @@
   "name": "oulve",
   "version": "1.0.0",
   "description": "oulve package.json",
-  "main": "index.html",
+  "main": "serve.js",
   "dependencies": {
     "gitbook-cli": "^2.0.1",
     "hexo-cli": "^1.0.1"
