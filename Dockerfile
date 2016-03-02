@@ -10,7 +10,7 @@ RUN cd docs \
     && cd ..
 RUN cd blog \
     && npm install \
-    && hexo generate \
+    && node_modules/.bin/hexo generate \
     && cd ..
 
 EXPOSE 80
