@@ -118,7 +118,7 @@ for(key in fooB){
 // 第二种属性枚举方式（枚举实例对象的所有自身属性）：
 var key;
 for (key in fooB){
-    if(fooB.hasOwnPropetty(key)){
+    if(fooB.hasOwnProperty(key)){
         // 只列出实例对象的自身属性
         console.log(key) // 3
     }
