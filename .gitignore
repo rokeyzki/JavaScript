@@ -2,6 +2,6 @@
 .DS_Store
 node_modules
 _book
-public
+/public/*
 #不忽略blog的favicon.ico
-!public/favicon.ico
+!/public/favicon.ico
