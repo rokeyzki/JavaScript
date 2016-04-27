@@ -3,3 +3,5 @@
 node_modules
 _book
 public
+#不忽略blog的favicon.ico
+!public/favicon.ico
