@@ -1,0 +1,27 @@
+{
+    "author": "Charles Lim <hi@oulve.com>",
+    "description": "JavaScript 手册",
+    "extension": null,
+    "generator": "site",
+    "isbn": null,
+    "links": {
+        "sharing": {
+            "all": null,
+            "facebook": null,
+            "google": null,
+            "twitter": null,
+            "weibo": "http://weibo.com/208887170"
+        },
+        "sidebar": {
+            "About Me": "http://oulve.com",
+            "Charles Lim's Blog": "http://oulve.com/blog/public/"
+        }
+    },
+    "output": null,
+    "plugins": [],
+    "title": "JavaScript 手册",
+    "variables": {},
+    "search": {
+        "maxIndexSize": 1000000000
+    }
+}
