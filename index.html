@@ -9,7 +9,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
 <link rel="bookmark" href="./favicon.ico" />
 
-<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+<link href="https://cdn.bootcss.com/normalize/3.0.3/normalize.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/welcome.css" />
 <link rel="stylesheet" type="text/css" href="css/component.css" />
 
@@ -24,15 +24,17 @@
 				<canvas id="welcome-canvas"></canvas>
 				<div class="main-title">
 					<p>Charles <span class="thin">Lim</span></p>
-					<div class="sub-title"><a href="./blog/public/">Blog 博客</a> / <a href="./docs/_book/">Docs 文档</a></div>
+					<div class="sub-title">
+						<span id="blog"><a href="http://rokeyzki-oulve-com.daoapp.io/blog/public/">Blog 博客</a></span>
+						<span id="split">/</span>
+						<span id="docs"><a href="http://rokeyzki-oulve-com.daoapp.io/docs/_book/">Docs 文档</a></span>
+					</div>
 				</div>
-				<!-- <h1 class="main-title">Connect <span class="thin">Three</span></h1> -->
 			</div>
 		</div>
 	</div>
 	<script src="js/TweenLite.min.js"></script>
 	<script src="js/EasePack.min.js"></script>
-	<script src="js/rAF.js"></script>
 	<script src="js/welcome.js"></script>
 </body>
 </html>

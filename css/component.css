@@ -45,4 +45,17 @@
 	.welcome .main-title {
 		font-size: 3em;
 	}
+
+	#welcome-canvas {
+		display: none;
+	}
+
+	#split {
+		display: none;
+	}
+
+	#blog, #docs {
+		display: block;
+		margin-bottom: 10px;
+	}
 }
