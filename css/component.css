@@ -54,7 +54,7 @@
 		display: none;
 	}
 
-	#blog, #docs {
+	#blog, #docs, #dome {
 		display: block;
 		margin-bottom: 10px;
 	}
