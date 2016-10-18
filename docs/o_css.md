@@ -269,7 +269,7 @@
     * x y
 
 ### circle
-```
+```css
 #circle {
   width: 100px;
   height: 50px;
@@ -281,7 +281,7 @@
 ```
 
 ### square
-```
+```css
 #square {
   width: 100px;
   height: 50px;
@@ -294,7 +294,7 @@
 ```
 
 ### center
-```
+```css
 #center {
   max-width: 300px;
   background-color: #666;

@@ -122,7 +122,8 @@
     * Element.prototype.style.setProperty()
     * Element.prototype.style.removeProperty()
     * getStyle
-```
+
+```javascript
 function getStyle(obj, prop){
   if(obj.currentStyle){
     return obj.currentStyle[prop];
@@ -134,7 +135,8 @@ function getStyle(obj, prop){
 
 ### Event
 * 预备方法
-```
+
+```javascript
 document.onreadystatechange = function(){
   if(this.readtState == "complete"){
     // todo

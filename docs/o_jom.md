@@ -54,7 +54,8 @@
 * 方法
     * var foo = {"a": 1, "b": 2};
 * 闭包函数OOP
-```
+
+```javascript
 // 封装
 var math = function(){
   var _flag = 10;
@@ -75,8 +76,10 @@ var math = (function(m){
 math.minus(1, 2);
 ```
 
+
 * 构造函数OOP
-```
+
+```javascript
 // 封装
 function ParentClass(a, b){
   this.A = a;
@@ -116,15 +119,16 @@ var foo = new ChildClass(1, 2, 3, 4);
     * a = a || 1;
     * var a = arguments[0]? arguments[0]: 1;
 * 类型
-    * 普通函数
-```
+
+```javascript
+// 普通函数
 function foo(){
   // return 1;
 }
 ```
-
-    * 内调函数
-```
+ 
+```javascript
+// 内调函数
 function foo(x){
   if(x > 2){
     return foo(x-1) + foo(x-2);
@@ -135,8 +139,8 @@ function foo(x){
 // foo(3);
 ```
 
-    * 闭包函数
-```
+```javascript
+// 闭包函数
 function foo(x){
   return function(){
     return x++;
@@ -146,8 +150,8 @@ var test = foo(1);
 test();
 ```
 
-    * 构造函数
-```
+```javascript
+// 构造函数
 function Foo(){
   this.one = 1;
 }
