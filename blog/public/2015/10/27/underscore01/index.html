@@ -1,0 +1,633 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/blog/public/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/blog/public/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="林川淇" />
+
+
+
+  <meta name="keywords" content="Charles Lim" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/blog/public/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="underscore 源码版本 1.8.2
+
+起因很多人向我推荐研究js，可以看看一些第三方js类库的源码，而源码之中最好解读也最简短的就是underscore，它也是我平常比较喜欢的一个库，因为它性价比高：体积小、能力强。打开一看，才1000多行，试着读了一下，确实很值得一看，所以对精彩部分做了一下整理。
+闭包整个函数在一个闭包中，避免污染全局变量。通过传入this（其实就是window对象）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="underscore源码通读（一）">
+<meta property="og:url" content="http://oulve.com/blog/2015/10/27/underscore01/index.html">
+<meta property="og:site_name" content="Charles Lim's Blog">
+<meta property="og:description" content="underscore 源码版本 1.8.2
+
+起因很多人向我推荐研究js，可以看看一些第三方js类库的源码，而源码之中最好解读也最简短的就是underscore，它也是我平常比较喜欢的一个库，因为它性价比高：体积小、能力强。打开一看，才1000多行，试着读了一下，确实很值得一看，所以对精彩部分做了一下整理。
+闭包整个函数在一个闭包中，避免污染全局变量。通过传入this（其实就是window对象）">
+<meta property="og:updated_time" content="2016-03-02T14:18:07.222Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="underscore源码通读（一）">
+<meta name="twitter:description" content="underscore 源码版本 1.8.2
+
+起因很多人向我推荐研究js，可以看看一些第三方js类库的源码，而源码之中最好解读也最简短的就是underscore，它也是我平常比较喜欢的一个库，因为它性价比高：体积小、能力强。打开一看，才1000多行，试着读了一下，确实很值得一看，所以对精彩部分做了一下整理。
+闭包整个函数在一个闭包中，避免污染全局变量。通过传入this（其实就是window对象）">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> underscore源码通读（一） // Charles Lim's Blog </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/blog/public/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Charles Lim's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/public/./" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/public/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/public/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              underscore源码通读（一）
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-27T12:51:00+00:00" content="2015-10-27">
+            2015-10-27
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>underscore 源码版本 1.8.2</p>
+</blockquote>
+<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>很多人向我推荐研究js，可以看看一些第三方js类库的源码，而源码之中最好解读也最简短的就是underscore，它也是我平常比较喜欢的一个库，因为它性价比高：体积小、能力强。打开一看，才1000多行，试着读了一下，确实很值得一看，所以对精彩部分做了一下整理。</p>
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><p>整个函数在一个闭包中，避免污染全局变量。通过传入this（其实就是window对象）来改变函数的作用域。和jquery的自执行函数其实是异曲同工之妙。这种传入全局变量的方式一方面有利于代码阅读，另一方面方便压缩。</p>
+<p>underscore写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;.call(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure>
+<a id="more"></a> 
+<p>jquery写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">window, undefined</span>) </span>&#123; </span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;)(<span class="built_in">window</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="原型赋值"><a href="#原型赋值" class="headerlink" title="原型赋值"></a>原型赋值</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">18</span> <span class="keyword">var</span> ArrayProto = <span class="built_in">Array</span>.prototype, ObjProto = <span class="built_in">Object</span>.prototype, FuncProto = <span class="built_in">Function</span>.prototype;</span><br></pre></td></tr></table></figure>
+<p><code>Array</code>,<code>Object</code>,<code>Function</code> 这些本质都是函数，获取函数原型属性prototype</p>
+<p>也是为了便于压缩。简单解释一下，如果代码中要扩展属性，可能这样写</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.prototype.xxx = ...</span><br></pre></td></tr></table></figure>
+<p>而这种代码是不可压缩的，Object,prototype这些名字改了浏览器就不认得了。</p>
+<p>但是上面的代码中创建了ObjProto之后，源生代码经过压缩之后，ObjProto就可能命名成a变量，那么原来的代码就压缩成</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">a.xxx = ...</span><br></pre></td></tr></table></figure>
+<p>一个小建议就是凡事一段代码被使用两次以上都建议定义变量(函数)，有利于修改和压缩代码。</p>
+<h1 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">29</span> <span class="keyword">var</span></span><br><span class="line"></span><br><span class="line">nativeIsArray = <span class="built_in">Array</span>.isArray,</span><br><span class="line"></span><br><span class="line">nativeKeys = <span class="built_in">Object</span>.keys,</span><br><span class="line"></span><br><span class="line">nativeBind = FuncProto.bind,</span><br><span class="line"></span><br><span class="line">nativeCreate = <span class="built_in">Object</span>.create;</span><br></pre></td></tr></table></figure>
+<p>这种定义的方式省略了多余的var，格式也美观，让我想到了sublime中的一个插件alignment。</p>
+<h1 id="数据判断"><a href="#数据判断" class="headerlink" title="数据判断"></a>数据判断</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1194</span> _.isElement = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> !!(obj &amp;&amp; obj.nodeType === <span class="number">1</span>); </span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>判断是否为dom，dom的nodeType属性值为1。这里用!!强转为boolean值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1200</span> _.isArray = nativeIsArray || <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> toString.call(obj) === <span class="string">'[object Array]'</span>; </span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>判断是否为数组。由于Array.isArray函数是ECMAScript 5新增函数，所以为了兼容之前的版本，在原生判断函数不存在的情况下，后面重写了一个判断函数。用call函数来改变作用域可以避免当obj没有toString函数报错的情况。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1205</span> _.isObject = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> type = <span class="keyword">typeof</span> obj; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> type === <span class="string">'function'</span> || type === <span class="string">'object'</span> &amp;&amp; !!obj;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>判断是否为对象。先用typeof判断数据类型。函数也属于对象，但是由于typeof null也是object，所以用!!obj来区分这种情况。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1219</span> <span class="keyword">if</span> (!_.isArguments(<span class="built_in">arguments</span>)) &#123;</span><br><span class="line"></span><br><span class="line">    _.isArguments = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> _.has(obj, <span class="string">'callee'</span>);</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>判断是否为arguments,很简单，arguments有个特有属性callee。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1239</span> _.isNaN = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> _.isNumber(obj) &amp;&amp; obj !== +obj; </span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>NaN这个值有两个特点：1.它是一个数；2.不等于它自己。</p>
+<p>‘+’放在变量前面一般作用是把后面的变量变成一个数，在这里已经判断为一个数仍加上’+’，是为了把var num = new Number()这种没有值的数字也归为NaN。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1244</span> _.isBoolean = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> obj === <span class="literal">true</span> || obj === <span class="literal">false</span> || toString.call(obj) === <span class="string">'[object Boolean]'</span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>是不是以为如果是布尔值不是true就是false？还有第3中情况var b = new Boolean()。b也是布尔值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1254</span> _.isUndefined = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> obj === <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>用void 0来表示undefined，非常有意思的小技巧。不过常用方式还是if(xxx)来判断是不是undefined。</p>
+<p>eq是underscore的一个内置函数，代码太长，不粘贴了。isEmpty调用了这个函数。整个思路由易到难，先用===比较简单数据，然后用toString来判断是否相等，最后用递归处理复杂的Array、Function和Object对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1091</span> <span class="keyword">if</span> (a === b) <span class="keyword">return</span> a !== <span class="number">0</span> || <span class="number">1</span> / a === <span class="number">1</span> / b;</span><br></pre></td></tr></table></figure>
+<p>这里为了区分’+0’和’-0’，因为这两个数对计算结果是有影响的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span> (className !== toString.call(b)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (className) &#123; </span><br><span class="line"></span><br><span class="line">        <span class="comment">// Strings, numbers, regular expressions, dates, and booleans are compared by value. </span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'[object RegExp]'</span>: </span><br><span class="line"></span><br><span class="line">        <span class="comment">// RegExps are coerced to strings for comparison (<span class="doctag">Note:</span> '' + /a/i === '/a/i')</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'[object String]'</span>: </span><br><span class="line"></span><br><span class="line">        <span class="comment">// Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is </span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// equivalent to `new String("5")`. </span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span> + a === <span class="string">''</span> + b; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'[object Number]'</span>: </span><br><span class="line"></span><br><span class="line">        <span class="comment">// `NaN`s are equivalent, but non-reflexive. </span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Object(NaN) is equivalent to NaN if (+a !== +a) </span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> +b !== +b; </span><br><span class="line"></span><br><span class="line">        <span class="comment">// An `egal` comparison is performed for other numeric values. </span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> +a === <span class="number">0</span> ? <span class="number">1</span> / +a === <span class="number">1</span> / b : +a === +b; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'[object Date]'</span>: </span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'[object Boolean]'</span>: </span><br><span class="line"></span><br><span class="line">        <span class="comment">// Coerce dates and booleans to numeric primitive values. Dates are compared by their </span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// millisecond representations. Note that invalid dates with millisecond representations </span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// of `NaN` are not equivalent. </span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> +a === +b;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里是对简单对象进行判断，分为两类，一类是String和RegExp，这种数据直接toString然后判断。另一类是Number、Date和Boolean，通过转换成数字判断。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1150</span> aStack.push(a);</span><br><span class="line"></span><br><span class="line">bStack.push(b);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (areArrays) &#123; </span><br><span class="line"></span><br><span class="line">    length = a.length; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (length !== b.length) <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (length--) &#123; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!eq(a[length], b[length], aStack, bStack)) <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> keys = _.keys(a), key;</span><br><span class="line"></span><br><span class="line">    length = keys.length; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (_.keys(b).length !== length) <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (length--) &#123; </span><br><span class="line"></span><br><span class="line">        key = keys[length]; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!(_.has(b, key) &amp;&amp; eq(a[key], b[key], aStack, bStack))) <span class="keyword">return</span> <span class="literal">false</span>;   </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">aStack.pop();</span><br><span class="line"></span><br><span class="line">bStack.pop();</span><br></pre></td></tr></table></figure>
+<p>对于数组和对象只能用递归了，同时用aStack和bStack来暂存递归中的子对象。这里一个小技巧的就是先判断数组/属性的长度，如果不相等可以有效地减少递归。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/public/2015/10/28/underscore02/" rel="prev">underscore源码通读（二）</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/public/2014/10/17/hello-world/" rel="next">Hello World</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/blog/public/images/default_avatar.jpg" alt="Charles Lim" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Charles Lim</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">林川淇</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/public/archives">
+              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/blog/public/tags">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://oulve.com" target="_blank">HomePage</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rokeyzki" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/208887170" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://xueqiu.com/P/ZH544289" target="_blank">XueQiu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包"><span class="nav-number">2.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型赋值"><span class="nav-number">3.</span> <span class="nav-text">原型赋值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#格式"><span class="nav-number">4.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据判断"><span class="nav-number">5.</span> <span class="nav-text">数据判断</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Lim</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/blog/public/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/blog/public/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/blog/public/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/blog/public/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/blog/public/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/blog/public/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/blog/public/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/blog/public/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/blog/public/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

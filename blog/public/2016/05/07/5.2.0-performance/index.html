@@ -1,0 +1,658 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/blog/public/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/blog/public/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="林川淇" />
+
+
+
+  <meta name="keywords" content="Charles Lim" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/blog/public/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="网站性能直接影响到了网站的响应时间、吞吐量等等，也是运维、开发一系列技术的体现。
+网站性能监测网站性能监测
+
+网站可用性是网站性能监测的重要指标之一，表示在一段时间内，网站处于“正常状态”的机率。
+
+
+DNS 解析
+内存、硬盘等等
+网页打开速度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网站性能">
+<meta property="og:url" content="http://oulve.com/blog/2016/05/07/5.2.0-performance/index.html">
+<meta property="og:site_name" content="Charles Lim's Blog">
+<meta property="og:description" content="网站性能直接影响到了网站的响应时间、吞吐量等等，也是运维、开发一系列技术的体现。
+网站性能监测网站性能监测
+
+网站可用性是网站性能监测的重要指标之一，表示在一段时间内，网站处于“正常状态”的机率。
+
+
+DNS 解析
+内存、硬盘等等
+网页打开速度">
+<meta property="og:updated_time" content="2016-05-07T07:27:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网站性能">
+<meta name="twitter:description" content="网站性能直接影响到了网站的响应时间、吞吐量等等，也是运维、开发一系列技术的体现。
+网站性能监测网站性能监测
+
+网站可用性是网站性能监测的重要指标之一，表示在一段时间内，网站处于“正常状态”的机率。
+
+
+DNS 解析
+内存、硬盘等等
+网页打开速度">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 网站性能 // Charles Lim's Blog </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/blog/public/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Charles Lim's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/public/./" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/public/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/public/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              网站性能
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-07T15:45:08+00:00" content="2016-05-07">
+            2016-05-07
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>网站性能直接影响到了网站的响应时间、吞吐量等等，也是运维、开发一系列技术的体现。</p>
+<h3 id="网站性能监测"><a href="#网站性能监测" class="headerlink" title="网站性能监测"></a>网站性能监测</h3><p>网站性能监测</p>
+<blockquote>
+<p>网站可用性是网站性能监测的重要指标之一，表示在一段时间内，网站处于“正常状态”的机率。</p>
+</blockquote>
+<ul>
+<li>DNS 解析</li>
+<li>内存、硬盘等等</li>
+<li>网页打开速度</li>
+</ul>
+<a id="more"></a>
+<h4 id="应用性能指数"><a href="#应用性能指数" class="headerlink" title="应用性能指数"></a>应用性能指数</h4><blockquote>
+<p>Apdex 联盟，一个由众多网络分析技术公司和测量工业组成的联盟组织，它们联合起来开发了“应用性能指数”即“Apdex”(Application Performance Index)，用一句话来概括，Apdex 是用户对应用性能满意度的量化值。它提供了一个统一的测量和报告用户体验的方法，第一次把最终用户的体验和应用性能联系在了一起。</p>
+</blockquote>
+<p>任务响应时间定义为：当用户操作（鼠标点击、输入、回车）开始到系统（客户机、网络、服务器）响应从而用户能继续这个过程所经过的时间。这些等待时间定义了应用程序的“响应度”。该指数是基于应用程序响应度的三个方面：</p>
+<ul>
+<li>满意:用户充分工作。这就是目标时间（T秒），即在此时间里用户的工作没有因应用程序的响应时间而受阻，如3秒。</li>
+<li>容忍:用户感觉到响应滞后，响应时间大于 T，但能继续这个过程，如3～12秒。</li>
+<li>挫折:响应时间大于 F 秒的性能是不能接受的，用户可能放弃这个过程。F 等于 T×4，在本例子中为12秒。</li>
+</ul>
+<h3 id="网站性能"><a href="#网站性能" class="headerlink" title="网站性能"></a>网站性能</h3><p>针对网站性能优化领域，网上已经有相当多的总结，这里只罗列一些常见（我用过）的策略。</p>
+<h4 id="减少-HTTP-请求"><a href="#减少-HTTP-请求" class="headerlink" title="减少 HTTP 请求"></a>减少 HTTP 请求</h4><p>从网上查找的情况分类来看，有下面的一些情况：</p>
+<ul>
+<li>合并 JavaScript 和 CSS。只是这种方式需要好好评估，因为合并过多的 JavaScript，可能会导致 JavaScript 文件过大。一个大的文件将增加 Load时间，导致不好的用户体验。</li>
+<li>CSS Sprites。即将一个页面涉及到的所有零星图片都包含到一张大图中去。值得注意的是，像 Logo 这一类文件将不要加到里面去了。</li>
+<li>拆分初始化负载。将页面加载时需要的一堆 JavaScript 文件，分成两部分：渲染页面所必需的和其他的。页面初始化时，只加载必须的，其余的等会加载。</li>
+<li>划分主域。将资源划分的请求划分到几个不同的域上，来加速资源请求。</li>
+</ul>
+<p>对于我这样的懒人来说，我使用 Google 出品的 <a href="https://developers.google.com/speed/pagespeed/?hl=zh-CN" target="_blank" rel="external">PageSpeed</a>。它主要的功能是针对前端页面而进行服务器端的优化，对前端设计人员来说，可以省去优化 css、js 以及图片的过程。它可以对 CSS 和 JavaScript 压缩、合并、级联、内联，生成一个新的 Script 和 CSS 文件 。还有图像优化：剥离元数据、动态调整，重新压缩，如针对 Chrome 浏览器生成 WebP 文件。还可以推迟图像和 JavaScript 加载。</p>
+<h4 id="页面内部优化"><a href="#页面内部优化" class="headerlink" title="页面内部优化"></a>页面内部优化</h4><p>HTML 页面内的优化的目的便是：<strong>尽快渲染出页面</strong>。常见的优化策略便是：</p>
+<ul>
+<li>将 CSS 放在顶部，即早点渲染出页面及其样式。</li>
+<li>将 JavaScript 放在底部。如果有后台渲染机制，那么就应该将 JS 放到页面底部来加速页面加载。如果是单页面应用，那么这个 JS 就应该在页面顶部。</li>
+<li>压缩 HTML。在我们写模板的过程中，一些判断可能会导致页面有过多的空格。压缩这些 HTML，可以稍微提高一下页面速度。</li>
+</ul>
+<p>这里的大部分内容都应该通过修改代码来完成。</p>
+<h4 id="启用缓存"><a href="#启用缓存" class="headerlink" title="启用缓存"></a>启用缓存</h4><p>前面的缓存一节里，我们说过了一些缓存的策略，我们再稍微提一下。</p>
+<ul>
+<li>后台优化，如数据库端缓存</li>
+<li>启用页面缓存，即应用层缓存</li>
+</ul>
+<h4 id="减少下载量"><a href="#减少下载量" class="headerlink" title="减少下载量"></a>减少下载量</h4><p>简单地来说，就是减少对服务器的请求：</p>
+<ul>
+<li>使用 CDN</li>
+<li>使用外部 JavaScript 和 CSS</li>
+<li>缓存：使用 gzip 压缩、添加 Expires 头、配置 ETag、使 AjaX 可缓存</li>
+</ul>
+<h4 id="网络连接上的优化"><a href="#网络连接上的优化" class="headerlink" title="网络连接上的优化"></a>网络连接上的优化</h4><p>主要就是对域名到服务器进行优化，因此从方法上有：</p>
+<ul>
+<li>DNS 域名解析加速</li>
+<li>减少 DNS 查找</li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/public/2016/05/08/5.3.0-seo/" rel="prev">SEO</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/public/2016/05/07/5.1.2-ga/" rel="next">用户数据分析：Google Analytics</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/blog/public/images/default_avatar.jpg" alt="Charles Lim" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Charles Lim</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">林川淇</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/public/archives">
+              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/blog/public/tags">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://oulve.com" target="_blank">HomePage</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rokeyzki" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/208887170" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://xueqiu.com/P/ZH544289" target="_blank">XueQiu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#网站性能监测"><span class="nav-number">1.</span> <span class="nav-text">网站性能监测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用性能指数"><span class="nav-number">1.1.</span> <span class="nav-text">应用性能指数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网站性能"><span class="nav-number">2.</span> <span class="nav-text">网站性能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#减少-HTTP-请求"><span class="nav-number">2.1.</span> <span class="nav-text">减少 HTTP 请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#页面内部优化"><span class="nav-number">2.2.</span> <span class="nav-text">页面内部优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启用缓存"><span class="nav-number">2.3.</span> <span class="nav-text">启用缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#减少下载量"><span class="nav-number">2.4.</span> <span class="nav-text">减少下载量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络连接上的优化"><span class="nav-number">2.5.</span> <span class="nav-text">网络连接上的优化</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Lim</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/blog/public/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/blog/public/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/blog/public/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/blog/public/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/blog/public/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/blog/public/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/blog/public/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/blog/public/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/blog/public/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

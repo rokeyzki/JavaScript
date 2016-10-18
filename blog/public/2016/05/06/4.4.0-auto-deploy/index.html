@@ -1,0 +1,641 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/blog/public/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/blog/public/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="林川淇" />
+
+
+
+  <meta name="keywords" content="Charles Lim" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/blog/public/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="优化我们开发流程有一个很重要的步骤就是：让部署自动化。通过部署自动化，我们可以大大缩减我们的开发周期，加快软件交付流程。下图是一个自动化部署的流程图：
+
+从下图中我们可以得到下面的五个步骤：
+
+获取源码
+获取依赖
+构建软件包
+生成/上传安装包
+目标平台安装/配置
+
+这个过程可能和之前的 Web 项目构建过程差不多，然而却多了好几步。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动化部署">
+<meta property="og:url" content="http://oulve.com/blog/2016/05/06/4.4.0-auto-deploy/index.html">
+<meta property="og:site_name" content="Charles Lim's Blog">
+<meta property="og:description" content="优化我们开发流程有一个很重要的步骤就是：让部署自动化。通过部署自动化，我们可以大大缩减我们的开发周期，加快软件交付流程。下图是一个自动化部署的流程图：
+
+从下图中我们可以得到下面的五个步骤：
+
+获取源码
+获取依赖
+构建软件包
+生成/上传安装包
+目标平台安装/配置
+
+这个过程可能和之前的 Web 项目构建过程差不多，然而却多了好几步。">
+<meta property="og:image" content="http://growth.phodal.com/assets/article/chapter4/auto-deployment.png">
+<meta property="og:image" content="http://growth.phodal.com/assets/article/chapter4/hierarchy-vs-graph.png">
+<meta property="og:image" content="http://growth.phodal.com/assets/article/chapter4/rpm-deploy.jpg">
+<meta property="og:image" content="http://growth.phodal.com/assets/article/chapter4/rpm-koji.jpg">
+<meta property="og:updated_time" content="2016-05-06T01:27:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自动化部署">
+<meta name="twitter:description" content="优化我们开发流程有一个很重要的步骤就是：让部署自动化。通过部署自动化，我们可以大大缩减我们的开发周期，加快软件交付流程。下图是一个自动化部署的流程图：
+
+从下图中我们可以得到下面的五个步骤：
+
+获取源码
+获取依赖
+构建软件包
+生成/上传安装包
+目标平台安装/配置
+
+这个过程可能和之前的 Web 项目构建过程差不多，然而却多了好几步。">
+<meta name="twitter:image" content="http://growth.phodal.com/assets/article/chapter4/auto-deployment.png">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 自动化部署 // Charles Lim's Blog </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/blog/public/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Charles Lim's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/public/./" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/public/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/public/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              自动化部署
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-06T13:45:08+00:00" content="2016-05-06">
+            2016-05-06
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>优化我们开发流程有一个很重要的步骤就是：让部署自动化。通过部署自动化，我们可以大大缩减我们的开发周期，加快软件交付流程。下图是一个自动化部署的流程图：</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter4/auto-deployment.png" alt="自动化部署"></p>
+<p>从下图中我们可以得到下面的五个步骤：</p>
+<ul>
+<li>获取源码</li>
+<li>获取依赖</li>
+<li>构建软件包</li>
+<li>生成/上传安装包</li>
+<li>目标平台安装/配置</li>
+</ul>
+<p>这个过程可能和之前的 Web 项目构建过程差不多，然而却多了好几步。</p>
+<a id="more"></a>
+<p>在前面的章节里，我们已经使用了版本管理系统来管理我们的源码。因此，在这里对于获取源码的介绍就比较简单了——我们只需要在我们的 CI（持续集成）服务器上使用 <code>git clone</code> 这一类的方法来获取我们的源码即可。</p>
+<h3 id="依赖与包仓库"><a href="#依赖与包仓库" class="headerlink" title="依赖与包仓库"></a>依赖与包仓库</h3><p>获取完源码后，我们就需要开始下载软件包依赖。无论是 Python、Ruby、Java，还是 JavaScript 都需要这样的一个过程。软件开发已经从大教堂式的开发走向了集市——开源软件改变了这一切。</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter4/hierarchy-vs-graph.png" alt="大教堂与集市"></p>
+<p>过去我们需要大系统的内部构建我们使用的依赖，现在我们更多地借助于外部的库来实现这些功能。这也意味着，如果在这一个节点里出现了意外——软件被删除，那么这个系统将陷入瘫痪的状态。如之前在 NPM 圈发生了“一个 17 行的模块引发的血案”——即 left-pad 工具模块被作者从 NPM 上撤下，所有直接或者间接依赖这个模块的 NPM 的软件包都挂掉了。因为我们依赖于公有的包服务，所以系统便严重依赖于外部条件。</p>
+<p>这时候一种简单、有效的方案就是搭建自己的包服务。如使用 Java 技术栈的项目，就会使用 Nexus 搭建自己的 Maven 私有服务。我们的软件依赖包将会依赖于我们自己的服务，此时会产生的主要问题可能就是：我们的软件包不是最新的。但是对于追求稳定的项目来说，这个并不是必须的需求，反而这也是一个优势。</p>
+<h3 id="构建软件包"><a href="#构建软件包" class="headerlink" title="构建软件包"></a>构建软件包</h3><p>在一些编译型语言里，在我们运行包测试后，我们将会得到一个软件包。如 Jar 包，它是 Java 中所特有一种压缩文档。Jar 包无法直接安装使用，虽然我们可以直接运行这个 Jar 包，但是我们需要通过一些手段将这个 Jar 包拷贝到我们的服务器上，然后运行。在特定的时候，我们还需要修改配置才能完成我们的工作。</p>
+<p>因此，使用 RPM 或者 DEB 包会是一种更好的选择。RPM 全称是 Red Hat Package Manager（Red Hat包管理器），它工作于 Red Hat Linux 以及其它 Linux 和 UNIX 系统，可被任何人使用。如下图是 RPM 包的构建过程：</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter4/rpm-deploy.jpg" alt="RPM Build Process"></p>
+<p>要构建一个标准的 RPM 包，我们需要创建 .spec文件，这个文件包含软件打包的全部信息——如包的 Summary、Name、Version、Copyright、Vendor 等等。在产生完这一个配置文件后，执行 rpmbuild 命令，系统会按照步骤生成目标 RPM 包。</p>
+<h3 id="上传和安装软件包"><a href="#上传和安装软件包" class="headerlink" title="上传和安装软件包"></a>上传和安装软件包</h3><p>生成对应的软件包后，我们就可以将其上传到 Koji 上，它是 Fedora 社区的编译系统。如下图所示：</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter4/rpm-koji.jpg" alt="RPM Build Process"></p>
+<p>如果我们已经对我们的所有目标操作系统配置过，即配置好了软件源，那么我们就可以直接在我们的服务器上使用包管理工具安装，如<code>yum install</code>。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/public/2016/05/06/5.0.0-data-analytics/" rel="prev">数据分析</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/public/2016/05/05/4.3.1-configurable/" rel="next">可配置</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/blog/public/images/default_avatar.jpg" alt="Charles Lim" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Charles Lim</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">林川淇</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/public/archives">
+              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/blog/public/tags">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://oulve.com" target="_blank">HomePage</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rokeyzki" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/208887170" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://xueqiu.com/P/ZH544289" target="_blank">XueQiu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖与包仓库"><span class="nav-number">1.</span> <span class="nav-text">依赖与包仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建软件包"><span class="nav-number">2.</span> <span class="nav-text">构建软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传和安装软件包"><span class="nav-number">3.</span> <span class="nav-text">上传和安装软件包</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Lim</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/blog/public/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/blog/public/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/blog/public/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/blog/public/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/blog/public/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/blog/public/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/blog/public/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/blog/public/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/blog/public/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

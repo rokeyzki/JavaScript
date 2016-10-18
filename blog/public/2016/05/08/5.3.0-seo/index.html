@@ -1,0 +1,737 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/blog/public/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/blog/public/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="林川淇" />
+
+
+
+  <meta name="keywords" content="Charles Lim" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/blog/public/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="这是一个老的，有些过时纸，但非常平易近人，甚至在我们中间的非白皮书的读者图标微笑什么每个程序员都应该知道的关于搜索引擎优化和他们绝对概念的解释更详细，我只提一笔带过。
+
+搜索时发生什么了?
+
+用户输入查询内容
+查询处理以及分词技术
+确定搜索意图及返回相关、新鲜的内容
+
+
+为什么需要 SEO?
+这是一个有趣的问题，答案总会来源于为网站带来更多的流量。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SEO">
+<meta property="og:url" content="http://oulve.com/blog/2016/05/08/5.3.0-seo/index.html">
+<meta property="og:site_name" content="Charles Lim's Blog">
+<meta property="og:description" content="这是一个老的，有些过时纸，但非常平易近人，甚至在我们中间的非白皮书的读者图标微笑什么每个程序员都应该知道的关于搜索引擎优化和他们绝对概念的解释更详细，我只提一笔带过。
+
+搜索时发生什么了?
+
+用户输入查询内容
+查询处理以及分词技术
+确定搜索意图及返回相关、新鲜的内容
+
+
+为什么需要 SEO?
+这是一个有趣的问题，答案总会来源于为网站带来更多的流量。">
+<meta property="og:image" content="http://growth.phodal.com/assets/article/chapter5/search-engine-arch.jpg">
+<meta property="og:image" content="http://growth.phodal.com/assets/article/chapter5/my-website-seo.jpg">
+<meta property="og:updated_time" content="2016-05-08T04:34:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SEO">
+<meta name="twitter:description" content="这是一个老的，有些过时纸，但非常平易近人，甚至在我们中间的非白皮书的读者图标微笑什么每个程序员都应该知道的关于搜索引擎优化和他们绝对概念的解释更详细，我只提一笔带过。
+
+搜索时发生什么了?
+
+用户输入查询内容
+查询处理以及分词技术
+确定搜索意图及返回相关、新鲜的内容
+
+
+为什么需要 SEO?
+这是一个有趣的问题，答案总会来源于为网站带来更多的流量。">
+<meta name="twitter:image" content="http://growth.phodal.com/assets/article/chapter5/search-engine-arch.jpg">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> SEO // Charles Lim's Blog </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/blog/public/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Charles Lim's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/public/./" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/public/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/public/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              SEO
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-08T13:45:08+00:00" content="2016-05-08">
+            2016-05-08
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>这是一个老的，有些过时纸，但非常平易近人，甚至在我们中间的非白皮书的读者图标微笑什么每个程序员都应该知道的关于搜索引擎优化和他们绝对概念的解释更详细，我只提一笔带过。</p>
+</blockquote>
+<p><strong>搜索时发生什么了?</strong></p>
+<ul>
+<li>用户输入查询内容</li>
+<li>查询处理以及分词技术</li>
+<li>确定搜索意图及返回相关、新鲜的内容</li>
+</ul>
+<p><img src="http://growth.phodal.com/assets/article/chapter5/search-engine-arch.jpg" alt="search-engine-arch"></p>
+<p><strong>为什么需要 SEO?</strong></p>
+<p>这是一个有趣的问题，答案总会来源于<code>为网站带来更多的流量</code>。</p>
+<a id="more"></a>
+<h3 id="爬虫与索引"><a href="#爬虫与索引" class="headerlink" title="爬虫与索引"></a>爬虫与索引</h3><p>我们先看看来自谷歌的爬虫工作的一点内容</p>
+<blockquote>
+<p>抓取是 Googlebot 发现新网页并更新这些网页以将网页添加到 Google 索引中的过程。</p>
+<p>我们使用许多计算机来获取（或”抓取”）网站上的大量网页。执行获取任务的程序叫做 Googlebot（也被称为漫游器或信息采集软件）。Googlebot 使用算法来进行抓取：计算机程序会确定要抓取的网站、抓取频率以及从每个网站中获取的网页数量。</p>
+<p>Google 的抓取过程是根据网页网址的列表进行的，该列表是在之前进行的抓取过程中形成的，且随着网站管理员所提供的站点地图数据不断进行扩充。Googlebot 在访问每个网站时，会检测每个网页上的链接，并将这些链接添加到它要抓取的网页列表中。新建立的网站、对现有网站所进行的更改以及无效链接都会被记录下来，并用于更新 Google 索引。</p>
+</blockquote>
+<p>也就是如原文所说:</p>
+<blockquote>
+<p>谷歌的爬虫(又或者说蛛蛛)能够抓取你整个网站索引的所有页。</p>
+</blockquote>
+<p><strong>为什么谷歌上可以搜索整个互联网的内容</strong>？因为，他解析并存储了。而更有意思的是，他会为同样的内容建立一个索引或者说分类，按照一定的相关性，针对于某个关键词的内容。</p>
+<p>PageRank 对于一个网站来说是相当重要的，只是这个相比也比较复杂。包括其他网站链接向你的网站，以及流量，当然还有域名等等。</p>
+<h3 id="什么样的网站需要-SEO？"><a href="#什么样的网站需要-SEO？" class="headerlink" title="什么样的网站需要 SEO？"></a>什么样的网站需要 SEO？</h3><p>下图是我的博客的流量来源</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter5/my-website-seo.jpg" alt="What Site Need SEO"></p>
+<p>正常情况下除了像<code>腾讯</code>这类的<code>QQ空间</code>自我封闭的网站外都需要 SEO，或者不希望泄露一些用户隐私如<code>Facebook</code>、<code>人人</code>等等。</p>
+<ul>
+<li>如果你和我的网站一样需要靠搜索带来流量</li>
+<li>如果你只有很少的用户访问，却有很多的内容。</li>
+<li>如果你是为一个公司、企业工作为以带来业务。</li>
+<li>。。。</li>
+</ul>
+<p><strong>SEO 与编程的不同之处?</strong></p>
+<p>SEO 与编程的最大不同之处在于: <strong>编程的核心是技术，SEO 的核心是内容</strong>。</p>
+<p>内容才是 SEO 最重要的组成部分，这也就是腾讯复制不了的东西。</p>
+<h3 id="SEO-基础知识"><a href="#SEO-基础知识" class="headerlink" title="SEO 基础知识"></a>SEO 基础知识</h3><p><strong>确保网站是可以被索引的</strong></p>
+<p>一些常见的页面不能被访问的原因</p>
+<ul>
+<li>隐藏在需要提交的表格中的链接</li>
+<li>不能解析的 JavaScript 脚本中的链接</li>
+<li>Flash、Java 和其他插件中的链接</li>
+<li>PowerPoint 和 PDF 文件中的链接</li>
+<li>指向被 meta Robtots 标签、rel=”NoFollow” 和 robots.txt 屏蔽的页面的链接</li>
+<li>页面上有上几百个链接</li>
+<li>frame（框架结构）和 iframe 里的链接</li>
+</ul>
+<p>对于现在的网站来还有下面的原因，通过来说是因为内容是动态生成的，而不是静态的</p>
+<ul>
+<li>网站通过 WebSocket 的方法渲染内容</li>
+<li>使用诸如 Mustache 之类的 JS 模板引擎</li>
+</ul>
+<p><strong>什么样的网页可以被索引</strong></p>
+<ul>
+<li>确保页面可以在没有 JavaScript 下能被渲染。对于现在 JavaScript 语言的使用越来越多的情况下，在使用 JS 模板引擎的时候也应该注意这样的问题。</li>
+<li>在用户禁用了 JavaScript 的情况下，保证所有的链接和页面是可以访问的。</li>
+<li>确保爬虫可以看到所有的内容。那些用 JS 动态加载出来的对于爬虫来说是不友好的</li>
+<li>使用描述性的锚文本的网页</li>
+<li>限制的页面上的链接数量。除去一些分类网站、导航网站之类有固定流量，要不容易被认为垃圾网站。</li>
+<li>确保页面能被索引。有一指向它的 URL</li>
+<li>URL 应该遵循最佳实践。如 blog/how-to-driver 有更好的可读性</li>
+</ul>
+<p><strong>在正确的地方使用正确的关键词</strong></p>
+<ul>
+<li>把关键词放 URL 中</li>
+<li>关键词应该是页面的标签</li>
+<li>带有 H1 标签</li>
+<li>图片文件名、ALT 属性带有关键词。</li>
+<li>页面文字</li>
+<li>加粗文字</li>
+<li>Descripiton 标签</li>
+</ul>
+<h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>对于技术博客而言，内容才是最需要考虑的因素。</p>
+<p>可以考虑一下这篇文章，虽然其主题是以 SEO 为主<br><a href="http://www.phodal.com/blog/user-experience-writing-web-content/" target="_blank" rel="external">用户体验与网站内容</a></p>
+<p>不可忽略的一些因素是内容才是最优质的部分，没有内容一切 SEO 都是无意义的。</p>
+<h4 id="复制内容问题"><a href="#复制内容问题" class="headerlink" title="复制内容问题"></a>复制内容问题</h4><p>一个以用户角度考虑的问题: <strong>用户需要看到多元化的搜索结果</strong></p>
+<p>所以对于搜索引擎来说，复制带来的结果：</p>
+<ul>
+<li>搜索引擎爬虫对每个网站都有设定的爬行预算，每一次爬行都只能爬行 trpgr 页面数</li>
+<li>连向复制内容页面的链接也浪费了它们的链接权重。</li>
+<li>没有一个搜索引擎详细解释他们的算法怎样选择显示页面的哪个版本。</li>
+</ul>
+<p>于是上文说到的作者给了下面的这些建议:</p>
+<blockquote>
+<p>避免从网上复制的内容（除非你有很多其他的内容汇总，以使它看起来不同 - 我们做头条，对我们的产品页面的新闻片段的方式） 。这当然强烈适用于在自己的网站页面以及。内容重复可以混淆搜索引擎哪些页面是权威（它也可能会导致罚款，如果你只是复制粘贴别人的内容也行） ，然后你可以有你自己的网页互相竞争排名！</p>
+<p>如果你必须有重复的内容，利用相对=规范，让搜索引擎知道哪个 URL 是一个他们应该被视为权威。但是，如果你的页面是另一个在网络上找到一个副本？那么开始想出一些策略来增加更多的文字和信息来区分你的网页，因为这样重复的内容是决不可能得到好的排名。</p>
+</blockquote>
+<p>——待续。</p>
+<h4 id="保持更新"><a href="#保持更新" class="headerlink" title="保持更新"></a>保持更新</h4><p>谷歌对于一个一直在更新的博客来说会有一个好的排名，当然只是相对的。</p>
+<p>对于一个技术博客作者来说，一直更新的好处不仅可以让我们不断地学习更多的内容。也可以保持一个良好的习惯，而对于企业来说更是如此。如果我们每天去更新我们的博客，那么搜索引擎对于我们网站的收录也会变得越来越加频繁。那么，对于我们的排名及点击量来说也算是一个好事，当我们可以获得足够的排名靠前时，我们的 PR 值也在不断地提高。</p>
+<p>更多内容可以参考:<a href="http://www.seomoz.org/blog/google-fresh-factor" target="_blank" rel="external">Google Fresh Factor</a></p>
+<h4 id="网站速度"><a href="#网站速度" class="headerlink" title="网站速度"></a>网站速度</h4><blockquote>
+<p>谷歌曾表示在他们的算法页面加载速度问题，所以一定要确保你已经调整您的网站，都服从最佳做法，以使事情迅速</p>
+</blockquote>
+<p>过去的一个月里，我试着提高自己的网站的速度，有一个相对好的速度，但是受限于<code>域名解析速度</code>以及 <code>VPS</code>。</p>
+<p><a href="http://www.phodal.com/blog/use-traceroute-analyse-person-homepage-speed/" target="_blank" rel="external">网站速度分析与 traceroute
+</a></p>
+<p><a href="http://www.phodal.com/blog/ux-and-improve-website-load-speed/" target="_blank" rel="external">UX 与网站速度优化——博客速度优化小记
+</a></p>
+<p><a href="http://www.phodal.com/blog/nginx-with-ngx-pagespeed-module-improve-website-cache/" target="_blank" rel="external">Nginx ngx_pagespeed nginx 前端优化模块编译</a></p>
+<h4 id="保持耐心"><a href="#保持耐心" class="headerlink" title="保持耐心"></a>保持耐心</h4><blockquote>
+<p>这是有道理的，如果你在需要的谷歌机器人抓取更新的页面，然后处理每一个页面，并更新与新内容对应的索引的时间因素。</p>
+<p>而这可能是相当长一段时间，当你正在处理的内容 PB 级。</p>
+</blockquote>
+<p>SEO 是一个长期的过程，很少有网站可以在短期内有一个很好的位置，除非是一个热门的网站，然而在它被发现之前也会一个过程。</p>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p>在某种意义上，这个是提高 PR 值，及网站流量的另外一个核心，除了内容以外的核心。</p>
+<ul>
+<li>链接建设是 SEO 的基础部分。除非你有一个异常强大的品牌，不需要干什么就能吸引到链接。</li>
+<li>链接建设永不停止。这是不间断营销网站的过程</li>
+</ul>
+<p>关于链接的内容有太多，而且当前没有一个好的方法获取链接虽然在我的网站已经有了</p>
+<p>Links to Your Site</p>
+<p>Total links</p>
+<p><code>5,880</code></p>
+<blockquote>
+<p>同时寻求更多的链接是更有利更相关的链接可以帮助一样多。如果你有你的内容的分销合作伙伴，或者你建立一个小工具，或其他任何人都会把链接回你的网站在网络上 - 你可以通过确保各个环节都有最佳的关键字锚文本大大提高链路的相关性。您还应该确保所有链接到您的网站指向你的主域（ <a href="http://www.yourdomain.com" target="_blank" rel="external">http://www.yourdomain.com</a> ，像 <a href="http://widget.yourdomain.com" target="_blank" rel="external">http://widget.yourdomain.com</a> 不是一个子域） 。另外，你要尽可能多的联系，以包含适当的替代文字。你的想法。</p>
+<p>另外，也许不太明显的方式，建立链接（或者至少流量）是使用社交媒体 - 所以设置你的 Facebook ，Twitter 和谷歌，每当你有新的链接一定要分享。这些通道也可以作为一个有效的渠道，推动更多的流量到您的网站。</p>
+</blockquote>
+<p>由社交渠道带来的流量在现在已经越来越重要了，对于一些以内容为主导的网站，而且处于发展初期，可以迅速带来流量。一些更简单的办法就是交换链接，总之这个话题有些沉重，可能会带来一些负面的影响，如黑帽 SEO。。。。</p>
+<p><strong>参考来源</strong>:</p>
+<p>《SEO 艺术》(The Art of SEO)</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/public/2016/05/08/5.4.0-first-ux/" rel="prev">UX 入门</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/public/2016/05/07/5.2.0-performance/" rel="next">网站性能</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/blog/public/images/default_avatar.jpg" alt="Charles Lim" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Charles Lim</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">林川淇</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/public/archives">
+              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/blog/public/tags">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://oulve.com" target="_blank">HomePage</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rokeyzki" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/208887170" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://xueqiu.com/P/ZH544289" target="_blank">XueQiu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#爬虫与索引"><span class="nav-number">1.</span> <span class="nav-text">爬虫与索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么样的网站需要-SEO？"><span class="nav-number">2.</span> <span class="nav-text">什么样的网站需要 SEO？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEO-基础知识"><span class="nav-number">3.</span> <span class="nav-text">SEO 基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内容"><span class="nav-number">4.</span> <span class="nav-text">内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#复制内容问题"><span class="nav-number">4.1.</span> <span class="nav-text">复制内容问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#保持更新"><span class="nav-number">4.2.</span> <span class="nav-text">保持更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网站速度"><span class="nav-number">4.3.</span> <span class="nav-text">网站速度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#保持耐心"><span class="nav-number">4.4.</span> <span class="nav-text">保持耐心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链接"><span class="nav-number">4.5.</span> <span class="nav-text">链接</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Lim</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/blog/public/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/blog/public/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/blog/public/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/blog/public/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/blog/public/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/blog/public/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/blog/public/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/blog/public/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/blog/public/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

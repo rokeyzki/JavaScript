@@ -1,0 +1,1068 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/blog/public/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/blog/public/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="林川淇" />
+
+
+
+  <meta name="keywords" content="Charles Lim" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/blog/public/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="林川淇">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Charles Lim's Blog">
+<meta property="og:url" content="http://oulve.com/blog/page/3/index.html">
+<meta property="og:site_name" content="Charles Lim's Blog">
+<meta property="og:description" content="林川淇">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Charles Lim's Blog">
+<meta name="twitter:description" content="林川淇">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> Charles Lim's Blog </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/blog/public/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Charles Lim's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/public/./" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/public/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/public/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+  <section id="posts" class="posts-expand">
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/06/4.4.0-auto-deploy/" itemprop="url">
+                自动化部署
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-06T21:45:08+08:00" content="2016-05-06">
+            2016-05-06
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>优化我们开发流程有一个很重要的步骤就是：让部署自动化。通过部署自动化，我们可以大大缩减我们的开发周期，加快软件交付流程。下图是一个自动化部署的流程图：</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter4/auto-deployment.png" alt="自动化部署"></p>
+<p>从下图中我们可以得到下面的五个步骤：</p>
+<ul>
+<li>获取源码</li>
+<li>获取依赖</li>
+<li>构建软件包</li>
+<li>生成/上传安装包</li>
+<li>目标平台安装/配置</li>
+</ul>
+<p>这个过程可能和之前的 Web 项目构建过程差不多，然而却多了好几步。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/06/4.4.0-auto-deploy/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/05/4.3.1-configurable/" itemprop="url">
+                可配置
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-05T23:45:08+08:00" content="2016-05-05">
+            2016-05-05
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>让我们写的 Web 应用可配置是一项很有挑战性，也很实用的技能。</p>
+<p>起先，我们在本地开发的时候为本地创建了一套环境，也创建了本地的配置。接着我们需要将我们的包部署到测试环境，也生成了测试环境的相应配置。这其中如果有其他的环境，我们也需要创建相应的环境。最后，我们还需要为产品环境创建全新的配置。</p>
+<p>下图是 Druapl 框架的部署流:</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter4/deployment-flow.png" alt="Drupal Deployment Flow"></p>
+<p>在不同的环境下，他们使用不同的 Content。这些 Content 的内容不仅仅可以是一些系统相当的配置，也可以是一些不同环境下的 UI 等等。而在这其中也会涉及到一些比较复杂的知识，下面只是做一些简单的介绍。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/05/4.3.1-configurable/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/05/4.2.1-cache/" itemprop="url">
+                Web 缓存
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-05T22:45:08+08:00" content="2016-05-05">
+            2016-05-05
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Web 缓存是显著提高 Web 站点的性能最有效的方法之一。主要有:</p>
+<ul>
+<li>数据库端缓存</li>
+<li>应用层缓存</li>
+<li>前端缓存</li>
+<li>客户端缓存</li>
+</ul>
+<p>不同的缓存类型适用于不同的环境下使用。</p>
+<h3 id="数据库端缓存"><a href="#数据库端缓存" class="headerlink" title="数据库端缓存"></a>数据库端缓存</h3><p>这个可以用以“空间换时间”来说。比如建一个表来存储另外一个表某个类型的数据的总条数，在每次更新数据的时候同时更新数据表和统计条数的表。在需要获取某个类型的数据的条数的时候，就不需要 select count 去查询，直接查询统计表就可以了，这样可以提高查询的速度和数据库的性能。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/05/4.2.1-cache/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/05/4.2.0-lnmp/" itemprop="url">
+                LNMP 架构
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-05T21:45:08+08:00" content="2016-05-05">
+            2016-05-05
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>LNMP 是一个基于 CentOS/Debian 编写的 Nginx、PHP、MySQL、phpMyAdmin、eAccelerator 一键安装包。可以在 VPS、独立主机上轻松的安装 LNMP 生产环境。</p>
+</blockquote>
+<p>由于在前面我们已经介绍过了数据库和编程语言，这里我们就只介绍 LN 两项</p>
+<h3 id="GNU-Linux"><a href="#GNU-Linux" class="headerlink" title="GNU/Linux"></a>GNU/Linux</h3><p>GNU 工程创始于一九八四年，旨在开发一个完整 GNU 系统。GNU这个名字是“GNU’s Not Unix!”的递归首字母缩写词。”GNU” 的发音为 g’noo，只有一个音节，发音很像 “grew”，但需要把其中的 r 音替换为 n 音。类 Unix 操作系统是由一系列应用程序、系统库和开发工具构成的 软件集合 , 并加上用于资源分配和硬件管理的内核。</p>
+<p>Linux 是一种自由和开放源码的类 UNIX 操作系统内核。目前存在着许多不同的 Linux 发行版，可安装在各种各样的电脑硬件设备，从手机、平板电脑、路由器和影音游戏控制台，到桌上型电脑，大型电脑和超级电脑。Linux 是一个领先的操作系统内核，<strong>世界上运算最快的10台超级电脑运行的都是基于 Linux 内核的操作系统</strong>。</p>
+<p>Linux 操作系统也是自由软件和开放源代码发展中最著名的例子。只要遵循 GNU 通用公共许可证,任何人和机构都可以自由地使用 Linux 的所有底层源代码，也可以自由地修改和再发布。<strong>严格来讲，Linux 这个词本身只表示 Linux 内核，但在实际上人们已经习惯了用 Linux 来形容整个基于 Linux 内核，并且使用 GNU 工程各种工具和数据库的操作系统（也被称为 GNU/Linux）</strong>。通常情况下，Linux 被打包成供桌上型电脑和服务器使用的 Linux 发行版本。一些流行的主流 Linux 发行版本，包括 Debian（及其衍生版本 Ubuntu），Fedora 和 openSUSE 等。 Linux 得名于电脑业余爱好者 Linus Torvalds。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/05/4.2.0-lnmp/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/04/4.1.0-runenv/" itemprop="url">
+                隔离与运行环境
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-04T23:45:08+08:00" content="2016-05-04">
+            2016-05-04
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>为了将我们的应用部署到服务器上，我们需要为其配置一个运行环境。从底层到顶层有这样的运行环境及容器：</p>
+<ol>
+<li>隔离硬件：虚拟机</li>
+<li>隔离操作系统：容器虚拟化</li>
+<li>隔离底层：Servlet 容器</li>
+<li>隔离依赖版本：虚拟环境</li>
+<li>隔离运行环境：语言虚拟机</li>
+<li>隔离语言：DSL</li>
+</ol>
+<p>实现上这是一个请求的处理过程，一个 HTTP 请求会先到达你的主机。如果你的主机上运行着多个虚拟机实例，那么请求就会来到这个虚拟机上。又或者是如果你是在 Docker 这一类容器里运行你的程序的话，那么也会先到达 Docker。随后这个请求就会交由 HTTP 服务器来处理，如 Apache、Nginx，这些 HTTP 服务器再将这些请求交由对应的应用或脚本来处理。随后将交由语言底层的指令来处理。</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter4/docker-with-tomcat.png" alt="Docker Tomcat"></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/04/4.1.0-runenv/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/04/4.0.0-golive/" itemprop="url">
+                上线
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-04T22:45:08+08:00" content="2016-05-04">
+            2016-05-04
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>作为一个开发人员，我们也需要去了解如何配置服务器。不仅仅因为它可以帮助我们更好地理解 Web 开发，而且有时候很多 Bug 都是因为服务器环境引起的——如臭名昭著地编码问题。</p>
+<ul>
+<li>一些简单的 Ops 技能。</li>
+<li>了解服务器的相关软件</li>
+<li>搭建运行 Web 应用的服务器</li>
+<li>自动化部署应用</li>
+</ul>
+<p>为了即时的完成工作，你是不是放弃了很多东西，比如质量? 测试是很重要的一个环节，不仅可以为我们保证代码的质量，而且还可以为我们以后的重构提供基础条件。</p>
+<p>作为一个在敏捷团队里工作的开发人员，初次意识到在国内大部分的开发人员是不写测试的时候，我还是有点诧异。</p>
+<p>尽管没有写测试可以在初期走得很快，但是在后期就会遇到一堆麻烦事。传统的思维下，我们会认为一个人会在一家公司工作很久。而这件事在最近几年里变化得特别快，特别是在信息技术高速发展的今天。人们可以从不同的地方得到哪里缺人，从一个地方到另外一个地方也变得异常的快，这就意味着人员流动是常态。</p>
+<p>而代码尽管还在，但是却会随着人员流动而出现更多的问题。这时如果代码是有有效的测试，那么则可以帮助系统更好地被理解。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/04/3.3.0-refactor-to-pattern/" itemprop="url">
+                重构到设计模式
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-04T21:45:08+08:00" content="2016-05-04">
+            2016-05-04
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><blockquote>
+<p>模式和重构之间存在着天然联系，模式是你想到达的目的地，而重构则是从其他地方到达这个目的地的条条道理——Martin Fowler《重构》</p>
+</blockquote>
+<h3 id="过度设计与设计模式"><a href="#过度设计与设计模式" class="headerlink" title="过度设计与设计模式"></a>过度设计与设计模式</h3><p>过度设计和设计模式是两个很有意思的词语，这取决于我们是不是预先式设计。通过以往的经验我们很容易看到一个环境来识别一个模式。遗憾的是使用设计模式来依赖于我们整个团队的水平。对于了解设计模式的人来说，设计模式就是一种沟通语言。而对于了解一些设计模式的人来说，设计模式就是复杂的代码。</p>
+<p>并且在软件迭代的过程中需求总是不断变化的，这就意味着如果我们对我们的代码设计越早，那么在后期失败的概率也就越大。设计会伴随着需求而发生变化，在当时看起来合理的设计，在后期就会因此而花费过多的代价。</p>
+<p>而如果我们不进行一些设计，就有可能出现设计不足。这种情况可能出现于没有时间写出更好的代码的项目，在这些项目里由于一些原因出现加班等等的原因，使得我们没有办法写出更好的代码。同时，也有可能是因为参考项目的程序员的设计方面出现不足。</p>
+<p>我们没有对设计模式介绍的一个原因是——它需要有大量的编程经验，才可以让我们实现：重构到设计模式。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/03/3.2.3-intellij-refactor/" itemprop="url">
+                Intellij Idea 重构
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-03T23:45:08+08:00" content="2016-05-03">
+            2016-05-03
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>下面简单地介绍一下，一些可以直接使用 IDE 就能完成的重构。这种重构可以用在日常的工作中，只需要使用 IDE 上的快捷键就可以完成了。</p>
+<h3 id="提炼函数"><a href="#提炼函数" class="headerlink" title="提炼函数"></a>提炼函数</h3><p>Intellij IDEA 带了一些有意思的快捷键，或者说自己之前不在意这些快捷键的存在。重构作为单独的一个菜单，显然也突显了其功能的重要性，说说<strong>提炼函数</strong>，或者说提出方法。</p>
+<p>快捷键</p>
+<p>Mac:  <code>alt</code>+<code>command</code>+<code>M</code></p>
+<p>Windows/Linux: <code>Ctrl</code>+<code>Alt</code>+<code>M</code></p>
+<p>鼠标: Refactor | Extract | Method</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/03/3.2.3-intellij-refactor/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/03/3.2.2-refactor/" itemprop="url">
+                代码重构
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-03T22:45:08+08:00" content="2016-05-03">
+            2016-05-03
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>重构，一言以蔽之，就是在不改变外部行为的前提下，有条不紊地改善代码。</p>
+</blockquote>
+<p>代码重构（英语：Code refactoring）指对软件代码做任何更动以增加可读性或者简化结构而不影响输出结果。在经历了一年多的工作之后，我平时的主要工作就是修 Bug。刚开始的时候觉得无聊，后来才发现修 Bug 需要更好的技术。有时候你可能要面对着一坨一坨的代码，有时候你可能要花几天的时间去阅读代码。而，你重写那几十代码可能只会花上你不到一天的时间。但是如果你没办法理解当时为什么这么做，你的修改只会带来更多的 Bug。修 Bug，更多的是维护代码。还是前人总结的那句话对:</p>
+<blockquote>
+<p>写代码容易，读代码难。</p>
+</blockquote>
+<p>假设我们写这些代码只要半天，而别人读起来要一天。为什么不试着用一天的时候去写这些代码，让别人花半天或者更少的时间来理解。</p>
+<h3 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h3><p>在上一节中，我们提到了命名的重要性，这里首先要说到的也就是重命名~~~。让再看看《编写可读代码的艺术》也提到了这几点：</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/03/3.2.2-refactor/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/03/3.2.1-readable/" itemprop="url">
+                可读的代码
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-03T21:45:08+08:00" content="2016-05-03">
+            2016-05-03
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>过去，我有过在不同的场合吐槽别人的代码写得烂。而我写的仅仅是比别人好一点而已——而不是好很多。</p>
+<p>然而这是一件很难的事，人们对于同一件事物未来的考虑都是不一样的。同样的代码在相同的情景下，不同的人会有不同的设计模式。同样的代码在不同的情景下，同样的人会有不同的设计模式。在这里，我们没有办法讨论设计模式，也不需要讨论。</p>
+<p>我们所需要做的是，确保我们的代码易读、易测试，看上去这样就够了，然而这也是挺复杂的一件事:</p>
+<ul>
+<li>确保我们的变量名、函数名是易读的</li>
+<li>没有复杂的逻辑判断</li>
+<li>没有多层嵌套 (事不过三)</li>
+<li>减少复杂函数的出现（如,不超过三十行）</li>
+<li>然后，你要去测试它。这样你就知道需要什么，实际上要做到这些也不是一些难事。</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/03/3.2.1-readable/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/blog/public/page/2/">&laquo;</a><a class="page-number" href="/blog/public/">1</a><a class="page-number" href="/blog/public/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/public/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/public/page/8/">8</a><a class="extend next" rel="next" href="/blog/public/page/4/">&raquo;</a>
+  </nav>
+
+
+            </div>
+
+            
+
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/blog/public/images/default_avatar.jpg" alt="Charles Lim" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Charles Lim</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">林川淇</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/public/archives">
+              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/blog/public/tags">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://oulve.com" target="_blank">HomePage</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rokeyzki" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/208887170" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://xueqiu.com/P/ZH544289" target="_blank">XueQiu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Lim</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/blog/public/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/blog/public/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/blog/public/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/blog/public/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/blog/public/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/blog/public/js/search-toggle.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+  
+  
+
+  
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/blog/public/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/blog/public/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

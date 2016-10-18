@@ -1,0 +1,709 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/blog/public/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/blog/public/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="林川淇" />
+
+
+
+  <meta name="keywords" content="Charles Lim" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/blog/public/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="根据 URL 请求页面过程说实话，这类文章网上一抓一大把，而我仍想写这篇博客，一方面是想再仔细缕一下这个过程，另一方面是希望用清晰的语言和结构来解释，也算是小小地挑战一下自己。
+过程概述
+浏览器查找域名对应的 IP 地址；
+
+浏览器根据 IP 地址与服务器建立 socket 连接；
+
+浏览器与服务器通信： 浏览器请求，服务器处理请求；
+
+浏览器与服务器断开连接。
+
+
+天啦撸，结束了？也太简单了吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从输入 URL 到页面加载完成的过程中都发生了什么">
+<meta property="og:url" content="http://oulve.com/blog/2015/11/10/url/index.html">
+<meta property="og:site_name" content="Charles Lim's Blog">
+<meta property="og:description" content="根据 URL 请求页面过程说实话，这类文章网上一抓一大把，而我仍想写这篇博客，一方面是想再仔细缕一下这个过程，另一方面是希望用清晰的语言和结构来解释，也算是小小地挑战一下自己。
+过程概述
+浏览器查找域名对应的 IP 地址；
+
+浏览器根据 IP 地址与服务器建立 socket 连接；
+
+浏览器与服务器通信： 浏览器请求，服务器处理请求；
+
+浏览器与服务器断开连接。
+
+
+天啦撸，结束了？也太简单了吧。">
+<meta property="og:updated_time" content="2016-03-02T14:18:07.222Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从输入 URL 到页面加载完成的过程中都发生了什么">
+<meta name="twitter:description" content="根据 URL 请求页面过程说实话，这类文章网上一抓一大把，而我仍想写这篇博客，一方面是想再仔细缕一下这个过程，另一方面是希望用清晰的语言和结构来解释，也算是小小地挑战一下自己。
+过程概述
+浏览器查找域名对应的 IP 地址；
+
+浏览器根据 IP 地址与服务器建立 socket 连接；
+
+浏览器与服务器通信： 浏览器请求，服务器处理请求；
+
+浏览器与服务器断开连接。
+
+
+天啦撸，结束了？也太简单了吧。">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 从输入 URL 到页面加载完成的过程中都发生了什么 // Charles Lim's Blog </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/blog/public/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Charles Lim's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/public/./" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/public/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/public/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              从输入 URL 到页面加载完成的过程中都发生了什么
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-10T13:14:42+00:00" content="2015-11-10">
+            2015-11-10
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="根据-URL-请求页面过程"><a href="#根据-URL-请求页面过程" class="headerlink" title="根据 URL 请求页面过程"></a>根据 URL 请求页面过程</h2><p>说实话，这类文章网上一抓一大把，而我仍想写这篇博客，一方面是想再仔细缕一下这个过程，另一方面是希望用清晰的语言和结构来解释，也算是小小地挑战一下自己。</p>
+<h3 id="过程概述"><a href="#过程概述" class="headerlink" title="过程概述"></a>过程概述</h3><ul>
+<li><p>浏览器查找域名对应的 IP 地址；</p>
+</li>
+<li><p>浏览器根据 IP 地址与服务器建立 socket 连接；</p>
+</li>
+<li><p>浏览器与服务器通信： 浏览器请求，服务器处理请求；</p>
+</li>
+<li><p>浏览器与服务器断开连接。</p>
+</li>
+</ul>
+<p>天啦撸，结束了？也太简单了吧。。。各位看官，不急，都说了是概述，且向下看。</p>
+<a id="more"></a> 
+<h3 id="根据域名查找-IP-地址"><a href="#根据域名查找-IP-地址" class="headerlink" title="根据域名查找 IP 地址"></a>根据域名查找 IP 地址</h3><h4 id="概念解释"><a href="#概念解释" class="headerlink" title="概念解释"></a>概念解释</h4><ul>
+<li><p>IP 地址：IP 协议为互联网上的每一个网络和每一台主机分配的一个逻辑地址。IP 地址如同门牌号码，通过 IP 地址才能确定一台主机位置。服务器本质也是一台主机，想要访问某个服务器，必须先知道它的 IP 地址；</p>
+</li>
+<li><p>域名（ DN ）：IP 地址由四个数字组成，中间用点号连接，在使用过程中难记忆且易输入错误，所以用我们熟悉的字母和数字组合来代替纯数字的 IP 地址，比如我们只会记住 www.baidu.com（百度域名） 而不是 220.181.112.244（百度的其中一个 IP 地址）；</p>
+</li>
+<li><p>DNS： 每个域名都对应一个或多个提供相同服务服务器的 IP 地址，只有知道服务器 IP 地址才能建立连接，所以需要通过 DNS 把域名解析成一个 IP 地址。</p>
+</li>
+</ul>
+<p>知道了上面的概念，大概就知道了想要获得服务器的门牌号码，需要先将域名转换成 IP 地址。转换过程如下（以查询 www.baidu.com 的 IP 地址为例，其中2、3、4步均在上一步未查询成功的情况下进行）</p>
+<h4 id="查找过程"><a href="#查找过程" class="headerlink" title="查找过程"></a>查找过程</h4><ul>
+<li><p>浏览器搜索自己的 DNS 缓存（维护一张域名与 IP 地址的对应表）；</p>
+</li>
+<li><p>搜索操作系统中的 DNS 缓存（维护一张域名与 IP 地址的对应表）；</p>
+</li>
+<li><p>搜索操作系统的 hosts 文件（ Windows 环境下，维护一张域名与 IP 地址的对应表）；</p>
+</li>
+<li><p>操作系统将域名发送至 LDNS（本地区域名服务器，如果你在学校接入互联网，则 LDNS 服务器就在学校，如果通过电信接入互联网，则 LDNS 服务器就在你当地的电信那里。）LDNS 查询 自己的 DNS 缓存（一般查找成功率在 80% 左右），查找成功则返回结果，失败则发起一个迭代 DNS 解析请求；</p>
+<ul>
+<li><p>LDNS 向 Root Name Server （根域名服务器，其虽然没有每个域名的的具体信息，但存储了负责每个域，如 com、net、org等的解析的顶级域名服务器的地址）发起请求，此处，Root Name Server 返回 com 域的顶级域名服务器的地址；</p>
+</li>
+<li><p>LDNS 向 com 域的顶级域名服务器发起请求，返回 baidu.com 域名服务器地址；</p>
+</li>
+<li><p>LDNS 向 baidu.com 域名服务器发起请求，得到 www.baidu.com 的 IP 地址；</p>
+</li>
+</ul>
+</li>
+<li><p>LDNS 将得到的 IP 地址返回给操作系统，同时自己也将 IP 地址缓存起来；</p>
+</li>
+<li><p>操作系统将 IP 地址返回给浏览器，同时自己也将 IP 地址缓存起来；</p>
+</li>
+<li><p>至此，浏览器已经得到了域名对应的 IP 地址。</p>
+</li>
+</ul>
+<h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><ul>
+<li><p>域名与 URL 是两个概念：域名是一台或一组服务器的名称，用来确定服务器在 Internet 上的位置；URL 是统一资源定位符，用来确定某一个文件的具体位置，例如，oulve.com 是我个人主页的域名，根据这个域名可以找到oulve的服务器，oulve.com/a/1 是 URL ，可以根据这个 URL 定位我写的第一篇博客；</p>
+</li>
+<li><p>IP 地址与域名不是一一对应的关系：可以把多个提供相同服务的服务器 IP 设置为同一个域名，但在同一时刻一个域名只能解析出一个 IP地址；同时，一个 IP 地址可以绑定多个域名，数量不限；</p>
+</li>
+</ul>
+<h3 id="建立连接–三次握手"><a href="#建立连接–三次握手" class="headerlink" title="建立连接–三次握手"></a>建立连接–三次握手</h3><p>知道了服务器的 IP 地址，下面便开始与服务器建立连接了。</p>
+<p>通俗地讲，通信连接的建立需要经历以下三个过程：</p>
+<ul>
+<li><p>主机向服务器发送一个建立连接的请求（<strong>您好，我想认识您</strong>）；</p>
+</li>
+<li><p>服务器接到请求后发送同意连接的信号（<strong>好的，很高兴认识您</strong>）；</p>
+</li>
+<li><p>主机接到同意连接的信号后，再次向服务器发送了确认信号（<strong>我也很高兴认识您</strong>），自此，主机与服务器两者建立了连接。</p>
+</li>
+</ul>
+<h4 id="补充说明-1"><a href="#补充说明-1" class="headerlink" title="补充说明"></a>补充说明</h4><ul>
+<li>TCP 协议：三次握手的过程采用 TCP 协议，其可以保证信息传输的可靠性，三次握手过程中，若一方收不到确认信号，协议会要求重新发送信号。</li>
+</ul>
+<h3 id="网页请求与显示"><a href="#网页请求与显示" class="headerlink" title="网页请求与显示"></a>网页请求与显示</h3><p>当服务器与主机建立了连接之后，下面主机便与服务器进行通信。网页请求是一个单向请求的过程，即是一个主机向服务器请求数据，服务器返回相应的数据的过程。</p>
+<ul>
+<li><p>浏览器根据 URL 内容生成 HTTP 请求，请求中包含请求文件的位置、请求文件的方式等等；</p>
+</li>
+<li><p>服务器接到请求后，会根据 HTTP 请求中的内容来决定如何获取相应的 HTML 文件；</p>
+</li>
+<li><p>服务器将得到的 HTML 文件发送给浏览器；</p>
+</li>
+<li><p>在浏览器还没有完全接收 HTML 文件时便开始渲染、显示网页；</p>
+</li>
+<li><p>在执行 HTML 中代码时，根据需要，浏览器会继续请求图片、CSS、JavsScript等文件，过程同请求 HTML ；</p>
+</li>
+</ul>
+<h3 id="断开连接–四次挥手"><a href="#断开连接–四次挥手" class="headerlink" title="断开连接–四次挥手"></a>断开连接–四次挥手</h3><ul>
+<li><p>主机向服务器发送一个断开连接的请求（<strong>不早了，我该走了</strong>）；</p>
+</li>
+<li><p>服务器接到请求后发送确认收到请求的信号（<strong>知道了</strong>）；</p>
+</li>
+<li><p>服务器向主机发送断开通知（<strong>我也该走了</strong>）；</p>
+</li>
+<li><p>主机接到断开通知后断开连接并反馈一个确认信号（<strong>嗯，好的</strong>），服务器收到确认信号后断开连接；</p>
+</li>
+</ul>
+<h4 id="补充说明-2"><a href="#补充说明-2" class="headerlink" title="补充说明"></a>补充说明</h4><ul>
+<li><p>为什么服务器在接到断开请求时不立即同意断开：当服务器收到断开连接的请求时，可能仍然有数据未发送完毕，所有服务器先发送确认信号，等所有数据发送完毕后再同意断开。</p>
+</li>
+<li><p>第四次握手后，主机发送确认信号后并没有立即断开连接，而是等待了 2 个报文传送周期，原因是：如果第四次握手的确认信息丢失，服务器将会重新发送第三次握手的断开连接的信号，而服务器发觉丢包与重新发送的断开连接到达主机的时间正好为 2 个报文传输周期。</p>
+</li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/public/2015/11/16/front-end1/" rel="prev">前端工程化知识要点回顾&思考</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/public/2015/11/05/sublime2/" rel="next">在SublimeText上搭建ReactJS开发环境</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/blog/public/images/default_avatar.jpg" alt="Charles Lim" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Charles Lim</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">林川淇</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/public/archives">
+              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/blog/public/tags">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://oulve.com" target="_blank">HomePage</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rokeyzki" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/208887170" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://xueqiu.com/P/ZH544289" target="_blank">XueQiu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#根据-URL-请求页面过程"><span class="nav-number">1.</span> <span class="nav-text">根据 URL 请求页面过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过程概述"><span class="nav-number">1.1.</span> <span class="nav-text">过程概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据域名查找-IP-地址"><span class="nav-number">1.2.</span> <span class="nav-text">根据域名查找 IP 地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念解释"><span class="nav-number">1.2.1.</span> <span class="nav-text">概念解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找过程"><span class="nav-number">1.2.2.</span> <span class="nav-text">查找过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补充说明"><span class="nav-number">1.2.3.</span> <span class="nav-text">补充说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立连接–三次握手"><span class="nav-number">1.3.</span> <span class="nav-text">建立连接–三次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充说明-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">补充说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网页请求与显示"><span class="nav-number">1.4.</span> <span class="nav-text">网页请求与显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#断开连接–四次挥手"><span class="nav-number">1.5.</span> <span class="nav-text">断开连接–四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充说明-2"><span class="nav-number">1.5.1.</span> <span class="nav-text">补充说明</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Lim</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/blog/public/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/blog/public/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/blog/public/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/blog/public/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/blog/public/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/blog/public/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/blog/public/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/blog/public/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/blog/public/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

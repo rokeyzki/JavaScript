@@ -1,0 +1,1068 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/blog/public/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/blog/public/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="林川淇" />
+
+
+
+  <meta name="keywords" content="Charles Lim" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/blog/public/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="林川淇">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Charles Lim's Blog">
+<meta property="og:url" content="http://oulve.com/blog/page/7/index.html">
+<meta property="og:site_name" content="Charles Lim's Blog">
+<meta property="og:description" content="林川淇">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Charles Lim's Blog">
+<meta name="twitter:description" content="林川淇">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> Charles Lim's Blog </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/blog/public/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Charles Lim's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/public/./" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/public/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/public/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+  <section id="posts" class="posts-expand">
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2015/11/23/jquery04/" itemprop="url">
+                可想实现一个自己的简单jQuery库？(四)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-23T19:54:34+08:00" content="2015-11-23">
+            2015-11-23
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="Lesson-3"><a href="#Lesson-3" class="headerlink" title="Lesson-3"></a>Lesson-3</h2><p>修改f(selector) 里的判断,新增domReady</p>
+<p>我们知道在jQuery中还有一种选择器写法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>在dom加载完毕后马上就执行,这样的方法会比onload更快,所以domReady对于我们来说一定是必不可少的</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2015/11/23/jquery04/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2015/11/20/jquery03/" itemprop="url">
+                可想实现一个自己的简单jQuery库？(三)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-20T20:26:15+08:00" content="2015-11-20">
+            2015-11-20
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="Lesson-2"><a href="#Lesson-2" class="headerlink" title="Lesson-2"></a>Lesson-2</h2><p>这个版本新增 next(),prev(),parent(),parents()</p>
+<p>这4个选择元素的方法还是比较常用的</p>
+<p>首先我们需要一个func来过滤我们需要的dom</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sibling</span>(<span class="params">cur, dir</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> ((cur = cur[dir]) &amp;&amp; cur.nodeType !== <span class="number">1</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cur;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2015/11/20/jquery03/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2015/11/19/jquery02/" itemprop="url">
+                可想实现一个自己的简单jQuery库？(二)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-19T20:25:12+08:00" content="2015-11-19">
+            2015-11-19
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="Lesson-1-初步体验"><a href="#Lesson-1-初步体验" class="headerlink" title="Lesson-1 初步体验"></a>Lesson-1 初步体验</h2><p>这个版本呢,先来加四个很简单的方法感受感受下!</p>
+<p>首先3个class不用说了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hasClass : <span class="function"><span class="keyword">function</span>(<span class="params">cls</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(\\s|^)'</span> + cls + <span class="string">'(\\s|$)'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>[i].className.match(reg)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2015/11/19/jquery02/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2015/11/18/jquery01/" itemprop="url">
+                可想实现一个自己的简单jQuery库？(一)
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-18T20:26:48+08:00" content="2015-11-18">
+            2015-11-18
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
+<li><p>虽然说市面上有许多讲解jQuery源码或者是也有类似如何搭建一个属于自己的javascript库的文章。</p>
+</li>
+<li><p>但毕竟更多数人的水平并没有达到单纯看源码解析就能读懂jQuery</p>
+</li>
+<li><p>如果你既不能通过书籍视频和他人文章的源码解析明白jQuery，也想自己实现一个jQuery的。</p>
+</li>
+<li><p>本系列就是以一些不同的方法手段，简单的代码，实现了一套与jQuery一样的API</p>
+</li>
+</ol>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2015/11/18/jquery01/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2015/11/16/front-end1/" itemprop="url">
+                前端工程化知识要点回顾&思考
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-16T20:24:27+08:00" content="2015-11-16">
+            2015-11-16
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="编程技术及生态发展的三个阶段"><a href="#编程技术及生态发展的三个阶段" class="headerlink" title="编程技术及生态发展的三个阶段"></a>编程技术及生态发展的三个阶段</h2><ul>
+<li><p>最初的时候人们忙着补全各种API，代表着他们拥有的东西还很匮乏，需要在语言跟基础设施上继续完善</p>
+</li>
+<li><p>然后就开始各种模式，标志他们做的东西逐渐变大变复杂，需要更好的组织了</p>
+</li>
+<li><p>然后就是各类分层MVC，MVP，MVVM之类，可视化开发，自动化测试，团队协同系统等等，说明重视生产效率了，也就是所谓工程化</p>
+</li>
+</ul>
+<h2 id="前端工程是软件工程的一个子类别"><a href="#前端工程是软件工程的一个子类别" class="headerlink" title="前端工程是软件工程的一个子类别"></a>前端工程是软件工程的一个子类别</h2><p>软件工程是一门研究用工程化方法构建和维护有效的、实用的和高质量的软件的学科。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2015/11/16/front-end1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2015/11/10/url/" itemprop="url">
+                从输入 URL 到页面加载完成的过程中都发生了什么
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-10T21:14:42+08:00" content="2015-11-10">
+            2015-11-10
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="根据-URL-请求页面过程"><a href="#根据-URL-请求页面过程" class="headerlink" title="根据 URL 请求页面过程"></a>根据 URL 请求页面过程</h2><p>说实话，这类文章网上一抓一大把，而我仍想写这篇博客，一方面是想再仔细缕一下这个过程，另一方面是希望用清晰的语言和结构来解释，也算是小小地挑战一下自己。</p>
+<h3 id="过程概述"><a href="#过程概述" class="headerlink" title="过程概述"></a>过程概述</h3><ul>
+<li><p>浏览器查找域名对应的 IP 地址；</p>
+</li>
+<li><p>浏览器根据 IP 地址与服务器建立 socket 连接；</p>
+</li>
+<li><p>浏览器与服务器通信： 浏览器请求，服务器处理请求；</p>
+</li>
+<li><p>浏览器与服务器断开连接。</p>
+</li>
+</ul>
+<p>天啦撸，结束了？也太简单了吧。。。各位看官，不急，都说了是概述，且向下看。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2015/11/10/url/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2015/11/05/sublime2/" itemprop="url">
+                在SublimeText上搭建ReactJS开发环境
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-05T20:51:28+08:00" content="2015-11-05">
+            2015-11-05
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="编辑器选择"><a href="#编辑器选择" class="headerlink" title="编辑器选择"></a>编辑器选择</h2><p>最近在学习ReactJS，这东西确实不错，但是在实际开发中却有很多问题。不是ReactJS本身的问题，而是开发环境，目前而言并没发现一个真正完美支持JSX语法的编辑器或IDE，这对于ReactJS开发者来说无疑是一个很头疼的事情，以往所习惯的码字方式都要改变，基本上要纯手打，虽然纯手打可以帮助记忆代码，但在工作效率上却就会大打折扣。</p>
+<h3 id="HBuilder"><a href="#HBuilder" class="headerlink" title="HBuilder"></a>HBuilder</h3><p>之前一直用的是DCloud研发的<a href="http://www.dcloud.io/">Hbuilder</a>来做WEB开发，可能很多人都不熟悉这个工具，简单说就是一个国产的WEB开发专用的IDE，集成了很多功能，习惯了之后工作效率确实提升不少。但Hbuilder在第三方插件方面比较弱，ReactJS的相关插件一个都没有，于是我只能换编辑器了。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2015/11/05/sublime2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2015/11/04/sublime1/" itemprop="url">
+                我的 Sublime Text 必备插件
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-04T19:52:35+08:00" content="2015-11-04">
+            2015-11-04
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="常用插件清单"><a href="#常用插件清单" class="headerlink" title="常用插件清单 :"></a>常用插件清单 :</h2><ul>
+<li><p>SideBarEnhancements</p>
+</li>
+<li><p>HTML-CSS-JS Prettify</p>
+</li>
+<li><p>SublimeCodeIntel</p>
+</li>
+<li><p>Emmet</p>
+</li>
+</ul>
+<h2 id="SideBarEnhancements"><a href="#SideBarEnhancements" class="headerlink" title="SideBarEnhancements"></a>SideBarEnhancements</h2><p>Sublime Text有一个缺点，当你想使用浏览器浏览你的html页面的时候，你需要在你的文件上点击鼠标右键，选择Open In Browser才可以浏览器浏览，而这是用默认浏览器浏览，如果想用第二个浏览器都没办法. 所以，可以通过SideBarEnhancements这个插件来更方便的浏览</p>
+<h3 id="第一步-安装"><a href="#第一步-安装" class="headerlink" title="第一步 : 安装"></a>第一步 : 安装</h3><p>通过 <code>Package Control-&gt;Install Package</code> 搜索 <code>sidebarenhancements</code> 安装</p>
+<h3 id="第二步-配置-一"><a href="#第二步-配置-一" class="headerlink" title="第二步 : 配置 ( 一 )"></a>第二步 : 配置 ( 一 )</h3><p>右键某html，js，css等文件，找到 <code>Open With</code> 然后点击 <code>Edit Applications</code></p>
+<p>将里面内容设置为:</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2015/11/04/sublime1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2015/11/03/redux1/" itemprop="url">
+                对 Redux 的梳理与理解
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-11-03T21:00:38+08:00" content="2015-11-03">
+            2015-11-03
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="Redux-介绍"><a href="#Redux-介绍" class="headerlink" title="Redux 介绍"></a>Redux 介绍</h1><blockquote>
+<p>本文主要是对 <a href="http://rackt.github.io/redux/">Redux 官方文档</a> 的梳理以及自身对 Redux 的理解。</p>
+</blockquote>
+<h2 id="单页面应用的痛点"><a href="#单页面应用的痛点" class="headerlink" title="单页面应用的痛点"></a>单页面应用的痛点</h2><p>对于复杂的单页面应用，状态（state）管理非常重要。state 可能包括：服务端的响应数据、本地对响应数据的缓存、本地创建的数据（比如，表单数据）以及一些 UI 的状态信息（比如，路由、选中的 tab、是否显示下拉列表、页码控制等等）。如果 state 变化不可预测，就会难于调试（state 不易重现，很难复现一些 bug）和不易于扩展（比如，优化更新渲染、服务端渲染、路由切换时获取数据等等）。</p>
+<p>Redux 就是用来确保 state 变化的可预测性，主要的约束有：</p>
+<ul>
+<li><p>state 以单一对象存储在 store 对象中</p>
+</li>
+<li><p>state 只读</p>
+</li>
+<li><p>使用纯函数 reducer 执行 state 更新</p>
+</li>
+</ul>
+<blockquote>
+<p>state 为单一对象，使得 Redux 只需要维护一棵状态树，服务端很容易初始化状态，易于服务器渲染。state 只能通过 dispatch(action) 来触发更新，更新逻辑由 reducer 来执行。</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2015/11/03/redux1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2015/10/30/dockerfile/" itemprop="url">
+                Docker - 关于Dockerfile的一些笔记
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-30T21:45:08+08:00" content="2015-10-30">
+            2015-10-30
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Docker 这种新的容器技术最近一年可谓热得发紫，前阵子去上海参加 PHP Conference China 2015 的时候，来自七牛的技术朋友在一个关于”SaaS 产品交付探索”的主题演讲中也介绍了 Docker。从上海回来之后，我开始尝试在自己的项目中使用 Docker 来搭建节省磁盘空间和扩展性良好的开发环境。</p>
+<p>​</p>
+<p>在 Docker 中，Dockerfile 是一个镜像的表示，使用 Dockerfile 可以允许用户创建自定义的镜像，通过 Dockerfile 来描述构建镜像的步骤，并自动构建一个容器。</p>
+<h1 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h1><p>Dockerfile 由一行行命令语句组成，并且支持以 # 开头的注释行。</p>
+<p>一般的，Dockerfile 分为四部分：基础镜像信息、维护者信息、镜像操作指令和容器启动时执行指令。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2015/10/30/dockerfile/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/blog/public/page/6/">&laquo;</a><a class="page-number" href="/blog/public/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/public/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog/public/page/8/">8</a><a class="extend next" rel="next" href="/blog/public/page/8/">&raquo;</a>
+  </nav>
+
+
+            </div>
+
+            
+
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/blog/public/images/default_avatar.jpg" alt="Charles Lim" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Charles Lim</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">林川淇</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/public/archives">
+              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/blog/public/tags">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://oulve.com" target="_blank">HomePage</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rokeyzki" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/208887170" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://xueqiu.com/P/ZH544289" target="_blank">XueQiu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Lim</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/blog/public/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/blog/public/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/blog/public/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/blog/public/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/blog/public/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/blog/public/js/search-toggle.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+  
+  
+
+  
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/blog/public/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/blog/public/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

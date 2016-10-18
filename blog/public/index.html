@@ -1,0 +1,1075 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/blog/public/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/blog/public/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="林川淇" />
+
+
+
+  <meta name="keywords" content="Charles Lim" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/blog/public/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="林川淇">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Charles Lim's Blog">
+<meta property="og:url" content="http://oulve.com/blog/index.html">
+<meta property="og:site_name" content="Charles Lim's Blog">
+<meta property="og:description" content="林川淇">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Charles Lim's Blog">
+<meta name="twitter:description" content="林川淇">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> Charles Lim's Blog </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/blog/public/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Charles Lim's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/public/./" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/public/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/public/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+  <section id="posts" class="posts-expand">
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/12/8.3.1-seperate/" itemprop="url">
+                架构解耦
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-12T23:45:08+08:00" content="2016-05-12">
+            2016-05-12
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>解耦是一件很有意思的过程，它也能反应架构的变迁。</p>
+<h3 id="从-MVC-与微服务"><a href="#从-MVC-与微服务" class="headerlink" title="从 MVC 与微服务"></a>从 MVC 与微服务</h3><p>在我初识架构是什么的时候，我看到了 MVC 模式架构。这种模式是基于分层的结构，要理解起逻辑也很简单。这个模式如下图所示：</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter8/spring-mvc.png" alt="Spring MVC"></p>
+<p>由我们的 Front controller 来处理由客户端（浏览器）发过来的请求，实际上这里的 Front controller 是 DispatcherServlet。 DispatcherServlet 负责将请求派发到特定的 handler，接着交由对应的Controller来处理这个请求。依据请求的内容，Controller 将创建相应 model。随后这个 model 将传到前端框架中渲染，最后再返回给浏览器。</p>
+<p>但是这样的架构充满了太多的问题，如 view 与 controller 的紧密耦合、controller 粒度难以把控的问题等等。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/12/8.3.1-seperate/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/12/8.3.0-architecture/" itemprop="url">
+                每个人都是架构师
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-12T22:45:08+08:00" content="2016-05-12">
+            2016-05-12
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>每一个程序员都是架构师。平时在我们工作的时候，架构师这个 Title 都被那些非常有经历的开发人员占据着。然而，如果你喜欢刷刷 Github，喜欢做一些有意思的东西，那么你也将是一个架构师。</p>
+<h3 id="如何构建一个博客系统"><a href="#如何构建一个博客系统" class="headerlink" title="如何构建一个博客系统"></a>如何构建一个博客系统</h3><h4 id="如果你需要帮人搭建一个博客你先会想到什么？"><a href="#如果你需要帮人搭建一个博客你先会想到什么？" class="headerlink" title="如果你需要帮人搭建一个博客你先会想到什么？"></a>如果你需要帮人搭建一个博客你先会想到什么？</h4><p>先问一个问题，如果要让你搭建一个博客你会想到什么技术解决方案？</p>
+<ol>
+<li>静态博客（类似于 GitHub Page）</li>
+<li>动态博客（可以在线更新，如 WordPress）</li>
+<li>半动态的静态博客（可以动态更新，但是依赖于后台构建系统）</li>
+<li>使用第三方博客</li>
+</ol>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/12/8.3.0-architecture/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/12/8.2.1-emergent-design/" itemprop="url">
+                浮现式设计
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-12T21:45:08+08:00" content="2016-05-12">
+            2016-05-12
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>设计模式不是一开始就有的，好的软件也不是一开始就设计成现在这样的，好的设计亦是如此。</p>
+<p>导致我们重构现有系统的原因有很多，但是多数是因为原来的代码变得越来越不可读，并且重构的风险太大了。在实现业务逻辑的时候，我们快速地用代码实现，没有测试，没有好的设计。</p>
+<p>而下图算是最近两年来想要的一个答案：</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter8/emergent-design.jpg" alt="浮现式设计"></p>
+<p>浮现式设计是一种敏捷技术，强调在开发过程中不断演进。软件本身就不应该是一开始就设计好的，他需要经历一个演化的过程。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/12/8.2.1-emergent-design/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/11/8.2.0-arch-pattern/" itemprop="url">
+                架构模式
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-11T23:45:08+08:00" content="2016-05-11">
+            2016-05-11
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>模式就是最好的架构。</p>
+</blockquote>
+<h3 id="架构的产生"><a href="#架构的产生" class="headerlink" title="架构的产生"></a>架构的产生</h3><p>在我开始接触架构设计的时候，我买了几本书然后我就开始学习了。我发现在这些书中都出现了一些相似的东西，如基本的分层设计、Pipe and Filters 模式、MVC 模式。然后，我开始意料到这些模式本身就是最好的架构。</p>
+<p>MVC 模式本身也是接于分层而设计的，如下图是 Spring MVC 的请求处理过程：</p>
+<p><img src="http://growth.phodal.com/assets/article/chapter8/spring-mvc.png" alt="Spring MVC"></p>
+<p>而这个框架只是框架本身的架构，这一类也是我们预先设计好的框架。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/11/8.2.0-arch-pattern/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/11/8.1.2-retro/" itemprop="url">
+                Retro
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-11T22:45:08+08:00" content="2016-05-11">
+            2016-05-11
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Retro，又可以称为回顾，它的目的是对团队的激励、改进。它的模式的特点就是让我们更关注于 Less Well，即不好的地方。当我们无法变得更好的时候，它可以帮助我们反观团队自身，即不要让现状变得更差，避免让破窗效应<a href="以一幢有少许破窗的建筑为例，如果那些窗不被修理好，可能将会有破坏者破坏更多的窗户。最终他们甚至会闯入建筑内，如果发现无人居住，也许就在那里定居或者纵火。又或想像一条人行道有些许纸屑，如果无人清理，不久后就会有更多垃圾，最终人们会视为理所当然地将垃圾顺手丢弃在地上。因此破窗理论强调着力打击轻微罪行有助减少更严重罪案，应该以零容忍的态度面对罪案。">^破窗</a>难以发生。</p>
+<p>在敏捷团队里，Retro 通常会发生一个迭代的结束与下一个迭代的开始之间，这看上去就是我们的除旧迎新。相信很多人都会对自我进行总结，随后改进。而 Retro 便是对团队进行改进，即发生了一些什么不好的事，而这些事可以变好，那么我们就应该对此进行改进。</p>
+<p>Retro 是以整个团队为核心去考虑问题的，通常来说没有理由以个人为对象。因为敏捷回顾有一个最高指导原则，即：</p>
+<blockquote>
+<p>无论我们发现了什么，考虑到当时的已知情况、个人的技术水平和能力、可用的资源，以及手上的状况，我们理解并坚信：每个人对自己的工作都已全力以赴。</p>
+</blockquote>
+<p>下面就让我们来看看在一个团队里是如何 Retro 的。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/11/8.1.2-retro/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/11/7.2.1-refactor2/" itemprop="url">
+                网站重构
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-11T21:45:08+08:00" content="2016-05-11">
+            2016-05-11
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>网站重构应包含结构、行为、表现三层次的分离以及优化，行内分工优化，以及以技术与数据、人文为主导的交互优化等。</p>
+</blockquote>
+<p>从我所了解到的网站重构，它大概可以分为下面的几类：</p>
+<ol>
+<li>速度优化</li>
+<li>功能加强</li>
+<li>模块重构</li>
+</ol>
+<p>下面就我们来看这三类的网站重构</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/11/7.2.1-refactor2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/10/7.1.2-change-code/" itemprop="url">
+                如何修改遗留代码
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-10T23:45:08+08:00" content="2016-05-10">
+            2016-05-10
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>即使是最训练有素的开发团队，也不能保证始终编写出清晰高效的代码。</p>
+</blockquote>
+<p>然而，如果我们不去尝试做一些改变，这些代码就会遗留下去——成为遗留代码，再次重构掉。即使说，重构系统是不可避免的一个过程，但是在这个过程中要是能抽象中领域特定的代码、语言也是件不错的事。</p>
+<h3 id="修改遗留代码"><a href="#修改遗留代码" class="headerlink" title="修改遗留代码"></a>修改遗留代码</h3><p>So，如何开始修改代码？如《修改代码的艺术》一书所说，应该是下面的五个步骤：</p>
+<ol>
+<li>代码修改点</li>
+<li>找到测试点</li>
+<li>打破依赖</li>
+<li>编写测试</li>
+<li>修改并重构</li>
+</ol>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/10/7.1.2-change-code/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/10/7.1.1-legacy-code/" itemprop="url">
+                遗留代码
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-10T22:45:08+08:00" content="2016-05-10">
+            2016-05-10
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>我们生活息息相关的很多软件里满是错误、脆弱，并且难以扩展，这就是我们说的“遗留代码”。</p>
+<p>相信你也经常看到某某网站的高架构之路，会发现其中一个很有趣的过程就是他们会把之前的架构抛弃掉。接着，他们又做了一个这样的系统，然后过些年这个系统又被重做了。究其原因，会发现这个架构是在几年前设计的。在几年前，他是非常好的架构。但是随着时间的演变，他还是几年前的架构。这是为什么呢？</p>
+<h3 id="遗留代码"><a href="#遗留代码" class="headerlink" title="遗留代码"></a>遗留代码</h3><p>什么是遗留代码？</p>
+<blockquote>
+<p>没有自动化测试的代码就是遗留代码，不管它是十年前写的，还是昨天写的。</p>
+</blockquote>
+<p>从一个新手程序员到一个老鸟，我们的编程水平都在不断增加。但是我们过去写的代码一直都在那里，但是我们一直都没有足够的勇气去动他们。因为我们知道如果我们一不小心改错了什么，就会导致一些意外的 Bug。这些 Bug 可能会对我们的编程生涯造成一些影响。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/10/7.1.1-legacy-code/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/10/7.0.0-legacy-system/" itemprop="url">
+                遗留系统与修改代码
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-10T21:45:08+08:00" content="2016-05-10">
+            2016-05-10
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>尽管维基百科上对遗留系统的定义是:</p>
+<blockquote>
+<p>一种旧的方法、旧的技术、旧的计算机系统或应用程序。</p>
+</blockquote>
+<p>但是实际上，当你看到某个网站宣称用新的框架来替换旧的框架的时候，你应该知晓他们原有的系统是遗留系统。人们已经不想在上面工作了，很多代码也不知道是干什么的，也没有人想去深究——毕竟不是自己的代码。判断是否是遗留代码的条件很简单，维护成本是否比开发成本高很多。</p>
+<ul>
+<li>几乎无法维护</li>
+<li>代码遗失</li>
+<li>逻辑不清</li>
+<li>没有文档或者不够详细、看不懂</li>
+<li>关键点遗失</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/10/7.0.0-legacy-system/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/blog/public/2016/05/09/6.3.0-cl/" itemprop="url">
+                持续学习
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-05-09T23:45:08+08:00" content="2016-05-09">
+            2016-05-09
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>如果说<code>持续交付则是一种对卓越的追求</code>,那么<code>持续学习应该就是追求软件卓越</code>。<br>如果说<code>持续集成是一种软件开发实践</code>,那么对于技术人员来说——<code>持续写作应该就是持续学习的实践</code></p>
+<p>生活总会遇到压力，来自工作上的也好，来自对于技术上的兴趣也罢，我们需要持续来断地学习。没有一直能立于不败的方法，在传说中的武林上也是如此。</p>
+<p>对于持续学习来说，通常会有以下的</p>
+<ul>
+<li>阅读</li>
+<li>编程</li>
+<li>写作</li>
+</ul>
+<p>有意思的是持续学习有额外的好处便是</p>
+<ul>
+<li>持续学习可以降低危机感</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog/public/2016/05/09/6.3.0-cl/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/blog/public/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/public/page/8/">8</a><a class="extend next" rel="next" href="/blog/public/page/2/">&raquo;</a>
+  </nav>
+
+
+            </div>
+
+            
+
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/blog/public/images/default_avatar.jpg" alt="Charles Lim" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Charles Lim</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">林川淇</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/blog/public/archives">
+              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/blog/public/tags">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://oulve.com" target="_blank">HomePage</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rokeyzki" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/208887170" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://xueqiu.com/P/ZH544289" target="_blank">XueQiu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Lim</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/blog/public/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/blog/public/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/blog/public/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/blog/public/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/blog/public/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/blog/public/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/blog/public/js/search-toggle.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+  
+  
+
+  
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/blog/public/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/blog/public/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>
