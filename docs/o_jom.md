@@ -90,6 +90,7 @@ console.log(theB.getInfo());
 
 ### Object
 * 声明
+
 ```javascript
 // ES3
 const foo = {
@@ -105,6 +106,16 @@ const foo = {
     return x;
   },
 };
+```
+
+* 方法
+    * Object.assign()
+
+```javascript
+const a = {x:1, y:2};
+const b = {x:3, z:4};
+Object.assign(a, b);
+console.dir(a); // {y:2, x:3, z:4};
 ```
 
 ### Function
