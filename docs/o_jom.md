@@ -1,17 +1,55 @@
+### Module
+* 上游 a.js
+
+```javascript
+// 逻辑
+const name = 'Charles';
+const year = 1989;
+// 出口
+export { name, year };
+```
+
+* 中游 b.js
+
+```javascript
+// 入口
+import { name as myName, year } from './a';
+// 逻辑
+const moduleB = {
+  name: myName,
+  year,
+  getInfo() {
+    return `${myName}: ${year}`;
+  },
+};
+// 出口
+export default moduleB; // 如果模块只有一个输出值，就使用export default moduleB，否则使用export {one, two, three}
+```
+
+* 下游 c.js
+
+```javascript
+// 入口
+import theB from './b';
+// 逻辑
+console.log(theB.year);
+console.log(theB.getInfo());
+```
+
 ### Boolean
 * 声明
-    * var foo = true;
+    * const foo = true;
 
 ### RegExp
 * 声明
-    * var foo = /xyz/g;
+    * const foo = /xyz/g;
 * 方法
     * RegExp.prototype.test()
     * RegExp.prototype.exec()
 
 ### Number
 * 声明
-    * var foo = 123;
+    * const foo = 123;
 * 方法
     * Number.prototype.toString()
     * Number.prototype.toFixed()
@@ -28,7 +66,7 @@
 
 ### String
 * 声明
-    * var foo = "abc";
+    * const foo = "abc";
 * 方法
     * String.prototype.concat()
     * String.prototype.trim()
@@ -51,64 +89,30 @@
     * JSON.parse(json)
 
 ### Object
-* 方法
-    * var foo = {"a": 1, "b": 2};
-* 闭包函数OOP
-
-```javascript
-// 封装
-var math = function(){
-  var _flag = 10;
-  return {
-    add: function(x, y){
-      return x + y + _flag;
-    }
-  };
-};
-// 继承
-var math = (function(m){
-    m.minus = function(x, y){
-      return x - y;
-    };
-    return m;
-  })(math || {});
-// 多态
-math.minus(1, 2);
-```
-
-
-* 构造函数OOP
-
-```javascript
-// 封装
-function ParentClass(a, b){
-  this.A = a;
-  this.B = function(){
-    return b;
-  };
-}
-ParentClass.prototype.X = 1;
-ParentClass.prototype.Y = function(){
-  return 2;
-};
-// 继承
-function ChildClass(a, b, c, d){
-  ParentClass.call(this, a, b);
-  this.C = c;
-  this.D = function(){
-    return d;
-  };
-}
-ChildClass.prototype = Object.create(ParentClass.prototype);
-ChildClass.prototype.constructor = ChildClass.prototype;
-// 多态
-var foo = new ChildClass(1, 2, 3, 4);
-```
-
-### function
 * 声明
-    * 变量函数表达式：var foo = function(){};
-    * 命名函数表达式：function foo(){}
+```javascript
+// ES3
+const foo = {
+  a: 1, 
+  b: function(x) {
+    return x;
+  },
+};
+// ES6
+const foo = {
+  a: 1, 
+  b(x) {
+    return x;
+  },
+};
+```
+
+### Function
+* 声明
+    * 命名函数表达式：function foo(){};
+    * 变量函数表达式：
+        * const foo = function(x){return x;};
+        * `[ES6]` const foo = (x) => {return x;};
     * 即调函数表达式：
         * (function(){})();
         * (function(){}());
@@ -117,13 +121,16 @@ var foo = new ChildClass(1, 2, 3, 4);
     * 首类函数表达式：return function(){};
 * 参数
     * a = a || 1;
-    * var a = arguments[0]? arguments[0]: 1;
+    * `[ES6]` function foo(a = 1) 
+    * const a = arguments[0]? arguments[0]: 1;
+    * `[ES6]` function foo(...arguments)
+    * `[ES6]` foo(...arrayName)
 * 类型
 
 ```javascript
 // 普通函数
 function foo(){
-  // return 1;
+  return 1;
 }
 ```
  
@@ -136,7 +143,7 @@ function foo(x){
     return 1;
   }
 }
-// foo(3);
+foo(3);
 ```
 
 ```javascript
@@ -146,7 +153,7 @@ function foo(x){
     return x++;
   }
 }
-var test = foo(1);
+const test = foo(1);
 test();
 ```
 
@@ -155,7 +162,119 @@ test();
 function Foo(){
   this.one = 1;
 }
-var foo = new Foo();
+const foo = new Foo();
+```
+
+* class
+
+```javascript
+// 闭包函数
+let math = function(){ // 封装
+  const _flag = 10;
+  return {
+    add: function(x, y){
+      return x + y + _flag;
+    }
+  };
+};
+math = (function(m){ // 继承
+  m.minus = function(x, y){
+    return x - y;
+  };
+  return m;
+})(math || {});
+math.minus(1, 2); // 多态
+```
+
+```javascript
+// 构造函数
+function ParentClass(a, b){ // 封装
+  this.A = a;
+  this.B = function(){
+    return b;
+  };
+}
+ParentClass.prototype.X = 1;
+ParentClass.prototype.Y = function(){
+  return 2;
+};
+function ChildClass(a, b, c, d){ // 继承
+  ParentClass.call(this, a, b);
+  this.C = c;
+  this.D = function(){
+    return d;
+  };
+}
+ChildClass.prototype = Object.create(ParentClass.prototype);
+ChildClass.prototype.constructor = ChildClass.prototype;
+const foo = new ChildClass(1, 2, 3, 4); // 多态
+```
+
+```javascript
+// ES6
+class ParentClass { // 封装
+  constructor(a, b) {
+    this.parentA = a;
+    this.parentB = function () {
+      return b;
+    };
+  }
+  static parentC() {
+    return '静态方法，支持直接调用';
+  }
+  set parentD(value) {
+    this.parentA += value;
+  }
+  get parentD() {
+    return this.parentA;
+  }
+}
+console.log(ParentClass.parentC());
+class ChildClass extends ParentClass { // 继承
+  constructor(a, b, c, d) {
+    super(a, b);
+    this.childA = c;
+    this.childB = function () {
+      return d;
+    };
+  }
+  static childC() {
+    return `子类静态方法: ${super.parentC()}`;
+  }
+}
+console.log(ChildClass.childC());
+const foo = new ChildClass(1, 2, 3); // 多态
+foo.parentD = 4;
+console.log(foo.parentD);
+```
+
+* async
+
+```javascript
+function step(x) {
+  return new Promise((resolve, reject) => {
+    function handler(value) {
+      if (value >= 5) resolve(value);
+      else reject(value);
+    }
+    setInterval(() => {
+      handler(+x);
+    }, 3000);
+  });
+}
+async function group() {
+  console.log('start');
+  await step(5).then((v) => { console.info(`then: ${v}`); })
+    .catch((v) => { console.error(`catch: ${v}`); });
+  await step(4).then(
+      (v) => { console.info(`then: ${v}`); }, 
+      (v) => { console.error(`catch: ${v}`); }
+    );
+  await step(4).then((v) => { console.info(`then: ${v}`); });
+  await step(5).then((v) => { console.info(`then: ${v}`); });
+  console.log('end');
+}
+group();
 ```
 
 * 方法
@@ -165,7 +284,7 @@ var foo = new Foo();
 
 ### Array
 * 声明
-    * var foo = [1, 2, 3];
+    * const foo = [1, 2, 3];
 * 属性
     * Array.prototype.length
 * 方法
@@ -182,9 +301,9 @@ var foo = new Foo();
 
 ### Date
 * 声明
-    * var foo = new Date();
-    * var foo = new Date(1234567890);
-    * var foo = new Date("1234-05-06");
+    * const foo = new Date();
+    * const foo = new Date(1234567890);
+    * const foo = new Date("1234-05-06");
 * 获取方法
     * Date.prototype.getTime()
     * Date.prototype.getFullYear()
